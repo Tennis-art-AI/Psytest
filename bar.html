@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Диагностика биполярного расстройства (БАР)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f6fa;--card:#fff;--ink:#1a1a24;--ink2:#3d3d50;--ink3:#8a8a9a;
+  --pri:#4a4a70;--pri-lt:#eeeef6;--pri-dk:#14141e;--pri-soft:#7a7aa0;
+  --warm:#8a8ac0;--warm-lt:#f2f0fa;--warm-dk:#5a5a80;
+  --red:#b03a4a;--red-lt:#fdf0f2;
+  --sage:#5a7a6a;--sage-lt:#f0f5f2;
+  --brd:#e0e0ea;--brd-lt:#eaeaf0;
+  --dA:#4a3270;--dB:#8a6a0a;--dC:#5a7a3a;--dD:#7a3a2a;--dE:#3a6a6a;--dBI:#b84a10;
+  --radius:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.8;-webkit-font-smoothing:antialiased;}
+
+/* HERO — dark Slate Violet, bridges from landing */
+.hero{background:var(--pri-dk);color:#fff;padding:80px 0 64px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:rgba(138,138,192,.04);}
+.hero::after{content:'';position:absolute;bottom:-120px;left:-80px;width:300px;height:300px;border-radius:50%;background:rgba(138,138,192,.03);}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:14px;position:relative;}
+.hero p{color:rgba(255,255,255,.35);font-size:13px;letter-spacing:.08em;text-transform:uppercase;position:relative;}
+
+/* PROGRESS BAR — same dark as hero */
+.pw{background:var(--pri-dk);padding:0 0 18px;position:sticky;top:0;z-index:100;}
+.pi{max-width:880px;margin:0 auto;padding:0 32px;}
+.pt{height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;}
+.pf{height:100%;background:linear-gradient(90deg,#7a7ab0,#a4a4d8);border-radius:2px;transition:width .5s;width:0%;}
+.pl{color:rgba(255,255,255,.3);font-size:11px;text-align:right;margin-top:6px;letter-spacing:.03em;}
+
+.ct{max-width:880px;margin:0 auto;padding:0 32px;}
+
+/* MODE SWITCHER */
+.mode{background:var(--card);border-bottom:1px solid var(--brd);}
+.mode-in{max-width:880px;margin:0 auto;padding:0 32px;display:flex;align-items:center;flex-wrap:wrap;gap:0;}
+.mode-l{padding:20px 20px 16px 0;font-size:12px;font-weight:600;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase;}
+.mode-b{border:none;background:none;padding:20px 24px 16px;font-family:inherit;font-size:15px;font-weight:500;color:var(--ink3);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;}
+.mode-b.act{color:var(--pri);font-weight:600;border-bottom-color:var(--pri);}
+.mode-b span{display:block;font-size:11px;font-weight:400;color:var(--ink3);margin-top:2px;}
+.mode-ys{margin-left:auto;padding:8px 0;display:none;align-items:center;gap:8px;}
+.mode-ys label{font-size:12px;color:var(--ink3);}
+.mode-ys select{border:1.5px solid var(--brd);border-radius:8px;padding:6px 12px;font-size:13px;font-family:inherit;color:var(--ink);background:#fff;cursor:pointer;}
+.mode-exp{width:100%;padding:12px 32px 16px;font-size:15px;color:var(--ink2);display:none;}
+
+/* SECTIONS */
+.sec{background:var(--card);border-bottom:1px solid var(--brd);padding:56px 0;}
+.slbl{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--pri-soft);margin-bottom:20px;}
+.stitle{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:var(--ink);margin-bottom:16px;line-height:1.3;}
+.stext{font-size:16px;color:var(--ink2);margin-bottom:20px;max-width:720px;line-height:1.85;}
+
+/* INFO BLOCKS — lavender tints */
+.info{padding:24px 28px;border-radius:var(--radius);font-size:15px;line-height:1.8;margin:24px 0;}
+.info strong{display:block;margin-bottom:8px;font-size:16px;}
+.info-pri{background:var(--pri-lt);color:var(--pri-dk);border-left:4px solid var(--pri);}
+.info-warm{background:var(--warm-lt);color:var(--warm-dk);border-left:4px solid var(--warm);}
+.info-sage{background:var(--sage-lt);color:var(--sage);border-left:4px solid var(--sage);}
+.info-red{background:var(--red-lt);color:var(--red);border-left:4px solid var(--red);}
+
+/* COMPARISON TABLE */
+.ctbl{width:100%;border-collapse:collapse;font-size:12px;margin:24px 0;line-height:1.4;}
+.ctbl th{background:var(--pri-dk);color:#fff;padding:10px;text-align:left;font-weight:500;font-size:11px;letter-spacing:.03em;}
+.ctbl td{padding:8px 10px;border-bottom:1px solid var(--brd-lt);vertical-align:top;}
+.ctbl tr:nth-child(even) td{background:rgba(74,74,112,.03);}
+.ck{color:var(--pri);font-weight:700;}
+
+/* DOMAIN MAP */
+.dmap{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:14px;margin:28px 0;}
+.dmc{border-radius:14px;padding:22px 18px;position:relative;overflow:hidden;transition:transform .2s;}
+.dmc:hover{transform:translateY(-2px);}
+.dmc::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;}
+.dc-a{background:#eeecf6;}.dc-a::before{background:var(--dA);}
+.dc-b{background:#f5f2e8;}.dc-b::before{background:var(--dB);}
+.dc-c{background:#eef5ee;}.dc-c::before{background:var(--dC);}
+.dc-d{background:#f5eeec;}.dc-d::before{background:var(--dD);}
+.dc-e{background:#eef5f5;}.dc-e::before{background:var(--dE);}
+.dc-bi{background:#fcf2e8;}.dc-bi::before{background:var(--dBI);}
+.dmc-letter{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;opacity:.12;position:absolute;top:12px;right:16px;}
+.dmc-name{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;margin-bottom:6px;color:var(--ink);}
+.dmc-desc{font-size:12px;color:var(--ink2);line-height:1.45;}
+.dmc-w{font-size:10px;color:var(--ink3);margin-top:8px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;}
+.dmc-bar{margin-top:10px;height:5px;background:rgba(0,0,0,.05);border-radius:3px;overflow:hidden;}
+.dmc-bf{height:100%;border-radius:3px;transition:width .6s;width:0%;}
+
+/* INTRO CARDS */
+.igrid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:28px 0;}
+.icard{background:var(--bg);border-radius:14px;padding:28px 24px;}
+.icard h4{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--ink);margin-bottom:16px;}
+.icard ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.icard li{padding-left:18px;position:relative;font-size:15px;color:var(--ink2);line-height:1.6;}
+.icard li::before{content:'';position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:50%;background:var(--brd);}
+
+/* MAIN QUIZ AREA */
+.main{padding:56px 0;}
+.sdiv{background:var(--pri-dk);color:#fff;padding:20px 28px;border-radius:var(--radius);margin-bottom:32px;display:flex;align-items:center;gap:20px;}
+.sdiv-n{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:400;opacity:.15;line-height:1;}
+.sdiv h3{font-size:16px;font-weight:600;letter-spacing:.02em;}
+.sdiv p{font-size:12px;opacity:.35;margin-top:3px;}
+.dh{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin:40px 0 18px;padding-left:4px;display:flex;align-items:center;gap:12px;}
+.dh .ln{flex:1;height:1px;background:var(--brd);}
+
+/* QUESTION CARDS */
+.qc{background:var(--card);border:1px solid var(--brd-lt);border-radius:var(--radius);margin-bottom:20px;overflow:hidden;transition:box-shadow .25s;}
+.qc:hover{box-shadow:0 8px 32px rgba(20,20,30,.07);}
+.qh{padding:20px 28px;display:flex;align-items:flex-start;gap:18px;}
+.qn{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;color:rgba(255,255,255,.15);line-height:1;min-width:40px;}
+.qm{flex:1;}
+.qtg{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:5px;}
+.qtl{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#fff;line-height:1.3;}
+.qd{font-size:12px;color:rgba(255,255,255,.3);margin-top:5px;font-style:italic;}
+.qp{padding:20px 28px 16px;font-size:16px;font-weight:500;color:var(--ink2);border-bottom:1px solid var(--brd-lt);}
+
+/* ANSWER OPTIONS */
+.ans{padding:0;}
+.ao{display:flex;align-items:center;cursor:pointer;border-bottom:1px solid var(--brd-lt);transition:background .15s;}
+.ao:last-child{border-bottom:none;}
+.ao:hover{background:rgba(74,74,112,.03);}
+.ao input{display:none;}
+.ao.sel{background:var(--pri-lt);}
+.ao.sel-w{background:var(--red-lt);}
+.al{width:42px;min-width:42px;text-align:center;font-weight:600;font-size:13px;color:var(--ink3);padding:18px 0;border-right:1px solid var(--brd-lt);}
+.ao.sel .al,.ao.sel-w .al{color:var(--pri);}
+.ao.sel-w .al{color:var(--red);}
+.ach{width:22px;height:22px;border:2px solid var(--brd);border-radius:50%;margin:0 18px;min-width:22px;transition:all .2s;display:flex;align-items:center;justify-content:center;}
+.ao.sel .ach{background:var(--pri);border-color:var(--pri);}
+.ao.sel-w .ach{background:var(--red);border-color:var(--red);}
+.ach::after{content:'';width:8px;height:8px;border-radius:50%;background:#fff;opacity:0;transition:opacity .2s;}
+.ao.sel .ach::after,.ao.sel-w .ach::after{opacity:1;}
+.at{flex:1;padding:18px 16px 18px 0;font-size:15px;line-height:1.6;color:var(--ink);}
+.as{display:none;}
+
+/* PSYCHOEDUCATION NOTES */
+.qnt{background:var(--warm-lt);border-top:1px solid #d8d0e0;padding:18px 28px;font-size:14px;color:var(--warm-dk);line-height:1.7;}
+.qnt strong{display:block;margin-bottom:4px;}
+.qnt-red{background:var(--red-lt);border-color:#f0c8c8;color:var(--red);}
+
+/* FLOATING BUTTON */
+.sf{position:fixed;bottom:28px;right:28px;background:var(--pri-dk);color:#fff;border-radius:50px;padding:14px 28px;display:none;align-items:center;gap:16px;box-shadow:0 12px 40px rgba(20,20,30,.25);z-index:200;cursor:pointer;transition:all .3s;}
+.sf.vis{display:flex;}
+.sf:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(20,20,30,.35);}
+.sf-n{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;line-height:1;}
+.sf-l{font-size:10px;opacity:.35;text-transform:uppercase;letter-spacing:.03em;}
+.sf-v{font-size:14px;font-weight:600;}
+
+/* HISTORY */
+.hist{margin-top:48px;}
+.hc{background:var(--card);border:1px solid var(--brd-lt);border-radius:12px;margin-bottom:14px;overflow:hidden;}
+.hch{display:flex;align-items:center;gap:14px;padding:16px 22px;border-bottom:1px solid var(--brd-lt);background:var(--bg);}
+.hcc{font-size:12px;font-weight:700;color:var(--pri);min-width:28px;}
+.hcl{font-size:15px;font-weight:500;flex:1;}
+.hcd{font-size:12px;color:var(--ink3);margin-top:2px;}
+.hco{display:flex;flex-wrap:wrap;gap:8px;padding:16px 22px;}
+.hcb{padding:9px 18px;border:1.5px solid var(--brd);border-radius:24px;font-size:13px;cursor:pointer;transition:all .2s;color:var(--ink2);user-select:none;}
+.hcb:hover{border-color:var(--pri);color:var(--pri);}
+.hcb.sel{background:var(--pri);border-color:var(--pri);color:#fff;font-weight:500;transform:scale(1.03);box-shadow:0 2px 8px rgba(74,74,112,.2);}
+.hcn{padding:12px 22px 16px;font-size:13px;color:var(--warm-dk);font-style:italic;display:none;}
+.hist-ok{font-size:13px;color:var(--sage);font-weight:500;padding:8px 22px;display:none;}.hist-ok.show{display:block;animation:fadeIn .3s;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:translateY(0);}}
+
+/* RESULTS */
+.res{background:var(--card);border:1px solid var(--brd-lt);border-radius:20px;padding:44px;margin-top:48px;}
+.res-t{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;margin-bottom:10px;}
+.rbig{display:flex;align-items:baseline;gap:10px;margin:28px 0 20px;}
+.rnum{font-family:'Cormorant Garamond',serif;font-size:4.5rem;font-weight:700;line-height:1;}
+.rmx{font-size:16px;color:var(--ink3);}
+.rlv{font-size:1.2rem;font-weight:700;margin-bottom:10px;}
+.rds{font-size:16px;color:var(--ink2);margin-bottom:24px;}
+.rbar{height:12px;background:var(--bg);border-radius:6px;margin-bottom:28px;overflow:hidden;}
+.rbf{height:100%;border-radius:6px;transition:width .8s cubic-bezier(.4,0,.2,1);}
+.stbl{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:28px;}
+.stbl th{background:var(--pri-dk);color:#fff;padding:12px 16px;text-align:left;font-weight:500;font-size:11px;letter-spacing:.03em;}
+.stbl td{padding:12px 16px;border-bottom:1px solid var(--brd-lt);vertical-align:top;}
+.stbl tr:nth-child(even) td{background:var(--bg);}
+.stbl tr.act td{background:var(--pri-lt)!important;font-weight:600;}
+.dgr{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:10px;margin-bottom:24px;}
+.dgc{background:var(--bg);border-radius:12px;padding:16px;}
+.dgc .dl{font-size:12px;color:var(--ink3);margin-bottom:4px;}
+.dgc .dv{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;}
+.dgc .dm{font-size:11px;color:var(--ink3);}
+
+/* BAR-I INDICATOR */
+.bi-block{border:2px solid var(--dBI);border-radius:16px;padding:24px 28px;margin:20px 0;display:none;background:var(--bg);}
+.bi-block-t{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dBI);margin-bottom:16px;}
+.bi-row{display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.bi-score{min-width:80px;text-align:center;background:var(--card);border-radius:12px;padding:12px 16px;border:1px solid var(--brd-lt);}
+.bi-score .dv{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--ink);line-height:1;}
+.bi-score .dm{font-size:11px;color:var(--ink3);}
+.bi-right{flex:1;min-width:200px;}
+.bi-label{font-size:18px;font-weight:700;margin-bottom:8px;}
+.bi-bar{height:10px;background:rgba(0,0,0,.06);border-radius:5px;overflow:hidden;margin-bottom:10px;}
+.bi-bar-fill{height:100%;border-radius:5px;transition:width .8s cubic-bezier(.4,0,.2,1);width:0%;}
+.bi-desc{font-size:14px;color:var(--ink2);line-height:1.7;}
+
+/* CONCLUSIONS */
+.conc{background:var(--card);border:1px solid var(--brd-lt);border-radius:20px;padding:36px 40px;margin-top:24px;}
+.conc-t{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;margin-bottom:16px;color:var(--pri-dk);}
+.ci{padding:14px 0;border-bottom:1px solid var(--brd-lt);font-size:15px;color:var(--ink2);line-height:1.75;}
+.ci:last-child{border-bottom:none;}
+.ci strong{color:var(--ink);font-weight:600;}
+
+/* REFERENCES */
+.refs{margin-top:48px;padding-top:32px;border-top:1px solid var(--brd);}
+.refs h4{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:16px;}
+.ri{font-size:12px;color:var(--ink3);margin-bottom:10px;line-height:1.6;}
+.ri a{color:var(--pri);text-decoration:none;}
+.ri a:hover{color:var(--pri-dk);text-decoration:underline;}
+
+/* DISCLAIMER */
+.disc{margin-top:20px;padding:18px 24px;background:var(--bg);border-radius:12px;font-size:13px;color:var(--ink3);line-height:1.7;}
+
+@media(max-width:700px){.hero h1{font-size:2rem;}.hero{padding:56px 0 44px;}.igrid,.dmap{grid-template-columns:1fr;}.dgr{grid-template-columns:repeat(2,1fr);}.sf{bottom:14px;right:14px;padding:10px 20px;}.mode-in{flex-direction:column;align-items:flex-start;}.res{padding:28px 20px;}.conc{padding:24px 20px;}.bi-row{flex-direction:column;}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Диагностика биполярного расстройства</h1>
+  <p>24 вопроса · 6 доменов · MDQ · HCL-32 · YMRS · PHQ-9 · DSM-5 · БАР-I/II</p>
+</div>
+
+<div class="pw"><div class="pi"><div class="pt"><div class="pf" id="pf"></div></div><div class="pl" id="pl">0 из 24</div></div></div>
+
+<div class="mode"><div class="mode-in">
+  <div class="mode-l">Оценка:</div>
+  <button class="mode-b act" id="btn-2w" onclick="setM('2w')">Последние месяцы<span>недавние спады и подъёмы</span></button>
+  <button class="mode-b" id="btn-life" onclick="setM('life')">Типичный паттерн<span>как обычно за всю жизнь</span></button>
+  <button class="mode-b" id="btn-worst" onclick="setM('worst')">Самый тяжёлый эпизод<span>пик депрессии + пик мании</span></button>
+  <div class="mode-ys" id="ys"><label>Горизонт:</label><select id="yr" onchange="updP()"><option value="3">3 года</option><option value="5">5 лет</option><option value="10" selected>10 лет</option><option value="0">Всю жизнь</option></select></div>
+  <div class="mode-exp" id="me"></div>
+</div></div>
+
+<div class="sec"><div class="ct">
+  <div class="slbl">Методология</div>
+  <div class="stitle">Почему именно такая диагностика</div>
+  <div class="stext">Биполярное расстройство — диагноз с самым высоким процентом пропуска в клинике. Человек приходит к врачу в депрессии, о «хороших» периодах не рассказывает или не считает их проблемой. Средний срок до правильного диагноза — 10 лет.</div>
+  <div class="stext">MDQ (Hirschfeld, 2000) оценивает только манию, PHQ-9 — только депрессию. Эта диагностика оценивает обе фазы в одном инструменте и добавляет три специфических маркера для разграничения БАР-I и БАР-II: инсайт в эпизоде, функционирование во время подъёма и психотические симптомы.</div>
+
+  <div class="info info-red"><strong>Почему это критически важно</strong>Если у человека БАР, но диагностирована только депрессия, назначаются антидепрессанты — в 25–40% случаев они запускают маниакальный эпизод (инверсия фазы). Правильная диагностика меняет лечение принципиально: вместо антидепрессантов — стабилизаторы настроения.</div>
+
+  <div class="info info-pri"><strong>Откуда взяты вопросы</strong>MDQ (Hirschfeld, 2000) · HCL-32 (Angst, 2005) · YMRS (Young, 1978) · PHQ-9 (Kroenke, 2001) · DSM-5-TR (APA, 2022) · Goodwin &amp; Jamison (2007) · SUMD — шкала инсайта (Amador et al., 1993)</div>
+
+  <details style="margin:24px 0;"><summary style="cursor:pointer;font-weight:600;color:var(--pri);font-size:15px;padding:12px 0;">Чем отличаются Циклотимия, БАР-II и БАР-I ▾</summary>
+  <table class="ctbl"><thead><tr><th>Признак</th><th>Циклотимия</th><th>БАР-II</th><th>БАР-I</th></tr></thead><tbody>
+    <tr><td>Интенсивность подъёмов</td><td>Субпороговая</td><td>Гипомания (≥4 дней)</td><td>Мания (≥7 дней)</td></tr>
+    <tr><td>Инсайт в эпизоде</td><td>Частично сохранён</td><td>Частично сохранён</td><td>Часто отсутствует</td></tr>
+    <tr><td>Психотические симптомы</td><td>Нет</td><td>Нет</td><td>Возможны (бред, галлюцинации)</td></tr>
+    <tr><td>Функционирование в подъёме</td><td>Сохранено / улучшено</td><td>Сохранено / улучшено</td><td>Нарушено</td></tr>
+    <tr><td>Госпитализация</td><td>Редко</td><td>Редко</td><td>Часто при мании</td></tr>
+  </tbody></table></details>
+
+  <div class="dmap">
+    <div class="dmc dc-a"><div class="dmc-letter">А</div><div class="dmc-name">Депрессивная фаза</div><div class="dmc-desc">Подавленность, ангедония, безнадёжность, руминация</div><div class="dmc-w">5 вопросов · 0–5 · 32%</div><div class="dmc-bar"><div class="dmc-bf" id="barA" style="background:var(--dA);"></div></div></div>
+    <div class="dmc dc-b"><div class="dmc-letter">Б</div><div class="dmc-name">Мания / гипомания</div><div class="dmc-desc">Эйфория, сниженная потребность во сне, грандиозность, скачка идей</div><div class="dmc-w">5 вопросов · 0–5 · 32%</div><div class="dmc-bar"><div class="dmc-bf" id="barB" style="background:var(--dB);"></div></div></div>
+    <div class="dmc dc-c"><div class="dmc-letter">В</div><div class="dmc-name">Цикличность</div><div class="dmc-desc">Смена фаз, смешанные состояния, колебания энергии и сна</div><div class="dmc-w">4 вопроса · 0–3 · 15%</div><div class="dmc-bar"><div class="dmc-bf" id="barC" style="background:var(--dC);"></div></div></div>
+    <div class="dmc dc-d"><div class="dmc-letter">Г</div><div class="dmc-name">Поведенческий</div><div class="dmc-desc">Финансы, риск в подъёме, изоляция в спаде, нарушение режима</div><div class="dmc-w">4 вопроса · 0–4 · 21%</div><div class="dmc-bar"><div class="dmc-bf" id="barD" style="background:var(--dD);"></div></div></div>
+    <div class="dmc dc-e"><div class="dmc-letter">Д</div><div class="dmc-name">Функционирование</div><div class="dmc-desc">Работа, отношения, быт — по DSM-5</div><div class="dmc-w">3 вопроса · вне балла</div><div class="dmc-bar"><div class="dmc-bf" id="barE" style="background:var(--dE);"></div></div></div>
+    <div class="dmc dc-bi"><div class="dmc-letter" style="font-size:1.1rem;opacity:.2;top:14px;">I/II</div><div class="dmc-name">Маркеры БАР-I</div><div class="dmc-desc">Инсайт в эпизоде, функционирование в подъёме, психотические симптомы</div><div class="dmc-w">3 вопроса · отдельный индикатор</div><div class="dmc-bar"><div class="dmc-bf" id="barBI" style="background:var(--dBI);"></div></div></div>
+  </div>
+
+  <div class="info info-warm"><strong>Как работает индикатор БАР-I / БАР-II</strong>Вопросы 22–24 оценивают три маркера полной мании: инсайт во время эпизода, нарушение функционирования самим подъёмом и психотические симптомы. Они не входят в основной балл — формируют отдельный индикатор «ближе к БАР-I» или «ближе к БАР-II» в результатах.</div>
+</div></div>
+
+<div class="sec" style="padding:44px 0;"><div class="ct">
+  <div class="slbl">Введение</div>
+  <div class="stitle">Депрессия и биполярное — не одно и то же</div>
+  <div class="igrid">
+    <div class="icard"><h4>Депрессия (БДР)</h4><ul>
+      <li>Только «низ» — подавленность, пустота</li>
+      <li>Нет эпизодов подъёма и цикличности</li>
+      <li>Антидепрессанты помогают и не вредят</li>
+      <li>Лечение: антидепрессанты + КПТ</li>
+    </ul></div>
+    <div class="icard"><h4>Биполярное (БАР)</h4><ul>
+      <li>«Низ» + «верх» — фазы чередуются</li>
+      <li>Подъёмы: меньше сна, энергия, грандиозность, импульсивность</li>
+      <li>Антидепрессанты без стабилизатора могут запустить манию</li>
+      <li>Лечение: стабилизаторы (литий, вальпроат, ламотриджин)</li>
+    </ul></div>
+  </div>
+  <div class="info info-pri"><strong>Как устроена эта диагностика</strong>Q01–Q05 — депрессивная фаза. Q06–Q10 — маниакальная/гипоманиакальная фаза. Q11–Q18 — цикличность, соматика, поведение. Q19–Q21 — функционирование (вне балла). Q22–Q24 — маркеры БАР-I (отдельный индикатор, не входят в основной балл).</div>
+  <div style="margin-top:20px;font-size:16px;color:var(--ink2);background:var(--bg);padding:20px 24px;border-radius:14px;"><strong style="color:var(--ink);">Как заполнять:</strong> <span id="iText">Вспомните <strong>последние несколько месяцев</strong>. Для депрессивных вопросов — как было в недавних спадах. Для маниакальных — как было в недавних подъёмах.</span></div>
+</div></div>
+
+<div class="main"><div class="ct">
+  <div class="sdiv"><div class="sdiv-n">I</div><div><h3 id="s1t">Симптомы · последние месяцы</h3><p id="s1s">21 + 3 вопроса · 6 доменов · макс. 78 баллов</p></div></div>
+
+  <div class="dh" style="color:var(--dA);"><span>Домен А · Депрессивная фаза · 0–5 · повышенный вес</span><span class="ln"></span></div>
+
+  <!-- Q1: порядок 3,0,5,1,4,2 -->
+  <div class="qc"><div class="qh" style="background:var(--dA);"><div class="qn">01</div><div class="qm"><div class="qtg">Ядерный · PHQ-9 · DSM-5</div><div class="qtl">Подавленное настроение в спаде</div><div class="qd">Как ощущается «низ» — периоды депрессивного настроения</div></div></div>
+    <div class="qp" id="qp-1" data-2w="Как ощущается настроение в периоды спада?" data-life="Какой была ТИПИЧНАЯ глубина депрессивных периодов?" data-worst="Каким было настроение в самом тяжёлом депрессивном эпизоде?">Как ощущается настроение в периоды спада?</div>
+    <div class="ans" data-q="1">
+    <label class="ao"><input type="radio" name="q1" value="3"><span class="al">1</span><span class="ach"></span><span class="at">Тяжёлые спады — «серая пелена» на недели или месяцы</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q1" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Нет выраженных спадов — настроение ровное</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q1" value="5"><span class="al">3</span><span class="ach"></span><span class="at">Депрессивные эпизоды невыносимы — полная неспособность функционировать, мысли о смерти</span><span class="as">5</span></label>
+    <label class="ao"><input type="radio" name="q1" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Спады бывают — грусть ощутима, но проходит за дни</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q1" value="4"><span class="al">5</span><span class="ach"></span><span class="at">Глубокие провалы — пустота, невозможность чувствовать, длящаяся месяцами</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q1" value="2"><span class="al">6</span><span class="ach"></span><span class="at">Спады заметные — тоска длится неделями, то отпускает, то накрывает снова</span><span class="as">2</span></label></div></div>
+
+  <!-- Q2: порядок 4,1,0,5,2,3 -->
+  <div class="qc"><div class="qh" style="background:var(--dA);"><div class="qn">02</div><div class="qm"><div class="qtg">Ядерный · PHQ-9 · ангедония</div><div class="qtl">Потеря интереса и удовольствия в спаде</div></div></div>
+    <div class="qp" id="qp-2" data-2w="Насколько теряется интерес к жизни в периоды спада?" data-life="Какой была ТИПИЧНАЯ степень ангедонии?" data-worst="Какой была потеря интереса в худшем эпизоде?">Насколько теряется интерес к жизни в периоды спада?</div>
+    <div class="ans" data-q="2">
+    <label class="ao"><input type="radio" name="q2" value="4"><span class="al">1</span><span class="ach"></span><span class="at">Полная ангедония — хобби, друзья, еда, секс перестали что-либо давать</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q2" value="1"><span class="al">2</span><span class="ach"></span><span class="at">Некоторые вещи теряют привлекательность — но не всё</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q2" value="0"><span class="al">3</span><span class="ach"></span><span class="at">Интересы сохраняются даже в непростые периоды</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q2" value="5"><span class="al">4</span><span class="ach"></span><span class="at">Забыл(а) что такое удовольствие — не могу представить, что раньше что-то нравилось</span><span class="as">5</span></label>
+    <label class="ao"><input type="radio" name="q2" value="2"><span class="al">5</span><span class="ach"></span><span class="at">Удовольствие приходит и уходит — иногда могу радоваться, иногда всё безразлично</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q2" value="3"><span class="al">6</span><span class="ach"></span><span class="at">Почти всё безразлично — заставляю себя, но не чувствую отдачи</span><span class="as">3</span></label></div></div>
+
+  <!-- Q3: порядок 2,5,0,4,1,3 -->
+  <div class="qc"><div class="qh" style="background:var(--dA);"><div class="qn">03</div><div class="qm"><div class="qtg">BHS · Abramson · безнадёжность</div><div class="qtl">Безнадёжность в депрессивной фазе</div></div></div>
+    <div class="qp" id="qp-3" data-2w="Как воспринимается будущее в периоды спада?" data-life="Какой была ТИПИЧНАЯ степень безнадёжности?" data-worst="Какой была безнадёжность в худшем эпизоде?">Как воспринимается будущее в периоды спада?</div>
+        <div class="ans" data-q="3">
+    <label class="ao"><input type="radio" name="q3" value="5"><span class="al">1</span><span class="ach"></span><span class="at">Будущее = бесконечный цикл страдания. Не вижу выхода</span><span class="as">5</span></label>
+    <label class="ao"><input type="radio" name="q3" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Даже в спаде понимаю, что это пройдёт</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q3" value="4"><span class="al">3</span><span class="ach"></span><span class="at">Убеждён(а) что цикл никогда не прекратится — обречён(а) на спады</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q3" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Сомневаюсь в будущем — но надежда остаётся</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q3" value="3"><span class="al">5</span><span class="ach"></span><span class="at">Будущее ощущается пустым — ничего хорошего не жду</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q3" value="2"><span class="al">6</span><span class="ach"></span><span class="at">Колеблюсь — часть дней верю что станет лучше, часть — нет</span><span class="as">2</span></label>
+</div></div>
+
+  <!-- Q4: порядок 1,4,5,0,2,3 -->
+  <div class="qc"><div class="qh" style="background:var(--dA);"><div class="qn">04</div><div class="qm"><div class="qtg">Nolen-Hoeksema · руминация</div><div class="qtl">Руминация и самокритика в спаде</div></div></div>
+    <div class="qp" id="qp-4" data-2w="Насколько в спаде прокручиваются негативные мысли о себе?" data-life="Какой была ТИПИЧНАЯ руминация?" data-worst="Какой была руминация в худшем эпизоде?">Насколько в спаде прокручиваются негативные мысли о себе?</div>
+    <div class="ans" data-q="4">
+    <label class="ao"><input type="radio" name="q4" value="1"><span class="al">1</span><span class="ach"></span><span class="at">Иногда самокритика усиливается — но переключаюсь</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q4" value="4"><span class="al">2</span><span class="ach"></span><span class="at">Ненависть к себе — «я разрушаю жизнь и не могу остановиться»</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q4" value="5"><span class="al">3</span><span class="ach"></span><span class="at">Глубокое убеждение в дефектности — «я сломан(а), это не лечится»</span><span class="as">5</span></label>
+    <label class="ao"><input type="radio" name="q4" value="0"><span class="al">4</span><span class="ach"></span><span class="at">Не зацикливаюсь на негативе</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q4" value="2"><span class="al">5</span><span class="ach"></span><span class="at">Часто прокручиваю: «почему я такой(ая)?» — особенно стыд за подъём</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q4" value="3"><span class="al">6</span><span class="ach"></span><span class="at">Почти непрерывно — мозг атакует воспоминаниями о поступках в мании</span><span class="as">3</span></label></div></div>
+
+  <!-- Q5: порядок 3,1,0,5,4,2 -->
+  <div class="qc"><div class="qh" style="background:var(--dA);"><div class="qn">05</div><div class="qm"><div class="qtg">PHQ-9 · DSM-5 · суицидальность</div><div class="qtl">Мысли о смерти или самоповреждении</div></div></div>
+    <div class="qp" id="qp-5" data-2w="Бывают ли мысли о смерти или самоповреждении в спаде?" data-life="Были ли мысли о смерти типичными для спадов?" data-worst="Какими были мысли о смерти в худшем эпизоде?">Бывают ли мысли о смерти или самоповреждении в спаде?</div>
+    <div class="ans" data-q="5">
+    <label class="ao"><input type="radio" name="q5" value="3"><span class="al">1</span><span class="ach"></span><span class="at">Мысли о способах — но пугают и вызывают отвращение</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q5" value="1"><span class="al">2</span><span class="ach"></span><span class="at">«Устал(а) от всего» — не о смерти конкретно</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q5" value="0"><span class="al">3</span><span class="ach"></span><span class="at">Таких мыслей нет</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q5" value="5"><span class="al">4</span><span class="ach"></span><span class="at">Составил(а) план или предпринял(а) попытку</span><span class="as">5</span></label>
+    <label class="ao"><input type="radio" name="q5" value="4"><span class="al">5</span><span class="ach"></span><span class="at">Мысли о смерти приносят облегчение — как выход из цикла</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q5" value="2"><span class="al">6</span><span class="ach"></span><span class="at">«Лучше бы меня не было» — мысли пугают, я их не хочу</span><span class="as">2</span></label></div>
+    <div class="qnt qnt-red"><strong>Если вы сейчас в кризисе</strong>Позвоните на телефон доверия: 8-800-2000-122 (бесплатно, 24/7). Вы не одиноки, и помощь существует.</div></div>
+
+  <div class="dh" style="color:var(--dB);"><span>Домен Б · Мания / гипомания · 0–5 · повышенный вес</span><span class="ln"></span></div>
+
+  <!-- Q6: порядок 4,0,2,5,1,3 -->
+  <div class="qc"><div class="qh" style="background:var(--dB);"><div class="qn">06</div><div class="qm"><div class="qtg">Ядерный · DSM-5 A · MDQ · YMRS</div><div class="qtl">Повышенное настроение / эйфория</div><div class="qd">Не обычная радость — неестественно приподнятое состояние</div></div></div>
+    <div class="qp" id="qp-6" data-2w="Бывали ли периоды необычно приподнятого, «заряженного» настроения?" data-life="Были ли эпизоды эйфории типичными?" data-worst="Каким был самый сильный подъём?">Бывали ли периоды необычно приподнятого, «заряженного» настроения?</div>
+        <div class="ans" data-q="6">
+    <label class="ao"><input type="radio" name="q6" value="4"><span class="al">1</span><span class="ach"></span><span class="at">Эйфория: ощущение сверхспособностей, мир сияет, всё возможно — длится неделю и более</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q6" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Нет — настроение ровное, радость пропорциональна событиям</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q6" value="5"><span class="al">3</span><span class="ach"></span><span class="at">Неконтролируемый подъём с раздражительностью — эйфория может резко сменяться гневом</span><span class="as">5</span></label>
+    <label class="ao"><input type="radio" name="q6" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Иногда чувствую необычный подъём — но он длится часы, не дни</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q6" value="2"><span class="al">5</span><span class="ach"></span><span class="at">Бывают периоды в несколько дней, когда энергии и оптимизма непривычно много</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q6" value="3"><span class="al">6</span><span class="ach"></span><span class="at">Чёткие эпизоды подъёма (4+ дней): «заряжен(а)», «всё по силам», окружающие замечают</span><span class="as">3</span></label>
+</div></div>
+
+  <!-- Q7: порядок 2,0,4,1,5,3 -->
+  <div class="qc"><div class="qh" style="background:var(--dB);"><div class="qn">07</div><div class="qm"><div class="qtg">DSM-5 B2 · MDQ · патогномоничный</div><div class="qtl">Снижение потребности во сне</div><div class="qd">НЕ бессонница — просто не нужен сон, но энергии полно</div></div></div>
+    <div class="qp" id="qp-7" data-2w="Бывали ли периоды, когда нужно было значительно меньше сна, но энергии хватало?" data-life="Было ли снижение потребности во сне типичным?" data-worst="Каким было минимальное время сна при сохранении энергии?">Бывали ли периоды, когда нужно было значительно меньше сна, но энергии хватало?</div>
+        <div class="ans" data-q="7">
+    <label class="ao"><input type="radio" name="q7" value="0"><span class="al">1</span><span class="ach"></span><span class="at">Нет — мне нужны стандартные 7–8 часов, иначе устаю</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q7" value="4"><span class="al">2</span><span class="ach"></span><span class="at">Могу не спать 1–2 ночи подряд без усталости — чувствую прилив сил</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q7" value="1"><span class="al">3</span><span class="ach"></span><span class="at">Иногда обхожусь 5–6 часами и чувствую себя нормально — но редко</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q7" value="5"><span class="al">4</span><span class="ach"></span><span class="at">Не сплю сутками и чувствую себя сверхчеловеком — сон кажется пустой тратой времени</span><span class="as">5</span></label>
+    <label class="ao"><input type="radio" name="q7" value="2"><span class="al">5</span><span class="ach"></span><span class="at">Бывают периоды по несколько дней, когда хватает 4–5 часов и я полон(на) энергии</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q7" value="3"><span class="al">6</span><span class="ach"></span><span class="at">Чёткие периоды: сплю 3–4 часа и не устаю — на это обращают внимание близкие</span><span class="as">3</span></label>
+</div></div>
+
+  <!-- Q8: порядок 3,1,0,5,2,4 -->
+  <div class="qc"><div class="qh" style="background:var(--dB);"><div class="qn">08</div><div class="qm"><div class="qtg">DSM-5 B1 · YMRS · грандиозность</div><div class="qtl">Грандиозность и завышенная самооценка</div><div class="qd">«Я могу всё», «у меня особая миссия», «я лучше других»</div></div></div>
+    <div class="qp" id="qp-8" data-2w="Бывали ли периоды необычно завышенной самооценки или грандиозных идей?" data-life="Была ли грандиозность типичной?" data-worst="Какой была грандиозность в самом сильном подъёме?">Бывали ли периоды необычно завышенной самооценки или грандиозных идей?</div>
+    <div class="ans" data-q="8">
+    <label class="ao"><input type="radio" name="q8" value="3"><span class="al">1</span><span class="ach"></span><span class="at">Чёткие периоды: чувствую себя особенным(ой), умнее и способнее окружающих</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q8" value="1"><span class="al">2</span><span class="ach"></span><span class="at">Иногда повышенная уверенность — «сегодня мне всё удастся»</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q8" value="0"><span class="al">3</span><span class="ach"></span><span class="at">Самооценка стабильная и реалистичная</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q8" value="5"><span class="al">4</span><span class="ach"></span><span class="at">Ощущение избранности или особой миссии — убеждённость в сверхспособностях</span><span class="as">5</span></label>
+    <label class="ao"><input type="radio" name="q8" value="2"><span class="al">5</span><span class="ach"></span><span class="at">Периоды когда чувствую себя значительно увереннее обычного — берусь за амбициозные проекты</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q8" value="4"><span class="al">6</span><span class="ach"></span><span class="at">Грандиозные планы: «изменить мир», «написать книгу за неделю», бросить всё и начать заново</span><span class="as">4</span></label></div></div>
+
+  <!-- Q9: порядок 2,0,4,1,5,3 -->
+  <div class="qc"><div class="qh" style="background:var(--dB);"><div class="qn">09</div><div class="qm"><div class="qtg">DSM-5 B3–B4 · YMRS · скачка идей</div><div class="qtl">Ускоренное мышление и речь</div><div class="qd">«Мысли скачут», «не могу остановиться», «говорю без пауз»</div></div></div>
+    <div class="qp" id="qp-9" data-2w="Бывали ли периоды когда мысли скачут, а речь ускоряется?" data-life="Было ли ускоренное мышление типичным?" data-worst="Каким было ускорение мышления в самом сильном подъёме?">Бывали ли периоды когда мысли скачут, а речь ускоряется?</div>
+        <div class="ans" data-q="9">
+    <label class="ao"><input type="radio" name="q9" value="0"><span class="al">1</span><span class="ach"></span><span class="at">Мышление и речь обычного темпа</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q9" value="4"><span class="al">2</span><span class="ach"></span><span class="at">Поток идей неостановим — начинаю десятки проектов, не доводя ни один до конца</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q9" value="1"><span class="al">3</span><span class="ach"></span><span class="at">Иногда мысли идут быстрее обычного — но могу контролировать</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q9" value="5"><span class="al">4</span><span class="ach"></span><span class="at">Мышление хаотичное — мысли настолько быстрые, что теряю нить, окружающим трудно понять меня</span><span class="as">5</span></label>
+    <label class="ao"><input type="radio" name="q9" value="2"><span class="al">5</span><span class="ach"></span><span class="at">Периоды когда идеи приходят быстро — перескакиваю с темы на тему, близкие замечают</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q9" value="3"><span class="al">6</span><span class="ach"></span><span class="at">Мысли скачут — не успеваю за ними, говорю быстро и много, перебиваю</span><span class="as">3</span></label>
+</div></div>
+
+  <!-- Q10: порядок 3,0,5,1,4,2 -->
+  <div class="qc"><div class="qh" style="background:var(--dB);"><div class="qn">10</div><div class="qm"><div class="qtg">DSM-5 B7 · MDQ · импульсивность</div><div class="qtl">Импульсивность и безрассудство в подъёме</div><div class="qd">Траты, рискованный секс, опасное вождение, инвестиции</div></div></div>
+    <div class="qp" id="qp-10" data-2w="Совершали ли вы в периоды подъёма действия, о которых потом жалели?" data-life="Была ли импульсивность типичной для подъёмов?" data-worst="Какими были последствия импульсивности в худшем эпизоде?">Совершали ли вы в периоды подъёма действия, о которых потом жалели?</div>
+    <div class="ans" data-q="10">
+    <label class="ao"><input type="radio" name="q10" value="3"><span class="al">1</span><span class="ach"></span><span class="at">Заметная импульсивность: крупные траты, резкие решения (бросить работу, переехать)</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q10" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Нет — мои решения обдуманны</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q10" value="5"><span class="al">3</span><span class="ach"></span><span class="at">Катастрофические: банкротство, потеря жилья, опасные ситуации из-за безрассудства</span><span class="as">5</span></label>
+    <label class="ao"><input type="radio" name="q10" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Иногда более импульсивен(на) чем обычно — но без серьёзных последствий</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q10" value="4"><span class="al">5</span><span class="ach"></span><span class="at">Серьёзные последствия: долги, разрушенные отношения, юридические проблемы</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q10" value="2"><span class="al">6</span><span class="ach"></span><span class="at">Бывают траты или решения, о которых жалею — но могу ограничить себя</span><span class="as">2</span></label></div></div>
+
+  <div class="dh" style="color:var(--dC);"><span>Домен В · Цикличность и соматика · 0–3</span><span class="ln"></span></div>
+
+  <!-- Q11: порядок 2,0,3,1 -->
+  <div class="qc"><div class="qh" style="background:var(--dC);"><div class="qn">11</div><div class="qm"><div class="qtg">Диагностический · БАР-специфичный</div><div class="qtl">Цикличность настроения</div></div></div>
+    <div class="qp" id="qp-11" data-2w="Насколько выражена цикличность настроения?" data-life="Была ли цикличность типичной?" data-worst="Какой была цикличность в худший период?">Насколько выражена цикличность настроения?</div>
+    <div class="ans" data-q="11">
+    <label class="ao"><input type="radio" name="q11" value="2"><span class="al">1</span><span class="ach"></span><span class="at">Заметные циклы: периоды подъёма и спада чередуются, каждый длится недели</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q11" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Настроение стабильное — нет заметных циклов</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q11" value="3"><span class="al">3</span><span class="ach"></span><span class="at">Выраженные циклы: чёткие фазы «верх» и «низ», переключение может быть резким</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q11" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Лёгкие колебания — в пределах нормы, без чётких фаз</span><span class="as">1</span></label></div></div>
+
+  <!-- Q12: порядок 1,3,0,2 -->
+  <div class="qc"><div class="qh" style="background:var(--dC);"><div class="qn">12</div><div class="qm"><div class="qtg">DSM-5 · смешанные состояния</div><div class="qtl">Смешанные состояния</div><div class="qd">Депрессия + возбуждение одновременно — самое опасное состояние при БАР</div></div></div>
+    <div class="qp" id="qp-12" data-2w="Бывает ли одновременно тоска И возбуждение, энергия И отчаяние?" data-life="Были ли смешанные состояния типичными?" data-worst="Какими были смешанные состояния в худший период?">Бывает ли одновременно тоска И возбуждение, энергия И отчаяние?</div>
+    <div class="ans" data-q="12">
+    <label class="ao"><input type="radio" name="q12" value="1"><span class="al">1</span><span class="ach"></span><span class="at">Иногда раздражительность на фоне подавленности</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q12" value="3"><span class="al">2</span><span class="ach"></span><span class="at">Регулярные смешанные эпизоды: плачу, но не могу остановить мысли, энергия мечется без направления</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q12" value="0"><span class="al">3</span><span class="ach"></span><span class="at">Нет — если грустно, то без энергии; если энергия, то без грусти</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q12" value="2"><span class="al">4</span><span class="ach"></span><span class="at">Бывают периоды: отчаяние + скачка мыслей + невозможность сидеть на месте</span><span class="as">2</span></label></div>
+    <div class="qnt qnt-red"><strong>Смешанные состояния — высокий риск</strong>Комбинация депрессии и возбуждения — самое опасное состояние при БАР: суицидальные мысли + энергия действовать. Если вы часто испытываете это — обсудите с психиатром немедленно.</div></div>
+
+  <!-- Q13: порядок 3,1,0,2 -->
+  <div class="qc"><div class="qh" style="background:var(--dC);"><div class="qn">13</div><div class="qm"><div class="qtg">DSM-5 · соматический</div><div class="qtl">Колебания энергии</div></div></div>
+    <div class="qp" id="qp-13" data-2w="Насколько сильно колеблется уровень энергии?" data-life="Были ли колебания энергии типичными?" data-worst="Какими были колебания энергии в худший период?">Насколько сильно колеблется уровень энергии?</div>
+    <div class="ans" data-q="13">
+    <label class="ao"><input type="radio" name="q13" value="3"><span class="al">1</span><span class="ach"></span><span class="at">Экстремальные качели: сверхпродуктивность → полный упадок. Разница огромна</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q13" value="1"><span class="al">2</span><span class="ach"></span><span class="at">Небольшие колебания — бывают дни активнее и пассивнее</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q13" value="0"><span class="al">3</span><span class="ach"></span><span class="at">Энергия стабильная изо дня в день</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q13" value="2"><span class="al">4</span><span class="ach"></span><span class="at">Заметные перепады: периоды «заряжен(а) на 200%» сменяются «не могу встать с кровати»</span><span class="as">2</span></label></div></div>
+
+  <!-- Q14: порядок 2,0,3,1 -->
+  <div class="qc"><div class="qh" style="background:var(--dC);"><div class="qn">14</div><div class="qm"><div class="qtg">DSM-5 · соматический</div><div class="qtl">Колебания сна между фазами</div></div></div>
+    <div class="qp" id="qp-14" data-2w="Как меняется сон между фазами?" data-life="Были ли колебания сна типичными?" data-worst="Какими были колебания сна в худший период?">Как меняется сон между фазами?</div>
+    <div class="ans" data-q="14">
+    <label class="ao"><input type="radio" name="q14" value="2"><span class="al">1</span><span class="ach"></span><span class="at">Заметные перепады: в подъёме 4–5 часов хватает, в спаде сплю 10–12</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q14" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Сон стабильный</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q14" value="3"><span class="al">3</span><span class="ach"></span><span class="at">Экстремальные: в подъёме не сплю почти, в спаде лежу сутками</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q14" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Небольшие колебания: иногда больше, иногда меньше обычного</span><span class="as">1</span></label></div></div>
+
+  <div class="dh" style="color:var(--dD);"><span>Домен Г · Поведенческий · 0–4</span><span class="ln"></span></div>
+
+  <!-- Q15: порядок 3,0,4,1,2 -->
+  <div class="qc"><div class="qh" style="background:var(--dD);"><div class="qn">15</div><div class="qm"><div class="qtg">MDQ · HCL-32 · финансовый</div><div class="qtl">Финансовое поведение в подъёме</div></div></div>
+    <div class="qp" id="qp-15" data-2w="Бывают ли в подъёме чрезмерные траты?" data-life="Были ли чрезмерные траты типичными?" data-worst="Какими были траты в самом сильном подъёме?">Бывают ли в подъёме чрезмерные траты?</div>
+    <div class="ans" data-q="15">
+    <label class="ao"><input type="radio" name="q15" value="3"><span class="al">1</span><span class="ach"></span><span class="at">Крупные незапланированные траты: дорогие покупки, инвестиции под влиянием момента</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q15" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Финансы под контролем — трачу обдуманно</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q15" value="4"><span class="al">3</span><span class="ach"></span><span class="at">Финансовые катастрофы: долги, кредиты, потеря сбережений из-за импульсивных решений</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q15" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Иногда трачу больше чем планировал(а) — но без серьёзных последствий</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q15" value="2"><span class="al">5</span><span class="ach"></span><span class="at">В подъёме покупаю вещи, которые потом оказываются ненужными — заметные суммы</span><span class="as">2</span></label></div></div>
+
+  <!-- Q16: порядок 2,4,0,1,3 -->
+  <div class="qc"><div class="qh" style="background:var(--dD);"><div class="qn">16</div><div class="qm"><div class="qtg">MDQ · рискованное поведение</div><div class="qtl">Рискованное поведение в подъёме</div><div class="qd">Секс, вождение, конфронтации — нетипичное для вас</div></div></div>
+    <div class="qp" id="qp-16" data-2w="Бывает ли в подъёме рискованное поведение, нетипичное для вас?" data-life="Было ли рискованное поведение типичным?" data-worst="Каким было рискованное поведение в самом сильном подъёме?">Бывает ли в подъёме рискованное поведение, нетипичное для вас?</div>
+    <div class="ans" data-q="16">
+    <label class="ao"><input type="radio" name="q16" value="2"><span class="al">1</span><span class="ach"></span><span class="at">Бывают решения, на которые не пошёл(ла) бы в обычном состоянии</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q16" value="4"><span class="al">2</span><span class="ach"></span><span class="at">Опасное: поведение угрожает здоровью или жизни — потом не верю что это был(а) я</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q16" value="0"><span class="al">3</span><span class="ach"></span><span class="at">Нет — моё поведение стабильно</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q16" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Иногда чуть смелее обычного — но без реального риска</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q16" value="3"><span class="al">5</span><span class="ach"></span><span class="at">Заметный риск: случайные связи, опасное вождение, конфликты с незнакомцами</span><span class="as">3</span></label></div></div>
+
+  <!-- Q17: порядок 2,0,3,1,4 -->
+  <div class="qc"><div class="qh" style="background:var(--dD);"><div class="qn">17</div><div class="qm"><div class="qtg">Поведенческий · изоляция в спаде</div><div class="qtl">Изоляция в депрессивной фазе</div></div></div>
+    <div class="qp" id="qp-17" data-2w="Насколько вы изолируетесь в периоды спада?" data-life="Была ли изоляция в спадах типичной?" data-worst="Какой была изоляция в худшем депрессивном эпизоде?">Насколько вы изолируетесь в периоды спада?</div>
+    <div class="ans" data-q="17">
+    <label class="ao"><input type="radio" name="q17" value="2"><span class="al">1</span><span class="ach"></span><span class="at">Отменяю встречи, не отвечаю на сообщения — «ухожу в берлогу»</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q17" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Общение сохраняется даже в спаде</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q17" value="3"><span class="al">3</span><span class="ach"></span><span class="at">Почти полная изоляция — неделями не выхожу и не отвечаю никому</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q17" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Меньше желания общаться — но если зовут, иду</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q17" value="4"><span class="al">5</span><span class="ach"></span><span class="at">Мир снаружи перестаёт существовать — не могу ни с кем контактировать</span><span class="as">4</span></label></div></div>
+
+  <!-- Q18: порядок 1,3,0,4,2 -->
+  <div class="qc"><div class="qh" style="background:var(--dD);"><div class="qn">18</div><div class="qm"><div class="qtg">Поведенческий · IPSRT · нарушение ритма</div><div class="qtl">Нарушение режима жизни</div><div class="qd">Хаотичный сон, питание, активность между фазами</div></div></div>
+    <div class="qp" id="qp-18" data-2w="Насколько цикличность нарушает ваш режим жизни?" data-life="Было ли нарушение режима типичным?" data-worst="Каким было нарушение режима в худший период?">Насколько цикличность нарушает ваш режим жизни?</div>
+    <div class="ans" data-q="18">
+    <label class="ao"><input type="radio" name="q18" value="1"><span class="al">1</span><span class="ach"></span><span class="at">Небольшие сбои — в подъёме ложусь позже, в спаде раньше</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q18" value="3"><span class="al">2</span><span class="ach"></span><span class="at">Режим полностью зависит от фазы — сплю, ем, работаю совершенно по-разному в подъёме и спаде</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q18" value="0"><span class="al">3</span><span class="ach"></span><span class="at">Режим стабильный</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q18" value="4"><span class="al">4</span><span class="ach"></span><span class="at">Жизнь хаотична — нет стабильного расписания, каждая фаза разрушает то, что построено в другой</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q18" value="2"><span class="al">5</span><span class="ach"></span><span class="at">Заметные сбои — в подъёме режим хаотичный, в спаде всё останавливается</span><span class="as">2</span></label></div></div>
+
+  <div class="dh" style="color:var(--dE);"><span>Домен Д · Функционирование · 0–4 · вне балла</span><span class="ln"></span></div>
+
+  <!-- Q19: порядок 2,0,3,1,4 -->
+  <div class="qc"><div class="qh" style="background:var(--dE);"><div class="qn">19</div><div class="qm"><div class="qtg">DSM-5 критерий · работа</div><div class="qtl">Влияние на работу или учёбу</div></div></div>
+    <div class="qp" id="qp-19" data-2w="Как цикличность влияет на работу/учёбу?" data-life="Как ТИПИЧНО влияла на работу?" data-worst="Как влияла на работу в худший период?">Как цикличность влияет на работу/учёбу?</div>
+    <div class="ans" data-q="19">
+    <label class="ao"><input type="radio" name="q19" value="2"><span class="al">1</span><span class="ach"></span><span class="at">Заметно: в подъёме берусь за слишком много, в спаде не могу выполнять обязательства</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q19" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Не влияет — работаю стабильно</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q19" value="3"><span class="al">3</span><span class="ach"></span><span class="at">Серьёзные проблемы: в подъёме конфликты, в спаде прогулы — менял(а) работу из-за этого</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q19" value="1"><span class="al">4</span><span class="ach"></span><span class="at">В подъёме сверхпродуктивен(на), в спаде медленнее — но справляюсь</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q19" value="4"><span class="al">5</span><span class="ach"></span><span class="at">Не могу удержаться на работе — цикличность разрушает карьеру</span><span class="as">4</span></label></div></div>
+
+  <!-- Q20: порядок 2,0,3,1,4 -->
+  <div class="qc"><div class="qh" style="background:var(--dE);"><div class="qn">20</div><div class="qm"><div class="qtg">DSM-5 критерий · отношения</div><div class="qtl">Влияние на отношения</div></div></div>
+    <div class="qp" id="qp-20" data-2w="Как цикличность влияет на отношения?" data-life="Как ТИПИЧНО влияла на отношения?" data-worst="Как влияла на отношения в худший период?">Как цикличность влияет на отношения?</div>
+    <div class="ans" data-q="20">
+    <label class="ao"><input type="radio" name="q20" value="2"><span class="al">1</span><span class="ach"></span><span class="at">Конфликты в подъёме (раздражительность) и отдаление в спаде — партнёр устаёт</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q20" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Не влияет</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q20" value="3"><span class="al">3</span><span class="ach"></span><span class="at">Отношения серьёзно пострадали — разрывы, потеря друзей из-за обеих фаз</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q20" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Близкие замечают перепады — но отношения сохранны</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q20" value="4"><span class="al">5</span><span class="ach"></span><span class="at">Цикличность разрушила главные отношения в моей жизни</span><span class="as">4</span></label></div></div>
+
+  <!-- Q21: порядок 1,3,0,4,2 -->
+  <div class="qc"><div class="qh" style="background:var(--dE);"><div class="qn">21</div><div class="qm"><div class="qtg">DSM-5 критерий · повседневная жизнь</div><div class="qtl">Влияние на быт и повседневные дела</div></div></div>
+    <div class="qp" id="qp-21" data-2w="Как цикличность влияет на быт и повседневные дела?" data-life="Как ТИПИЧНО влияла на быт?" data-worst="Как влияла на быт в худший период?">Как цикличность влияет на быт и повседневные дела?</div>
+    <div class="ans" data-q="21">
+    <label class="ao"><input type="radio" name="q21" value="1"><span class="al">1</span><span class="ach"></span><span class="at">Небольшие сбои — в спаде дела копятся, в подъёме наверстываю</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q21" value="3"><span class="al">2</span><span class="ach"></span><span class="at">Быт зависит от фазы — в спаде не мо́юсь, не убираю, не ем нормально</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q21" value="0"><span class="al">3</span><span class="ach"></span><span class="at">Быт стабилен</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q21" value="4"><span class="al">4</span><span class="ach"></span><span class="at">Жизнь в хаосе — ни в одной фазе нет стабильности, базовые потребности не закрываются</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q21" value="2"><span class="al">5</span><span class="ach"></span><span class="at">Заметные проблемы: в подъёме хаос от множества начатых дел, в спаде всё запущено</span><span class="as">2</span></label></div></div>
+
+  <!-- DOMAIN BI: BAR-I markers -->
+  <div class="dh" style="color:var(--dBI);"><span>Маркеры БАР-I · 3 вопроса · не входят в основной балл · формируют отдельный индикатор</span><span class="ln"></span></div>
+  <div class="info info-warm" style="margin-bottom:24px;font-size:14px;"><strong>Зачем эти три вопроса</strong>БАР-I и БАР-II лечатся по-разному. Маркеры ниже помогают определить, ближе ли ваш паттерн к гипомании (БАР-II) или полной мании (БАР-I). Ни один из этих вопросов не влияет на основной балл — они формируют отдельную шкалу в результатах.</div>
+
+  <!-- Q22: инсайт, порядок 0,2,3,1 -->
+  <div class="qc"><div class="qh" style="background:var(--dBI);"><div class="qn">22</div><div class="qm"><div class="qtg">SUMD · Amador (1993) · маркер БАР-I</div><div class="qtl">Инсайт во время подъёма</div><div class="qd">Осознавали ли вы ВО ВРЕМЯ эпизода, что что-то не так</div></div></div>
+    <div class="qp" id="qp-22" data-2w="Во время подъёмов — осознаёте ли, что ведёте себя необычно?" data-life="Был ли инсайт в подъёмах типичным?" data-worst="Был ли инсайт в самом тяжёлом подъёме?">Во время подъёмов — осознаёте ли, что ведёте себя необычно?</div>
+    <div class="ans" data-q="22">
+    <label class="ao"><input type="radio" name="q22" value="0"><span class="al">1</span><span class="ach"></span><span class="at">Да — во время подъёма понимаю, что это эпизод, и могу его отслеживать</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q22" value="2"><span class="al">2</span><span class="ach"></span><span class="at">Частично — потом понимаю, что был(а) «не в себе», но во время — казалось нормальным</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q22" value="3"><span class="al">3</span><span class="ach"></span><span class="at">Нет инсайта — во время подъёма чувствую себя лучше всех, претензии окружающих кажутся нападками</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q22" value="1"><span class="al">4</span><span class="ach"></span><span class="at">В основном осознаю, но иногда «уносит» и теряю критику</span><span class="as">1</span></label></div>
+    <div class="qnt"><strong>Почему инсайт разделяет БАР-II и БАР-I</strong>При гипомании (БАР-II) человек обычно сохраняет частичное осознание — поэтому гипомания кажется «хорошим периодом». При полной мании (БАР-I) инсайт часто полностью отсутствует: человек убеждён, что он в своём лучшем состоянии, а окружающие просто мешают.</div></div>
+
+  <!-- Q23: функционирование в подъёме, порядок 0,2,3,1 -->
+  <div class="qc"><div class="qh" style="background:var(--dBI);"><div class="qn">23</div><div class="qm"><div class="qtg">DSM-5 · функционирование в мании · маркер БАР-I</div><div class="qtl">Функционирование во время подъёма</div><div class="qd">Подъём при БАР-I нарушает функционирование — при БАР-II обычно нет</div></div></div>
+    <div class="qp" id="qp-23" data-2w="Как вы функционируете непосредственно во время подъёма?" data-life="Как ТИПИЧНО функционировали во время подъёмов?" data-worst="Как функционировали в самом тяжёлом подъёме?">Как вы функционируете непосредственно во время подъёма?</div>
+    <div class="ans" data-q="23">
+    <label class="ao"><input type="radio" name="q23" value="0"><span class="al">1</span><span class="ach"></span><span class="at">В подъёме функционирую хорошо или даже лучше обычного — продуктивен(на), социален(на)</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q23" value="2"><span class="al">2</span><span class="ach"></span><span class="at">Начинаю много проектов, но не заканчиваю — продуктивность кажущаяся</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q23" value="3"><span class="al">3</span><span class="ach"></span><span class="at">Подъём мешает — конфликты на работе, неспособность следовать планам, окружающие принимают меры</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q23" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Немного хаотичнее обычного — но справляюсь с обязательствами</span><span class="as">1</span></label></div>
+    <div class="qnt"><strong>Ключевое различие гипомании и мании</strong>При гипомании (БАР-II) человек обычно <em>более</em> продуктивен и социален — именно поэтому гипоманиакальные эпизоды часто воспринимаются как «лучшая версия себя». При полной мании (БАР-I) функционирование нарушается — DSM-5 это требование прямо прописывает.</div></div>
+
+  <!-- Q24: психоз, порядок 0,2,3,1 -->
+  <div class="qc"><div class="qh" style="background:var(--dBI);"><div class="qn">24</div><div class="qm"><div class="qtg">DSM-5 · психотические симптомы · маркер БАР-I</div><div class="qtl">Психотические симптомы в эпизодах</div><div class="qd">Бред, галлюцинации — только при БАР-I, никогда при БАР-II</div></div></div>
+    <div class="qp" id="qp-24" data-2w="Бывали ли в подъёме или спаде галлюцинации или бред?" data-life="Были ли психотические симптомы типичными?" data-worst="Были ли психотические симптомы в тяжёлом эпизоде?">Бывали ли в подъёме или спаде галлюцинации или бред?</div>
+    <div class="ans" data-q="24">
+    <label class="ao"><input type="radio" name="q24" value="0"><span class="al">1</span><span class="ach"></span><span class="at">Нет — галлюцинаций и бреда не было</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q24" value="2"><span class="al">2</span><span class="ach"></span><span class="at">В сильном подъёме были убеждения, которые потом казались нереалистичными (бред величия)</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q24" value="3"><span class="al">3</span><span class="ach"></span><span class="at">Были галлюцинации или чёткий бред в эпизоде мании или депрессии</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q24" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Не уверен(а) — был(а) очень «не в себе», но не помню деталей</span><span class="as">1</span></label></div>
+    <div class="qnt qnt-red"><strong>Психоз = автоматически БАР-I</strong>По DSM-5 наличие психотических симптомов (галлюцинаций или бреда) в маниакальном или депрессивном эпизоде автоматически переводит диагноз в категорию БАР-I. При гипомании (БАР-II) психоз невозможен по определению.</div></div>
+
+  <!-- HISTORY -->
+  <div class="hist">
+    <div class="sdiv"><div class="sdiv-n">II</div><div><h3>История и контекст</h3><p>Определяет тактику лечения · не влияет на основной балл</p></div></div>
+    <div class="info info-warm" style="margin-bottom:24px;"><strong>Зачем этот раздел</strong>Основной балл показывает тяжесть симптомов. Но тактика лечения зависит от большего: как давно БАР? какой тип подъёмов? есть ли быстрая цикличность? Ответы появятся в блоке «Выводы» как отдельные рекомендации — на основной балл не влияют.</div>
+
+    <div class="hc"><div class="hch"><span class="hcc">X1</span><div><div class="hcl">Как давно вы замечаете чередование подъёмов и спадов?</div><div class="hcd">Средний срок до диагноза БАР — 10 лет. Раннее выявление меняет прогноз</div></div></div>
+    <div class="hco">
+      <span class="hcb" data-g="x1" data-v="lt1">Менее года</span>
+      <span class="hcb" data-g="x1" data-v="1-3">1–3 года</span>
+      <span class="hcb" data-g="x1" data-v="3-10">3–10 лет</span>
+      <span class="hcb" data-g="x1" data-v="10plus" data-note="Длительное нелеченное течение — устоявшиеся нейронные паттерны. Комбинация стабилизатор + психотерапия даёт результат даже при многолетнем течении">Более 10 лет ⚑</span>
+    </div>
+    <div class="hcn" id="note-x1"></div><div class="hist-ok" id="ok-x1">✓ Учтено в выводах</div></div>
+
+    <div class="hc"><div class="hch"><span class="hcc">X2</span><div><div class="hcl">Какова длительность типичного подъёма?</div><div class="hcd">Ключевой критерий разграничения БАР-I (мания ≥7 дней) и БАР-II (гипомания ≥4 дней)</div></div></div>
+    <div class="hco">
+      <span class="hcb" data-g="x2" data-v="hours">Часы — до суток</span>
+      <span class="hcb" data-g="x2" data-v="2-3days">2–3 дня</span>
+      <span class="hcb" data-g="x2" data-v="4-6days">4–6 дней</span>
+      <span class="hcb" data-g="x2" data-v="week" data-note="Подъём ≥7 дней — критерий мании по DSM-5. Это прямо указывает на БАР-I">Неделя и более ⚑</span>
+    </div>
+    <div class="hcn" id="note-x2"></div><div class="hist-ok" id="ok-x2">✓ Учтено в выводах</div></div>
+
+    <div class="hc"><div class="hch"><span class="hcc">X3</span><div><div class="hcl">Бывает ли быстрая цикличность — 4 и более эпизода за год?</div><div class="hcd">Быстрая цикличность — отдельный спецификатор DSM-5, влияет на выбор препаратов</div></div></div>
+    <div class="hco">
+      <span class="hcb" data-g="x3" data-v="no">Нет — эпизоды редкие</span>
+      <span class="hcb" data-g="x3" data-v="unsure">Не знаю, не считал(а)</span>
+      <span class="hcb" data-g="x3" data-v="yes" data-note="Быстрая цикличность: ≥4 эпизодов в год. Литий менее эффективен — предпочтительны вальпроат или ламотриджин">4+ эпизода в год ⚑</span>
+    </div>
+    <div class="hcn" id="note-x3"></div><div class="hist-ok" id="ok-x3">✓ Учтено в выводах</div></div>
+
+    <div class="hc"><div class="hch"><span class="hcc">Д1</span><div><div class="hcl">Какая фаза преобладает?</div><div class="hcd">Влияет на выбор препарата: при преобладании депрессии — ламотриджин, при мании — вальпроат/литий</div></div></div>
+    <div class="hco">
+      <span class="hcb" data-g="d1" data-v="dep">Депрессия преобладает</span>
+      <span class="hcb" data-g="d1" data-v="equal">Примерно поровну</span>
+      <span class="hcb" data-g="d1" data-v="manic">Подъёмы преобладают</span>
+      <span class="hcb" data-g="d1" data-v="mixed" data-note="Смешанные состояния — самые тяжёлые и опасные. Антидепрессанты противопоказаны. Вальпроат или атипичные антипсихотики">Смешанные состояния ⚑</span>
+    </div>
+    <div class="hcn" id="note-d1"></div><div class="hist-ok" id="ok-d1">✓ Учтено в выводах</div></div>
+
+    <div class="hc"><div class="hch"><span class="hcc">Д2</span><div><div class="hcl">Получали ли вы когда-либо антидепрессанты?</div><div class="hcd">Антидепрессанты без стабилизатора могут запускать манию или ускорять цикличность при БАР</div></div></div>
+    <div class="hco">
+      <span class="hcb" data-g="d2" data-v="no">Нет</span>
+      <span class="hcb" data-g="d2" data-v="with-stab">Да, со стабилизатором</span>
+      <span class="hcb" data-g="d2" data-v="alone" data-note="Антидепрессант без стабилизатора при БАР — риск инверсии фазы в 25–40% случаев. Обсудите с психиатром">Да, без стабилизатора ⚑</span>
+      <span class="hcb" data-g="d2" data-v="induced" data-note="Антидепрессант-индуцированная мания — прямое показание к диагнозу БАР и немедленной отмене антидепрессанта">Да — и был(а) подъём после приёма ⚑</span>
+    </div>
+    <div class="hcn" id="note-d2"></div><div class="hist-ok" id="ok-d2">✓ Учтено в выводах</div></div>
+
+    <div class="hc"><div class="hch"><span class="hcc">Д3</span><div><div class="hcl">Есть ли БАР или расстройства настроения в семье?</div><div class="hcd">Наследуемость БАР — около 70–80%. Один родитель с БАР = риск у ребёнка ~15–30%</div></div></div>
+    <div class="hco">
+      <span class="hcb" data-g="d3" data-v="no">Нет</span>
+      <span class="hcb" data-g="d3" data-v="unknown">Не знаю</span>
+      <span class="hcb" data-g="d3" data-v="mood">Депрессия у родственников</span>
+      <span class="hcb" data-g="d3" data-v="bipolar" data-note="Семейный анамнез БАР — сильный предиктор. Подтверждает биологическую основу, снижает вероятность ошибочного диагноза">БАР у родственников ⚑</span>
+    </div>
+    <div class="hcn" id="note-d3"></div><div class="hist-ok" id="ok-d3">✓ Учтено в выводах</div></div>
+
+  </div><!-- /hist -->
+
+</div></div><!-- /ct /main -->
+
+<!-- RESULTS -->
+<div class="ct" style="padding-bottom:80px;">
+  <div class="res" id="results">
+    <div class="res-t">Результаты</div>
+    <p style="color:var(--ink3);font-size:14px;">Обновляется автоматически по мере заполнения</p>
+    <div class="rbig"><div class="rnum" id="rn">0</div><div class="rmx">/ 78</div></div>
+    <div class="rlv" id="rl" style="color:var(--ink3);">—</div>
+    <div class="rds" id="rd">Заполните вопросы</div>
+    <div class="rbar"><div class="rbf" id="rb" style="width:0%;background:#ddd;"></div></div>
+
+    <table class="stbl" id="stbl"><thead><tr><th>Баллы</th><th>Уровень</th><th>Что это значит</th><th>Рекомендация</th></tr></thead><tbody>
+      <tr data-r="0,15"><td>0–15</td><td style="color:#166534;font-weight:700;">НЕТ ПРИЗНАКОВ</td><td>Симптомы в пределах нормы — цикличность не выражена</td><td>Наблюдение. Психообразование.</td></tr>
+      <tr data-r="16,31"><td>16–31</td><td style="color:#6a7a2a;font-weight:700;">ЛЁГКОЕ</td><td>Симптомы ощутимы, но жизнь функционирует</td><td>КПТ-ориентированная на БАР. Наблюдение психиатра.</td></tr>
+      <tr data-r="32,47"><td>32–47</td><td style="color:#b45309;font-weight:700;">УМЕРЕННОЕ</td><td>Цикличность мешает — территория расстройства</td><td>Стабилизатор настроения + психотерапия (IPSRT/КПТ).</td></tr>
+      <tr data-r="48,62"><td>48–62</td><td style="color:#c2410c;font-weight:700;">ТЯЖЁЛОЕ</td><td>Серьёзные нарушения — обе фазы значительно влияют на жизнь</td><td>Стабилизатор + атипичный антипсихотик. Психиатр срочно.</td></tr>
+      <tr data-r="63,78"><td>63–78</td><td style="color:#b03a3a;font-weight:700;">КРАЙНЕ ТЯЖЁЛОЕ</td><td>Парализующее расстройство — обе фазы выражены максимально</td><td>Срочная госпитализация. Интенсивная терапия.</td></tr>
+    </tbody></table>
+
+    <!-- BAR-I indicator block -->
+    <div class="bi-block" id="biBlock">
+      <div class="bi-block-t">Индикатор БАР-I / БАР-II (вопросы 22–24)</div>
+      <div class="bi-row">
+        <div class="bi-score"><div class="dv" id="biNum">0</div><div class="dm">из 9</div></div>
+        <div class="bi-right">
+          <div class="bi-label" id="biLabel" style="color:var(--dBI);">—</div>
+          <div class="bi-bar"><div class="bi-bar-fill" id="biBF" style="background:var(--dBI);"></div></div>
+          <div class="bi-desc" id="biDesc"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Domain profile -->
+    <div id="domBlock" style="display:none;">
+      <div style="font-size:11px;font-weight:600;color:var(--ink3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px;">Профиль по доменам</div>
+      <div class="dgr">
+        <div class="dgc" style="border-left:4px solid var(--dA);"><div class="dl">А · Депрессивная фаза</div><div class="dv" id="dA">–</div><div class="dm">из 25</div></div>
+        <div class="dgc" style="border-left:4px solid var(--dB);"><div class="dl">Б · Мания / гипомания</div><div class="dv" id="dB">–</div><div class="dm">из 25</div></div>
+        <div class="dgc" style="border-left:4px solid var(--dC);"><div class="dl">В · Цикличность</div><div class="dv" id="dC">–</div><div class="dm">из 12</div></div>
+        <div class="dgc" style="border-left:4px solid var(--dD);"><div class="dl">Г · Поведенческий</div><div class="dv" id="dD">–</div><div class="dm">из 16</div></div>
+        <div class="dgc" style="border-left:4px solid var(--dE);"><div class="dl">Д · Функционирование</div><div class="dv" id="dE">–</div><div class="dm">из 12 (вне балла)</div></div>
+        <div class="dgc" style="border-left:4px solid var(--dBI);"><div class="dl">БАР-I маркеры</div><div class="dv" id="dBI">–</div><div class="dm">из 9 (отд. индикатор)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONCLUSIONS -->
+  <div class="conc" id="conc" style="display:none;"><div class="conc-t">Выводы и интерпретация</div><div id="concC"></div></div>
+
+  <!-- REFS -->
+  <div class="refs">
+    <h4>Источники</h4>
+    <div class="ri">[1] Hirschfeld RM et al. MDQ. <em>Am J Psychiatry.</em> 2000;157(11):1873–1875. <a href="https://doi.org/10.1176/appi.ajp.157.11.1873" target="_blank">doi ↗</a></div>
+    <div class="ri">[2] Angst J et al. HCL-32. <em>J Affect Disord.</em> 2005;88(2):217–233. <a href="https://doi.org/10.1016/j.jad.2005.05.011" target="_blank">doi ↗</a></div>
+    <div class="ri">[3] Young RC et al. YMRS. <em>Br J Psychiatry.</em> 1978;133:429–435. <a href="https://doi.org/10.1192/bjp.133.5.429" target="_blank">doi ↗</a></div>
+    <div class="ri">[4] Kroenke K, Spitzer RL. PHQ-9. <em>J Gen Intern Med.</em> 2001;16(9):606–613. <a href="https://doi.org/10.1046/j.1525-1497.2001.016009606.x" target="_blank">doi ↗</a></div>
+    <div class="ri">[5] Amador XF et al. SUMD. <em>Schizophr Bull.</em> 1993;19(1):113–132. <a href="https://doi.org/10.1093/schbul/19.1.113" target="_blank">doi ↗</a></div>
+    <div class="ri">[6] APA. <em>DSM-5-TR.</em> 2022. <a href="https://doi.org/10.1176/appi.books.9780890425787" target="_blank">doi ↗</a></div>
+    <div class="ri">[7] Goodwin FK, Jamison KR. <em>Manic-Depressive Illness.</em> 2nd ed. Oxford University Press; 2007.</div>
+    <div class="ri">[8] NICE. Bipolar disorder guidelines. CG185. 2014 (updated 2020). <a href="https://www.nice.org.uk/guidance/cg185" target="_blank">NICE ↗</a></div>
+    <div class="disc">Этот инструмент — вспомогательное средство самодиагностики на основе международных стандартов. <strong>Не заменяет клинического интервью.</strong> Обсудите результаты с психиатром, специализирующимся на расстройствах настроения.</div>
+  </div>
+</div><!-- /ct -->
+
+<div class="sf" id="sf" onclick="document.getElementById('results').scrollIntoView({behavior:'smooth'})">
+  <div class="sf-n" id="sfn">0</div>
+  <div><div class="sf-l">из 78</div><div class="sf-v" id="sfv">—</div></div>
+</div>
+
+<script>
+const S={}, HIST={};
+const TQ=18, MAX=78, SCORED=18;
+const DOM={A:[1,5],B:[6,10],C:[11,14],D:[15,18],E:[19,21]};
+const DM={A:25,B:25,C:12,D:16,E:12};
+const BI_Q=[22,23,24], BI_MAX=9;
+
+const LEV=[
+  {min:0, max:15, l:'НЕТ ПРИЗНАКОВ', c:'#166534', b:'#86efac'},
+  {min:16,max:31, l:'ЛЁГКОЕ',        c:'#6a7a2a', b:'#c8e070'},
+  {min:32,max:47, l:'УМЕРЕННОЕ',     c:'#b45309', b:'#fbbf24'},
+  {min:48,max:62, l:'ТЯЖЁЛОЕ',       c:'#c2410c', b:'#f97316'},
+  {min:63,max:78, l:'КРАЙНЕ ТЯЖЁЛОЕ',c:'#b03a3a', b:'#ef4444'}
+];
+const DESC=[
+  'Симптомы в пределах нормы — цикличность не выражена.',
+  'Симптомы ощутимы, жизнь функционирует. Диагноз может быть не поставлен.',
+  'Цикличность мешает жить — территория расстройства.',
+  'Серьёзные нарушения — обе фазы значительно влияют на жизнь.',
+  'Парализующее расстройство — требуется срочная помощь.'
+];
+const BI_LEV=[
+  {min:0,max:2, l:'МАРКЕРЫ БАР-I ОТСУТСТВУЮТ', c:'#5a7a3a', desc:'Подъёмы ближе к гипомании (БАР-II): инсайт сохранён, функционирование не нарушено, психоза нет. Это не означает, что страдание меньше — при БАР-II депрессия часто тяжелее.'},
+  {min:3,max:5, l:'ВОЗМОЖЕН БАР-I',             c:'#b45309', desc:'Часть маркеров полной мании присутствует. Важно обсудить с психиатром — разграничение БАР-I и II меняет выбор препарата.'},
+  {min:6,max:7, l:'ВЕРОЯТЕН БАР-I',             c:'#c2410c', desc:'Выраженные маркеры мании: сниженный инсайт, нарушение функционирования в подъёме. Нужна консультация психиатра для уточнения диагноза.'},
+  {min:8,max:9, l:'ВЫСОКАЯ ВЕРОЯТНОСТЬ БАР-I',  c:'#b03a3a', desc:'Маркеры полной мании явно выражены — особенно если были психотические симптомы. Срочная консультация психиатра.'}
+];
+
+function gL(t){return LEV.find(l=>t>=l.min&&t<=l.max)||LEV[0];}
+function gBI(t){return BI_LEV.find(l=>t>=l.min&&t<=l.max)||BI_LEV[0];}
+
+function tot(){
+  let s=0;
+  for(let i=1;i<=SCORED;i++) if(S[i]!==undefined) s+=S[i];
+  return s;
+}
+function ans(){
+  let c=0;
+  for(let i=1;i<=24;i++) if(S[i]!==undefined) c++;
+  return c;
+}
+function dS(k){
+  const[s,e]=DOM[k]; let sum=0,cnt=0;
+  for(let i=s;i<=e;i++) if(S[i]!==undefined){sum+=S[i];cnt++;}
+  return cnt>0?sum:null;
+}
+function biS(){
+  let s=0,cnt=0;
+  BI_Q.forEach(q=>{if(S[q]!==undefined){s+=S[q];cnt++;}});
+  return cnt>0?s:null;
+}
+function biAns(){return BI_Q.filter(q=>S[q]!==undefined).length;}
+
+function updB(){
+  ['A','B','C','D','E'].forEach(k=>{
+    const s=dS(k), b=document.getElementById('bar'+k);
+    if(b) b.style.width=s!==null?Math.max((s/DM[k])*100,3)+'%':'0%';
+  });
+  const bi=biS(), bBI=document.getElementById('barBI');
+  if(bBI) bBI.style.width=bi!==null?Math.max((bi/BI_MAX)*100,3)+'%':'0%';
+}
+
+function buildBI(){
+  const bi=biS(), ba=biAns();
+  const block=document.getElementById('biBlock');
+  if(bi===null||ba<2){block.style.display='none';return;}
+  block.style.display='block';
+  const lev=gBI(bi);
+  document.getElementById('biNum').textContent=bi;
+  document.getElementById('biLabel').textContent=lev.l;
+  document.getElementById('biLabel').style.color=lev.c;
+  document.getElementById('biBF').style.width=(bi/BI_MAX*100)+'%';
+  document.getElementById('biBF').style.background=lev.c;
+  document.getElementById('biDesc').textContent=lev.desc;
+  // усиление от истории
+  let extra='';
+  if(HIST.x2==='week') extra+=' Длительность подъёма ≥7 дней дополнительно указывает на БАР-I.';
+  if(HIST.d2==='induced') extra+=' Антидепрессант-индуцированная мания — прямой критерий БАР-I по DSM-5.';
+  if(extra) document.getElementById('biDesc').textContent=lev.desc+extra;
+}
+
+function buildC(){
+  const t=tot(), a=ans(), hk=Object.keys(HIST).length;
+  if(a<3&&hk===0){document.getElementById('conc').style.display='none';return;}
+  document.getElementById('conc').style.display='block';
+  const lev=gL(t); let h='';
+
+  if(a>=3){
+    h+=`<div class="ci"><strong>Общий уровень: ${lev.l} (${t} из ${MAX})</strong>${DESC[LEV.indexOf(lev)]}</div>`;
+
+    // Domain commentary
+    const domData=[
+      {k:'A',n:'Депрессивная фаза',mx:DM.A,
+       ad:['Депрессивные симптомы минимальны.','Депрессия ощутима — важно отличить от БДР: при БАР есть подъёмы.','Выраженная депрессивная фаза. Ламотриджин эффективен при преобладании депрессии при БАР.','Тяжёлая депрессия. Без стабилизатора антидепрессанты опасны. Психиатр срочно.']},
+      {k:'B',n:'Мания / гипомания',mx:DM.B,
+       ad:['Маниакальные симптомы минимальны — возможна только депрессивная фаза.','Лёгкие гипоманиакальные признаки. Важно отследить длительность и влияние на жизнь.','Выраженная гипомания или мания. Стабилизатор настроения обязателен.','Тяжёлая мания. Вальпроат / литий + атипичный антипсихотик. Госпитализация.']},
+      {k:'C',n:'Цикличность',mx:DM.C,
+       ad:['Цикличность минимальна.','Заметная цикличность — паттерн смены фаз установлен.','Выраженная цикличность. IPSRT (социальная ритмотерапия) снижает частоту эпизодов.','Экстремальная цикличность. При быстрой (≥4 эпизодов/год) — вальпроат предпочтительнее лития.']},
+      {k:'D',n:'Поведенческий',mx:DM.D,
+       ad:['Поведение стабильно.','Умеренное: финансы и режим частично затронуты.','Значительные поведенческие последствия обеих фаз. Нужен конкретный план управления кризисом.','Тяжёлые последствия. Финансовый опекун, кризисный план, доверенное лицо — обсудите с психиатром.']}
+    ];
+    domData.forEach(d=>{
+      const s=dS(d.k); if(s===null) return;
+      const p=s/d.mx, i=p<=.25?0:p<=.5?1:p<=.75?2:3;
+      h+=`<div class="ci"><strong>${d.n}: ${s} из ${d.mx} (${Math.round(p*100)}%)</strong>${d.ad[i]}</div>`;
+    });
+
+    // Функционирование
+    const dE=dS('E');
+    if(dE!==null){
+      const p=dE/DM.E;
+      h+=`<div class="ci"><strong>Функционирование: ${dE} из ${DM.E}</strong>${p<=.15?'Сохранено. Критерий DSM-5 формально может быть не выполнен.':p<=.5?'Умеренное нарушение. Критерий DSM-5 выполнен.':'Значительное нарушение в обеих фазах. Нужна помощь.'}</div>`;
+    }
+  }
+
+  // BAR-I/II сигнал
+  if(biAns()>=2){
+    const bi=biS(), bilev=gBI(bi);
+    h+=`<div class="ci" style="border-top:2px solid var(--dBI);padding-top:18px;margin-top:8px;"><strong style="color:var(--dBI);">Индикатор БАР-I/II: ${bilev.l}</strong>${bilev.desc}</div>`;
+  }
+
+  // Domain-ratio флаги
+  if(a>=5){
+    const pA=dS('A'),pB=dS('B');
+    if(pA!==null&&pB!==null){
+      if(pA/DM.A>.5&&pB/DM.B<.2)
+        h+=`<div class="ci" style="border-top:2px solid var(--dA);padding-top:18px;margin-top:8px;"><strong style="color:var(--dA);">Высокая депрессия при низкой гипомании</strong>Картина ближе к БДР (большой депрессии), чем к БАР. Важно: при БДР антидепрессанты безопасны; при БАР — нет. Нужен тщательный расспрос о прошлых подъёмах.</div>`;
+      if(pB/DM.B>.5&&pA/DM.A<.2)
+        h+=`<div class="ci" style="border-top:2px solid var(--dB);padding-top:18px;margin-top:8px;"><strong style="color:var(--dB);">Выраженная мания при минимальной депрессии</strong>Редкий паттерн — возможна маниакальная фаза без депрессии. Это не исключает БАР-I. Обсудите с психиатром.</div>`;
+    }
+  }
+
+  // Режимо-специфичные блоки
+  if(a>=3&&cM==='life'&&t>=32){
+    h+='<div class="ci" style="border-top:2px solid var(--brd);padding-top:18px;margin-top:8px;"><strong style="color:var(--pri);">Хронический паттерн</strong>Вы оценили симптомы как характерные для всей жизни, и уровень ≥ умеренного. БАР — хроническое расстройство: без терапии фазы возвращаются. Золотой стандарт профилактики — стабилизаторы настроения (литий, ламотриджин, вальпроат).</div>';
+  }
+  if(a>=3&&cM==='worst'){
+    h+='<div class="ci" style="border-top:2px solid var(--brd);padding-top:18px;margin-top:8px;"><strong style="color:var(--warm-dk);">Оценка пикового состояния</strong>Этот балл отражает самый тяжёлый период, а не текущее состояние. Для актуальной оценки переключитесь в режим «Последние месяцы».</div>';
+  }
+
+  // История
+  if(Object.keys(HIST).length>0){
+    h+=`<div class="ci" style="border-top:2px solid var(--brd);padding-top:18px;margin-top:8px;"><strong style="color:var(--pri);">Тактика лечения (на основе истории):</strong></div>`;
+    if(HIST.x1==='lt1')   h+=`<div class="ci">Паттерн замечен менее года. Раннее вмешательство даёт наилучший прогноз. Важно начать стабилизатор до формирования устойчивых нейронных циклов.</div>`;
+    if(HIST.x1==='1-3')   h+=`<div class="ci">БАР 1–3 года. Паттерны ещё формируются — хороший момент для начала терапии.</div>`;
+    if(HIST.x1==='3-10')  h+=`<div class="ci">БАР 3–10 лет. Устоявшиеся паттерны, но терапия эффективна. IPSRT помогает стабилизировать циркадные ритмы.</div>`;
+    if(HIST.x1==='10plus')h+=`<div class="ci"><strong>Длительное течение (10+ лет).</strong> Нейронные паттерны устойчивы. Литий даёт наилучший профилактический эффект при длительном течении — и снижает риск суицида.</div>`;
+    if(HIST.x2==='hours') h+=`<div class="ci">Подъёмы длятся часы — это ниже порога гипомании по DSM-5 (≥4 дней). Рассмотрите циклотимию или эмоциональную дисрегуляцию.</div>`;
+    if(HIST.x2==='2-3days')h+=`<div class="ci">Подъёмы 2–3 дня — ниже порога DSM-5 для гипомании (≥4 дней). Возможна циклотимия или субпороговый БАР-II.</div>`;
+    if(HIST.x2==='4-6days')h+=`<div class="ci">Подъёмы 4–6 дней соответствуют критерию гипомании (≥4 дней). Это указывает на <strong>БАР-II</strong>.</div>`;
+    if(HIST.x2==='week')  h+=`<div class="ci"><strong>Подъёмы ≥7 дней — критерий мании по DSM-5.</strong> Это прямо указывает на <strong>БАР-I</strong>. Литий или вальпроат + консультация психиатра срочно.</div>`;
+    if(HIST.x3==='yes')   h+=`<div class="ci"><strong>Быстрая цикличность (≥4 эпизодов/год).</strong> Литий менее эффективен. Предпочтительны: вальпроат, ламотриджин, атипичные антипсихотики (кветиапин). Антидепрессанты могут усугублять.</div>`;
+    if(HIST.d1==='dep')   h+=`<div class="ci">Преобладает депрессия. Ламотриджин — препарат выбора при биполярной депрессии. Монотерапия антидепрессантами противопоказана без стабилизатора.</div>`;
+    if(HIST.d1==='manic') h+=`<div class="ci">Преобладают подъёмы. Вальпроат или литий. При частых эпизодах — кветиапин как профилактика.</div>`;
+    if(HIST.d1==='mixed') h+=`<div class="ci"><strong>Смешанные состояния.</strong> Самый высокий суицидальный риск при БАР. Антидепрессанты противопоказаны. Вальпроат или атипичные антипсихотики.</div>`;
+    if(HIST.d2==='alone') h+=`<div class="ci"><strong>Антидепрессант без стабилизатора.</strong> При БАР это риск инверсии фазы. Обсудите с психиатром добавление стабилизатора или замену схемы.</div>`;
+    if(HIST.d2==='induced')h+=`<div class="ci"><strong>Антидепрессант-индуцированная мания — прямой критерий БАР по DSM-5.</strong> Это подтверждает диагноз. Антидепрессант следует отменить или снизить под контролем психиатра.</div>`;
+    if(HIST.d3==='bipolar')h+=`<div class="ci">Семейный анамнез БАР. Наследуемость ~70–80% — биологическая основа очевидна. Это не «слабость характера».</div>`;
+  }
+
+  document.getElementById('concC').innerHTML=h;
+}
+
+function upd(){
+  const t=tot(), a=ans(), lev=gL(t);
+  // Прогресс
+  document.getElementById('pf').style.width=(a/24*100)+'%';
+  document.getElementById('pl').textContent=a+' из 24';
+  // Плавающая кнопка — появляется после основных 18 вопросов
+  const sf=document.getElementById('sf');
+  if(a>=TQ) sf.classList.add('vis'); else sf.classList.remove('vis');
+  document.getElementById('sfn').textContent=t;
+  document.getElementById('sfv').textContent=a>0?lev.l:'—';
+  // Результаты
+  document.getElementById('rn').textContent=t;
+  document.getElementById('rl').textContent=a>0?lev.l:'—';
+  document.getElementById('rl').style.color=a>0?lev.c:'#8a8a8a';
+  document.getElementById('rb').style.width=(t/MAX*100)+'%';
+  document.getElementById('rb').style.background=a>0?lev.b:'#ddd';
+  document.getElementById('rd').textContent=a>0?DESC[LEV.indexOf(lev)]:'Заполните вопросы';
+  document.querySelectorAll('#stbl tbody tr').forEach(tr=>{
+    const[mn,mx]=tr.dataset.r.split(',').map(Number);
+    tr.classList.toggle('act',a>0&&t>=mn&&t<=mx);
+  });
+  if(a>0){
+    document.getElementById('domBlock').style.display='block';
+    ['A','B','C','D','E'].forEach(k=>{ document.getElementById('d'+k).textContent=dS(k)??'–'; });
+    document.getElementById('dBI').textContent=biS()??'–';
+    updB(); buildBI(); buildC();
+  }
+}
+
+// Навешиваем обработчики на вопросы
+document.querySelectorAll('.ans').forEach(g=>{
+  const q=parseInt(g.dataset.q);
+  g.querySelectorAll('.ao').forEach(o=>{
+    o.addEventListener('click',()=>{
+      o.querySelector('input').checked=true;
+      S[q]=parseInt(o.querySelector('input').value);
+      g.querySelectorAll('.ao').forEach(x=>x.classList.remove('sel','sel-w'));
+      o.classList.add(q===5&&S[q]>=4?'sel-w':'sel');
+      upd();
+    });
+  });
+});
+
+// История
+document.querySelectorAll('.hcb').forEach(o=>{
+  o.addEventListener('click',()=>{
+    const g=o.dataset.g, v=o.dataset.v;
+    document.querySelectorAll(`[data-g="${g}"]`).forEach(x=>x.classList.remove('sel'));
+    o.classList.add('sel');
+    HIST[g]=v;
+    const n=o.dataset.note, ne=document.getElementById('note-'+g);
+    if(ne){if(n){ne.style.display='block';ne.textContent=n;}else ne.style.display='none';}
+    const ok=document.getElementById('ok-'+g);
+    if(ok) ok.classList.add('show');
+    buildBI(); buildC();
+  });
+});
+
+// Режимы
+let cM='2w';
+function setM(m){
+  cM=m;
+  document.querySelectorAll('.mode-b').forEach(b=>b.classList.remove('act'));
+  document.getElementById('btn-'+m).classList.add('act');
+  const ys=document.getElementById('ys'), me=document.getElementById('me');
+  if(m==='worst'){
+    ys.style.display='flex'; me.style.display='block'; updP();
+  } else {
+    ys.style.display='none';
+    if(m==='life'){
+      me.style.display='block';
+      me.innerHTML='<strong>Режим «типичный паттерн»:</strong> оценивайте то, как обычно — не лучший и не худший период, а характерное среднее за всю жизнь.';
+      document.getElementById('s1t').textContent='Симптомы · типичный паттерн';
+      document.getElementById('iText').innerHTML='Оценивайте <strong>типичную, характерную</strong> картину — не пик и не лучший период, а «среднее» за жизнь.';
+    } else {
+      me.style.display='none';
+      document.getElementById('s1t').textContent='Симптомы · последние месяцы';
+      document.getElementById('iText').innerHTML='Вспомните <strong>последние несколько месяцев</strong>. Для депрессивных вопросов — как было в недавних спадах. Для маниакальных — как было в недавних подъёмах.';
+    }
+  }
+  const k=m==='worst'?'worst':(m==='life'?'life':'2w');
+  for(let i=1;i<=24;i++){
+    const el=document.getElementById('qp-'+i);
+    if(el&&el.dataset[k]) el.textContent=el.dataset[k];
+  }
+  // Сброс ответов
+  Object.keys(S).forEach(k=>delete S[k]);
+  document.querySelectorAll('.ao').forEach(o=>o.classList.remove('sel','sel-w'));
+  document.querySelectorAll('input[type=radio]').forEach(r=>r.checked=false);
+  ['A','B','C','D','E'].forEach(k=>{const b=document.getElementById('bar'+k);if(b)b.style.width='0%';});
+  document.getElementById('barBI').style.width='0%';
+  document.getElementById('domBlock').style.display='none';
+  document.getElementById('biBlock').style.display='none';
+  document.getElementById('conc').style.display='none';
+  document.getElementById('sf').classList.remove('vis');
+  upd();
+}
+
+function updP(){
+  const v=document.getElementById('yr').value;
+  const lb=v==='0'?'всю жизнь':`последние ${v} ${v==='3'?'года':'лет'}`;
+  document.getElementById('s1t').textContent='Симптомы · худший период за '+lb;
+  document.getElementById('iText').innerHTML='Вспомните <strong>самый тяжёлый период за '+lb+'</strong>. Для депрессии — пик спада, для мании — пик подъёма.';
+  document.getElementById('me').innerHTML='<strong>Режим «самый тяжёлый эпизод»:</strong> оцените ПИК. Крайние варианты здесь уместны, если вы их пережили.';
+}
+
+upd();
+</script>
+</body>
+</html>
