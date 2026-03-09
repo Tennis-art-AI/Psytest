@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PsyTest — Клиническая самодиагностика расстройств</title>
+<meta name="description" content="Международные инструменты самодиагностики психических расстройств. DSM-5, 3 режима оценки, доменное профилирование. Не заменяет врача — помогает подготовиться.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #070810;
+  --bg2: #0c0e1a;
+  --card: #0f1120;
+  --card2: #141628;
+  --gold: #c4984e;
+  --gold-lt: rgba(196,152,78,0.12);
+  --gold-md: rgba(196,152,78,0.25);
+  --blue: #5d7db5;
+  --blue-lt: rgba(93,125,181,0.1);
+  --sage: #5a8a70;
+  --sage-lt: rgba(90,138,112,0.1);
+  --red: #9a4040;
+  --text: #e8e4dc;
+  --text2: rgba(232,228,220,0.55);
+  --text3: rgba(232,228,220,0.25);
+  --brd: rgba(232,228,220,0.06);
+  --brd2: rgba(232,228,220,0.12);
+  --r: 14px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ─── NOISE TEXTURE ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: .4;
+}
+
+/* ─── NAVBAR ─── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: rgba(7,8,16,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--brd);
+  padding: 0 40px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: .02em;
+  text-decoration: none;
+}
+.nav-logo span { color: var(--gold); }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text2);
+  text-decoration: none;
+  letter-spacing: .04em;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  background: var(--gold);
+  color: #0a0a10 !important;
+  padding: 8px 20px;
+  border-radius: 40px;
+  font-weight: 600 !important;
+  transition: opacity .2s !important;
+}
+.nav-cta:hover { opacity: .85; }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 40px 80px;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(ellipse, rgba(196,152,78,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(transparent, var(--bg));
+  pointer-events: none;
+}
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--gold-md);
+  border-radius: 40px;
+  padding: 6px 18px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 36px;
+}
+.hero-tag::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  margin-bottom: 28px;
+  max-width: 900px;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+.hero-sub {
+  font-size: 1.1rem;
+  color: var(--text2);
+  max-width: 600px;
+  line-height: 1.8;
+  margin-bottom: 48px;
+}
+.hero-btns {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 80px;
+}
+.btn-primary {
+  background: var(--gold);
+  color: #07080f;
+  padding: 14px 32px;
+  border-radius: 40px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all .25s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(196,152,78,.25); }
+.btn-secondary {
+  border: 1px solid var(--brd2);
+  color: var(--text2);
+  padding: 14px 32px;
+  border-radius: 40px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all .25s;
+}
+.btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--brd);
+  border: 1px solid var(--brd);
+  border-radius: 20px;
+  overflow: hidden;
+  max-width: 760px;
+  width: 100%;
+}
+.stat {
+  background: var(--card);
+  padding: 28px 24px;
+  text-align: center;
+}
+.stat-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.6rem;
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-l {
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+/* ─── SECTIONS ─── */
+section { position: relative; z-index: 1; padding: 100px 40px; }
+.ct { max-width: 1100px; margin: 0 auto; }
+.sec-tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sec-tag::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--gold); opacity: .3; }
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -.01em;
+  margin-bottom: 20px;
+}
+.lead {
+  font-size: 1.05rem;
+  color: var(--text2);
+  max-width: 680px;
+  line-height: 1.85;
+}
+.divider { height: 1px; background: var(--brd); margin: 0; }
+
+/* ─── UNIQUE FEATURES ─── */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1px;
+  background: var(--brd);
+  border: 1px solid var(--brd);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 56px;
+}
+.feat {
+  background: var(--card);
+  padding: 36px 32px;
+  position: relative;
+  overflow: hidden;
+  transition: background .2s;
+}
+.feat:hover { background: var(--card2); }
+.feat::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s;
+}
+.feat:hover::before { transform: scaleX(1); }
+.feat-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: var(--gold-lt);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+.feat h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+.feat p { font-size: 14px; color: var(--text2); line-height: 1.75; }
+.feat-badge {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold-md);
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+/* ─── METHODOLOGY ─── */
+.method-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin-top: 56px;
+  align-items: start;
+}
+.method-left { }
+.method-steps { display: flex; flex-direction: column; gap: 0; margin-top: 40px; }
+.mstep {
+  display: flex;
+  gap: 24px;
+  position: relative;
+  padding-bottom: 36px;
+}
+.mstep:last-child { padding-bottom: 0; }
+.mstep::after {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 40px;
+  bottom: 0;
+  width: 1px;
+  background: var(--brd2);
+}
+.mstep:last-child::after { display: none; }
+.mstep-n {
+  width: 40px; min-width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--brd2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--gold);
+  background: var(--card2);
+  position: relative;
+  z-index: 1;
+}
+.mstep-c h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+.mstep-c p { font-size: 14px; color: var(--text2); line-height: 1.7; }
+.method-right { }
+.comparison-box {
+  background: var(--card);
+  border: 1px solid var(--brd);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.cb-head {
+  background: var(--card2);
+  border-bottom: 1px solid var(--brd);
+  padding: 20px 28px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text3);
+}
+.cb-row {
+  display: flex;
+  align-items: center;
+  padding: 14px 28px;
+  border-bottom: 1px solid var(--brd);
+  gap: 12px;
+  font-size: 13px;
+}
+.cb-row:last-child { border-bottom: none; }
+.cb-label { flex: 1; color: var(--text2); }
+.cb-no { color: var(--text3); font-size: 18px; }
+.cb-yes { color: var(--gold); font-size: 18px; font-weight: 700; }
+.cb-head-row { display: grid; grid-template-columns: 1fr 80px 80px 80px; font-size: 11px; }
+.cb-data-row { display: grid; grid-template-columns: 1fr 80px 80px 80px; }
+
+/* ─── DISORDERS ─── */
+.disorders-section { }
+.dis-tabs {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  border: 1px solid var(--brd);
+  border-radius: 16px;
+  background: var(--card);
+  padding: 6px;
+  margin: 40px 0 0;
+  scrollbar-width: none;
+}
+.dis-tabs::-webkit-scrollbar { display: none; }
+.dis-tab {
+  flex: none;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text2);
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all .2s;
+  white-space: nowrap;
+  border: none;
+  background: none;
+  font-family: 'Outfit', sans-serif;
+}
+.dis-tab:hover { color: var(--text); background: rgba(255,255,255,.04); }
+.dis-tab.act {
+  background: var(--card2);
+  color: var(--text);
+  box-shadow: 0 2px 8px rgba(0,0,0,.3);
+}
+.dis-tab.ready { }
+.dis-tab.ready::after {
+  content: '●';
+  font-size: 8px;
+  color: var(--gold);
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.dis-panels { margin-top: 24px; }
+.dis-panel { display: none; }
+.dis-panel.act { display: block; }
+.dpanel-inner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.dp-left { }
+.dp-right { }
+.dp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 30px;
+  margin-bottom: 20px;
+}
+.dp-badge-ready { background: var(--gold-lt); color: var(--gold); border: 1px solid var(--gold-md); }
+.dp-badge-soon { background: rgba(255,255,255,.04); color: var(--text3); border: 1px solid var(--brd2); }
+.dp-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 500;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.dp-abbr {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  color: var(--text3);
+  margin-bottom: 20px;
+  font-style: italic;
+}
+.dp-desc {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.85;
+  margin-bottom: 28px;
+}
+.dp-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+.dp-chip {
+  font-size: 12px;
+  padding: 5px 14px;
+  border-radius: 30px;
+  border: 1px solid var(--brd2);
+  color: var(--text2);
+}
+.dp-instruments {
+  background: var(--card);
+  border: 1px solid var(--brd);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.dp-instruments h4 {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 14px;
+}
+.inst-list { display: flex; flex-direction: column; gap: 10px; }
+.inst-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 13px;
+}
+.inst-name {
+  font-weight: 600;
+  color: var(--text);
+  min-width: 80px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+}
+.inst-desc { color: var(--text2); }
+.dp-domains {
+  background: var(--card);
+  border: 1px solid var(--brd);
+  border-radius: 14px;
+  padding: 24px;
+}
+.dp-domains h4 {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 14px;
+}
+.dom-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.dom-row:last-child { margin-bottom: 0; }
+.dom-letter {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  width: 24px;
+  text-align: center;
+}
+.dom-bar-wrap { flex: 1; height: 6px; background: rgba(255,255,255,.05); border-radius: 3px; overflow: hidden; }
+.dom-bar-fill { height: 100%; border-radius: 3px; }
+.dom-info { font-size: 11px; color: var(--text3); min-width: 60px; text-align: right; }
+.dp-cta { margin-top: 28px; }
+.btn-start {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gold);
+  color: #07080f;
+  padding: 16px 36px;
+  border-radius: 40px;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all .25s;
+}
+.btn-start:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(196,152,78,.3); }
+.btn-coming {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--brd2);
+  color: var(--text3);
+  padding: 16px 36px;
+  border-radius: 40px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: default;
+}
+
+/* ─── STANDARDS ─── */
+.standards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 48px;
+}
+.std-card {
+  background: var(--card);
+  border: 1px solid var(--brd);
+  border-radius: 14px;
+  padding: 24px;
+  transition: border-color .2s;
+}
+.std-card:hover { border-color: var(--brd2); }
+.std-code {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.std-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.std-desc {
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.6;
+}
+.std-year {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  color: var(--text3);
+  text-transform: uppercase;
+}
+
+/* ─── FAQ / ABOUT ─── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin-top: 56px;
+}
+.about-block h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+.about-block p {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+.about-block p:last-child { margin-bottom: 0; }
+.about-block strong { color: var(--text); }
+
+.faq { margin-top: 56px; }
+.faq-item {
+  border-bottom: 1px solid var(--brd);
+  padding: 24px 0;
+  cursor: pointer;
+}
+.faq-item:first-child { border-top: 1px solid var(--brd); }
+.faq-q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text);
+  gap: 20px;
+}
+.faq-arrow {
+  font-size: 20px;
+  color: var(--text3);
+  transition: transform .25s;
+  min-width: 24px;
+  text-align: center;
+}
+.faq-item.open .faq-arrow { transform: rotate(45deg); color: var(--gold); }
+.faq-a {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.8;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s ease, padding .35s;
+}
+.faq-item.open .faq-a { max-height: 400px; padding-top: 14px; }
+
+/* ─── DISCLAIMER ─── */
+.disclaimer {
+  background: var(--card);
+  border: 1px solid var(--brd);
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin: 56px auto 0;
+  max-width: 820px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text3);
+  line-height: 1.8;
+}
+.disclaimer strong { color: var(--text2); }
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--brd);
+  padding: 48px 40px;
+  position: relative;
+  z-index: 1;
+}
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  color: var(--text2);
+}
+.footer-logo span { color: var(--gold); }
+.footer-links {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+}
+.footer-links a {
+  font-size: 12px;
+  color: var(--text3);
+  text-decoration: none;
+  transition: color .2s;
+}
+.footer-links a:hover { color: var(--text2); }
+.footer-cr { font-size: 12px; color: var(--text3); }
+
+/* ─── SCROLL REVEAL ─── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s, transform .6s; }
+.reveal.vis { opacity: 1; transform: none; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  section { padding: 72px 24px; }
+  .hero { padding: 80px 24px 60px; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .method-grid { grid-template-columns: 1fr; }
+  .dpanel-inner { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
+  .comparison-box { display: none; }
+}
+@media (max-width: 600px) {
+  .hero h1 { font-size: 2.2rem; }
+  .features-grid { grid-template-columns: 1fr; }
+  .standards-grid { grid-template-columns: 1fr 1fr; }
+  footer { padding: 32px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="#" class="nav-logo">Psy<span>Test</span></a>
+  <ul class="nav-links">
+    <li><a href="#how">Как работает</a></li>
+    <li><a href="#methodology">Методология</a></li>
+    <li><a href="#disorders">Расстройства</a></li>
+    <li><a href="#standards">Стандарты</a></li>
+    <li><a href="#about">О проекте</a></li>
+    <li><a href="depression.html" class="nav-cta">Начать</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ─── -->
+<div class="hero">
+  <div class="hero-tag">Клиническая самодиагностика · DSM-5 · МКБ-11</div>
+  <h1>Понять своё состояние <em>до визита к врачу</em></h1>
+  <p class="hero-sub">Инструменты на основе международных клинических шкал. Не ставим диагнозы — показываем профиль симптомов, чтобы разговор со специалистом стал точнее.</p>
+  <div class="hero-btns">
+    <a href="depression.html" class="btn-primary">Начать диагностику →</a>
+    <a href="#how" class="btn-secondary">Как это работает</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-n">10</div>
+      <div class="stat-l">расстройств</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">6+</div>
+      <div class="stat-l">инструментов на расстройство</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">3</div>
+      <div class="stat-l">режима оценки</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">0</div>
+      <div class="stat-l">данных на серверах</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ─── HOW IT WORKS ─── -->
+<section id="how">
+<div class="ct">
+  <div class="sec-tag reveal">Принцип работы</div>
+  <h2 class="reveal">Что отличает нас<br>от PHQ-9 и GAD-7</h2>
+  <p class="lead reveal">Стандартные скрининги дают один балл: «есть / нет». Мы даём профиль: где именно, насколько сильно, и что это значит для лечения.</p>
+
+  <div class="features-grid" style="margin-top:56px;">
+    <div class="feat reveal">
+      <div class="feat-icon">⏱</div>
+      <h3>Три временны́х режима</h3>
+      <p>«Последние 2 недели» — текущее состояние. «За всю жизнь» — хронический паттерн. «Худший период» — пик тяжести для ретроспективной оценки.</p>
+      <span class="feat-badge">Нет ни в одном онлайн-инструменте</span>
+    </div>
+    <div class="feat reveal">
+      <div class="feat-icon">⚖</div>
+      <h3>Дифференциальные веса</h3>
+      <p>Ядерные симптомы (обязательные по DSM-5) оцениваются по шкале 0–5. Второстепенные — 0–3. Как в HAM-D. Не все симптомы равны.</p>
+      <span class="feat-badge">Согласно Hamilton Rating Scale</span>
+    </div>
+    <div class="feat reveal">
+      <div class="feat-icon">〰</div>
+      <h3>Учёт «плавающих» симптомов</h3>
+      <p>День нормально, день тяжело? Каждый вопрос содержит вариант для волнообразного паттерна. Стандартные тесты это игнорируют.</p>
+      <span class="feat-badge">Клинически верное решение</span>
+    </div>
+    <div class="feat reveal">
+      <div class="feat-icon">📊</div>
+      <h3>Доменное профилирование</h3>
+      <p>Результат — не только общий балл, но и профиль по 5 доменам: эмоциональный, когнитивный, соматический, поведенческий, функционирование.</p>
+      <span class="feat-badge">Показывает ГДЕ проблема</span>
+    </div>
+    <div class="feat reveal">
+      <div class="feat-icon">📋</div>
+      <h3>История влияет на тактику</h3>
+      <p>Сколько эпизодов? Длительность? Коморбидность? Эти данные не меняют балл, но формируют раздел «Тактика лечения» в выводах.</p>
+      <span class="feat-badge">Согласно клиническим рекомендациям</span>
+    </div>
+    <div class="feat reveal">
+      <div class="feat-icon">🔒</div>
+      <h3>Полная приватность</h3>
+      <p>Статический сайт. Нет сервера, нет базы данных. Ваши ответы обрабатываются исключительно в браузере и никуда не передаются.</p>
+      <span class="feat-badge">Zero data retention</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── METHODOLOGY ─── -->
+<section id="methodology">
+<div class="ct">
+  <div class="sec-tag reveal">Методология</div>
+  <h2 class="reveal">Четыре уровня<br>клинических инструментов</h2>
+  <p class="lead reveal">Каждая диагностика объединяет инструменты всех уровней доказательности — от быстрого скрининга до специализированных конструктов теоретических моделей.</p>
+
+  <div class="method-grid">
+    <div class="method-left reveal">
+      <div class="method-steps">
+        <div class="mstep">
+          <div class="mstep-n">1</div>
+          <div class="mstep-c">
+            <h4>Скрининговые инструменты (2–5 мин.)</h4>
+            <p>PHQ-9, GAD-7, PC-PTSD-5 — берём вопросы как основу. Быстрая первичная проверка: есть ли проблема?</p>
+          </div>
+        </div>
+        <div class="mstep">
+          <div class="mstep-n">2</div>
+          <div class="mstep-c">
+            <h4>Шкалы оценки тяжести</h4>
+            <p>HAM-D, MADRS, BDI-II, CAPS-5, Y-BOCS — доменная структура и пункты, которых нет в скрининге. Ответ: насколько тяжело?</p>
+          </div>
+        </div>
+        <div class="mstep">
+          <div class="mstep-n">3</div>
+          <div class="mstep-c">
+            <h4>Специализированные конструкты</h4>
+            <p>PSWQ, IUS-12, MCQ-30, RRS, BHS — измеряют один конструкт глубоко. Непереносимость неопределённости, руминация, метакогниции.</p>
+          </div>
+        </div>
+        <div class="mstep">
+          <div class="mstep-n">4</div>
+          <div class="mstep-c">
+            <h4>Теоретические модели механизмов</h4>
+            <p>Что ПОДДЕРЖИВАЕТ расстройство. Модели Бека, Dugas, Wells, Nolen-Hoeksema, Ehlers & Clark — центральные механизмы хронификации.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="method-right reveal">
+      <div class="comparison-box">
+        <div class="cb-head">Сравнение инструментов самодиагностики</div>
+        <div class="cb-row cb-head-row" style="padding-top:10px;padding-bottom:10px;border-bottom:1px solid var(--brd);background:rgba(255,255,255,.02);">
+          <span class="cb-label" style="color:var(--text3);">Функция</span>
+          <span style="text-align:center;font-weight:600;color:var(--text3);">PHQ-9</span>
+          <span style="text-align:center;font-weight:600;color:var(--text3);">MHA</span>
+          <span style="text-align:center;font-weight:600;color:var(--gold);">PsyTest</span>
+        </div>
+        <div class="cb-row cb-data-row">
+          <span class="cb-label">Дифференц. веса</span>
+          <span class="cb-no" style="text-align:center">—</span>
+          <span class="cb-no" style="text-align:center">—</span>
+          <span class="cb-yes" style="text-align:center">✓</span>
+        </div>
+        <div class="cb-row cb-data-row">
+          <span class="cb-label">Доменный профиль</span>
+          <span class="cb-no" style="text-align:center">—</span>
+          <span class="cb-no" style="text-align:center">—</span>
+          <span class="cb-yes" style="text-align:center">✓</span>
+        </div>
+        <div class="cb-row cb-data-row">
+          <span class="cb-label">3 режима оценки</span>
+          <span class="cb-no" style="text-align:center">—</span>
+          <span class="cb-no" style="text-align:center">—</span>
+          <span class="cb-yes" style="text-align:center">✓</span>
+        </div>
+        <div class="cb-row cb-data-row">
+          <span class="cb-label">«Плавающие» симптомы</span>
+          <span class="cb-no" style="text-align:center">—</span>
+          <span class="cb-no" style="text-align:center">—</span>
+          <span class="cb-yes" style="text-align:center">✓</span>
+        </div>
+        <div class="cb-row cb-data-row">
+          <span class="cb-label">История → тактика</span>
+          <span class="cb-no" style="text-align:center">—</span>
+          <span class="cb-no" style="text-align:center">—</span>
+          <span class="cb-yes" style="text-align:center">✓</span>
+        </div>
+        <div class="cb-row cb-data-row">
+          <span class="cb-label">Теоретические модели</span>
+          <span class="cb-no" style="text-align:center">—</span>
+          <span class="cb-no" style="text-align:center">—</span>
+          <span class="cb-yes" style="text-align:center">✓</span>
+        </div>
+        <div class="cb-row cb-data-row">
+          <span class="cb-label">Функционирование (DSM-5 D)</span>
+          <span style="text-align:center;color:var(--text3);font-size:12px;">частично</span>
+          <span class="cb-no" style="text-align:center">—</span>
+          <span class="cb-yes" style="text-align:center">✓✓</span>
+        </div>
+        <div class="cb-row cb-data-row">
+          <span class="cb-label">Zero data retention</span>
+          <span class="cb-no" style="text-align:center">—</span>
+          <span class="cb-no" style="text-align:center">—</span>
+          <span class="cb-yes" style="text-align:center">✓</span>
+        </div>
+      </div>
+
+      <div style="margin-top:20px;background:var(--card);border:1px solid var(--brd);border-radius:14px;padding:24px;">
+        <div style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:16px;">Почему размерный подход важен</div>
+        <p style="font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:12px;">227 уникальных комбинаций симптомов могут дать один диагноз «большая депрессия» (Fried & Nesse, 2015). Два человека с «одинаковой» депрессией могут не иметь ни одного общего симптома.</p>
+        <p style="font-size:13px;color:var(--text2);line-height:1.75;">Бинарный результат «есть / нет» скрывает это. Доменный профиль показывает, где именно сосредоточена проблема и куда направить лечение.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── DISORDERS ─── -->
+<section id="disorders">
+<div class="ct">
+  <div class="sec-tag reveal">10 расстройств</div>
+  <h2 class="reveal">Диагностические инструменты</h2>
+  <p class="lead reveal">● — доступно сейчас. Остальные в разработке по той же методологии.</p>
+
+  <div class="dis-tabs reveal">
+    <button class="dis-tab ready act" onclick="showDis(0)">Депрессия</button>
+    <button class="dis-tab" onclick="showDis(1)">Тревога (ГТР)</button>
+    <button class="dis-tab" onclick="showDis(2)">ПТСР</button>
+    <button class="dis-tab" onclick="showDis(3)">ОКР</button>
+    <button class="dis-tab" onclick="showDis(4)">Биполярное</button>
+    <button class="dis-tab" onclick="showDis(5)">Социальная фобия</button>
+    <button class="dis-tab" onclick="showDis(6)">Паническое</button>
+    <button class="dis-tab" onclick="showDis(7)">СДВГ</button>
+    <button class="dis-tab" onclick="showDis(8)">Пищевые расстройства</button>
+    <button class="dis-tab" onclick="showDis(9)">Пограничное (ПРЛ)</button>
+  </div>
+
+  <div class="dis-panels">
+
+    <!-- 0. DEPRESSION -->
+    <div class="dis-panel act" id="dp0">
+      <div class="dpanel-inner">
+        <div class="dp-left">
+          <span class="dp-badge dp-badge-ready">✓ Доступно</span>
+          <div class="dp-title">Депрессивное расстройство</div>
+          <div class="dp-abbr">Большое депрессивное расстройство / БДР · DSM-5 · F32–F33</div>
+          <p class="dp-desc">Депрессия — не «плохое настроение». 227 уникальных комбинаций симптомов могут дать один диагноз. Наша диагностика объединяет 6 международных инструментов и показывает полную картину: где именно бьёт сильнее всего.</p>
+          <div class="dp-meta">
+            <span class="dp-chip">26 вопросов</span>
+            <span class="dp-chip">5 доменов</span>
+            <span class="dp-chip">DSM-5 ≥2 нед.</span>
+            <span class="dp-chip">История + тактика</span>
+          </div>
+          <div class="dp-cta">
+            <a href="depression.html" class="btn-start">Начать диагностику →</a>
+          </div>
+        </div>
+        <div class="dp-right">
+          <div class="dp-instruments">
+            <h4>Инструменты</h4>
+            <div class="inst-list">
+              <div class="inst-item"><span class="inst-name">PHQ-9</span><span class="inst-desc">Скрининг, 9 вопросов DSM, золотой стандарт первичной помощи</span></div>
+              <div class="inst-item"><span class="inst-name">BDI-II</span><span class="inst-desc">Beck Depression Inventory, акцент на когнитивные симптомы</span></div>
+              <div class="inst-item"><span class="inst-name">HAM-D17</span><span class="inst-desc">Hamilton, золотой стандарт клинических исследований</span></div>
+              <div class="inst-item"><span class="inst-name">MADRS</span><span class="inst-desc">Montgomery-Åsberg, высокая чувствительность к изменениям</span></div>
+              <div class="inst-item"><span class="inst-name">IDS-30</span><span class="inst-desc">Inventory for Depressive Symptomatology, самый полный</span></div>
+              <div class="inst-item"><span class="inst-name">Модели</span><span class="inst-desc">Beck (когн. триада), Abramson (безнадёжность), Nolen-Hoeksema (руминация)</span></div>
+            </div>
+          </div>
+          <div class="dp-domains">
+            <h4>Доменная структура</h4>
+            <div class="dom-row">
+              <span class="dom-letter" style="color:#6a3a7a">А</span>
+              <div class="dom-bar-wrap"><div class="dom-bar-fill" style="width:35%;background:#6a3a7a"></div></div>
+              <span class="dom-info">Эмоц. · 35%</span>
+            </div>
+            <div class="dom-row">
+              <span class="dom-letter" style="color:#3a5a7a">Б</span>
+              <div class="dom-bar-wrap"><div class="dom-bar-fill" style="width:29%;background:#3a5a7a"></div></div>
+              <span class="dom-info">Когн. · 29%</span>
+            </div>
+            <div class="dom-row">
+              <span class="dom-letter" style="color:#6a7a3a">В</span>
+              <div class="dom-bar-wrap"><div class="dom-bar-fill" style="width:17%;background:#6a7a3a"></div></div>
+              <span class="dom-info">Сомат. · 17%</span>
+            </div>
+            <div class="dom-row">
+              <span class="dom-letter" style="color:#7a4a3a">Г</span>
+              <div class="dom-bar-wrap"><div class="dom-bar-fill" style="width:19%;background:#7a4a3a"></div></div>
+              <span class="dom-info">Поведенч. · 19%</span>
+            </div>
+            <div class="dom-row">
+              <span class="dom-letter" style="color:#3a6a6a">Д</span>
+              <div class="dom-bar-wrap"><div class="dom-bar-fill" style="width:100%;background:rgba(58,106,106,.3);border:1px dashed rgba(58,106,106,.4)"></div></div>
+              <span class="dom-info">Функц. · вне</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. ANXIETY -->
+    <div class="dis-panel" id="dp1">
+      <div class="dpanel-inner">
+        <div class="dp-left">
+          <span class="dp-badge dp-badge-soon">⏳ Скоро</span>
+          <div class="dp-title">Генерализованное тревожное расстройство</div>
+          <div class="dp-abbr">ГТР / GAD · DSM-5 · F41.1</div>
+          <p class="dp-desc">Тревога — не «просто переживать». Центральный механизм — непереносимость неопределённости (Dugas, 1998) и метакогниции о полезности беспокойства (Wells, 2009). DSM-5 требует ≥6 месяцев хронического беспокойства.</p>
+          <div class="dp-meta">
+            <span class="dp-chip">~20 вопросов</span>
+            <span class="dp-chip">DSM-5 ≥6 мес.</span>
+            <span class="dp-chip">Метакогниции</span>
+          </div>
+          <div class="dp-cta">
+            <span class="btn-coming">В разработке</span>
+          </div>
+        </div>
+        <div class="dp-right">
+          <div class="dp-instruments">
+            <h4>Запланированные инструменты</h4>
+            <div class="inst-list">
+              <div class="inst-item"><span class="inst-name">GAD-7</span><span class="inst-desc">Spitzer, скрининг тревоги — стандарт первичной помощи</span></div>
+              <div class="inst-item"><span class="inst-name">HAM-A</span><span class="inst-desc">Hamilton Anxiety, психическая и соматическая тревога</span></div>
+              <div class="inst-item"><span class="inst-name">PSWQ</span><span class="inst-desc">Penn State Worry Questionnaire, патологическое беспокойство</span></div>
+              <div class="inst-item"><span class="inst-name">IUS-12</span><span class="inst-desc">Непереносимость неопределённости — ключевой конструкт</span></div>
+              <div class="inst-item"><span class="inst-name">MCQ-30</span><span class="inst-desc">Метакогнитивный опросник Wells</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. PTSD -->
+    <div class="dis-panel" id="dp2">
+      <div class="dpanel-inner">
+        <div class="dp-left">
+          <span class="dp-badge dp-badge-soon">⏳ Скоро</span>
+          <div class="dp-title">Посттравматическое стрессовое расстройство</div>
+          <div class="dp-abbr">ПТСР / PTSD · DSM-5 · F43.1</div>
+          <p class="dp-desc">ПТСР — единственное расстройство с чёткой этиологией в DSM-5. Центральные механизмы: нарушение автобиографической памяти и негативные оценки травмы (Ehlers & Clark, 2000). Интрузии, избегание, гипербдительность.</p>
+          <div class="dp-meta">
+            <span class="dp-chip">~25 вопросов</span>
+            <span class="dp-chip">DSM-5 ≥1 мес.</span>
+            <span class="dp-chip">Диссоциация</span>
+          </div>
+          <div class="dp-cta">
+            <span class="btn-coming">В разработке</span>
+          </div>
+        </div>
+        <div class="dp-right">
+          <div class="dp-instruments">
+            <h4>Запланированные инструменты</h4>
+            <div class="inst-list">
+              <div class="inst-item"><span class="inst-name">PC-PTSD-5</span><span class="inst-desc">Скрининг для первичной помощи</span></div>
+              <div class="inst-item"><span class="inst-name">PCL-5</span><span class="inst-desc">PTSD Checklist, 20 вопросов DSM-5</span></div>
+              <div class="inst-item"><span class="inst-name">IES-R</span><span class="inst-desc">Impact of Event Scale — навязчивость и избегание</span></div>
+              <div class="inst-item"><span class="inst-name">DES-II</span><span class="inst-desc">Dissociative Experiences Scale</span></div>
+              <div class="inst-item"><span class="inst-name">CAPS-5</span><span class="inst-desc">Клинически-администрируемая шкала (структура)</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. OCD -->
+    <div class="dis-panel" id="dp3">
+      <div class="dpanel-inner">
+        <div class="dp-left">
+          <span class="dp-badge dp-badge-soon">⏳ Скоро</span>
+          <div class="dp-title">Обсессивно-компульсивное расстройство</div>
+          <div class="dp-abbr">ОКР / OCD · DSM-5 · F42</div>
+          <p class="dp-desc">Навязчивые мысли + ритуалы. Центральный механизм — завышенное чувство ответственности (Salkovskis, 1985). Время обсессий в день = маркер тяжести. Ключевой вопрос: эго-дистонность (мысли пугают? или ощущаются «своими»?).</p>
+          <div class="dp-meta">
+            <span class="dp-chip">~22 вопроса</span>
+            <span class="dp-chip">Эго-дистонность</span>
+            <span class="dp-chip">Типы обсессий</span>
+          </div>
+          <div class="dp-cta">
+            <span class="btn-coming">В разработке</span>
+          </div>
+        </div>
+        <div class="dp-right">
+          <div class="dp-instruments">
+            <h4>Запланированные инструменты</h4>
+            <div class="inst-list">
+              <div class="inst-item"><span class="inst-name">Y-BOCS</span><span class="inst-desc">Yale-Brown OC Scale — золотой стандарт</span></div>
+              <div class="inst-item"><span class="inst-name">OCI-R</span><span class="inst-desc">OC Inventory-Revised, 18 пунктов</span></div>
+              <div class="inst-item"><span class="inst-name">PI-WSUR</span><span class="inst-desc">Padua Inventory, разные типы навязчивостей</span></div>
+              <div class="inst-item"><span class="inst-name">OBQ-44</span><span class="inst-desc">Obsessional Beliefs Questionnaire</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. BIPOLAR -->
+    <div class="dis-panel" id="dp4">
+      <div class="dpanel-inner">
+        <div class="dp-left">
+          <span class="dp-badge dp-badge-soon">⏳ Скоро</span>
+          <div class="dp-title">Биполярное расстройство</div>
+          <div class="dp-abbr">БАР I / БАР II · DSM-5 · F31</div>
+          <p class="dp-desc">Диагноз с самым высоким процентом пропустки в клинической практике (92.7%). Ключевая задача: дифференциация от депрессии. Мания и гипомания требуют отдельных шкал оценки. Лечение принципиально отличается.</p>
+          <div class="dp-meta">
+            <span class="dp-chip">~24 вопроса</span>
+            <span class="dp-chip">Мания + Депрессия</span>
+            <span class="dp-chip">Диффдиагностика</span>
+          </div>
+          <div class="dp-cta">
+            <span class="btn-coming">В разработке</span>
+          </div>
+        </div>
+        <div class="dp-right">
+          <div class="dp-instruments">
+            <h4>Запланированные инструменты</h4>
+            <div class="inst-list">
+              <div class="inst-item"><span class="inst-name">MDQ</span><span class="inst-desc">Mood Disorder Questionnaire — скрининг БАР</span></div>
+              <div class="inst-item"><span class="inst-name">ASRM</span><span class="inst-desc">Altman Self-Rating Mania Scale</span></div>
+              <div class="inst-item"><span class="inst-name">HCL-32</span><span class="inst-desc">Hypomania Checklist, гипомания</span></div>
+              <div class="inst-item"><span class="inst-name">YMRS</span><span class="inst-desc">Young Mania Rating Scale (структура)</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. SOCIAL PHOBIA -->
+    <div class="dis-panel" id="dp5">
+      <div class="dpanel-inner">
+        <div class="dp-left">
+          <span class="dp-badge dp-badge-soon">⏳ Скоро</span>
+          <div class="dp-title">Социальное тревожное расстройство</div>
+          <div class="dp-abbr">Социальная фобия / SAD · DSM-5 · F40.1</div>
+          <p class="dp-desc">Страх оценки другими. Центральный механизм — «публичное я» (Clark & Wells, 1995): избыточное самонаблюдение и негативные предвкушения. Ключевое отличие от застенчивости: уровень дистресса и избегания.</p>
+          <div class="dp-meta">
+            <span class="dp-chip">~20 вопросов</span>
+            <span class="dp-chip">Страх оценки</span>
+            <span class="dp-chip">Избегание</span>
+          </div>
+          <div class="dp-cta">
+            <span class="btn-coming">В разработке</span>
+          </div>
+        </div>
+        <div class="dp-right">
+          <div class="dp-instruments">
+            <h4>Запланированные инструменты</h4>
+            <div class="inst-list">
+              <div class="inst-item"><span class="inst-name">LSAS</span><span class="inst-desc">Liebowitz Social Anxiety Scale — золотой стандарт</span></div>
+              <div class="inst-item"><span class="inst-name">SPIN</span><span class="inst-desc">Social Phobia Inventory, 17 пунктов</span></div>
+              <div class="inst-item"><span class="inst-name">FNE</span><span class="inst-desc">Fear of Negative Evaluation Scale</span></div>
+              <div class="inst-item"><span class="inst-name">BFNE-S</span><span class="inst-desc">Brief FNE — краткая версия</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. PANIC -->
+    <div class="dis-panel" id="dp6">
+      <div class="dpanel-inner">
+        <div class="dp-left">
+          <span class="dp-badge dp-badge-soon">⏳ Скоро</span>
+          <div class="dp-title">Паническое расстройство</div>
+          <div class="dp-abbr">ПР / Panic Disorder · DSM-5 · F41.0</div>
+          <p class="dp-desc">Внезапные атаки + страх их повторения. Центральный механизм — катастрофизация телесных ощущений (Clark, 1986). Ключевой маркер: агорафобия как следствие избегания ситуаций, где «не спастись».</p>
+          <div class="dp-meta">
+            <span class="dp-chip">~18 вопросов</span>
+            <span class="dp-chip">Агорафобия</span>
+            <span class="dp-chip">Катастрофизация</span>
+          </div>
+          <div class="dp-cta">
+            <span class="btn-coming">В разработке</span>
+          </div>
+        </div>
+        <div class="dp-right">
+          <div class="dp-instruments">
+            <h4>Запланированные инструменты</h4>
+            <div class="inst-list">
+              <div class="inst-item"><span class="inst-name">PDSS</span><span class="inst-desc">Panic Disorder Severity Scale</span></div>
+              <div class="inst-item"><span class="inst-name">ACQ</span><span class="inst-desc">Agoraphobic Cognitions Questionnaire</span></div>
+              <div class="inst-item"><span class="inst-name">BSQ</span><span class="inst-desc">Body Sensations Questionnaire</span></div>
+              <div class="inst-item"><span class="inst-name">MI</span><span class="inst-desc">Mobility Inventory for Agoraphobia</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. ADHD -->
+    <div class="dis-panel" id="dp7">
+      <div class="dpanel-inner">
+        <div class="dp-left">
+          <span class="dp-badge dp-badge-soon">⏳ Скоро</span>
+          <div class="dp-title">Синдром дефицита внимания и гиперактивности</div>
+          <div class="dp-abbr">СДВГ / ADHD · DSM-5 · F90</div>
+          <p class="dp-desc">Сложнейшее в самодиагностике расстройство: симптомы должны быть с детства, присутствовать в двух сферах жизни, и не объясняться тревогой. Три типа: преобладание невнимательности, гиперактивности, или смешанный.</p>
+          <div class="dp-meta">
+            <span class="dp-chip">~22 вопроса</span>
+            <span class="dp-chip">С детства</span>
+            <span class="dp-chip">Три типа</span>
+          </div>
+          <div class="dp-cta">
+            <span class="btn-coming">В разработке</span>
+          </div>
+        </div>
+        <div class="dp-right">
+          <div class="dp-instruments">
+            <h4>Запланированные инструменты</h4>
+            <div class="inst-list">
+              <div class="inst-item"><span class="inst-name">ASRS-v1.1</span><span class="inst-desc">Adult ADHD Self-Report Scale — ВОЗ</span></div>
+              <div class="inst-item"><span class="inst-name">CAARS</span><span class="inst-desc">Conners' Adult ADHD Rating Scale</span></div>
+              <div class="inst-item"><span class="inst-name">BADDS</span><span class="inst-desc">Brown ADD Rating Scale</span></div>
+              <div class="inst-item"><span class="inst-name">DIVA 2.0</span><span class="inst-desc">Диагностическое интервью (структура)</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. EATING -->
+    <div class="dis-panel" id="dp8">
+      <div class="dpanel-inner">
+        <div class="dp-left">
+          <span class="dp-badge dp-badge-soon">⏳ Скоро</span>
+          <div class="dp-title">Расстройства пищевого поведения</div>
+          <div class="dp-abbr">РПП / AN, BN, BED · DSM-5 · F50</div>
+          <p class="dp-desc">Нервная анорексия, булимия, компульсивное переедание. Центральный конструкт — переоценка формы и веса тела (Fairburn, 1981). Самый высокий уровень смертности среди всех психических расстройств.</p>
+          <div class="dp-meta">
+            <span class="dp-chip">~20 вопросов</span>
+            <span class="dp-chip">Три подтипа</span>
+            <span class="dp-chip">EDE-Q</span>
+          </div>
+          <div class="dp-cta">
+            <span class="btn-coming">В разработке</span>
+          </div>
+        </div>
+        <div class="dp-right">
+          <div class="dp-instruments">
+            <h4>Запланированные инструменты</h4>
+            <div class="inst-list">
+              <div class="inst-item"><span class="inst-name">EDE-Q</span><span class="inst-desc">Eating Disorder Examination Questionnaire</span></div>
+              <div class="inst-item"><span class="inst-name">BITE</span><span class="inst-desc">Bulimic Investigatory Test Edinburgh</span></div>
+              <div class="inst-item"><span class="inst-name">BES</span><span class="inst-desc">Binge Eating Scale</span></div>
+              <div class="inst-item"><span class="inst-name">EAT-26</span><span class="inst-desc">Eating Attitudes Test</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. BPD -->
+    <div class="dis-panel" id="dp9">
+      <div class="dpanel-inner">
+        <div class="dp-left">
+          <span class="dp-badge dp-badge-soon">⏳ Скоро</span>
+          <div class="dp-title">Пограничное расстройство личности</div>
+          <div class="dp-abbr">ПРЛ / BPD · DSM-5 · F60.3</div>
+          <p class="dp-desc">«Эмоциональная дисрегуляция» как центральный механизм (Linehan, 1993). Страх отвержения, нестабильная идентичность, импульсивность. Наиболее стигматизированное расстройство — и наиболее поддающееся лечению (ДПТ).</p>
+          <div class="dp-meta">
+            <span class="dp-chip">~24 вопроса</span>
+            <span class="dp-chip">9 критериев DSM-5</span>
+            <span class="dp-chip">ДПТ-совместима</span>
+          </div>
+          <div class="dp-cta">
+            <span class="btn-coming">В разработке</span>
+          </div>
+        </div>
+        <div class="dp-right">
+          <div class="dp-instruments">
+            <h4>Запланированные инструменты</h4>
+            <div class="inst-list">
+              <div class="inst-item"><span class="inst-name">ZAN-BPD</span><span class="inst-desc">Zanarini Rating Scale for BPD</span></div>
+              <div class="inst-item"><span class="inst-name">MSI-BPD</span><span class="inst-desc">McLean Screening Instrument</span></div>
+              <div class="inst-item"><span class="inst-name">BPDSI-IV</span><span class="inst-desc">BPD Severity Index</span></div>
+              <div class="inst-item"><span class="inst-name">DERS</span><span class="inst-desc">Difficulties in Emotion Regulation Scale</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /panels -->
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── STANDARDS ─── -->
+<section id="standards">
+<div class="ct">
+  <div class="sec-tag reveal">Доказательная база</div>
+  <h2 class="reveal">Международные стандарты<br>и источники</h2>
+  <p class="lead reveal">Каждый вопрос в наших инструментах имеет конкретный источник — рецензируемую публикацию или официальный клинический стандарт.</p>
+
+  <div class="standards-grid">
+    <div class="std-card reveal">
+      <div class="std-code">DSM-5-TR</div>
+      <div class="std-name">Диагностическое и статистическое руководство</div>
+      <div class="std-desc">APA, 2022. Критерии диагностики, обязательные симптомы, временны́е рамки, критерий функционирования D.</div>
+      <span class="std-year">APA · 2022</span>
+    </div>
+    <div class="std-card reveal">
+      <div class="std-code">PHQ-9</div>
+      <div class="std-name">Patient Health Questionnaire</div>
+      <div class="std-desc">Kroenke et al., J Gen Intern Med. 2001. Стандарт скрининга депрессии в первичной помощи. Специфичность 98%.</div>
+      <span class="std-year">doi:10.1046/j.1525-1497.2001.016009606.x</span>
+    </div>
+    <div class="std-card reveal">
+      <div class="std-code">HAM-D17</div>
+      <div class="std-name">Hamilton Depression Rating Scale</div>
+      <div class="std-desc">Hamilton, J Neurol Neurosurg Psychiatry. 1960. Золотой стандарт клинических исследований. Дифференциальные веса 0–4 и 0–2.</div>
+      <span class="std-year">doi:10.1136/jnnp.23.1.56</span>
+    </div>
+    <div class="std-card reveal">
+      <div class="std-code">MADRS</div>
+      <div class="std-name">Montgomery-Åsberg Depression Scale</div>
+      <div class="std-desc">Montgomery & Åsberg, Br J Psychiatry. 1979. Высокая чувствительность к терапевтическим изменениям.</div>
+      <span class="std-year">doi:10.1192/bjp.134.4.382</span>
+    </div>
+    <div class="std-card reveal">
+      <div class="std-code">GAD-7</div>
+      <div class="std-name">Generalized Anxiety Disorder Scale</div>
+      <div class="std-desc">Spitzer et al., Arch Intern Med. 2006. Скрининг ГТР. Сенситивность 89%, специфичность 82%.</div>
+      <span class="std-year">doi:10.1001/archinte.166.10.1092</span>
+    </div>
+    <div class="std-card reveal">
+      <div class="std-code">BDI-II</div>
+      <div class="std-name">Beck Depression Inventory II</div>
+      <div class="std-desc">Beck et al., 1996. 21 вопрос, акцент на когнитивные симптомы. Основа когнитивной модели депрессии.</div>
+      <span class="std-year">APA PsycNet</span>
+    </div>
+    <div class="std-card reveal">
+      <div class="std-code">IDS-30</div>
+      <div class="std-name">Inventory for Depressive Symptomatology</div>
+      <div class="std-desc">Rush et al., Psychol Med. 1996. Самый полный инструмент: атипичные симптомы, психомоторика, суточные колебания.</div>
+      <span class="std-year">doi:10.1017/S0033291700035558</span>
+    </div>
+    <div class="std-card reveal">
+      <div class="std-code">Модели</div>
+      <div class="std-name">Теоретические модели механизмов</div>
+      <div class="std-desc">Beck (когн. триада), Abramson (безнадёжность), Nolen-Hoeksema (руминация), Dugas (IU), Wells (метакогниции), Ehlers & Clark (ПТСР).</div>
+      <span class="std-year">1986–2009</span>
+    </div>
+  </div>
+
+  <div class="disclaimer reveal">
+    <strong>Критический анализ:</strong> Ни один существующий потребительский онлайн-инструмент не совмещает дифференциальные веса DSM-5-иерархии, три временны́х режима оценки, учёт волнообразных симптомов и доменное профилирование в одном инструменте. MHA (Mental Health America) и аналогичные платформы используют равные веса и дают единственный бинарный результат. Клинические платформы типа NovoPsych (150+ шкал) ориентированы на специалистов. Наш подход занимает нишу между потребительским скринингом и клиническим инструментом.
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── ABOUT ─── -->
+<section id="about">
+<div class="ct">
+  <div class="sec-tag reveal">О проекте</div>
+  <h2 class="reveal">Что это такое<br>и чем не является</h2>
+
+  <div class="about-grid">
+    <div class="about-block reveal">
+      <h3>Чем является PsyTest</h3>
+      <p>Вспомогательный инструмент для подготовки к визиту к специалисту. Структурированный способ осмыслить свои симптомы, используя те же конструкты, что применяют клиницисты.</p>
+      <p>Профиль по доменам помогает ответить на вопрос «где именно проблема» — не просто «есть / нет». История эпизодов формирует тактические рекомендации, которые можно обсудить с врачом.</p>
+      <p>Все вопросы имеют источники в рецензируемых публикациях. Методология открыта и описана.</p>
+    </div>
+    <div class="about-block reveal">
+      <h3>Чем НЕ является</h3>
+      <p><strong>Не заменяет клиническое интервью.</strong> Золотой стандарт диагностики — SCID-5, проводимый психиатром. Наш инструмент не ставит диагнозов.</p>
+      <p><strong>Не является медицинской услугой.</strong> Результаты — ориентир для разговора со специалистом, не основание для самолечения.</p>
+      <p><strong>Не хранит данные.</strong> Статический сайт на GitHub Pages. Ваши ответы существуют только в браузере и удаляются при закрытии вкладки.</p>
+    </div>
+  </div>
+
+  <div class="faq reveal">
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Почему инструмент лучше обычного поиска симптомов в интернете? <span class="faq-arrow">+</span></div>
+      <div class="faq-a">Поиск симптомов даёт списки из Википедии или форумов. Наши вопросы взяты из валидированных клинических шкал (PHQ-9, HAM-D, BDI-II), а алгоритм интерпретации основан на DSM-5. Разница: мы спрашиваем не «есть ли у вас грусть», а «насколько устойчива грусть, утром или вечером хуже, мешает ли работе» — это даёт клинически значимую информацию.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Почему три режима оценки, а не один? <span class="faq-arrow">+</span></div>
+      <div class="faq-a">Разные цели — разные режимы. «Последние 2 недели» — DSM-5 критерий для текущего эпизода. «За всю жизнь» — хронический паттерн, нужен для дифдиагностики дистимии. «Худший период» — ретроспективная оценка пика тяжести, помогает понять, что происходило в прошлом. Ни один существующий потребительский инструмент это не реализует.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Что значит «дифференциальные веса»? <span class="faq-arrow">+</span></div>
+      <div class="faq-a">В PHQ-9 все 9 вопросов имеют одинаковый максимум (3 балла). Это неправильно с клинической точки зрения: ангедония и подавленное настроение — обязательные симптомы DSM-5, они весят больше, чем, например, изменение аппетита. Мы используем шкалу 0–5 для ядерных симптомов и 0–3 для второстепенных — как в HAM-D, которую применяют в клинических исследованиях.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Насколько точна самодиагностика по сравнению с клинической? <span class="faq-arrow">+</span></div>
+      <div class="faq-a">Самодиагностика в психиатрии имеет ограничения: человек может неточно оценивать собственное состояние, а некоторые симптомы требуют наблюдения специалиста. PHQ-9 имеет сенситивность 88% и специфичность 92% для большой депрессии — это хороший скрининговый инструмент, но не диагностический стандарт. Мы используем PHQ-9 как один из шести источников, а не единственный.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Проект с открытым кодом? <span class="faq-arrow">+</span></div>
+      <div class="faq-a">Да. Сайт размещён на GitHub Pages, весь исходный код открыт. Каждая диагностика — один самодостаточный HTML-файл с встроенным CSS и JS, работает офлайн. Никаких внешних зависимостей кроме Google Fonts.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Psy<span>Test</span></div>
+    <ul class="footer-links">
+      <li><a href="depression.html">Депрессия</a></li>
+      <li><a href="#methodology">Методология</a></li>
+      <li><a href="#standards">Источники</a></li>
+      <li><a href="#about">О проекте</a></li>
+      <li><a href="https://github.com" target="_blank">GitHub</a></li>
+    </ul>
+    <div class="footer-cr">Не медицинская услуга · Zero data retention</div>
+  </div>
+</footer>
+
+<script>
+// ─── DISORDER TABS ───
+function showDis(i) {
+  document.querySelectorAll('.dis-tab').forEach((t,j) => t.classList.toggle('act', j===i));
+  document.querySelectorAll('.dis-panel').forEach((p,j) => p.classList.toggle('act', j===i));
+}
+
+// ─── FAQ ───
+function toggleFaq(el) {
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
+
+// ─── SCROLL REVEAL ───
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach((el, i) => {
+  el.style.transitionDelay = (i % 4) * 0.08 + 's';
+  obs.observe(el);
+});
+
+// ─── SMOOTH NAV ───
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+</body>
+</html>
