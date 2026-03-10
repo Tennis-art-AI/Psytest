@@ -888,7 +888,7 @@ document.querySelectorAll('.ans').forEach(g=>{
       o.querySelector('input').checked=true;
       S[q]=parseInt(o.querySelector('input').value);
       g.querySelectorAll('.ao').forEach(x=>x.classList.remove('sel','sel-w'));
-      o.classList.add((q===6&&S[q]>=4)||(q===25&&S[q]>=3)?'sel-w':'sel');
+      o.classList.add((q===6&&S[q]>=4)||(q===13&&S[q]>=3)||(q===25&&S[q]>=3)?'sel-w':'sel');
       upd();
     });
   });
