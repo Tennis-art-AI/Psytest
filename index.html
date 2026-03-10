@@ -11,7 +11,7 @@
   --accent:#6a9fc0;--accent-dk:#4a7a9a;
   --brd:rgba(255,255,255,.09);--brd2:rgba(255,255,255,.04);
   --radius:14px;
-  --c-depr:#7ab0d4;--c-bar:#d4b46a;--c-adhd:#c4a070;--c-ocd:#a4a4d0;--c-cyclo:#90a8c0;
+  --c-depr:#7ab0d4;--c-bar:#d4b46a;--c-adhd:#c4a070;--c-ocd:#a4a4d0;--c-cyclo:#90a8c0;--c-anx:#6aaa8a;--c-bpd:#c07a90;--c-narc:#c0a060;--c-mixed:#8aaa80;--c-insomnia:#7080b0;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -182,6 +182,66 @@ html.t-slate .room-cta.ready:hover{box-shadow:0 6px 20px rgba(138,138,192,.3);}
   75%{filter:brightness(1.02) saturate(1.05) hue-rotate(3deg);}
 }
 
+/* ТРЕВОГА: мелкая вибрация — постоянное напряжение */
+.anim-anxiety img{
+  animation:anxShake 6s ease-in-out infinite;
+}
+@keyframes anxShake{
+  0%,100%{transform:translate(0,0);}
+  10%{transform:translate(0.5px,-0.3px);}
+  20%{transform:translate(-0.4px,0.5px);}
+  30%{transform:translate(0.3px,0.2px);}
+  40%{transform:translate(-0.5px,-0.4px);}
+  50%{transform:translate(0.2px,0.3px);}
+  60%{transform:translate(-0.3px,-0.2px);}
+  70%{transform:translate(0.4px,0.4px);}
+  80%{transform:translate(-0.2px,-0.3px);}
+  90%{transform:translate(0.3px,0.2px);}
+}
+
+/* ПРЛ: резкие перепады — вспышка и затухание */
+.anim-bpd img{
+  animation:bpdFlash 7s ease-in-out infinite;
+}
+@keyframes bpdFlash{
+  0%,100%{filter:brightness(1) saturate(1) contrast(1);}
+  15%{filter:brightness(1.12) saturate(1.3) contrast(1.05);}
+  20%{filter:brightness(.85) saturate(.6) contrast(1.1);}
+  50%{filter:brightness(1) saturate(1) contrast(1);}
+  70%{filter:brightness(1.08) saturate(1.2) contrast(1);}
+  75%{filter:brightness(.88) saturate(.7) contrast(1.05);}
+}
+
+/* НАРЦИССИЗМ: медленное приближение — всматривание в себя */
+.anim-narc img{
+  animation:narcZoom 10s ease-in-out infinite;
+}
+@keyframes narcZoom{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.03);}
+}
+
+/* СМЕШАННОЕ: лёгкое покачивание + затухание — ни туда ни сюда */
+.anim-mixed img{
+  animation:mixedDrift 9s ease-in-out infinite;
+}
+@keyframes mixedDrift{
+  0%,100%{filter:brightness(1) saturate(1);transform:translate(0,0);}
+  30%{filter:brightness(.9) saturate(.8);transform:translate(-1px,0);}
+  60%{filter:brightness(1.02) saturate(.9);transform:translate(1px,0);}
+}
+
+/* БЕССОННИЦА: мерцание — свет экрана в темноте */
+.anim-insomnia img{
+  animation:insomFlicker 8s ease-in-out infinite;
+}
+@keyframes insomFlicker{
+  0%,100%{filter:brightness(.85) contrast(1.05);}
+  30%{filter:brightness(.9) contrast(1);}
+  50%{filter:brightness(.82) contrast(1.08);}
+  70%{filter:brightness(.92) contrast(1);}
+}
+
 /* FOOTER */
 .foot{text-align:center;padding:60px 32px 80px;border-top:1px solid var(--brd);}
 .foot p{font-size:13px;color:var(--ink3);margin-bottom:8px;}
@@ -253,7 +313,6 @@ html.t-slate .room-cta.ready:hover{box-shadow:0 6px 20px rgba(138,138,192,.3);}
       </div>
       <a class="room-cta ready" href="bar.html">Начать диагностику →</a>
     </div>
-    <p class="room-desc">Золотой свет мании слева: открытый чемодан, записи на стенах, горящие свечи, разбросанные книги — грандиозные планы. Серая пустота депрессии справа: смятая постель, задёрнутые шторы, опрокинутая бутылка, пустые тарелки. Одна комната. Один человек. Два состояния, которые сменяют друг друга.</p>
 
     <div class="instruments">
       <div class="instr-label">Международные инструменты диагностики</div>
@@ -292,7 +351,6 @@ html.t-slate .room-cta.ready:hover{box-shadow:0 6px 20px rgba(138,138,192,.3);}
       </div>
       <a class="room-cta ready" href="depression.html">Начать диагностику →</a>
     </div>
-    <p class="room-desc">Задёрнутые шторы, смятая постель, ноутбук как единственный свет. Нераспечатанная почта на полу — недели копились. Еда из коробок у кровати. Одежда в чехле — так и не надетая. Увядшие цветы на камине. Часы показывают время, которое перестало иметь значение.</p>
 
     <div class="instruments">
       <div class="instr-label">Международные инструменты диагностики</div>
@@ -331,7 +389,6 @@ html.t-slate .room-cta.ready:hover{box-shadow:0 6px 20px rgba(138,138,192,.3);}
       </div>
       <a class="room-cta ready" href="cyclothymia.html">Начать диагностику →</a>
     </div>
-    <p class="room-desc">Комната, которая не может определиться. Одна половина залита мягким золотым светом — незаконченные проекты, открытые книги, энергия. Другая тонет в сером — смятые простыни, закрытые шторы, тишина. Граница между ними размыта. Ни одно состояние не длится достаточно долго, чтобы стать домом.</p>
 
     <div class="instruments">
       <div class="instr-label">Международные инструменты диагностики</div>
@@ -369,7 +426,6 @@ html.t-slate .room-cta.ready:hover{box-shadow:0 6px 20px rgba(138,138,192,.3);}
       </div>
       <span class="room-cta soon">⏳ В разработке</span>
     </div>
-    <p class="room-desc">Дрон на незаправленной кровати. Гитара в кресле. Мольберт у окна. Шахматы на полу. Открытые книги повсюду. Кофемашина рядом с паяльником. Стикеры-напоминалки на стене. Ноутбук с двадцатью вкладками. Энергия есть — фокуса нет.</p>
 
     <div class="instruments">
       <div class="instr-label">Планируемые инструменты</div>
@@ -406,7 +462,6 @@ html.t-slate .room-cta.ready:hover{box-shadow:0 6px 20px rgba(138,138,192,.3);}
       </div>
       <span class="room-cta soon">⏳ В разработке</span>
     </div>
-    <p class="room-desc">Рубашки в шкафу по градиенту цвета. Книги рассортированы и подписаны. Обувь выстроена по линейке. Перчатки на столе. Антисептик на каминной полке. Пять замков на двери — и всё равно тревожно. Контроль, который не даёт контроля.</p>
 
     <div class="instruments">
       <div class="instr-label">Планируемые инструменты</div>
@@ -428,9 +483,190 @@ html.t-slate .room-cta.ready:hover{box-shadow:0 6px 20px rgba(138,138,192,.3);}
   </div>
 </section>
 
+<!-- ==================== 06. ТРЕВОГА ==================== -->
+<div class="room-divider"></div>
+<section class="room" data-anim="anxiety">
+  <div class="room-img-wrap anim-anxiety">
+    <img class="room-img" src="Тревога.png" alt="Комната тревоги">
+  </div>
+  <div class="room-content">
+    <div class="room-header">
+      <div class="room-header-left">
+        <div class="room-label" style="color:var(--c-anx);">Тревога</div>
+        <div class="room-title">Сто сценариев катастрофы до завтрака</div>
+        <div class="room-subtitle">Генерализованное тревожное расстройство · ГТР · DSM-5 · F41.1</div>
+      </div>
+      <span class="room-cta soon">⏳ В разработке</span>
+    </div>
+
+    <div class="instruments">
+      <div class="instr-label">Международные инструменты диагностики</div>
+      <div class="instr-grid">
+        <div class="instr-tag"><span class="t-name">GAD-7</span> <span class="t-desc">· скрининг, золотой стандарт</span></div>
+        <div class="instr-tag"><span class="t-name">HAM-A</span> <span class="t-desc">· Hamilton Anxiety</span></div>
+        <div class="instr-tag"><span class="t-name">PSWQ</span> <span class="t-desc">· Penn State Worry</span></div>
+        <div class="instr-tag"><span class="t-name">IUS-12</span> <span class="t-desc">· непереносимость неопределённости</span></div>
+        <div class="instr-tag"><span class="t-name">MCQ-30</span> <span class="t-desc">· метакогниции (Wells)</span></div>
+        <div class="instr-tag"><span class="t-name">DSM-5-TR</span> <span class="t-desc">· критерии APA 2022</span></div>
+      </div>
+    </div>
+
+    <div class="room-meta">
+      <span class="room-tag">21 вопрос</span>
+      <span class="room-tag">5 доменов</span>
+      <span class="room-tag">DSM-5 ≥6 мес.</span>
+      <span class="room-tag">3 режима оценки</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 07. ПРЛ ==================== -->
+<div class="room-divider"></div>
+<section class="room" data-anim="bpd">
+  <div class="room-img-wrap anim-bpd">
+    <img class="room-img" src="ПРЛ.png" alt="Комната ПРЛ">
+  </div>
+  <div class="room-content">
+    <div class="room-header">
+      <div class="room-header-left">
+        <div class="room-label" style="color:var(--c-bpd);">ПРЛ</div>
+        <div class="room-title">Каждая эмоция — на максимальной громкости</div>
+        <div class="room-subtitle">Пограничное расстройство личности · BPD · DSM-5 · F60.3</div>
+      </div>
+      <span class="room-cta soon">⏳ В разработке</span>
+    </div>
+
+    <div class="instruments">
+      <div class="instr-label">Международные инструменты диагностики</div>
+      <div class="instr-grid">
+        <div class="instr-tag"><span class="t-name">MSI-BPD</span> <span class="t-desc">· McLean Screening</span></div>
+        <div class="instr-tag"><span class="t-name">BSL-23</span> <span class="t-desc">· Borderline Symptom List</span></div>
+        <div class="instr-tag"><span class="t-name">ZAN-BPD</span> <span class="t-desc">· Zanarini Rating Scale</span></div>
+        <div class="instr-tag"><span class="t-name">Schema</span> <span class="t-desc">· схема-терапия (Young)</span></div>
+        <div class="instr-tag"><span class="t-name">DSM-5-TR</span> <span class="t-desc">· критерии APA 2022</span></div>
+      </div>
+    </div>
+
+    <div class="room-meta">
+      <span class="room-tag">Хроническое</span>
+      <span class="room-tag">5 доменов</span>
+      <span class="room-tag">Нестабильность аффекта</span>
+      <span class="room-tag">Дифдиагностика</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 08. НАРЦИССИЗМ ==================== -->
+<div class="room-divider"></div>
+<section class="room" data-anim="narc">
+  <div class="room-img-wrap anim-narc">
+    <img class="room-img" src="Нарциссизм.png" alt="Комната нарциссизма">
+  </div>
+  <div class="room-content">
+    <div class="room-header">
+      <div class="room-header-left">
+        <div class="room-label" style="color:var(--c-narc);">Нарциссизм</div>
+        <div class="room-title">Трон над пропастью</div>
+        <div class="room-subtitle">Нарциссическое расстройство личности · NPD · DSM-5 · F60.81</div>
+      </div>
+      <span class="room-cta soon">⏳ В разработке</span>
+    </div>
+
+    <div class="instruments">
+      <div class="instr-label">Международные инструменты диагностики</div>
+      <div class="instr-grid">
+        <div class="instr-tag"><span class="t-name">NPI-40</span> <span class="t-desc">· грандиозный нарциссизм</span></div>
+        <div class="instr-tag"><span class="t-name">PNI</span> <span class="t-desc">· Pathological Narcissism</span></div>
+        <div class="instr-tag"><span class="t-name">HSNS</span> <span class="t-desc">· уязвимый нарциссизм</span></div>
+        <div class="instr-tag"><span class="t-name">FFNI</span> <span class="t-desc">· Five-Factor Narcissism</span></div>
+        <div class="instr-tag"><span class="t-name">DSM-5-TR</span> <span class="t-desc">· критерии APA 2022</span></div>
+      </div>
+    </div>
+
+    <div class="room-meta">
+      <span class="room-tag">Хроническое</span>
+      <span class="room-tag">5 доменов</span>
+      <span class="room-tag">Грандиозный vs уязвимый</span>
+      <span class="room-tag">Дифдиагностика</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 09. СМЕШАННОЕ ==================== -->
+<div class="room-divider"></div>
+<section class="room" data-anim="mixed">
+  <div class="room-img-wrap anim-mixed">
+    <img class="room-img" src="Смешанное тревожно-депрессивное расстройство.png" alt="Комната смешанного расстройства">
+  </div>
+  <div class="room-content">
+    <div class="room-header">
+      <div class="room-header-left">
+        <div class="room-label" style="color:var(--c-mixed);">Смешанное тревожно-депрессивное</div>
+        <div class="room-title">Слишком мало для диагноза, слишком много для жизни</div>
+        <div class="room-subtitle">Смешанное тревожно-депрессивное расстройство · МКБ-11 · 6A73</div>
+      </div>
+      <span class="room-cta soon">⏳ В разработке</span>
+    </div>
+
+    <div class="instruments">
+      <div class="instr-label">Международные инструменты диагностики</div>
+      <div class="instr-grid">
+        <div class="instr-tag"><span class="t-name">PHQ-4</span> <span class="t-desc">· ультракороткий скрининг</span></div>
+        <div class="instr-tag"><span class="t-name">HADS</span> <span class="t-desc">· Hospital Anxiety & Depression</span></div>
+        <div class="instr-tag"><span class="t-name">K-10</span> <span class="t-desc">· Kessler Distress</span></div>
+        <div class="instr-tag"><span class="t-name">GHQ-12</span> <span class="t-desc">· General Health Questionnaire</span></div>
+        <div class="instr-tag"><span class="t-name">Goldberg</span> <span class="t-desc">· тревога + депрессия</span></div>
+      </div>
+    </div>
+
+    <div class="room-meta">
+      <span class="room-tag">МКБ-11 (нет в DSM-5)</span>
+      <span class="room-tag">5 доменов</span>
+      <span class="room-tag">≥1 мес.</span>
+      <span class="room-tag">Кросс-ссылки ГТР/БДР</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 10. БЕССОННИЦА ==================== -->
+<div class="room-divider"></div>
+<section class="room" data-anim="insomnia">
+  <div class="room-img-wrap anim-insomnia">
+    <img class="room-img" src="Бессоница.png" alt="Комната бессонницы">
+  </div>
+  <div class="room-content">
+    <div class="room-header">
+      <div class="room-header-left">
+        <div class="room-label" style="color:var(--c-insomnia);">Бессонница</div>
+        <div class="room-title">Ночь длиною в вечность</div>
+        <div class="room-subtitle">Хроническая инсомния · DSM-5 · F51.01 · МКБ-11 · 7A00</div>
+      </div>
+      <span class="room-cta soon">⏳ В разработке</span>
+    </div>
+
+    <div class="instruments">
+      <div class="instr-label">Международные инструменты диагностики</div>
+      <div class="instr-grid">
+        <div class="instr-tag"><span class="t-name">ISI</span> <span class="t-desc">· Insomnia Severity Index</span></div>
+        <div class="instr-tag"><span class="t-name">PSQI</span> <span class="t-desc">· Pittsburgh Sleep Quality</span></div>
+        <div class="instr-tag"><span class="t-name">ESS</span> <span class="t-desc">· Epworth Sleepiness</span></div>
+        <div class="instr-tag"><span class="t-name">DBAS-16</span> <span class="t-desc">· убеждения о сне</span></div>
+        <div class="instr-tag"><span class="t-name">Spielman</span> <span class="t-desc">· модель 3P</span></div>
+      </div>
+    </div>
+
+    <div class="room-meta">
+      <span class="room-tag">DSM-5 ≥3 мес.</span>
+      <span class="room-tag">5 доменов</span>
+      <span class="room-tag">≥3 ночей/нед.</span>
+      <span class="room-tag">КПТ-И — первая линия</span>
+    </div>
+  </div>
+</section>
+
 <!-- ==================== FOOTER ==================== -->
 <footer class="foot">
-  <p>4 из 10 комнат · Проект <a href="#">PsyTest</a></p>
+  <p>10 из 10 комнат · Проект <a href="#">PsyTest</a></p>
   <p>Не медицинская услуга · Не заменяет клинического интервью · Zero data retention</p>
 </footer>
 
