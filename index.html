@@ -11,7 +11,7 @@
   --accent:#8a8ac0;--accent-dk:#6a6aa0;
   --brd:rgba(140,140,200,.1);--brd2:rgba(255,255,255,.04);
   --radius:14px;
-  --c-depr:#80a8d0;--c-bar:#c8b870;--c-adhd:#c0a878;--c-ocd:#b0a0d8;--c-cyclo:#90a8c0;--c-anx:#6aaa8a;--c-bpd:#c07a90;--c-narc:#c0a060;--c-mixed:#8aaa80;--c-insomnia:#7080b0;
+  --c-depr:#80a8d0;--c-bar:#c8b870;--c-adhd:#c0a878;--c-ocd:#b0a0d8;--c-cyclo:#90a8c0;--c-anx:#6aaa8a;--c-bpd:#c07a90;--c-narc:#c0a060;--c-mixed:#8aaa80;--c-insomnia:#7080b0;--c-panic:#c06070;--c-avoid:#7a9a7a;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -219,6 +219,31 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
   30%{filter:brightness(.9) contrast(1);}
   50%{filter:brightness(.82) contrast(1.08);}
   70%{filter:brightness(.92) contrast(1);}
+}
+
+/* ПАНИКА: внезапная вспышка — удар паники, потом угасание */
+.anim-panic img{
+  animation:panicBurst 6s ease-in-out infinite;
+}
+@keyframes panicBurst{
+  0%,100%{filter:brightness(1) saturate(1) contrast(1);transform:scale(1);}
+  8%{filter:brightness(1.25) saturate(1.4) contrast(1.15);transform:scale(1.02);}
+  16%{filter:brightness(.88) saturate(.7) contrast(1.05);transform:scale(1);}
+  40%{filter:brightness(1) saturate(1) contrast(1);transform:scale(1);}
+  75%{filter:brightness(1) saturate(1) contrast(1);transform:scale(1);}
+  80%{filter:brightness(1.15) saturate(1.25) contrast(1.1);transform:scale(1.01);}
+  88%{filter:brightness(.92) saturate(.8) contrast(1);transform:scale(1);}
+}
+
+/* ИЗБЕГАЮЩЕЕ: медленное отступление — съёживание, уход в тень */
+.anim-avoid img{
+  animation:avoidShrink 12s ease-in-out infinite;
+}
+@keyframes avoidShrink{
+  0%,100%{filter:brightness(1) saturate(1);transform:scale(1) translate(0,0);}
+  30%{filter:brightness(.92) saturate(.85);transform:scale(.99) translate(2px,1px);}
+  60%{filter:brightness(.87) saturate(.75);transform:scale(.985) translate(3px,2px);}
+  80%{filter:brightness(.94) saturate(.9);transform:scale(.995) translate(1px,0);}
 }
 
 /* FOOTER */
@@ -636,9 +661,83 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
   </div>
 </section>
 
+<!-- ==================== 11. ПАНИКА ==================== -->
+<div class="room-divider"></div>
+<section class="room" data-anim="panic">
+  <div class="room-img-wrap anim-panic">
+    <img class="room-img" src="Паническое.png" alt="Комната панического расстройства">
+  </div>
+  <div class="room-content">
+    <div class="room-header">
+      <div class="room-header-left">
+        <div class="room-label" style="color:var(--c-panic);">Паническое расстройство</div>
+        <div class="room-title">Тело кричит «беги», но бежать некуда</div>
+        <div class="room-subtitle">Паническое расстройство · Panic Disorder · DSM-5 · F41.0</div>
+      </div>
+      <span class="room-cta soon">⏳ В разработке</span>
+    </div>
+
+    <div class="instruments">
+      <div class="instr-label">Планируемые инструменты диагностики</div>
+      <div class="instr-grid">
+        <div class="instr-tag"><span class="t-name">PDSS</span> <span class="t-desc">· Panic Disorder Severity Scale</span></div>
+        <div class="instr-tag"><span class="t-name">ASI-3</span> <span class="t-desc">· Anxiety Sensitivity Index</span></div>
+        <div class="instr-tag"><span class="t-name">MI</span> <span class="t-desc">· Mobility Inventory (агорафобия)</span></div>
+        <div class="instr-tag"><span class="t-name">Clark (1986)</span> <span class="t-desc">· когнитивная модель паники</span></div>
+        <div class="instr-tag"><span class="t-name">DSM-5-TR</span> <span class="t-desc">· критерии APA 2022</span></div>
+      </div>
+    </div>
+
+    <div class="room-meta">
+      <span class="room-tag">DSM-5 ≥1 мес.</span>
+      <span class="room-tag">5 доменов</span>
+      <span class="room-tag">Интероцепция</span>
+      <span class="room-tag">Агорафобия</span>
+      <span class="room-tag">Дифдиагностика</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 12. ИЗБЕГАЮЩЕЕ РЛ ==================== -->
+<div class="room-divider"></div>
+<section class="room" data-anim="avoid">
+  <div class="room-img-wrap anim-avoid">
+    <img class="room-img" src="Избегающее_расстройство_личности.png" alt="Комната избегающего расстройства личности">
+  </div>
+  <div class="room-content">
+    <div class="room-header">
+      <div class="room-header-left">
+        <div class="room-label" style="color:var(--c-avoid);">Избегающее расстройство личности</div>
+        <div class="room-title">Красивая жизнь за стеклом, в которой нет места мне</div>
+        <div class="room-subtitle">Избегающее расстройство личности · AvPD · DSM-5 · F60.6</div>
+      </div>
+      <span class="room-cta soon">⏳ В разработке</span>
+    </div>
+
+    <div class="instruments">
+      <div class="instr-label">Планируемые инструменты диагностики</div>
+      <div class="instr-grid">
+        <div class="instr-tag"><span class="t-name">PDQ-4+</span> <span class="t-desc">· Personality Diagnostic</span></div>
+        <div class="instr-tag"><span class="t-name">AVPDQ</span> <span class="t-desc">· Avoidant PD Questionnaire</span></div>
+        <div class="instr-tag"><span class="t-name">SAPAS</span> <span class="t-desc">· Standardised Assessment</span></div>
+        <div class="instr-tag"><span class="t-name">LSAS</span> <span class="t-desc">· Liebowitz Social Anxiety</span></div>
+        <div class="instr-tag"><span class="t-name">DSM-5-TR</span> <span class="t-desc">· критерии APA 2022</span></div>
+      </div>
+    </div>
+
+    <div class="room-meta">
+      <span class="room-tag">Хроническое</span>
+      <span class="room-tag">5 доменов</span>
+      <span class="room-tag">~2-3% населения</span>
+      <span class="room-tag">Коморбидность с СТР ~40-50%</span>
+      <span class="room-tag">Дифдиагностика</span>
+    </div>
+  </div>
+</section>
+
 <!-- ==================== FOOTER ==================== -->
 <footer class="foot">
-  <p>10 из 10 комнат · Проект <a href="#">PsyTest</a></p>
+  <p>12 из 12 комнат · Проект <a href="#">PsyTest</a></p>
   <p>Не медицинская услуга · Не заменяет клинического интервью · Zero data retention</p>
 </footer>
 
