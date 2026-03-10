@@ -386,6 +386,8 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
     <label class="ao"><input type="radio" name="q7" value="0"><span class="al">5</span><span class="ach"></span><span class="at">Нет — мысль и действие это разное</span><span class="as s0">0</span></label>
     <label class="ao"><input type="radio" name="q7" value="3"><span class="al">6</span><span class="ach"></span><span class="at">«Если я подумал(а) о вреде — значит, в глубине души я этого хочу»</span><span class="as s3">3</span></label></div></div>
 
+  <div class="qnt"><strong>Thought-action fusion (Rachman, 1997)</strong>Слияние мысли и действия — когнитивное искажение, при котором «подумать» = «почти сделать». У здоровых людей мысль остаётся мыслью. При ОКР она приравнивается к действию или намерению. Именно из-за этого навязчивые мысли о вреде так пугают — хотя они НЕ отражают желания человека.</div>
+
   <!-- Q8: Непереносимость неопределённости -->
   <div class="qc"><div class="qh" style="background:var(--dB);"><div class="qn">08</div><div class="qm"><div class="qtg">Когнитивный · потребность в определённости</div><div class="qtl">Непереносимость неопределённости</div><div class="qd">«Мне нужно знать НАВЕРНЯКА» — топливо для проверок и ритуалов</div></div></div>
     <div class="qp" id="qp-8" data-2w="Как вы переносите неопределённость?" data-life="Было ли тяжело с неопределённостью на протяжении жизни?" data-worst="Как переносили неопределённость на пике тяжести?">Как вы переносите неопределённость?</div>
@@ -396,6 +398,8 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
     <label class="ao"><input type="radio" name="q8" value="4"><span class="al">4</span><span class="ach"></span><span class="at">Даже 99% уверенности недостаточно — проверяю снова и снова</span><span class="as s4">4</span></label>
     <label class="ao"><input type="radio" name="q8" value="1"><span class="al">5</span><span class="ach"></span><span class="at">Немного тревожно — но справляюсь без проверок</span><span class="as s1">1</span></label>
     <label class="ao"><input type="radio" name="q8" value="3"><span class="al">6</span><span class="ach"></span><span class="at">«Мне НУЖНО знать на 100%» — без уверенности не могу остановиться</span><span class="as s3">3</span></label></div></div>
+
+  <div class="qnt"><strong>Непереносимость неопределённости (IUS, Freeston 1994)</strong>Потребность в абсолютной уверенности — топливо для ритуалов проверки. «Выключил ли я плиту? Наверное да. Но вдруг нет?» — и человек возвращается снова. Проблема не в плите, а в неспособности вынести даже 1% неопределённости. ЭПР учит: жить с «наверное» — можно, и это безопасно.</div>
 
   <!-- Q9: Метакогнитивный — страдание от мыслей -->
   <div class="qc"><div class="qh" style="background:var(--dB);"><div class="qn">09</div><div class="qm"><div class="qtg">Метакогнитивный · Wells (1997)</div><div class="qtl">Страдание от навязчивых мыслей</div><div class="qd">Не содержание, а сам ПРОЦЕСС — насколько навязчивые мысли причиняют боль</div></div></div>
@@ -630,7 +634,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
 </div></div>
 
-<div class="sf" onclick="document.getElementById('results').scrollIntoView({behavior:'smooth'})">
+<div class="sf" id="sfBtn" style="display:none" onclick="document.getElementById('results').scrollIntoView({behavior:'smooth'})">
   <div class="sf-n" id="sfn">0</div>
   <div><div class="sf-l">из 70</div><div class="sf-v" id="sfv">—</div></div>
 </div>
@@ -724,7 +728,7 @@ function buildC(){const t=tot(),a=ans(),hk=Object.keys(HIST).length;if(a<5&&hk==
     if(HIST.x3==='current') h+='<div class="ci" style="background:var(--warm-lt);padding:16px;border-radius:10px;margin-top:12px;"><strong>Тикозное расстройство.</strong> Наличие тиков может указывать на сопутствующий синдром Туретта или хроническое тикозное расстройство. Обсудите с неврологом.</div>';
   }
   document.getElementById('concC').innerHTML=h;}
-function upd(){const t=tot(),a=ans(),lev=gL(t);const TOTAL_Q=22;document.getElementById('pf').style.width=(a/TOTAL_Q*100)+'%';document.getElementById('pl').textContent=a+' из '+TOTAL_Q;document.getElementById('sfn').textContent=t;document.getElementById('sfv').textContent=a>0?lev.l:'—';document.getElementById('rn').textContent=t;document.getElementById('rl').textContent=a>0?lev.l:'—';document.getElementById('rl').style.color=a>0?lev.c:'#8a8a8a';document.getElementById('rb').style.width=(t/MAX*100)+'%';document.getElementById('rb').style.background=a>0?lev.b:'#ddd';document.getElementById('rd').textContent=a>0?DESC[LEV.indexOf(lev)]:'Заполните вопросы';document.querySelectorAll('#stbl tbody tr').forEach(tr=>{const[mn,mx]=tr.dataset.r.split(',').map(Number);tr.classList.toggle('act',a>0&&t>=mn&&t<=mx);});if(a>0){document.getElementById('domBlock').style.display='block';['A','B','C','D','E'].forEach(k=>{document.getElementById('d'+k).textContent=dS(k)??'–';});updB();buildSM();buildC();}
+function upd(){const t=tot(),a=ans(),lev=gL(t);const TOTAL_Q=22;document.getElementById('sfBtn').style.display=a>=TQ?'flex':'none';document.getElementById('pf').style.width=(a/TOTAL_Q*100)+'%';document.getElementById('pl').textContent=a+' из '+TOTAL_Q;document.getElementById('sfn').textContent=t;document.getElementById('sfv').textContent=a>0?lev.l:'—';document.getElementById('rn').textContent=t;document.getElementById('rl').textContent=a>0?lev.l:'—';document.getElementById('rl').style.color=a>0?lev.c:'#8a8a8a';document.getElementById('rb').style.width=(t/MAX*100)+'%';document.getElementById('rb').style.background=a>0?lev.b:'#ddd';document.getElementById('rd').textContent=a>0?DESC[LEV.indexOf(lev)]:'Заполните вопросы';document.querySelectorAll('#stbl tbody tr').forEach(tr=>{const[mn,mx]=tr.dataset.r.split(',').map(Number);tr.classList.toggle('act',a>0&&t>=mn&&t<=mx);});if(a>0){document.getElementById('domBlock').style.display='block';['A','B','C','D','E'].forEach(k=>{document.getElementById('d'+k).textContent=dS(k)??'–';});updB();buildSM();buildC();}
     document.getElementById('dSM').textContent=smS()??'–';}
 document.querySelectorAll('.ans').forEach(g=>{const q=parseInt(g.dataset.q);g.querySelectorAll('.ao').forEach(o=>{o.addEventListener('click',()=>{o.querySelector('input').checked=true;S[q]=parseInt(o.querySelector('input').value);g.querySelectorAll('.ao').forEach(x=>x.classList.remove('sel','sel-w'));o.classList.add(o.dataset.warn?'sel-w':'sel');if(q===9){const cb=document.getElementById('q9-crisis');if(cb)cb.style.display=S[9]===5?'block':'none';}upd();});});});
 const HIST={};
