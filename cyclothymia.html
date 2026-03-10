@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Диагностика циклотимии</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="common.css">
 <style>
 :root{
   --bg:#f6f6fa;--card:#fff;--ink:#1a1a24;--ink2:#3d3d50;--ink3:#8a8a9a;
@@ -16,147 +17,12 @@
   --dA:#5a3a7a;--dB:#7a6a1a;--dC:#3a6a5a;--dD:#6a4a3a;--dE:#3a6a6a;
   --radius:16px;
 }
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.8;-webkit-font-smoothing:antialiased;}
-.hero{background:var(--pri-dk);color:#fff;padding:80px 0 64px;text-align:center;position:relative;overflow:hidden;}
-.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,.03);}
-.hero::after{content:'';position:absolute;bottom:-120px;left:-80px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.02);}
-.hero h1{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:14px;position:relative;}
-.hero p{color:rgba(255,255,255,.35);font-size:13px;letter-spacing:.08em;text-transform:uppercase;position:relative;}
-.pw{background:var(--pri-dk);padding:0 0 18px;position:sticky;top:0;z-index:100;}
-.pi{max-width:880px;margin:0 auto;padding:0 32px;}
-.pt{height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;}
-.pf{height:100%;background:linear-gradient(90deg,#7a7ab0,#a4a4d8);border-radius:2px;transition:width .5s;width:0%;}
-.pl{color:rgba(255,255,255,.25);font-size:11px;text-align:right;margin-top:6px;letter-spacing:.03em;}
-.ct{max-width:880px;margin:0 auto;padding:0 32px;}
-.mode{background:var(--card);border-bottom:1px solid var(--brd);}
-.mode-in{max-width:880px;margin:0 auto;padding:0 32px;display:flex;align-items:center;flex-wrap:wrap;gap:0;}
-.mode-l{padding:20px 20px 16px 0;font-size:12px;font-weight:600;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase;}
-.mode-b{border:none;background:none;padding:20px 24px 16px;font-family:inherit;font-size:15px;font-weight:500;color:var(--ink3);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;}
-.mode-b.act{color:var(--pri);font-weight:600;border-bottom-color:var(--pri);}
-.mode-b span{display:block;font-size:11px;font-weight:400;color:var(--ink3);margin-top:2px;}
-.mode-exp{width:100%;padding:12px 32px 16px;font-size:15px;color:var(--ink2);display:none;}
-.sec{background:var(--card);border-bottom:1px solid var(--brd);padding:56px 0;}
-.slbl{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--pri-soft);margin-bottom:20px;}
-.stitle{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:var(--ink);margin-bottom:16px;line-height:1.3;}
-.stext{font-size:16px;color:var(--ink2);margin-bottom:20px;max-width:720px;line-height:1.85;}
-.info{padding:24px 28px;border-radius:var(--radius);font-size:15px;line-height:1.8;margin:24px 0;}
-.info strong{display:block;margin-bottom:8px;font-size:16px;}
-.info-pri{background:var(--pri-lt);color:var(--pri-dk);border-left:4px solid var(--pri);}
-.info-warm{background:var(--warm-lt);color:var(--warm-dk);border-left:4px solid var(--warm);}
-.info-sage{background:var(--sage-lt);color:var(--sage);border-left:4px solid var(--sage);}
-.info-red{background:var(--red-lt);color:var(--red);border-left:4px solid var(--red);}
-.ctbl{width:100%;border-collapse:collapse;font-size:12px;margin:24px 0;line-height:1.4;}
-.ctbl th{background:var(--pri-dk);color:#fff;padding:10px 10px;text-align:left;font-weight:500;font-size:11px;letter-spacing:.03em;}
-.ctbl td{padding:8px 10px;border-bottom:1px solid var(--brd-lt);vertical-align:top;}
-.ctbl tr:nth-child(even) td{background:rgba(74,74,112,.03);}
-.ck{color:var(--pri);font-weight:700;}
-.dmap{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:14px;margin:28px 0;}
-.dmc{border-radius:14px;padding:22px 18px;position:relative;overflow:hidden;transition:transform .2s;}
-.dmc:hover{transform:translateY(-2px);}
-.dmc::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;}
 .dc-a{background:#f2f0f6;}.dc-a::before{background:var(--dA);}
 .dc-b{background:#f6f4e8;}.dc-b::before{background:var(--dB);}
 .dc-c{background:#eef5f2;}.dc-c::before{background:var(--dC);}
 .dc-d{background:#f5f0ee;}.dc-d::before{background:var(--dD);}
 .dc-e{background:#f0f7f7;}.dc-e::before{background:var(--dE);}
-.dmc-letter{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;opacity:.15;position:absolute;top:12px;right:16px;}
-.dmc-name{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;margin-bottom:6px;color:var(--ink);}
-.dmc-desc{font-size:12px;color:var(--ink2);line-height:1.45;}
-.dmc-w{font-size:10px;color:var(--ink3);margin-top:8px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;}
-.dmc-bar{margin-top:10px;height:5px;background:rgba(0,0,0,.05);border-radius:3px;overflow:hidden;}
-.dmc-bf{height:100%;border-radius:3px;transition:width .6s;width:0%;}
-.igrid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:28px 0;}
-.icard{background:var(--bg);border-radius:14px;padding:28px 24px;}
-.icard h4{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--ink);margin-bottom:16px;}
-.icard ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
-.icard li{padding-left:18px;position:relative;font-size:15px;color:var(--ink2);line-height:1.6;}
-.icard li::before{content:'';position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:50%;background:var(--brd);}
-.main{padding:56px 0;}
-.sdiv{background:var(--pri-dk);color:#fff;padding:20px 28px;border-radius:var(--radius);margin-bottom:32px;display:flex;align-items:center;gap:20px;}
-.sdiv-n{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:400;opacity:.15;line-height:1;}
-.sdiv h3{font-size:16px;font-weight:600;letter-spacing:.02em;}
-.sdiv p{font-size:12px;opacity:.35;margin-top:3px;}
-.dh{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin:40px 0 18px;padding-left:4px;display:flex;align-items:center;gap:12px;}
-.dh .ln{flex:1;height:1px;background:var(--brd);}
-.qc{background:var(--card);border:1px solid var(--brd-lt);border-radius:var(--radius);margin-bottom:20px;overflow:hidden;transition:box-shadow .25s;}
-.qc:hover{box-shadow:0 8px 32px rgba(0,0,0,.06);}
-.qh{padding:20px 28px;display:flex;align-items:flex-start;gap:18px;}
-.qn{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;color:rgba(255,255,255,.15);line-height:1;min-width:40px;}
-.qm{flex:1;}
-.qtg{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:5px;}
-.qtl{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#fff;line-height:1.3;}
-.qd{font-size:12px;color:rgba(255,255,255,.3);margin-top:5px;font-style:italic;}
-.qp{padding:20px 28px 16px;font-size:16px;font-weight:500;color:var(--ink2);border-bottom:1px solid var(--brd-lt);}
-.ans{padding:0;}
-.ao{display:flex;align-items:center;cursor:pointer;border-bottom:1px solid var(--brd-lt);transition:background .15s;}
-.ao:last-child{border-bottom:none;}
-.ao:hover{background:rgba(74,74,112,.03);}
-.ao input{display:none;}
-.ao.sel{background:var(--pri-lt);}
-.ao.sel-w{background:var(--red-lt);}
-/* SKILL v3.1: числа вместо букв, ширина 42px */
-.al{width:42px;min-width:42px;text-align:center;font-weight:600;font-size:13px;color:var(--ink3);padding:18px 0;border-right:1px solid var(--brd-lt);}
-.ao.sel .al{color:var(--pri);}
-.ach{width:22px;height:22px;border:2px solid var(--brd);border-radius:50%;margin:0 18px;min-width:22px;transition:all .2s;display:flex;align-items:center;justify-content:center;}
-.ao.sel .ach{background:var(--pri);border-color:var(--pri);}
-.ao.sel-w .ach{background:var(--red);border-color:var(--red);}
-.ach::after{content:'';width:8px;height:8px;border-radius:50%;background:#fff;opacity:0;transition:opacity .2s;}
-.ao.sel .ach::after,.ao.sel-w .ach::after{opacity:1;}
-.at{flex:1;padding:18px 16px 18px 0;font-size:15px;line-height:1.6;color:var(--ink);}
-.as{display:none;}
-.qnt{background:var(--warm-lt);border-top:1px solid #d8d0e0;padding:18px 28px;font-size:14px;color:var(--warm-dk);line-height:1.7;}
-.qnt strong{display:block;margin-bottom:4px;}
-.sf{position:fixed;bottom:28px;right:28px;background:var(--pri-dk);color:#fff;border-radius:50px;padding:14px 28px;display:none;align-items:center;gap:16px;box-shadow:0 12px 40px rgba(0,0,0,.2);z-index:200;cursor:pointer;transition:all .3s;}
-.sf.vis{display:flex;}
-.sf:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,.25);}
-.sf-n{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;line-height:1;}
-.sf-l{font-size:10px;opacity:.35;text-transform:uppercase;letter-spacing:.03em;}
-.sf-v{font-size:14px;font-weight:600;}
-.hist{margin-top:48px;}
-.hc{background:var(--card);border:1px solid var(--brd-lt);border-radius:12px;margin-bottom:14px;overflow:hidden;}
-.hch{display:flex;align-items:center;gap:14px;padding:16px 22px;border-bottom:1px solid var(--brd-lt);background:var(--bg);}
-.hcc{font-size:12px;font-weight:700;color:var(--pri);min-width:28px;}
-.hcl{font-size:15px;font-weight:500;flex:1;}
-.hcd{font-size:12px;color:var(--ink3);margin-top:2px;}
-.hco{display:flex;flex-wrap:wrap;gap:8px;padding:16px 22px;}
-.hcb{padding:9px 18px;border:1.5px solid var(--brd);border-radius:24px;font-size:13px;cursor:pointer;transition:all .2s;color:var(--ink2);user-select:none;}
-.hcb:hover{border-color:var(--pri);color:var(--pri);}
-.hcb.sel{background:var(--pri);border-color:var(--pri);color:#fff;font-weight:500;transform:scale(1.03);box-shadow:0 2px 8px rgba(58,74,90,.2);}
-.hcn{padding:12px 22px 16px;font-size:13px;color:var(--warm-dk);font-style:italic;display:none;}
-.hist-ok{font-size:13px;color:var(--sage);font-weight:500;padding:8px 22px;display:none;}.hist-ok.show{display:block;animation:fadeIn .3s;}
-@keyframes fadeIn{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:translateY(0);}}
-.res{background:var(--card);border:1px solid var(--brd-lt);border-radius:20px;padding:44px;margin-top:48px;}
-.res-t{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;margin-bottom:10px;}
-.rbig{display:flex;align-items:baseline;gap:10px;margin:28px 0 20px;}
-.rnum{font-family:'Cormorant Garamond',serif;font-size:4.5rem;font-weight:700;line-height:1;}
-.rmx{font-size:16px;color:var(--ink3);}
-.rlv{font-size:1.2rem;font-weight:700;margin-bottom:10px;}
-.rds{font-size:16px;color:var(--ink2);margin-bottom:24px;}
-.rbar{height:12px;background:var(--bg);border-radius:6px;margin-bottom:28px;overflow:hidden;}
-.rbf{height:100%;border-radius:6px;transition:width .8s cubic-bezier(.4,0,.2,1);}
-.stbl{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:28px;}
-.stbl th{background:var(--pri-dk);color:#fff;padding:12px 16px;text-align:left;font-weight:500;font-size:11px;letter-spacing:.03em;}
-.stbl td{padding:12px 16px;border-bottom:1px solid var(--brd-lt);vertical-align:top;}
-.stbl tr:nth-child(even) td{background:var(--bg);}
-.stbl tr.act td{background:var(--pri-lt)!important;font-weight:600;}
-.dgr{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;margin-bottom:24px;}
-.dgc{background:var(--bg);border-radius:12px;padding:16px;}
-.dgc .dl{font-size:12px;color:var(--ink3);margin-bottom:4px;}
-.dgc .dv{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;}
-.dgc .dm{font-size:11px;color:var(--ink3);}
-.conc{background:var(--card);border:1px solid var(--brd-lt);border-radius:20px;padding:36px 40px;margin-top:24px;}
-.conc-t{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;margin-bottom:16px;color:var(--pri-dk);}
-.ci{padding:14px 0;border-bottom:1px solid var(--brd-lt);font-size:15px;color:var(--ink2);line-height:1.75;}
-.ci:last-child{border-bottom:none;}
-.ci strong{color:var(--ink);font-weight:600;}
-.refs{margin-top:48px;padding-top:32px;border-top:1px solid var(--brd);}
-.refs h4{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:16px;}
-.ri{font-size:12px;color:var(--ink3);margin-bottom:10px;line-height:1.6;}
-.ri a{color:var(--pri);text-decoration:none;transition:color .15s;}
-.ri a:hover{color:var(--pri-dk);text-decoration:underline;}
-.disc{margin-top:20px;padding:18px 24px;background:var(--bg);border-radius:12px;font-size:13px;color:var(--ink3);line-height:1.7;}
-@media(max-width:700px){.hero h1{font-size:2rem;}.hero{padding:56px 0 44px;}.igrid,.dmap{grid-template-columns:1fr;}.dgr{grid-template-columns:repeat(2,1fr);}.sf{bottom:14px;right:14px;padding:10px 20px;}.mode-in{flex-direction:column;align-items:flex-start;}.res{padding:28px 20px;}.conc{padding:24px 20px;}}
+.pf{height:100%;background:linear-gradient(90deg,#7a7ab0,#a4a4d8);border-radius:2px;transition:width .5s;width:0%;}
 </style>
 </head>
 <body>
@@ -513,48 +379,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
   <div><div class="sf-l">из 69</div><div class="sf-v" id="sfv">—</div></div>
 </div>
 
-<script>
-const S={},TQ=16,FQ=3,MAX=69,SCORED=16;
-const DOM={A:[1,5],B:[6,9],C:[10,13],D:[14,16],E:[17,19]};
-const DM={A:25,B:20,C:12,D:12,E:12};
-const LEV=[{min:0,max:13,l:'НОРМА',c:'#166534',b:'#86efac'},{min:14,max:27,l:'СУБКЛИНИЧЕСКАЯ',c:'#6a7a2a',b:'#c8e070'},{min:28,max:41,l:'ЦИКЛОТИМИЯ',c:'#b45309',b:'#fbbf24'},{min:42,max:55,l:'ТЯЖЁЛАЯ',c:'#c2410c',b:'#f97316'},{min:56,max:69,l:'РАССМОТРИТЕ БАР',c:'#b03a3a',b:'#ef4444'}];
-const DESC=['Колебания настроения в пределах нормы','Заметная цикличность — циклотимический темперамент','Выраженная цикличность — территория циклотимии','Серьёзная цикличность с риском прогрессии','Интенсивность может указывать на БАР-II — пройдите диагностику БАР'];
-function gL(t){return LEV.find(l=>t>=l.min&&t<=l.max)||LEV[0];}
-function tot(){let s=0;for(let i=1;i<=SCORED;i++)if(S[i]!==undefined)s+=S[i];return s;}
-function ans(){let c=0;for(let i=1;i<=TQ+FQ;i++)if(S[i]!==undefined)c++;return c;}
-function dS(k){const[s,e]=DOM[k];let sum=0,cnt=0;for(let i=s;i<=e;i++)if(S[i]!==undefined){sum+=S[i];cnt++;}return cnt>0?sum:null;}
-function updB(){['A','B','C','D','E'].forEach(k=>{const s=dS(k),b=document.getElementById('bar'+k);if(b)b.style.width=s!==null?Math.max((s/DM[k])*100,3)+'%':'0%';});}
-function buildC(){const t=tot(),a=ans(),hk=Object.keys(HIST).length;if(a<5&&hk===0){document.getElementById('conc').style.display='none';return;}
-  document.getElementById('conc').style.display='block';const lev=gL(t);let h='';
-  if(a>=3){
-  h+=`<div class="ci"><strong>Общий уровень: ${lev.l} (${t} из ${MAX})</strong>${DESC[LEV.indexOf(lev)]}.</div>`;
-  [{k:'A',n:'Депрессивный полюс',mx:DM.A,ad:['Спады минимальны.','Заметные спады. Дневник настроения для отслеживания паттерна.','Выраженные депрессивные периоды. Ламотриджин — препарат выбора для профилактики спадов.','Тяжёлые спады. Рассмотрите полную диагностику депрессии — возможен БАР-II.']},{k:'B',n:'Гипоманиакальный полюс',mx:DM.B,ad:['Подъёмы минимальны. Если только спады — скорее дистимия, чем циклотимия.','Заметные подъёмы. Типичная картина циклотимии.','Выраженные подъёмы. Если длятся ≥4 дней — рассмотрите БАР-II.','Сильные подъёмы. Высока вероятность гипомании — пройдите диагностику БАР.']},{k:'C',n:'Цикличность',mx:DM.C,ad:['Цикличность не выражена — скорее нормальные колебания.','Лёгкая цикличность. Дневник настроения + стабилизация режима сна.','Выраженный паттерн. IPSRT (терапия социальных ритмов) — стабилизация цикла через режим.','Высокая цикличность. Стабилизаторы настроения + строгий режим.']},{k:'D',n:'Идентичность и отношения',mx:DM.D,ad:['Идентичность стабильна.','Лёгкое влияние на самоощущение. Психообразование.','Значительное: «кто я настоящий?». КПТ + работа с идентичностью.','Кризис идентичности. Может потребоваться схема-терапия.']}].forEach(d=>{const s=dS(d.k);if(s===null)return;const p=s/d.mx;const i=p<=.25?0:p<=.5?1:p<=.75?2:3;h+=`<div class="ci"><strong>${d.n}: ${s} из ${d.mx} (${Math.round(p*100)}%)</strong>${d.ad[i]}</div>`;});
-  }
-  // Domain-ratio флаги дифдиагностики (SKILL v3.1, раздел 6.4)
-  if(a>=5){const pA=dS('A'),pB=dS('B'),pC=dS('C');
-    if(pA!==null&&pB!==null&&pA/DM.A>.4&&pB/DM.B<.15){h+='<div class="ci" style="border-top:2px solid var(--dA);padding-top:18px;margin-top:8px;"><strong style="color:var(--dA);">Только депрессивный полюс</strong>Спады выражены, подъёмы минимальны. Это больше похоже на дистимию (хроническую депрессию), чем на циклотимию. Рассмотрите диагностику депрессии.</div>';}
-    if(pB!==null&&pB/DM.B>.6){h+='<div class="ci" style="border-top:2px solid var(--dB);padding-top:18px;margin-top:8px;"><strong style="color:var(--dB);">Выраженные подъёмы</strong>Интенсивность подъёмов может указывать на полноценную гипоманию (БАР-II). Ключевой вопрос: длятся ли подъёмы ≥4 дней? Если да — пройдите диагностику БАР.</div>';}
-    if(pC!==null&&pC/DM.C<.2){h+='<div class="ci" style="border-top:2px solid var(--brd);padding-top:18px;margin-top:8px;">Низкая цикличность. Без чёткого паттерна «качелей» диагноз циклотимии маловероятен — DSM-5 требует ≥2 года непрерывного циклирования.</div>';}
-  }
-  if(a>=3){const dE=dS('E');if(dE!==null){const p=dE/DM.E;h+=`<div class="ci"><strong>Функционирование: ${dE} из ${DM.E}</strong>${p<=.15?'Сохранено. Возможен циклотимический темперамент — вариант нормы.':p<=.5?'Умеренное нарушение. DSM-5 критерий D выполнен.':'Значительное нарушение. Нужна помощь.'}</div>`;}}
-  const histKeys=Object.keys(HIST);
-  if(histKeys.length>0){
-    h+='<div class="ci" style="border-top:2px solid var(--brd);padding-top:18px;margin-top:8px;"><strong style="color:var(--pri);">Дифференциальная диагностика и тактика:</strong></div>';
-    if(HIST.x1==='yes') h+='<div class="ci" style="background:var(--warm-lt);padding:16px;border-radius:10px;"><strong>Были полноценные депрессивные эпизоды.</strong> Это может указывать на БАР-II (если есть подъёмы ≥4 дней) или рекуррентную депрессию (если подъёмов нет). Циклотимия по DSM-5 исключается при наличии полных депрессивных эпизодов.</div>';
-    if(HIST.x2==='yes') h+='<div class="ci" style="background:var(--warm-lt);padding:16px;border-radius:10px;"><strong>Были эпизоды гипомании ≥4 дней.</strong> Это формально превышает порог для циклотимии → рассмотрите БАР-II. Пройдите диагностику биполярного расстройства.</div>';
-    if(HIST.x3==='bipolar') h+='<div class="ci"><strong>БАР в семье.</strong> Повышает риск прогрессии циклотимии в БАР. Мониторинг обязателен — дневник настроения + регулярные визиты к психиатру.</div>';
-    if(HIST.d1==='switch') h+='<div class="ci" style="background:var(--red-lt);padding:16px;border-radius:10px;"><strong style="color:var(--red);">Антидепрессанты вызвали подъём.</strong> Сильнейший аргумент в пользу биполярного спектра. Обсудите с психиатром — возможно, это БАР-II, а не циклотимия.</div>';
-    if(HIST.d1==='rapid') h+='<div class="ci"><strong>Антидепрессанты ускорили качели.</strong> Типичный паттерн при расстройствах биполярного спектра. Стабилизатор настроения может быть эффективнее антидепрессанта.</div>';
-    if(HIST.d2==='yes') h+='<div class="ci"><strong>Считали качели «характером».</strong> Это самый частый паттерн при циклотимии — годы без диагноза. Важно понять: это не «какой вы есть», а расстройство, которое лечится. Стабилизация возможна.</div>';
-  }
-  document.getElementById('concC').innerHTML=h;}
-function upd(){const t=tot(),a=ans(),lev=gL(t);document.getElementById('pf').style.width=(a/(TQ+FQ)*100)+'%';document.getElementById('pl').textContent=a+' из '+(TQ+FQ);const sf=document.querySelector('.sf');if(a>=TQ){sf.classList.add('vis');document.getElementById('sfn').textContent=t;document.getElementById('sfv').textContent=lev.l;}else{sf.classList.remove('vis');}if(a>=5){document.getElementById('rn').textContent=t;document.getElementById('rl').textContent=lev.l;document.getElementById('rl').style.color=lev.c;document.getElementById('rb').style.width=(t/MAX*100)+'%';document.getElementById('rb').style.background=lev.b;document.getElementById('rd').textContent=DESC[LEV.indexOf(lev)];document.querySelectorAll('#stbl tbody tr').forEach(tr=>{const[mn,mx]=tr.dataset.r.split(',').map(Number);tr.classList.toggle('act',t>=mn&&t<=mx);});document.getElementById('domBlock').style.display='block';['A','B','C','D','E'].forEach(k=>{document.getElementById('d'+k).textContent=dS(k)??'–';});updB();buildC();}else{document.getElementById('rn').textContent='—';document.getElementById('rl').textContent='';document.getElementById('rb').style.width='0%';document.getElementById('rd').textContent='Ответьте минимум на 5 вопросов для предварительных результатов';}}
-document.querySelectorAll('.ans').forEach(g=>{const q=parseInt(g.dataset.q);g.querySelectorAll('.ao').forEach(o=>{o.addEventListener('click',()=>{o.querySelector('input').checked=true;S[q]=parseInt(o.querySelector('input').value);g.querySelectorAll('.ao').forEach(x=>x.classList.remove('sel','sel-w'));o.classList.add('sel');upd();});});});
-const HIST={};
-document.querySelectorAll('.hcb').forEach(o=>{o.addEventListener('click',()=>{const g=o.dataset.g,v=o.dataset.v;document.querySelectorAll(`[data-g="${g}"]`).forEach(x=>x.classList.remove('sel'));o.classList.add('sel');HIST[g]=v;const n=o.dataset.note,ne=document.getElementById('note-'+g);if(ne){if(n){ne.style.display='block';ne.textContent=n;}else ne.style.display='none';}const ok=document.getElementById('ok-'+g);if(ok){ok.classList.add('show');}buildC();});});
-upd();
-let cM='2w';
-function setM(m){cM=m;document.querySelectorAll('.mode-b').forEach(b=>b.classList.remove('act'));document.getElementById('btn-'+m).classList.add('act');const me=document.getElementById('me');if(m==='life'){me.style.display='block';me.innerHTML='<strong>Режим «всю жизнь»:</strong> оценивайте типичный паттерн с подросткового возраста. Как обычно выглядят ваши спады? Подъёмы? Как часто переключается? Не пик — «среднее».';}else if(m==='worst'){me.style.display='block';me.innerHTML='<strong>Режим «самые сильные качели»:</strong> вспомните период, когда амплитуда была максимальной — самый глубокий спад и самый сильный подъём. Отвечайте про ПИКОВЫЕ моменты.';}else me.style.display='none';const k=m==='worst'?'worst':(m==='life'?'life':'2w');for(let i=1;i<=TQ+FQ;i++){const el=document.getElementById('qp-'+i);if(el&&el.dataset[k])el.textContent=el.dataset[k];}if(m==='2w'){document.getElementById('s1t').textContent='Симптомы · последние 2 года';document.getElementById('iText').innerHTML='Оценивайте свой <strong>типичный паттерн за последние 2 года</strong>. Для вопросов о спадах — как обычно ощущается «низ». Для вопросов о подъёмах — как обычно ощущается «верх».';}else if(m==='life'){document.getElementById('s1t').textContent='Симптомы · типичный паттерн за жизнь';document.getElementById('iText').innerHTML='Оценивайте <strong>типичный</strong> уровень качелей за всю жизнь — не самый тяжёлый момент, а «среднее».';}else{document.getElementById('s1t').textContent='Симптомы · самые сильные качели';document.getElementById('iText').innerHTML='Оценивайте <strong>самую большую амплитуду</strong> — максимальный спад и максимальный подъём.';}Object.keys(S).forEach(k=>delete S[k]);document.querySelectorAll('.ao').forEach(o=>o.classList.remove('sel','sel-w'));document.querySelectorAll('input').forEach(r=>r.checked=false);upd();['A','B','C','D','E'].forEach(k=>{const b=document.getElementById('bar'+k);if(b)b.style.width='0%';});document.getElementById('conc').style.display='none';}
-</script>
+<script src="config-cyclothymia.js"></script>
+<script src="engine.js"></script>
 </body>
 </html>
