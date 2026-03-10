@@ -36,16 +36,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 .ct{max-width:880px;margin:0 auto;padding:0 32px;}
 
 /* MODE SWITCHER */
-.mode{background:var(--card);border-bottom:1px solid var(--brd);}
-.mode-in{max-width:880px;margin:0 auto;padding:0 32px;display:flex;align-items:center;flex-wrap:wrap;gap:0;}
-.mode-l{padding:20px 20px 16px 0;font-size:12px;font-weight:600;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase;}
-.mode-b{border:none;background:none;padding:20px 24px 16px;font-family:inherit;font-size:15px;font-weight:500;color:var(--ink3);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;}
-.mode-b.act{color:var(--pri);font-weight:600;border-bottom-color:var(--pri);}
-.mode-b span{display:block;font-size:11px;font-weight:400;color:var(--ink3);margin-top:2px;}
-.mode-ys{margin-left:auto;padding:8px 0;display:none;align-items:center;gap:8px;}
-.mode-ys label{font-size:12px;color:var(--ink3);}
-.mode-ys select{border:1.5px solid var(--brd);border-radius:8px;padding:6px 12px;font-size:13px;font-family:inherit;color:var(--ink);background:#fff;cursor:pointer;}
-.mode-exp{width:100%;padding:12px 32px 16px;font-size:15px;color:var(--ink2);display:none;}
+/* mode switcher removed - SKILL v7 */
 
 /* SECTIONS */
 .sec{background:var(--card);border-bottom:1px solid var(--brd);padding:56px 0;}
@@ -212,7 +203,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 /* DISCLAIMER */
 .disc{margin-top:20px;padding:18px 24px;background:var(--bg);border-radius:12px;font-size:13px;color:var(--ink3);line-height:1.7;}
 
-@media(max-width:700px){.hero h1{font-size:2rem;}.hero{padding:56px 0 44px;}.igrid,.dmap{grid-template-columns:1fr;}.dgr{grid-template-columns:repeat(2,1fr);}.sf{bottom:14px;right:14px;padding:10px 20px;}.mode-in{flex-direction:column;align-items:flex-start;}.res{padding:28px 20px;}.conc{padding:24px 20px;}.bi-row{flex-direction:column;}}
+@media(max-width:700px){.hero h1{font-size:2rem;}.hero{padding:56px 0 44px;}.igrid,.dmap{grid-template-columns:1fr;}.dgr{grid-template-columns:repeat(2,1fr);}.sf{bottom:14px;right:14px;padding:10px 20px;}.res{padding:28px 20px;}.conc{padding:24px 20px;}.bi-row{flex-direction:column;}}
 </style>
 </head>
 <body>
@@ -224,14 +215,6 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
 <div class="pw"><div class="pi"><div class="pt"><div class="pf" id="pf"></div></div><div class="pl" id="pl">0 из 24</div></div></div>
 
-<div class="mode"><div class="mode-in">
-  <div class="mode-l">Оценка:</div>
-  <button class="mode-b act" id="btn-2w" onclick="setM('2w')">Последние месяцы<span>недавние спады и подъёмы</span></button>
-  <button class="mode-b" id="btn-life" onclick="setM('life')">Типичный паттерн<span>как обычно за всю жизнь</span></button>
-  <button class="mode-b" id="btn-worst" onclick="setM('worst')">Самый тяжёлый эпизод<span>пик депрессии + пик мании</span></button>
-  <div class="mode-ys" id="ys"><label>Горизонт:</label><select id="yr" onchange="updP()"><option value="3">3 года</option><option value="5">5 лет</option><option value="10" selected>10 лет</option><option value="0">Всю жизнь</option></select></div>
-  <div class="mode-exp" id="me"></div>
-</div></div>
 
 <div class="sec"><div class="ct">
   <div class="slbl">Методология</div>
@@ -282,17 +265,17 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
     </ul></div>
   </div>
   <div class="info info-pri"><strong>Как устроена эта диагностика</strong>Q01–Q05 — депрессивная фаза. Q06–Q10 — маниакальная/гипоманиакальная фаза. Q11–Q18 — цикличность, соматика, поведение. Q19–Q21 — функционирование (вне балла). Q22–Q24 — маркеры БАР-I (отдельный индикатор, не входят в основной балл).</div>
-  <div style="margin-top:20px;font-size:16px;color:var(--ink2);background:var(--bg);padding:20px 24px;border-radius:14px;"><strong style="color:var(--ink);">Как заполнять:</strong> <span id="iText">Вспомните <strong>последние несколько месяцев</strong>. Для депрессивных вопросов — как было в недавних спадах. Для маниакальных — как было в недавних подъёмах.</span></div>
+  <div style="margin-top:20px;font-size:16px;color:var(--ink2);background:var(--bg);padding:20px 24px;border-radius:14px;"><strong style="color:var(--ink);">Как заполнять:</strong> Отвечайте так, как вы чувствуете себя в последнее время. Если симптомы волнообразны — выбирайте свой типичный уровень, не лучший день и не худший.</div>
 </div></div>
 
 <div class="main"><div class="ct">
-  <div class="sdiv"><div class="sdiv-n">I</div><div><h3 id="s1t">Симптомы · последние месяцы</h3><p id="s1s">21 + 3 вопроса · 6 доменов · макс. 78 баллов</p></div></div>
+  <div class="sdiv"><div class="sdiv-n">I</div><div><h3>Симптомы</h3><p id="s1s">21 + 3 вопроса · 6 доменов · макс. 78 баллов</p></div></div>
 
   <div class="dh" style="color:var(--dA);"><span>Домен А · Депрессивная фаза · 0–5 · повышенный вес</span><span class="ln"></span></div>
 
   <!-- Q1: порядок 3,0,5,1,4,2 -->
   <div class="qc"><div class="qh" style="background:var(--dA);"><div class="qn">01</div><div class="qm"><div class="qtg">Ядерный · PHQ-9 · DSM-5</div><div class="qtl">Подавленное настроение в спаде</div><div class="qd">Как ощущается «низ» — периоды депрессивного настроения</div></div></div>
-    <div class="qp" id="qp-1" data-2w="Как ощущается настроение в периоды спада?" data-life="Какой была ТИПИЧНАЯ глубина депрессивных периодов?" data-worst="Каким было настроение в самом тяжёлом депрессивном эпизоде?">Как ощущается настроение в периоды спада?</div>
+    <div class="qp" id="qp-1">Как ощущается настроение в периоды спада?</div>
     <div class="ans" data-q="1">
     <label class="ao"><input type="radio" name="q1" value="3"><span class="al">1</span><span class="ach"></span><span class="at">Тяжёлые спады — «серая пелена» на недели или месяцы</span><span class="as">3</span></label>
     <label class="ao"><input type="radio" name="q1" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Нет выраженных спадов — настроение ровное</span><span class="as">0</span></label>
@@ -303,7 +286,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
   <!-- Q2: порядок 4,1,0,5,2,3 -->
   <div class="qc"><div class="qh" style="background:var(--dA);"><div class="qn">02</div><div class="qm"><div class="qtg">Ядерный · PHQ-9 · ангедония</div><div class="qtl">Потеря интереса и удовольствия в спаде</div></div></div>
-    <div class="qp" id="qp-2" data-2w="Насколько теряется интерес к жизни в периоды спада?" data-life="Какой была ТИПИЧНАЯ степень ангедонии?" data-worst="Какой была потеря интереса в худшем эпизоде?">Насколько теряется интерес к жизни в периоды спада?</div>
+    <div class="qp" id="qp-2">Насколько теряется интерес к жизни в периоды спада?</div>
     <div class="ans" data-q="2">
     <label class="ao"><input type="radio" name="q2" value="4"><span class="al">1</span><span class="ach"></span><span class="at">Полная ангедония — хобби, друзья, еда, секс перестали что-либо давать</span><span class="as">4</span></label>
     <label class="ao"><input type="radio" name="q2" value="1"><span class="al">2</span><span class="ach"></span><span class="at">Некоторые вещи теряют привлекательность — но не всё</span><span class="as">1</span></label>
@@ -314,7 +297,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
   <!-- Q3: порядок 2,5,0,4,1,3 -->
   <div class="qc"><div class="qh" style="background:var(--dA);"><div class="qn">03</div><div class="qm"><div class="qtg">BHS · Abramson · безнадёжность</div><div class="qtl">Безнадёжность в депрессивной фазе</div></div></div>
-    <div class="qp" id="qp-3" data-2w="Как воспринимается будущее в периоды спада?" data-life="Какой была ТИПИЧНАЯ степень безнадёжности?" data-worst="Какой была безнадёжность в худшем эпизоде?">Как воспринимается будущее в периоды спада?</div>
+    <div class="qp" id="qp-3">Как воспринимается будущее в периоды спада?</div>
         <div class="ans" data-q="3">
     <label class="ao"><input type="radio" name="q3" value="5"><span class="al">1</span><span class="ach"></span><span class="at">Будущее = бесконечный цикл страдания. Не вижу выхода</span><span class="as">5</span></label>
     <label class="ao"><input type="radio" name="q3" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Даже в спаде понимаю, что это пройдёт</span><span class="as">0</span></label>
@@ -326,7 +309,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
   <!-- Q4: порядок 1,4,5,0,2,3 -->
   <div class="qc"><div class="qh" style="background:var(--dA);"><div class="qn">04</div><div class="qm"><div class="qtg">Nolen-Hoeksema · руминация</div><div class="qtl">Руминация и самокритика в спаде</div></div></div>
-    <div class="qp" id="qp-4" data-2w="Насколько в спаде прокручиваются негативные мысли о себе?" data-life="Какой была ТИПИЧНАЯ руминация?" data-worst="Какой была руминация в худшем эпизоде?">Насколько в спаде прокручиваются негативные мысли о себе?</div>
+    <div class="qp" id="qp-4">Насколько в спаде прокручиваются негативные мысли о себе?</div>
     <div class="ans" data-q="4">
     <label class="ao"><input type="radio" name="q4" value="1"><span class="al">1</span><span class="ach"></span><span class="at">Иногда самокритика усиливается — но переключаюсь</span><span class="as">1</span></label>
     <label class="ao"><input type="radio" name="q4" value="4"><span class="al">2</span><span class="ach"></span><span class="at">Ненависть к себе — «я разрушаю жизнь и не могу остановиться»</span><span class="as">4</span></label>
@@ -337,7 +320,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
   <!-- Q5: порядок 3,1,0,5,4,2 -->
   <div class="qc"><div class="qh" style="background:var(--dA);"><div class="qn">05</div><div class="qm"><div class="qtg">PHQ-9 · DSM-5 · суицидальность</div><div class="qtl">Мысли о смерти или самоповреждении</div></div></div>
-    <div class="qp" id="qp-5" data-2w="Бывают ли мысли о смерти или самоповреждении в спаде?" data-life="Были ли мысли о смерти типичными для спадов?" data-worst="Какими были мысли о смерти в худшем эпизоде?">Бывают ли мысли о смерти или самоповреждении в спаде?</div>
+    <div class="qp" id="qp-5">Бывают ли мысли о смерти или самоповреждении в спаде?</div>
     <div class="ans" data-q="5">
     <label class="ao"><input type="radio" name="q5" value="3"><span class="al">1</span><span class="ach"></span><span class="at">Мысли о способах — но пугают и вызывают отвращение</span><span class="as">3</span></label>
     <label class="ao"><input type="radio" name="q5" value="1"><span class="al">2</span><span class="ach"></span><span class="at">«Устал(а) от всего» — не о смерти конкретно</span><span class="as">1</span></label>
@@ -351,7 +334,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
   <!-- Q6: порядок 4,0,2,5,1,3 -->
   <div class="qc"><div class="qh" style="background:var(--dB);"><div class="qn">06</div><div class="qm"><div class="qtg">Ядерный · DSM-5 A · MDQ · YMRS</div><div class="qtl">Повышенное настроение / эйфория</div><div class="qd">Не обычная радость — неестественно приподнятое состояние</div></div></div>
-    <div class="qp" id="qp-6" data-2w="Бывали ли периоды необычно приподнятого, «заряженного» настроения?" data-life="Были ли эпизоды эйфории типичными?" data-worst="Каким был самый сильный подъём?">Бывали ли периоды необычно приподнятого, «заряженного» настроения?</div>
+    <div class="qp" id="qp-6">Бывали ли периоды необычно приподнятого, «заряженного» настроения?</div>
         <div class="ans" data-q="6">
     <label class="ao"><input type="radio" name="q6" value="4"><span class="al">1</span><span class="ach"></span><span class="at">Эйфория: ощущение сверхспособностей, мир сияет, всё возможно — длится неделю и более</span><span class="as">4</span></label>
     <label class="ao"><input type="radio" name="q6" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Нет — настроение ровное, радость пропорциональна событиям</span><span class="as">0</span></label>
@@ -363,7 +346,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
   <!-- Q7: порядок 2,0,4,1,5,3 -->
   <div class="qc"><div class="qh" style="background:var(--dB);"><div class="qn">07</div><div class="qm"><div class="qtg">DSM-5 B2 · MDQ · патогномоничный</div><div class="qtl">Снижение потребности во сне</div><div class="qd">НЕ бессонница — просто не нужен сон, но энергии полно</div></div></div>
-    <div class="qp" id="qp-7" data-2w="Бывали ли периоды, когда нужно было значительно меньше сна, но энергии хватало?" data-life="Было ли снижение потребности во сне типичным?" data-worst="Каким было минимальное время сна при сохранении энергии?">Бывали ли периоды, когда нужно было значительно меньше сна, но энергии хватало?</div>
+    <div class="qp" id="qp-7">Бывали ли периоды, когда нужно было значительно меньше сна, но энергии хватало?</div>
         <div class="ans" data-q="7">
     <label class="ao"><input type="radio" name="q7" value="0"><span class="al">1</span><span class="ach"></span><span class="at">Нет — мне нужны стандартные 7–8 часов, иначе устаю</span><span class="as">0</span></label>
     <label class="ao"><input type="radio" name="q7" value="4"><span class="al">2</span><span class="ach"></span><span class="at">Могу не спать 1–2 ночи подряд без усталости — чувствую прилив сил</span><span class="as">4</span></label>
@@ -375,7 +358,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
   <!-- Q8: порядок 3,1,0,5,2,4 -->
   <div class="qc"><div class="qh" style="background:var(--dB);"><div class="qn">08</div><div class="qm"><div class="qtg">DSM-5 B1 · YMRS · грандиозность</div><div class="qtl">Грандиозность и завышенная самооценка</div><div class="qd">«Я могу всё», «у меня особая миссия», «я лучше других»</div></div></div>
-    <div class="qp" id="qp-8" data-2w="Бывали ли периоды необычно завышенной самооценки или грандиозных идей?" data-life="Была ли грандиозность типичной?" data-worst="Какой была грандиозность в самом сильном подъёме?">Бывали ли периоды необычно завышенной самооценки или грандиозных идей?</div>
+    <div class="qp" id="qp-8">Бывали ли периоды необычно завышенной самооценки или грандиозных идей?</div>
     <div class="ans" data-q="8">
     <label class="ao"><input type="radio" name="q8" value="3"><span class="al">1</span><span class="ach"></span><span class="at">Чёткие периоды: чувствую себя особенным(ой), умнее и способнее окружающих</span><span class="as">3</span></label>
     <label class="ao"><input type="radio" name="q8" value="1"><span class="al">2</span><span class="ach"></span><span class="at">Иногда повышенная уверенность — «сегодня мне всё удастся»</span><span class="as">1</span></label>
@@ -386,7 +369,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
   <!-- Q9: порядок 2,0,4,1,5,3 -->
   <div class="qc"><div class="qh" style="background:var(--dB);"><div class="qn">09</div><div class="qm"><div class="qtg">DSM-5 B3–B4 · YMRS · скачка идей</div><div class="qtl">Ускоренное мышление и речь</div><div class="qd">«Мысли скачут», «не могу остановиться», «говорю без пауз»</div></div></div>
-    <div class="qp" id="qp-9" data-2w="Бывали ли периоды когда мысли скачут, а речь ускоряется?" data-life="Было ли ускоренное мышление типичным?" data-worst="Каким было ускорение мышления в самом сильном подъёме?">Бывали ли периоды когда мысли скачут, а речь ускоряется?</div>
+    <div class="qp" id="qp-9">Бывали ли периоды когда мысли скачут, а речь ускоряется?</div>
         <div class="ans" data-q="9">
     <label class="ao"><input type="radio" name="q9" value="0"><span class="al">1</span><span class="ach"></span><span class="at">Мышление и речь обычного темпа</span><span class="as">0</span></label>
     <label class="ao"><input type="radio" name="q9" value="4"><span class="al">2</span><span class="ach"></span><span class="at">Поток идей неостановим — начинаю десятки проектов, не доводя ни один до конца</span><span class="as">4</span></label>
@@ -398,7 +381,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
   <!-- Q10: порядок 3,0,5,1,4,2 -->
   <div class="qc"><div class="qh" style="background:var(--dB);"><div class="qn">10</div><div class="qm"><div class="qtg">DSM-5 B7 · MDQ · импульсивность</div><div class="qtl">Импульсивность и безрассудство в подъёме</div><div class="qd">Траты, рискованный секс, опасное вождение, инвестиции</div></div></div>
-    <div class="qp" id="qp-10" data-2w="Совершали ли вы в периоды подъёма действия, о которых потом жалели?" data-life="Была ли импульсивность типичной для подъёмов?" data-worst="Какими были последствия импульсивности в худшем эпизоде?">Совершали ли вы в периоды подъёма действия, о которых потом жалели?</div>
+    <div class="qp" id="qp-10">Совершали ли вы в периоды подъёма действия, о которых потом жалели?</div>
     <div class="ans" data-q="10">
     <label class="ao"><input type="radio" name="q10" value="3"><span class="al">1</span><span class="ach"></span><span class="at">Заметная импульсивность: крупные траты, резкие решения (бросить работу, переехать)</span><span class="as">3</span></label>
     <label class="ao"><input type="radio" name="q10" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Нет — мои решения обдуманны</span><span class="as">0</span></label>
@@ -411,7 +394,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
   <!-- Q11: порядок 2,0,3,1 -->
   <div class="qc"><div class="qh" style="background:var(--dC);"><div class="qn">11</div><div class="qm"><div class="qtg">Диагностический · БАР-специфичный</div><div class="qtl">Цикличность настроения</div></div></div>
-    <div class="qp" id="qp-11" data-2w="Насколько выражена цикличность настроения?" data-life="Была ли цикличность типичной?" data-worst="Какой была цикличность в худший период?">Насколько выражена цикличность настроения?</div>
+    <div class="qp" id="qp-11">Насколько выражена цикличность настроения?</div>
     <div class="ans" data-q="11">
     <label class="ao"><input type="radio" name="q11" value="2"><span class="al">1</span><span class="ach"></span><span class="at">Заметные циклы: периоды подъёма и спада чередуются, каждый длится недели</span><span class="as">2</span></label>
     <label class="ao"><input type="radio" name="q11" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Настроение стабильное — нет заметных циклов</span><span class="as">0</span></label>
@@ -420,7 +403,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
   <!-- Q12: порядок 1,3,0,2 -->
   <div class="qc"><div class="qh" style="background:var(--dC);"><div class="qn">12</div><div class="qm"><div class="qtg">DSM-5 · смешанные состояния</div><div class="qtl">Смешанные состояния</div><div class="qd">Депрессия + возбуждение одновременно — самое опасное состояние при БАР</div></div></div>
-    <div class="qp" id="qp-12" data-2w="Бывает ли одновременно тоска И возбуждение, энергия И отчаяние?" data-life="Были ли смешанные состояния типичными?" data-worst="Какими были смешанные состояния в худший период?">Бывает ли одновременно тоска И возбуждение, энергия И отчаяние?</div>
+    <div class="qp" id="qp-12">Бывает ли одновременно тоска И возбуждение, энергия И отчаяние?</div>
     <div class="ans" data-q="12">
     <label class="ao"><input type="radio" name="q12" value="1"><span class="al">1</span><span class="ach"></span><span class="at">Иногда раздражительность на фоне подавленности</span><span class="as">1</span></label>
     <label class="ao"><input type="radio" name="q12" value="3"><span class="al">2</span><span class="ach"></span><span class="at">Регулярные смешанные эпизоды: плачу, но не могу остановить мысли, энергия мечется без направления</span><span class="as">3</span></label>
@@ -430,7 +413,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
   <!-- Q13: порядок 3,1,0,2 -->
   <div class="qc"><div class="qh" style="background:var(--dC);"><div class="qn">13</div><div class="qm"><div class="qtg">DSM-5 · соматический</div><div class="qtl">Колебания энергии</div></div></div>
-    <div class="qp" id="qp-13" data-2w="Насколько сильно колеблется уровень энергии?" data-life="Были ли колебания энергии типичными?" data-worst="Какими были колебания энергии в худший период?">Насколько сильно колеблется уровень энергии?</div>
+    <div class="qp" id="qp-13">Насколько сильно колеблется уровень энергии?</div>
     <div class="ans" data-q="13">
     <label class="ao"><input type="radio" name="q13" value="3"><span class="al">1</span><span class="ach"></span><span class="at">Экстремальные качели: сверхпродуктивность → полный упадок. Разница огромна</span><span class="as">3</span></label>
     <label class="ao"><input type="radio" name="q13" value="1"><span class="al">2</span><span class="ach"></span><span class="at">Небольшие колебания — бывают дни активнее и пассивнее</span><span class="as">1</span></label>
@@ -439,7 +422,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
   <!-- Q14: порядок 2,0,3,1 -->
   <div class="qc"><div class="qh" style="background:var(--dC);"><div class="qn">14</div><div class="qm"><div class="qtg">DSM-5 · соматический</div><div class="qtl">Колебания сна между фазами</div></div></div>
-    <div class="qp" id="qp-14" data-2w="Как меняется сон между фазами?" data-life="Были ли колебания сна типичными?" data-worst="Какими были колебания сна в худший период?">Как меняется сон между фазами?</div>
+    <div class="qp" id="qp-14">Как меняется сон между фазами?</div>
     <div class="ans" data-q="14">
     <label class="ao"><input type="radio" name="q14" value="2"><span class="al">1</span><span class="ach"></span><span class="at">Заметные перепады: в подъёме 4–5 часов хватает, в спаде сплю 10–12</span><span class="as">2</span></label>
     <label class="ao"><input type="radio" name="q14" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Сон стабильный</span><span class="as">0</span></label>
@@ -450,7 +433,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
   <!-- Q15: порядок 3,0,4,1,2 -->
   <div class="qc"><div class="qh" style="background:var(--dD);"><div class="qn">15</div><div class="qm"><div class="qtg">MDQ · HCL-32 · финансовый</div><div class="qtl">Финансовое поведение в подъёме</div></div></div>
-    <div class="qp" id="qp-15" data-2w="Бывают ли в подъёме чрезмерные траты?" data-life="Были ли чрезмерные траты типичными?" data-worst="Какими были траты в самом сильном подъёме?">Бывают ли в подъёме чрезмерные траты?</div>
+    <div class="qp" id="qp-15">Бывают ли в подъёме чрезмерные траты?</div>
     <div class="ans" data-q="15">
     <label class="ao"><input type="radio" name="q15" value="3"><span class="al">1</span><span class="ach"></span><span class="at">Крупные незапланированные траты: дорогие покупки, инвестиции под влиянием момента</span><span class="as">3</span></label>
     <label class="ao"><input type="radio" name="q15" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Финансы под контролем — трачу обдуманно</span><span class="as">0</span></label>
@@ -460,7 +443,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
   <!-- Q16: порядок 2,4,0,1,3 -->
   <div class="qc"><div class="qh" style="background:var(--dD);"><div class="qn">16</div><div class="qm"><div class="qtg">MDQ · рискованное поведение</div><div class="qtl">Рискованное поведение в подъёме</div><div class="qd">Секс, вождение, конфронтации — нетипичное для вас</div></div></div>
-    <div class="qp" id="qp-16" data-2w="Бывает ли в подъёме рискованное поведение, нетипичное для вас?" data-life="Было ли рискованное поведение типичным?" data-worst="Каким было рискованное поведение в самом сильном подъёме?">Бывает ли в подъёме рискованное поведение, нетипичное для вас?</div>
+    <div class="qp" id="qp-16">Бывает ли в подъёме рискованное поведение, нетипичное для вас?</div>
     <div class="ans" data-q="16">
     <label class="ao"><input type="radio" name="q16" value="2"><span class="al">1</span><span class="ach"></span><span class="at">Бывают решения, на которые не пошёл(ла) бы в обычном состоянии</span><span class="as">2</span></label>
     <label class="ao"><input type="radio" name="q16" value="4"><span class="al">2</span><span class="ach"></span><span class="at">Опасное: поведение угрожает здоровью или жизни — потом не верю что это был(а) я</span><span class="as">4</span></label>
@@ -470,7 +453,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
   <!-- Q17: порядок 2,0,3,1,4 -->
   <div class="qc"><div class="qh" style="background:var(--dD);"><div class="qn">17</div><div class="qm"><div class="qtg">Поведенческий · изоляция в спаде</div><div class="qtl">Изоляция в депрессивной фазе</div></div></div>
-    <div class="qp" id="qp-17" data-2w="Насколько вы изолируетесь в периоды спада?" data-life="Была ли изоляция в спадах типичной?" data-worst="Какой была изоляция в худшем депрессивном эпизоде?">Насколько вы изолируетесь в периоды спада?</div>
+    <div class="qp" id="qp-17">Насколько вы изолируетесь в периоды спада?</div>
     <div class="ans" data-q="17">
     <label class="ao"><input type="radio" name="q17" value="2"><span class="al">1</span><span class="ach"></span><span class="at">Отменяю встречи, не отвечаю на сообщения — «ухожу в берлогу»</span><span class="as">2</span></label>
     <label class="ao"><input type="radio" name="q17" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Общение сохраняется даже в спаде</span><span class="as">0</span></label>
@@ -480,7 +463,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
   <!-- Q18: порядок 1,3,0,4,2 -->
   <div class="qc"><div class="qh" style="background:var(--dD);"><div class="qn">18</div><div class="qm"><div class="qtg">Поведенческий · IPSRT · нарушение ритма</div><div class="qtl">Нарушение режима жизни</div><div class="qd">Хаотичный сон, питание, активность между фазами</div></div></div>
-    <div class="qp" id="qp-18" data-2w="Насколько цикличность нарушает ваш режим жизни?" data-life="Было ли нарушение режима типичным?" data-worst="Каким было нарушение режима в худший период?">Насколько цикличность нарушает ваш режим жизни?</div>
+    <div class="qp" id="qp-18">Насколько цикличность нарушает ваш режим жизни?</div>
     <div class="ans" data-q="18">
     <label class="ao"><input type="radio" name="q18" value="1"><span class="al">1</span><span class="ach"></span><span class="at">Небольшие сбои — в подъёме ложусь позже, в спаде раньше</span><span class="as">1</span></label>
     <label class="ao"><input type="radio" name="q18" value="3"><span class="al">2</span><span class="ach"></span><span class="at">Режим полностью зависит от фазы — сплю, ем, работаю совершенно по-разному в подъёме и спаде</span><span class="as">3</span></label>
@@ -492,7 +475,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
   <!-- Q19: порядок 2,0,3,1,4 -->
   <div class="qc"><div class="qh" style="background:var(--dE);"><div class="qn">19</div><div class="qm"><div class="qtg">DSM-5 критерий · работа</div><div class="qtl">Влияние на работу или учёбу</div></div></div>
-    <div class="qp" id="qp-19" data-2w="Как цикличность влияет на работу/учёбу?" data-life="Как ТИПИЧНО влияла на работу?" data-worst="Как влияла на работу в худший период?">Как цикличность влияет на работу/учёбу?</div>
+    <div class="qp" id="qp-19">Как цикличность влияет на работу/учёбу?</div>
     <div class="ans" data-q="19">
     <label class="ao"><input type="radio" name="q19" value="2"><span class="al">1</span><span class="ach"></span><span class="at">Заметно: в подъёме берусь за слишком много, в спаде не могу выполнять обязательства</span><span class="as">2</span></label>
     <label class="ao"><input type="radio" name="q19" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Не влияет — работаю стабильно</span><span class="as">0</span></label>
@@ -502,7 +485,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
   <!-- Q20: порядок 2,0,3,1,4 -->
   <div class="qc"><div class="qh" style="background:var(--dE);"><div class="qn">20</div><div class="qm"><div class="qtg">DSM-5 критерий · отношения</div><div class="qtl">Влияние на отношения</div></div></div>
-    <div class="qp" id="qp-20" data-2w="Как цикличность влияет на отношения?" data-life="Как ТИПИЧНО влияла на отношения?" data-worst="Как влияла на отношения в худший период?">Как цикличность влияет на отношения?</div>
+    <div class="qp" id="qp-20">Как цикличность влияет на отношения?</div>
     <div class="ans" data-q="20">
     <label class="ao"><input type="radio" name="q20" value="2"><span class="al">1</span><span class="ach"></span><span class="at">Конфликты в подъёме (раздражительность) и отдаление в спаде — партнёр устаёт</span><span class="as">2</span></label>
     <label class="ao"><input type="radio" name="q20" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Не влияет</span><span class="as">0</span></label>
@@ -512,7 +495,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
   <!-- Q21: порядок 1,3,0,4,2 -->
   <div class="qc"><div class="qh" style="background:var(--dE);"><div class="qn">21</div><div class="qm"><div class="qtg">DSM-5 критерий · повседневная жизнь</div><div class="qtl">Влияние на быт и повседневные дела</div></div></div>
-    <div class="qp" id="qp-21" data-2w="Как цикличность влияет на быт и повседневные дела?" data-life="Как ТИПИЧНО влияла на быт?" data-worst="Как влияла на быт в худший период?">Как цикличность влияет на быт и повседневные дела?</div>
+    <div class="qp" id="qp-21">Как цикличность влияет на быт и повседневные дела?</div>
     <div class="ans" data-q="21">
     <label class="ao"><input type="radio" name="q21" value="1"><span class="al">1</span><span class="ach"></span><span class="at">Небольшие сбои — в спаде дела копятся, в подъёме наверстываю</span><span class="as">1</span></label>
     <label class="ao"><input type="radio" name="q21" value="3"><span class="al">2</span><span class="ach"></span><span class="at">Быт зависит от фазы — в спаде не мо́юсь, не убираю, не ем нормально</span><span class="as">3</span></label>
@@ -526,7 +509,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
   <!-- Q22: инсайт, порядок 0,2,3,1 -->
   <div class="qc"><div class="qh" style="background:var(--dBI);"><div class="qn">22</div><div class="qm"><div class="qtg">SUMD · Amador (1993) · маркер БАР-I</div><div class="qtl">Инсайт во время подъёма</div><div class="qd">Осознавали ли вы ВО ВРЕМЯ эпизода, что что-то не так</div></div></div>
-    <div class="qp" id="qp-22" data-2w="Во время подъёмов — осознаёте ли, что ведёте себя необычно?" data-life="Был ли инсайт в подъёмах типичным?" data-worst="Был ли инсайт в самом тяжёлом подъёме?">Во время подъёмов — осознаёте ли, что ведёте себя необычно?</div>
+    <div class="qp" id="qp-22">Во время подъёмов — осознаёте ли, что ведёте себя необычно?</div>
     <div class="ans" data-q="22">
     <label class="ao"><input type="radio" name="q22" value="0"><span class="al">1</span><span class="ach"></span><span class="at">Да — во время подъёма понимаю, что это эпизод, и могу его отслеживать</span><span class="as">0</span></label>
     <label class="ao"><input type="radio" name="q22" value="2"><span class="al">2</span><span class="ach"></span><span class="at">Частично — потом понимаю, что был(а) «не в себе», но во время — казалось нормальным</span><span class="as">2</span></label>
@@ -536,7 +519,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
   <!-- Q23: функционирование в подъёме, порядок 0,2,3,1 -->
   <div class="qc"><div class="qh" style="background:var(--dBI);"><div class="qn">23</div><div class="qm"><div class="qtg">DSM-5 · функционирование в мании · маркер БАР-I</div><div class="qtl">Функционирование во время подъёма</div><div class="qd">Подъём при БАР-I нарушает функционирование — при БАР-II обычно нет</div></div></div>
-    <div class="qp" id="qp-23" data-2w="Как вы функционируете непосредственно во время подъёма?" data-life="Как ТИПИЧНО функционировали во время подъёмов?" data-worst="Как функционировали в самом тяжёлом подъёме?">Как вы функционируете непосредственно во время подъёма?</div>
+    <div class="qp" id="qp-23">Как вы функционируете непосредственно во время подъёма?</div>
     <div class="ans" data-q="23">
     <label class="ao"><input type="radio" name="q23" value="0"><span class="al">1</span><span class="ach"></span><span class="at">В подъёме функционирую хорошо или даже лучше обычного — продуктивен(на), социален(на)</span><span class="as">0</span></label>
     <label class="ao"><input type="radio" name="q23" value="2"><span class="al">2</span><span class="ach"></span><span class="at">Начинаю много проектов, но не заканчиваю — продуктивность кажущаяся</span><span class="as">2</span></label>
@@ -546,7 +529,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
   <!-- Q24: психоз, порядок 0,2,3,1 -->
   <div class="qc"><div class="qh" style="background:var(--dBI);"><div class="qn">24</div><div class="qm"><div class="qtg">DSM-5 · психотические симптомы · маркер БАР-I</div><div class="qtl">Психотические симптомы в эпизодах</div><div class="qd">Бред, галлюцинации — только при БАР-I, никогда при БАР-II</div></div></div>
-    <div class="qp" id="qp-24" data-2w="Бывали ли в подъёме или спаде галлюцинации или бред?" data-life="Были ли психотические симптомы типичными?" data-worst="Были ли психотические симптомы в тяжёлом эпизоде?">Бывали ли в подъёме или спаде галлюцинации или бред?</div>
+    <div class="qp" id="qp-24">Бывали ли в подъёме или спаде галлюцинации или бред?</div>
     <div class="ans" data-q="24">
     <label class="ao"><input type="radio" name="q24" value="0"><span class="al">1</span><span class="ach"></span><span class="at">Нет — галлюцинаций и бреда не было</span><span class="as">0</span></label>
     <label class="ao"><input type="radio" name="q24" value="2"><span class="al">2</span><span class="ach"></span><span class="at">В сильном подъёме были убеждения, которые потом казались нереалистичными (бред величия)</span><span class="as">2</span></label>
@@ -795,7 +778,7 @@ function buildC(){
     const dE=dS('E');
     if(dE!==null){
       const p=dE/DM.E;
-      h+=`<div class="ci"><strong>Функционирование: ${dE} из ${DM.E}</strong>${p<=.15?'Сохранено. Критерий DSM-5 формально может быть не выполнен.':p<=.5?'Умеренное нарушение. Критерий DSM-5 выполнен.':'Значительное нарушение в обеих фазах. Нужна помощь.'}</div>`;
+      h+=`<div class="ci"><strong>Функционирование: ${dE} из ${DM.E}</strong>${p<=.25?'Сохранено. Критерий DSM-5 формально может быть не выполнен.':p<=.5?'Умеренное нарушение. Критерий DSM-5 выполнен.':p<=.75?'Значительное нарушение в обеих фазах. Нужна структурированная помощь.':'Тяжёлое нарушение — обе фазы парализуют жизнь. Срочная помощь.'}</div>`;
     }
   }
 
@@ -816,12 +799,22 @@ function buildC(){
     }
   }
 
-  // Режимо-специфичные блоки
-  if(a>=3&&cM==='life'&&t>=32){
-    h+='<div class="ci" style="border-top:2px solid var(--brd);padding-top:18px;margin-top:8px;"><strong style="color:var(--pri);">Хронический паттерн</strong>Вы оценили симптомы как характерные для всей жизни, и уровень ≥ умеренного. БАР — хроническое расстройство: без терапии фазы возвращаются. Золотой стандарт профилактики — стабилизаторы настроения (литий, ламотриджин, вальпроат).</div>';
+
+
+  // Кризисный блок при высокой суицидальности
+  if(S[5]!==undefined&&S[5]>=4){
+    h+='<div class="ci" style="border-top:3px solid var(--red);padding-top:18px;margin-top:12px;background:var(--red-lt);padding:20px 24px;border-radius:var(--radius);"><strong style="color:var(--red);">Важно: высокий уровень суицидальных мыслей</strong>Ваши ответы указывают на выраженные мысли о смерти или самоповреждении. Пожалуйста, обратитесь за помощью: телефон доверия 8-800-2000-122 (бесплатно, 24/7). При БАР суицидальный риск особенно высок в смешанных состояниях и при переходе из мании в депрессию. Вы не одиноки.</div>';
   }
-  if(a>=3&&cM==='worst'){
-    h+='<div class="ci" style="border-top:2px solid var(--brd);padding-top:18px;margin-top:8px;"><strong style="color:var(--warm-dk);">Оценка пикового состояния</strong>Этот балл отражает самый тяжёлый период, а не текущее состояние. Для актуальной оценки переключитесь в режим «Последние месяцы».</div>';
+
+  // Кросс-диагностические ссылки
+  if(a>=5){
+    const crA=dS('A'),crB=dS('B');
+    if(crA!==null&&crB!==null){
+      if(crA/DM.A>.5&&crB/DM.B<.25)
+        h+='<div class="ci" style="border-top:2px solid var(--dA);padding-top:18px;margin-top:8px;"><strong style="color:var(--dA);">Пройдите также: Депрессия</strong>Депрессивная фаза значительно преобладает над маниакальной. Возможно, это БДР, а не БАР. <a href="depression.html" style="color:var(--pri);font-weight:600;">Диагностика депрессии \u2192</a></div>';
+      if(crB/DM.B<.15&&crA/DM.A>.3)
+        h+='<div class="ci" style="border-top:2px solid var(--dC);padding-top:18px;margin-top:8px;"><strong style="color:var(--dC);">Пройдите также: Циклотимия</strong>Подъёмы субпороговые. Если они не достигают уровня гипомании — это может быть циклотимия. <a href="cyclothymia.html" style="color:var(--pri);font-weight:600;">Диагностика циклотимии \u2192</a></div>';
+    }
   }
 
   // История
@@ -884,7 +877,7 @@ document.querySelectorAll('.ans').forEach(g=>{
       o.querySelector('input').checked=true;
       S[q]=parseInt(o.querySelector('input').value);
       g.querySelectorAll('.ao').forEach(x=>x.classList.remove('sel','sel-w'));
-      o.classList.add(q===5&&S[q]>=4?'sel-w':'sel');
+      o.classList.add((q===5&&S[q]>=4)||(q===24&&S[q]>=3)?'sel-w':'sel');
       upd();
     });
   });
@@ -904,54 +897,6 @@ document.querySelectorAll('.hcb').forEach(o=>{
     buildBI(); buildC();
   });
 });
-
-// Режимы
-let cM='2w';
-function setM(m){
-  cM=m;
-  document.querySelectorAll('.mode-b').forEach(b=>b.classList.remove('act'));
-  document.getElementById('btn-'+m).classList.add('act');
-  const ys=document.getElementById('ys'), me=document.getElementById('me');
-  if(m==='worst'){
-    ys.style.display='flex'; me.style.display='block'; updP();
-  } else {
-    ys.style.display='none';
-    if(m==='life'){
-      me.style.display='block';
-      me.innerHTML='<strong>Режим «типичный паттерн»:</strong> оценивайте то, как обычно — не лучший и не худший период, а характерное среднее за всю жизнь.';
-      document.getElementById('s1t').textContent='Симптомы · типичный паттерн';
-      document.getElementById('iText').innerHTML='Оценивайте <strong>типичную, характерную</strong> картину — не пик и не лучший период, а «среднее» за жизнь.';
-    } else {
-      me.style.display='none';
-      document.getElementById('s1t').textContent='Симптомы · последние месяцы';
-      document.getElementById('iText').innerHTML='Вспомните <strong>последние несколько месяцев</strong>. Для депрессивных вопросов — как было в недавних спадах. Для маниакальных — как было в недавних подъёмах.';
-    }
-  }
-  const k=m==='worst'?'worst':(m==='life'?'life':'2w');
-  for(let i=1;i<=24;i++){
-    const el=document.getElementById('qp-'+i);
-    if(el&&el.dataset[k]) el.textContent=el.dataset[k];
-  }
-  // Сброс ответов
-  Object.keys(S).forEach(k=>delete S[k]);
-  document.querySelectorAll('.ao').forEach(o=>o.classList.remove('sel','sel-w'));
-  document.querySelectorAll('input[type=radio]').forEach(r=>r.checked=false);
-  ['A','B','C','D','E'].forEach(k=>{const b=document.getElementById('bar'+k);if(b)b.style.width='0%';});
-  document.getElementById('barBI').style.width='0%';
-  document.getElementById('domBlock').style.display='none';
-  document.getElementById('biBlock').style.display='none';
-  document.getElementById('conc').style.display='none';
-  document.getElementById('sf').classList.remove('vis');
-  upd();
-}
-
-function updP(){
-  const v=document.getElementById('yr').value;
-  const lb=v==='0'?'всю жизнь':`последние ${v} ${v==='3'?'года':'лет'}`;
-  document.getElementById('s1t').textContent='Симптомы · худший период за '+lb;
-  document.getElementById('iText').innerHTML='Вспомните <strong>самый тяжёлый период за '+lb+'</strong>. Для депрессии — пик спада, для мании — пик подъёма.';
-  document.getElementById('me').innerHTML='<strong>Режим «самый тяжёлый эпизод»:</strong> оцените ПИК. Крайние варианты здесь уместны, если вы их пережили.';
-}
 
 upd();
 </script>
