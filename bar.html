@@ -158,7 +158,8 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 .rbig{display:flex;align-items:baseline;gap:10px;margin:28px 0 20px;}
 .rnum{font-family:'Cormorant Garamond',serif;font-size:4.5rem;font-weight:700;line-height:1;}
 .rmx{font-size:16px;color:var(--ink3);}
-.rlv{font-size:1.2rem;font-weight:700;margin-bottom:10px;}
+.rlv{font-size:1.2rem;font-weight:700;margin-bottom:4px;}
+.rlv-f{font-size:0.95rem;font-weight:600;margin-bottom:10px;padding:6px 14px;border-radius:8px;display:inline-block;}
 .rds{font-size:16px;color:var(--ink2);margin-bottom:24px;}
 .rbar{height:12px;background:var(--bg);border-radius:6px;margin-bottom:28px;overflow:hidden;}
 .rbf{height:100%;border-radius:6px;transition:width .8s cubic-bezier(.4,0,.2,1);}
@@ -626,8 +627,9 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
   <div class="res" id="results">
     <div class="res-t">Результаты</div>
     <p style="color:var(--ink3);font-size:14px;">Обновляется автоматически по мере заполнения</p>
-    <div class="rbig"><div class="rnum" id="rn">0</div><div class="rmx">/ 78</div></div>
+    <div class="rbig"><div class="rnum" id="rn">0</div><div class="rmx">/ 88</div></div>
     <div class="rlv" id="rl" style="color:var(--ink3);">—</div>
+    <div class="rlv-f" id="rlf" style="display:none;"></div>
     <div class="rds" id="rd">Заполните вопросы</div>
     <div class="rbar"><div class="rbf" id="rb" style="width:0%;background:#ddd;"></div></div>
 
@@ -686,7 +688,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
 <div class="sf" id="sf" onclick="document.getElementById('results').scrollIntoView({behavior:'smooth'})">
   <div class="sf-n" id="sfn">0</div>
-  <div><div class="sf-l">из 78</div><div class="sf-v" id="sfv">—</div></div>
+  <div><div class="sf-l">из 88</div><div class="sf-v" id="sfv">—</div></div>
 </div>
 
 <script>
@@ -717,6 +719,12 @@ const BI_LEV=[
   {min:8,max:9, l:'ВЫСОКАЯ ВЕРОЯТНОСТЬ БАР-I',  c:'#b03a3a', desc:'Маркеры полной мании явно выражены — особенно если были психотические симптомы. Срочная консультация психиатра.'}
 ];
 
+const FUNC_LEV=[
+  {min:0,max:3,l:'СОХРАНЕНО',c:'#166534',bg:'rgba(34,197,94,0.1)'},
+  {min:4,max:7,l:'НАРУШЕНО',c:'#b45309',bg:'rgba(245,158,11,0.1)'},
+  {min:8,max:12,l:'ТЯЖЕЛО НАРУШЕНО',c:'#b03a3a',bg:'rgba(239,68,68,0.1)'}
+];
+function gFL(t){return FUNC_LEV.find(l=>t>=l.min&&t<=l.max)||FUNC_LEV[0];}
 function gL(t){return LEV.find(l=>t>=l.min&&t<=l.max)||LEV[0];}
 function gBI(t){return BI_LEV.find(l=>t>=l.min&&t<=l.max)||BI_LEV[0];}
 
@@ -804,6 +812,15 @@ function buildC(){
     }
   }
 
+  // Discrepancy warning: low symptoms + high functioning impairment
+  if(a>=3){
+    const fE2=dS('E'), levIdx=LEV.indexOf(lev);
+    if(fE2!==null && levIdx<=1 && fE2>=4){
+      const fl2=gFL(fE2);
+      h+=`<div class="ci" style="border:2px solid ${fl2.c};padding:16px;border-radius:10px;margin-top:12px;background:${fl2.bg};"><strong style="color:${fl2.c};">⚠ Расхождение: симптомы «${lev.l}», но функционирование «${fl2.l}»</strong> По рекомендациям NICE, нарушение функционирования — самостоятельное основание для вмешательства, даже при невысоком уровне симптомов. При БАР субсиндромальная депрессия вызывает нарушение функционирования, сопоставимое с полным эпизодом (Altshuler et al., 2006, N=759). Это не «норма» — обсудите с психиатром.</div>`;
+    }
+  }
+
   // BAR-I/II сигнал
   if(biAns()>=2){
     const bi=biS(), bilev=gBI(bi);
@@ -888,6 +905,16 @@ function upd(){
     ['A','B','C','D','E'].forEach(k=>{ document.getElementById('d'+k).textContent=dS(k)??'–'; });
     document.getElementById('dBI').textContent=biS()??'–';
     updB(); buildBI(); buildC();
+    // Functioning label
+    const fE=dS('E');
+    if(fE!==null){
+      const fl=gFL(fE);
+      const rlf=document.getElementById('rlf');
+      rlf.style.display='inline-block';
+      rlf.textContent='Функционирование: '+fl.l;
+      rlf.style.color=fl.c;
+      rlf.style.background=fl.bg;
+    }
   }
 }
 
