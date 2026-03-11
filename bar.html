@@ -293,7 +293,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
     <div class="icard"><h4>Депрессия (БДР)</h4><ul>
       <li>Только «низ» — подавленность, пустота</li>
       <li>Нет эпизодов подъёма и цикличности</li>
-      <li>Антидепрессанты помогают и не вредят</li>
+      <li>При депрессии и БАР подходы к помощи различаются — специалист подберёт правильный</li>
       <li>Хорошо изучена, существуют эффективные методы помощи</li>
     </ul></div>
     <div class="icard"><h4>Биполярное (БАР)</h4><ul>
@@ -911,7 +911,7 @@ function buildC(){
     const pA=dS('A'),pB=dS('B');
     if(pA!==null&&pB!==null){
       if(pA/DM.A>.5&&pB/DM.B<.2)
-        h+=`<div class="ci" style="border-top:2px solid var(--dA);padding-top:18px;margin-top:8px;"><strong style="color:var(--dA);">Высокая депрессия при низкой гипомании</strong>Картина ближе к БДР (большой депрессии), чем к БАР. Важно: при БДР антидепрессанты безопасны; при БАР — нет. Нужен тщательный расспрос о прошлых подъёмах.</div>`;
+        h+=`<div class="ci" style="border-top:2px solid var(--dA);padding-top:18px;margin-top:8px;"><strong style="color:var(--dA);">Высокая депрессия при низкой гипомании</strong>Картина ближе к БДР (большой депрессии), чем к БАР. При этих состояниях подходы к помощи существенно различаются. Нужен тщательный расспрос о прошлых подъёмах — обсудите с психиатром.</div>`;
       if(pB/DM.B>.5&&pA/DM.A<.2)
         h+=`<div class="ci" style="border-top:2px solid var(--dB);padding-top:18px;margin-top:8px;"><strong style="color:var(--dB);">Выраженная мания при минимальной депрессии</strong>Редкий паттерн — возможна маниакальная фаза без депрессии. Это не исключает БАР-I. Обсудите с психиатром.</div>`;
     }
