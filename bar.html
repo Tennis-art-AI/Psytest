@@ -944,6 +944,14 @@ function buildC(){
     }
   }
 
+  // P2-4: Когнитивные нарушения при длительном течении
+  if(a>=3){
+    const levIdx3=LEV.indexOf(lev);
+    if(levIdx3>=3&&HIST.x1==='10plus'){
+      h+='<div class="ci" style="border-top:2px solid var(--dB);padding-top:18px;margin-top:8px;background:rgba(80,100,180,0.06);padding:16px 20px;border-radius:10px;"><strong style="color:var(--dB);">Когнитивные нарушения при длительном течении БАР</strong>При течении 10+ лет когнитивные нарушения (память, внимание, исполнительные функции) сохраняются даже в ремиссии у 30–50% пациентов (Bora et al., 2009). Нейровизуализация показывает прогрессирующее снижение серого вещества. Литий обладает нейропротективным эффектом и снижает риск деменции на ~50% (Kessing et al., 2010). Раннее начало лечения критично для сохранения когнитивных функций.</div>';
+    }
+  }
+
   document.getElementById('concC').innerHTML=h;
 }
 
