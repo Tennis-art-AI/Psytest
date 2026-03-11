@@ -1,25 +1,13 @@
 /* === COMPONENTS.CSS — навбар, карточки, кнопки, модалки === */
 
-/* ========= КРИЗИСНАЯ ПОЛОСКА ========= */
-.crisis-bar {
-  background: var(--crisis-bg);
-  border-bottom: 1px solid rgba(200,160,80,.15);
-  padding: 6px 32px;
-  text-align: center;
-  font-size: 12px;
-  color: var(--crisis);
-  position: relative;
-  z-index: 101;
-}
-.crisis-bar a { color: var(--crisis); font-weight: 600; }
-.crisis-bar a:hover { color: #e0c060; }
+/* Crisis bar removed — only in diagnostics */
 
 /* ========= НАВБАР ========= */
 .nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  padding: 14px 40px;
+  padding: 18px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -28,7 +16,6 @@
   border-bottom: 1px solid var(--brd);
   transition: top .3s;
 }
-.nav.has-crisis { top: 30px; }
 
 .nav-logo {
   font-family: 'Cormorant Garamond', serif;
@@ -42,14 +29,14 @@
 
 .nav-center { display: flex; gap: 24px; align-items: center; }
 .nav-link {
-  font-size: 13px; font-weight: 500;
-  color: var(--ink3);
+  font-size: 15px; font-weight: 500;
+  color: var(--ink2);
   text-decoration: none;
   transition: color .2s;
   position: relative;
   cursor: pointer;
 }
-.nav-link:hover { color: var(--ink); }
+.nav-link:hover { color: var(--accent); }
 
 .nav-cta {
   padding: 8px 20px;
