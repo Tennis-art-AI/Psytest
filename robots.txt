@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /docs/
+Disallow: /index_old_gallery.html
+Disallow: /index_backup.html
+
+Sitemap: https://mentalscreenlab.com/sitemap.xml
