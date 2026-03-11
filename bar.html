@@ -912,7 +912,7 @@ function buildBI(){
 
 function buildC(){
   const t=tot(), a=ans(), hk=Object.keys(HIST).length;
-  if(a<3&&hk===0){document.getElementById('conc').style.display='none';return;}
+  if(a<TQ&&hk===0){document.getElementById('conc').style.display='none';return;}
   document.getElementById('conc').style.display='block';
   const lev=gL(t); let h='';
   var _fl=gFLadj(),_sIdx=LEV.indexOf(lev),_fIdx=_fl?FUNC_LEV.indexOf(_fl):-1,_fLev=adjLev(_sIdx,_fIdx),_finalLev=LEV[_fLev],_raised=_fLev>_sIdx;
@@ -1062,7 +1062,7 @@ function buildC(){
 
 function upd(){
   const t=tot(), a=ans(), lev=gL(t);
-  var _uf=a>0?gFLadj():null,_usIdx=LEV.indexOf(lev),_ufIdx=_uf?FUNC_LEV.indexOf(_uf):-1,_uFin=adjLev(_usIdx,_ufIdx),_uFL=LEV[_uFin];
+  var _uf=a>=TQ?gFLadj():null,_usIdx=LEV.indexOf(lev),_ufIdx=_uf?FUNC_LEV.indexOf(_uf):-1,_uFin=adjLev(_usIdx,_ufIdx),_uFL=LEV[_uFin];
   // Прогресс
   document.getElementById('pf').style.width=(a/28*100)+'%';
   document.getElementById('pl').textContent=a+' из 28';
@@ -1070,19 +1070,19 @@ function upd(){
   const sf=document.getElementById('sf');
   if(a>=TQ) sf.classList.add('vis'); else sf.classList.remove('vis');
   document.getElementById('sfn').textContent=t;
-  document.getElementById('sfv').textContent=a>0?_uFL.l:'—';
+  document.getElementById('sfv').textContent=a>=TQ?_uFL.l:'—';
   // Результаты
   document.getElementById('rn').textContent=t;
-  document.getElementById('rl').textContent=a>0?_uFL.l:'—';
-  document.getElementById('rl').style.color=a>0?_uFL.c:'#8a8a8a';
+  document.getElementById('rl').textContent=a>=TQ?_uFL.l:'—';
+  document.getElementById('rl').style.color=a>=TQ?_uFL.c:'#8a8a8a';
   document.getElementById('rb').style.width=(t/MAX*100)+'%';
-  document.getElementById('rb').style.background=a>0?_uFL.b:'#ddd';
-  document.getElementById('rd').textContent=a>0?DESC[_uFin]:'Заполните вопросы';
+  document.getElementById('rb').style.background=a>=TQ?_uFL.b:'#ddd';
+  document.getElementById('rd').textContent=a>=TQ?DESC[_uFin]:'Заполните вопросы';
   document.querySelectorAll('#stbl tbody tr').forEach(tr=>{
     const[mn,mx]=tr.dataset.r.split(',').map(Number);
-    tr.classList.toggle('act',a>0&&t>=mn&&t<=mx);
+    tr.classList.toggle('act',a>=TQ&&t>=mn&&t<=mx);
   });
-  if(a>0){
+  if(a>=TQ){
     document.getElementById('domBlock').style.display='block';
     ['A','B','C','D','E'].forEach(k=>{ document.getElementById('d'+k).textContent=dS(k)??'–'; });
     document.getElementById('dBI').textContent=biS()??'–';
