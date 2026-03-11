@@ -675,7 +675,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 
     <table class="stbl" id="stbl"><thead><tr><th>Баллы</th><th>Уровень</th><th>Что это значит</th><th>Рекомендация</th></tr></thead><tbody>
       <tr data-r="0,18"><td>0–18</td><td style="color:#166534;font-weight:700;">НЕТ ПРИЗНАКОВ</td><td>Симптомы в пределах нормы — цикличность не выражена</td><td>Наблюдение. Психообразование.</td></tr>
-      <tr data-r="19,37"><td>19–37</td><td style="color:#6a7a2a;font-weight:700;">ЛЁГКОЕ</td><td>Симптомы ощутимы, но жизнь функционирует</td><td>Есть признаки, заслуживающие внимания. Консультация психиатра поможет разобраться.</td></tr>
+      <tr data-r="19,37"><td>19–37</td><td style="color:#6a7a2a;font-weight:700;">ЛЁГКОЕ</td><td>Симптомы ощутимы — итоговый уровень зависит и от влияния на жизнь</td><td>Есть признаки, заслуживающие внимания. Консультация психиатра поможет разобраться.</td></tr>
       <tr data-r="38,55"><td>38–55</td><td style="color:#b45309;font-weight:700;">УМЕРЕННОЕ</td><td>Цикличность мешает — территория расстройства</td><td>Признаки выражены. Рекомендуется обращение к психиатру или психотерапевту.</td></tr>
       <tr data-r="56,74"><td>56–74</td><td style="color:#c2410c;font-weight:700;">ТЯЖЁЛОЕ</td><td>Серьёзные нарушения — обе фазы значительно влияют на жизнь</td><td>Выраженные признаки. Обратитесь к психиатру. Эффективные методы помощи существуют.</td></tr>
       <tr data-r="75,93"><td>75–93</td><td style="color:#b03a3a;font-weight:700;">КРАЙНЕ ТЯЖЁЛОЕ</td><td>Парализующее расстройство — обе фазы выражены максимально</td><td>Срочно обратитесь к психиатру. Помощь возможна и эффективна даже в тяжёлых случаях.</td></tr>
@@ -747,7 +747,7 @@ const LEV=[
 ];
 const DESC=[
   'Симптомы в пределах нормы — цикличность не выражена.',
-  'Симптомы ощутимы, жизнь функционирует. Диагноз может быть не поставлен.',
+  'Симптомы ощутимы. Итоговая оценка учитывает влияние на функционирование.',
   'Цикличность мешает жить — территория расстройства.',
   'Серьёзные нарушения — обе фазы значительно влияют на жизнь.',
   'Парализующее расстройство — требуется срочная помощь.'
@@ -765,6 +765,8 @@ const FUNC_LEV=[
   {min:8,max:12,l:'ТЯЖЕЛО НАРУШЕНО',c:'#b03a3a',bg:'rgba(239,68,68,0.1)'}
 ];
 function gFL(t){return FUNC_LEV.find(l=>t>=l.min&&t<=l.max)||FUNC_LEV[0];}
+function gFLadj(){var fE=dS('E');if(fE===null)return null;var hasHigh=[22,23,24].some(function(q){return S[q]!==undefined&&S[q]>=3;});if(hasHigh||fE>=8)return FUNC_LEV[2];return gFL(fE);}
+function adjLev(sIdx,fIdx){if(fIdx===null||fIdx===undefined||fIdx<0)return sIdx;if(sIdx===0){return fIdx>=2?1:0;}if(fIdx>=2){if(sIdx<=2)return Math.min(sIdx+2,3);return sIdx;}if(fIdx>=1){if(sIdx<=1)return Math.min(sIdx+1,3);return sIdx;}return sIdx;}
 function gL(t){return LEV.find(l=>t>=l.min&&t<=l.max)||LEV[0];}
 function gBI(t){return BI_LEV.find(l=>t>=l.min&&t<=l.max)||BI_LEV[0];}
 
@@ -823,10 +825,12 @@ function buildC(){
   if(a<3&&hk===0){document.getElementById('conc').style.display='none';return;}
   document.getElementById('conc').style.display='block';
   const lev=gL(t); let h='';
+  var _fl=gFLadj(),_sIdx=LEV.indexOf(lev),_fIdx=_fl?FUNC_LEV.indexOf(_fl):-1,_fLev=adjLev(_sIdx,_fIdx),_finalLev=LEV[_fLev],_raised=_fLev>_sIdx;
 
   if(a>=3){
     h+=`<div class="ci" style="background:var(--bg);padding:16px 20px;border-radius:10px;border:1px solid var(--brd);margin-bottom:12px;"><strong>Важно:</strong> Результат скрининга — не диагноз. Только специалист может поставить диагноз на основании очного осмотра.</div>`;
-    h+=`<div class="ci"><strong>Общий уровень: ${lev.l} (${t} из ${MAX})</strong>${DESC[LEV.indexOf(lev)]}</div>`;
+    if(_raised){h+=`<div class="ci" style="border:2px solid ${_finalLev.c};padding:16px 20px;border-radius:10px;margin-bottom:12px;"><strong style="color:${_finalLev.c};font-size:1.1em;">Итоговый уровень: ${_finalLev.l}</strong><div style="margin-top:8px;font-size:13px;color:var(--ink2);">Симптомы: ${lev.l} (${t} из ${MAX}) · Функционирование: ${_fl.l}</div><div style="margin-top:10px;font-size:13px;line-height:1.6;">Уровень повышен с учётом нарушения функционирования. По рекомендациям NICE NG222 и DSM-5-TR, тяжесть определяется как симптомами, так и степенью функционального нарушения.</div></div>`;}
+    else{h+=`<div class="ci"><strong>Общий уровень: ${lev.l} (${t} из ${MAX})</strong>${DESC[_sIdx]}</div>`;}
 
     // Domain commentary
     const domData=[
@@ -853,13 +857,9 @@ function buildC(){
     }
   }
 
-  // Discrepancy warning: low symptoms + high functioning impairment
-  if(a>=3){
-    const fE2=dS('E'), levIdx=LEV.indexOf(lev);
-    if(fE2!==null && levIdx<=1 && fE2>=4){
-      const fl2=gFL(fE2);
-      h+=`<div class="ci" style="border:2px solid ${fl2.c};padding:16px;border-radius:10px;margin-top:12px;background:${fl2.bg};"><strong style="color:${fl2.c};">⚠ Расхождение: симптомы «${lev.l}», но функционирование «${fl2.l}»</strong> По рекомендациям NICE, нарушение функционирования — самостоятельное основание для вмешательства, даже при невысоком уровне симптомов. При БАР субсиндромальная депрессия вызывает нарушение функционирования, сопоставимое с полным эпизодом (Altshuler et al., 2006, N=759). Это не «норма» — обсудите с психиатром.</div>`;
-    }
+  // Discrepancy: no symptoms but functioning impaired (not raised by matrix)
+  if(a>=3&&_fl&&_sIdx===0&&_fIdx>=1&&!_raised){
+    h+=`<div class="ci" style="border:2px solid ${_fl.c};padding:16px;border-radius:10px;margin-top:12px;background:${_fl.bg};"><strong style="color:${_fl.c};">⚠ Функционирование «${_fl.l}» при минимальных симптомах</strong> По рекомендациям NICE NG222, нарушение функционирования — самостоятельное основание для обращения к специалисту, даже при невысоком уровне симптомов. При БАР субсиндромальные симптомы вызывают нарушение, сопоставимое с полным эпизодом (Altshuler et al., 2006). Обсудите с психиатром.</div>`;
   }
 
   // BAR-I/II сигнал
@@ -968,6 +968,7 @@ function buildC(){
 
 function upd(){
   const t=tot(), a=ans(), lev=gL(t);
+  var _uf=a>0?gFLadj():null,_usIdx=LEV.indexOf(lev),_ufIdx=_uf?FUNC_LEV.indexOf(_uf):-1,_uFin=adjLev(_usIdx,_ufIdx),_uFL=LEV[_uFin];
   // Прогресс
   document.getElementById('pf').style.width=(a/27*100)+'%';
   document.getElementById('pl').textContent=a+' из 27';
@@ -975,14 +976,14 @@ function upd(){
   const sf=document.getElementById('sf');
   if(a>=TQ) sf.classList.add('vis'); else sf.classList.remove('vis');
   document.getElementById('sfn').textContent=t;
-  document.getElementById('sfv').textContent=a>0?lev.l:'—';
+  document.getElementById('sfv').textContent=a>0?_uFL.l:'—';
   // Результаты
   document.getElementById('rn').textContent=t;
-  document.getElementById('rl').textContent=a>0?lev.l:'—';
-  document.getElementById('rl').style.color=a>0?lev.c:'#8a8a8a';
+  document.getElementById('rl').textContent=a>0?_uFL.l:'—';
+  document.getElementById('rl').style.color=a>0?_uFL.c:'#8a8a8a';
   document.getElementById('rb').style.width=(t/MAX*100)+'%';
-  document.getElementById('rb').style.background=a>0?lev.b:'#ddd';
-  document.getElementById('rd').textContent=a>0?DESC[LEV.indexOf(lev)]:'Заполните вопросы';
+  document.getElementById('rb').style.background=a>0?_uFL.b:'#ddd';
+  document.getElementById('rd').textContent=a>0?DESC[_uFin]:'Заполните вопросы';
   document.querySelectorAll('#stbl tbody tr').forEach(tr=>{
     const[mn,mx]=tr.dataset.r.split(',').map(Number);
     tr.classList.toggle('act',a>0&&t>=mn&&t<=mx);
@@ -992,15 +993,13 @@ function upd(){
     ['A','B','C','D','E'].forEach(k=>{ document.getElementById('d'+k).textContent=dS(k)??'–'; });
     document.getElementById('dBI').textContent=biS()??'–';
     updB(); buildBI(); buildC();
-    // Functioning label
-    const fE=dS('E');
-    if(fE!==null){
-      const fl=gFL(fE);
+    // Functioning label (uses gFLadj for >=3 check)
+    if(_uf){
       const rlf=document.getElementById('rlf');
       rlf.style.display='inline-block';
-      rlf.textContent='Функционирование: '+fl.l;
-      rlf.style.color=fl.c;
-      rlf.style.background=fl.bg;
+      rlf.textContent='Функционирование: '+_uf.l;
+      rlf.style.color=_uf.c;
+      rlf.style.background=_uf.bg;
     }
   }
 }
