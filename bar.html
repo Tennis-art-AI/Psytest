@@ -275,8 +275,8 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
   </tbody></table></details>
 
   <div class="dmap">
-    <div class="dmc dc-a"><div class="dmc-letter">А</div><div class="dmc-name">Депрессивная фаза</div><div class="dmc-desc">Подавленность, ангедония, безнадёжность, руминация</div><div class="dmc-w">5 вопросов · 0–5 · 32%</div><div class="dmc-bar"><div class="dmc-bf" id="barA" style="background:var(--dA);"></div></div></div>
-    <div class="dmc dc-b"><div class="dmc-letter">Б</div><div class="dmc-name">Мания / гипомания</div><div class="dmc-desc">Эйфория, сниженная потребность во сне, грандиозность, скачка идей</div><div class="dmc-w">5 вопросов · 0–5 · 32%</div><div class="dmc-bar"><div class="dmc-bf" id="barB" style="background:var(--dB);"></div></div></div>
+    <div class="dmc dc-a"><div class="dmc-letter">А</div><div class="dmc-name">Депрессивная фаза</div><div class="dmc-desc">Подавленность, ангедония, безнадёжность, руминация</div><div class="dmc-w">6 вопросов · 0–5 · 32%</div><div class="dmc-bar"><div class="dmc-bf" id="barA" style="background:var(--dA);"></div></div></div>
+    <div class="dmc dc-b"><div class="dmc-letter">Б</div><div class="dmc-name">Мания / гипомания</div><div class="dmc-desc">Эйфория, сниженная потребность во сне, грандиозность, скачка идей</div><div class="dmc-w">7 вопросов · 0–5 · 38%</div><div class="dmc-bar"><div class="dmc-bf" id="barB" style="background:var(--dB);"></div></div></div>
     <div class="dmc dc-c"><div class="dmc-letter">В</div><div class="dmc-name">Цикличность</div><div class="dmc-desc">Смена фаз, смешанные состояния, колебания энергии и сна</div><div class="dmc-w">4 вопроса · 0–3 · 15%</div><div class="dmc-bar"><div class="dmc-bf" id="barC" style="background:var(--dC);"></div></div></div>
     <div class="dmc dc-d"><div class="dmc-letter">Г</div><div class="dmc-name">Поведенческий</div><div class="dmc-desc">Финансы, риск в подъёме, изоляция в спаде, нарушение режима</div><div class="dmc-w">4 вопроса · 0–4 · 21%</div><div class="dmc-bar"><div class="dmc-bf" id="barD" style="background:var(--dD);"></div></div></div>
     <div class="dmc dc-e"><div class="dmc-letter">Д</div><div class="dmc-name">Функционирование</div><div class="dmc-desc">Работа, отношения, быт — по DSM-5</div><div class="dmc-w">3 вопроса · вне балла</div><div class="dmc-bar"><div class="dmc-bf" id="barE" style="background:var(--dE);"></div></div></div>
@@ -545,7 +545,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
     <label class="ao"><input type="radio" name="q20" value="4"><span class="al">5</span><span class="ach"></span><span class="at">Мир снаружи перестаёт существовать — не могу ни с кем контактировать</span><span class="as">4</span></label></div></div>
 
   <!-- Q21: порядок 1,3,0,4,2 -->
-  <div class="qc"><div class="qh" style="background:var(--dD);"><div class="qn">21</div><div class="qm"><div class="qtg">Поведенческий · IPSRT · нарушение ритма</div><div class="qtl">Нарушение режима жизни</div><div class="qd">Хаотичный сон, питание, активность между фазами</div></div></div>
+  <div class="qc"><div class="qh" style="background:var(--dD);"><div class="qn">21</div><div class="qm"><div class="qtg">Поведенческий · DSM-5 · нарушение социального ритма</div><div class="qtl">Нарушение режима жизни</div><div class="qd">Хаотичный сон, питание, активность между фазами</div></div></div>
     <div class="qp" id="qp-21">Насколько цикличность нарушает ваш режим жизни?</div>
     <div class="ans" data-q="21">
     <label class="ao"><input type="radio" name="q21" value="1"><span class="al">1</span><span class="ach"></span><span class="at">Небольшие сбои — в подъёме ложусь позже, в спаде раньше</span><span class="as">1</span></label>
@@ -854,7 +854,7 @@ function buildBI(){
   // усиление от истории
   let extra='';
   if(HIST.x2==='week') extra+=' Длительность подъёма ≥7 дней дополнительно указывает на БАР-I.';
-  if(HIST.d2==='induced') extra+=' Антидепрессант-индуцированная мания — прямой критерий БАР-I по DSM-5.';
+  if(HIST.d2==='induced') extra+=' Антидепрессант-индуцированная мания — признак, который специалист может расценить как критерий БАР-I по DSM-5.';
   if(extra) document.getElementById('biDesc').textContent=lev.desc+extra;
 }
 
