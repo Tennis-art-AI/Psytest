@@ -956,7 +956,7 @@ function buildC(){
 
   if(a>=3){
     h+=`<div class="ci" style="background:var(--bg);padding:16px 20px;border-radius:10px;border:1px solid var(--brd);margin-bottom:12px;"><strong>Важно:</strong> Результат скрининга — не диагноз. Только специалист может поставить диагноз на основании очного осмотра.</div>`;
-    if(_raised){h+=`<div class="ci" style="border:2px solid ${_finalLev.c};padding:16px 20px;border-radius:10px;margin-bottom:12px;"><strong style="color:${_finalLev.c};font-size:1.1em;">Итоговый уровень: ${_finalLev.l}</strong><div style="margin-top:8px;font-size:13px;color:var(--ink2);">Симптомы: ${lev.l} (${t} из ${MAX}) · Функционирование: ${_fl.l}</div><div style="margin-top:10px;font-size:13px;line-height:1.6;">Уровень повышен с учётом нарушения функционирования. По рекомендациям NICE NG222 и DSM-5-TR, тяжесть определяется как симптомами, так и степенью функционального нарушения.</div></div>`;}
+    if(_raised){h+=`<div class="ci" style="border:2px solid ${_finalLev.c};padding:16px 20px;border-radius:10px;margin-bottom:12px;"><strong style="color:${_finalLev.c};font-size:1.1em;">Итоговый уровень: ${_finalLev.l}</strong><div style="margin-top:8px;font-size:13px;color:var(--ink2);">Симптомы: ${lev.l} (${t} из ${MAX}) · Функционирование: ${_fl.l}</div><div style="margin-top:10px;font-size:13px;line-height:1.6;">Уровень повышен с учётом нарушения функционирования. По рекомендациям NICE CG185 и DSM-5-TR, тяжесть определяется как симптомами, так и степенью функционального нарушения.</div></div>`;}
     else{h+=`<div class="ci"><strong>Общий уровень: ${lev.l} (${t} из ${MAX})</strong>${DESC[_sIdx]}</div>`;}
 
     // Domain commentary
@@ -986,7 +986,7 @@ function buildC(){
 
   // Discrepancy: no symptoms but functioning impaired (not raised by matrix)
   if(a>=3&&_fl&&_sIdx===0&&_fIdx>=1&&!_raised){
-    h+=`<div class="ci" style="border:2px solid ${_fl.c};padding:16px;border-radius:10px;margin-top:12px;background:${_fl.bg};"><strong style="color:${_fl.c};">⚠ Функционирование «${_fl.l}» при минимальных симптомах</strong> По рекомендациям NICE NG222, нарушение функционирования — самостоятельное основание для обращения к специалисту, даже при невысоком уровне симптомов. При БАР субсиндромальные симптомы вызывают нарушение, сопоставимое с полным эпизодом (Altshuler et al., 2006). Обсудите с психиатром.</div>`;
+    h+=`<div class="ci" style="border:2px solid ${_fl.c};padding:16px;border-radius:10px;margin-top:12px;background:${_fl.bg};"><strong style="color:${_fl.c};">⚠ Функционирование «${_fl.l}» при минимальных симптомах</strong> По рекомендациям NICE CG185, нарушение функционирования — самостоятельное основание для обращения к специалисту, даже при невысоком уровне симптомов. При БАР субсиндромальные симптомы вызывают нарушение, сопоставимое с полным эпизодом (Altshuler et al., 2006). Обсудите с психиатром.</div>`;
   }
 
   // BAR-I/II сигнал
@@ -1044,10 +1044,7 @@ function buildC(){
       if(rD/DM.D>.6&&rB2/DM.B<.3)
         h+='<div class="ci" style="border-top:2px solid var(--dD);padding-top:18px;margin-top:8px;"><strong style="color:var(--dD);">Выраженные поведенческие нарушения без мании</strong>Импульсивность и рискованное поведение при низких маниакальных симптомах. Рассмотрите пограничное расстройство личности (ПРЛ) — при ПРЛ импульсивность не связана с эпизодами подъёма, а с межличностными триггерами.</div>';
     }
-    if(rA2!==null&&rB2!==null&&rC!==null){
-      if(rA2/DM.A>.4&&rB2/DM.B>.4&&rC/DM.C<.2)
-        h+='<div class="ci" style="border-top:2px solid var(--ink3);padding-top:18px;margin-top:8px;"><strong>Оба полюса выражены, но цикличности нет</strong>Возможна коморбидность (депрессия + импульсивное расстройство) или смешанное состояние без чёткого циклического паттерна. Нужна консультация психиатра для уточнения.</div>';
-    }
+
   }
 
 
