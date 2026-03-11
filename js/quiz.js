@@ -22,14 +22,13 @@ const K6_DATA = {
     { max: 12, label: 'Умеренный дистресс', color: '#c0a040', desc: 'Есть признаки психологического напряжения. Рекомендуем пройти углублённый скрининг, чтобы понять, что именно вас беспокоит.' },
     { max: 24, label: 'Выраженный дистресс', color: '#c05050', desc: 'Уровень дистресса высокий. Углублённый скрининг поможет разобраться, а результат — подготовиться к разговору со специалистом.' }
   ],
-  screeningMap: {
-    nervous: { name: 'Тревога (ГТР)', slug: 'anxiety', ready: true },
-    hopeless: { name: 'Депрессия (БДР)', slug: 'depression', ready: true },
-    restless: { name: 'СДВГ', slug: 'adhd', ready: false },
-    depressed: { name: 'Депрессия (БДР)', slug: 'depression', ready: true },
-    effort: { name: 'Депрессия (БДР)', slug: 'depression', ready: true },
-    worthless: { name: 'Депрессия (БДР)', slug: 'depression', ready: true }
-  }
+  screenings: [
+    { slug: 'depression', name: 'Депрессия (БДР)', items: ['hopeless','depressed','effort','worthless'], ready: true, why: 'Безнадёжность, подавленность, потеря энергии и самооценки — ключевые признаки депрессии.' },
+    { slug: 'anxiety', name: 'Тревога (ГТР)', items: ['nervous','restless'], ready: true, why: 'Нервозность и беспокойство, которые трудно контролировать — признаки тревожного расстройства.' },
+    { slug: 'bipolar', name: 'Биполярное расстройство', items: ['hopeless','depressed','restless'], ready: true, why: 'Сочетание подавленности и беспокойства может указывать на чередование фаз.' },
+    { slug: 'adhd', name: 'СДВГ', items: ['restless','effort'], ready: false, why: 'Беспокойство и ощущение, что всё даётся с трудом — могут быть связаны с дефицитом внимания.' },
+    { slug: 'ocd', name: 'ОКР', items: ['nervous','effort'], ready: true, why: 'Постоянная нервозность и ощущение усилия могут быть связаны с навязчивыми состояниями.' }
+  ]
 };
 
 let quizState = { step: -1, answers: {} };
@@ -174,21 +173,50 @@ function initQuiz() {
     });
     html += '</div>';
 
-    // Screening recommendation
-    if (total >= 5 && maxItem) {
-      const scr = K6_DATA.screeningMap[maxItem];
-      html += '<div class="quiz-rec">';
-      html += '<h3>Рекомендация</h3>';
-      html += '<p>На основе ваших ответов рекомендуем пройти углублённый скрининг:</p>';
-      if (scr.ready) {
-        html += '<a href="/screening/' + scr.slug + '/" class="btn btn-primary btn-sm">Скрининг: ' + scr.name + ' &rarr;</a>';
-      } else {
-        html += '<span class="badge badge-soon">Скрининг &laquo;' + scr.name + '&raquo; в разработке</span>';
-      }
-      // Also suggest anxiety if nervous/restless are high
-      if ((ans.nervous >= 3 || ans.restless >= 3) && scr.slug !== 'anxiety') {
-        html += '<a href="/screening/anxiety/" class="btn btn-secondary btn-sm" style="margin-left:8px">Также: Тревога (ГТР) &rarr;</a>';
-      }
+    // Screening recommendations — score each screening by relevance
+    const recs = [];
+    K6_DATA.screenings.forEach(scr => {
+      let score = 0;
+      scr.items.forEach(item => { score += (ans[item] || 0); });
+      const avg = score / scr.items.length;
+      if (avg >= 1.5) recs.push({ ...scr, score: avg });
+    });
+    recs.sort((a, b) => b.score - a.score);
+
+    if (recs.length > 0) {
+      html += '<div style="text-align:left;margin-bottom:24px">';
+      html += '<h3 style="margin-bottom:16px">Какие скрининги пройти</h3>';
+      
+      recs.slice(0, 3).forEach((scr, i) => {
+        const isPrimary = i === 0;
+        const borderColor = isPrimary ? 'var(--accent)' : 'var(--brd)';
+        html += '<div class="quiz-rec" style="margin-bottom:12px;border-color:' + borderColor + '">';
+        html += '<div style="display:flex;justify-content:space-between;align-items:start;gap:16px;flex-wrap:wrap">';
+        html += '<div style="flex:1;min-width:200px">';
+        html += '<h3 style="font-size:1rem;margin-bottom:4px">' + (isPrimary ? '&#9733; ' : '') + scr.name + '</h3>';
+        html += '<p style="font-size:13px;color:var(--ink2);margin-bottom:8px">' + scr.why + '</p>';
+        html += '</div>';
+        if (scr.ready) {
+          html += '<a href="/screening/' + scr.slug + '/" class="btn ' + (isPrimary ? 'btn-primary' : 'btn-secondary') + ' btn-sm" style="white-space:nowrap">Пройти скрининг &rarr;</a>';
+        } else {
+          html += '<span class="badge badge-soon" style="white-space:nowrap">В разработке</span>';
+        }
+        html += '</div></div>';
+      });
+      html += '</div>';
+    } else if (total >= 3) {
+      html += '<div class="quiz-rec" style="margin-bottom:24px">';
+      html += '<h3>Что дальше?</h3>';
+      html += '<p style="font-size:14px;color:var(--ink2)">Уровень дистресса невысокий, но если что-то беспокоит — вы можете пройти скрининг по конкретному направлению:</p>';
+      html += '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">';
+      html += '<a href="/screening/depression/" class="btn btn-secondary btn-sm">Депрессия</a>';
+      html += '<a href="/screening/anxiety/" class="btn btn-secondary btn-sm">Тревога</a>';
+      html += '<a href="/screening/bipolar/" class="btn btn-secondary btn-sm">БАР</a>';
+      html += '<a href="/screening/ocd/" class="btn btn-secondary btn-sm">ОКР</a>';
+      html += '</div></div>';
+    } else {
+      html += '<div class="quiz-rec" style="margin-bottom:24px">';
+      html += '<p style="font-size:14px;color:var(--ink2)">Скрининг не выявил выраженного дистресса. Если что-то всё же беспокоит — <a href="/#screenings">выберите скрининг</a> по конкретному направлению.</p>';
       html += '</div>';
     }
 
