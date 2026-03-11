@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тест на психическое здоровье онлайн — бесплатный экспресс-скрининг | MentalScreenLab</title>
+<meta name="description" content="Бесплатный экспресс-тест на ментальное здоровье: 7 вопросов за 2 минуты. Покажет, на что обратить внимание — депрессия, тревога, СДВГ, ОКР или другое.">
+<meta name="keywords" content="тест на психическое здоровье, проверить ментальное здоровье, есть ли у меня депрессия, нужен ли мне психиатр">
+<link rel="canonical" href="https://mentalscreenlab.com/start/">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/components.css">
+<link rel="stylesheet" href="/css/quiz.css">
+</head>
+<body>
+
+<!-- Кризисная полоска -->
+<div class="crisis-bar">☎ Телефон доверия: <a href="tel:88002000122">8-800-2000-122</a> (бесплатно, круглосуточно)</div>
+
+<!-- Навбар мини -->
+<nav class="nav has-crisis" style="justify-content:center;gap:24px">
+  <a href="/" class="nav-logo">Mental<span>ScreenLab</span></a>
+</nav>
+
+<!-- Квиз встроенный (не overlay, а inline) -->
+<div class="quiz-overlay active" style="position:relative;min-height:100vh">
+  <div class="quiz-progress"><div class="quiz-progress-fill"></div></div>
+  <div class="quiz-header">
+    <span class="quiz-step"></span>
+    <a href="/" class="quiz-close" title="На главную">✕</a>
+  </div>
+  <div class="quiz-body"></div>
+</div>
+
+<!-- SEO-контент (невидимый для пользователя, видимый для поисковиков) -->
+<section class="section" style="padding:40px 32px">
+  <div class="container-narrow">
+    <h1 style="font-size:1.4rem;margin-bottom:16px">Бесплатный тест на психическое здоровье</h1>
+    <p class="text-muted text-small">Экспресс-тест из 7 вопросов поможет понять, есть ли у вас признаки депрессии, тревожности, СДВГ, ОКР, биполярного расстройства или других состояний. Тест не является диагностикой — это навигатор, который покажет, на что обратить внимание и какой углублённый скрининг пройти.</p>
+    <p class="text-muted text-small">После прохождения вы увидите персональную карту из 7 кластеров ментального здоровья и получите рекомендацию. Все данные остаются в вашем браузере.</p>
+    <p class="text-muted text-small">Если результат вызывает беспокойство — обратитесь к психиатру, психотерапевту или клиническому психологу.</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-crisis">☎ <a href="tel:88002000122">8-800-2000-122</a> (бесплатно, круглосуточно)</div>
+  <div class="footer-disclaimer">MentalScreenLab — информационный скрининговый сервис. Не является медицинской услугой.</div>
+  <div>© 2026 MentalScreenLab</div>
+</footer>
+
+<script src="/js/quiz.js"></script>
+<script>
+// Автозапуск квиза на этой странице
+document.addEventListener('DOMContentLoaded', () => {
+  const body = document.querySelector('.quiz-body');
+  if (body && typeof initQuiz === 'function') {
+    // quiz.js уже инициализирован, нужно триггернуть старт
+    const startBtn = document.createElement('button');
+    startBtn.setAttribute('data-start-quiz', '');
+    startBtn.style.display = 'none';
+    document.body.appendChild(startBtn);
+    startBtn.click();
+  }
+});
+</script>
+</body>
+</html>
