@@ -1023,6 +1023,16 @@ function buildC(){
     }
   }
 
+  // Cyclothymia cross-link (FIX-13b + FIX-18)
+  if(a>=TQ){
+    var _shortUp=(HIST.x2==='hours'||HIST.x2==='2-3days');
+    var _lowB=dS('B')!==null&&dS('B')/DM.B<.25;
+    var _mildCycle=(S[15]!==undefined&&S[15]<=2);
+    if((_shortUp&&_lowB)||(_shortUp&&_mildCycle)||(_lowB&&_mildCycle)){
+      h+='<div class="ci" style="border:2px solid var(--dC);padding:20px 24px;border-radius:10px;margin-top:12px;background:rgba(90,122,58,0.06);"><strong style="color:var(--dC);">Рассмотрите диагностику циклотимии</strong><div style="margin-top:10px;font-size:13px;line-height:1.6;">Ваши подъёмы короче порога гипомании по DSM-5 (≥4 дней), а цикличность хаотичная. Этот паттерн может лучше описываться циклотимией — хроническим расстройством с субпороговыми колебаниями. Разграничение БАР-II и циклотимии требует очного осмотра специалистом. <a href="cyclothymia.html" style="color:var(--pri);font-weight:600;">Пройти диагностику циклотимии →</a></div></div>';
+    }
+  }
+
   // Domain-ratio флаги
   if(a>=5){
     const pA=dS('A'),pB=dS('B');
