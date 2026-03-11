@@ -856,7 +856,7 @@ const FUNC_LEV=[
 ];
 function gFL(t){return FUNC_LEV.find(l=>t>=l.min&&t<=l.max)||FUNC_LEV[0];}
 function gFLadj(){var fE=dS('E');if(fE===null)return null;var hasHigh=[23,24,25].some(function(q){return S[q]!==undefined&&S[q]>=3;});if(hasHigh||fE>=8)return FUNC_LEV[2];return gFL(fE);}
-function adjLev(sIdx,fIdx){if(fIdx===null||fIdx===undefined||fIdx<0)return sIdx;if(sIdx===0){return fIdx>=2?1:0;}if(fIdx>=2){if(sIdx<=2)return Math.min(sIdx+2,3);return sIdx;}if(fIdx>=1){if(sIdx<=1)return Math.min(sIdx+1,3);return sIdx;}return sIdx;}
+function adjLev(sIdx,fIdx){if(fIdx===null||fIdx===undefined||fIdx<0)return sIdx;if(sIdx===0){return fIdx>=2?1:0;}if(fIdx>=2){if(sIdx<=2)return Math.min(sIdx+1,3);return sIdx;}if(fIdx>=1){if(sIdx<=1)return Math.min(sIdx+1,3);return sIdx;}return sIdx;}
 function gL(t){return LEV.find(l=>t>=l.min&&t<=l.max)||LEV[0];}
 function gBI(t){return BI_LEV.find(l=>t>=l.min&&t<=l.max)||BI_LEV[0];}
 
@@ -867,7 +867,7 @@ function tot(){
 }
 function ans(){
   let c=0;
-  for(let i=1;i<=27;i++) if(S[i]!==undefined) c++;
+  for(let i=1;i<=28;i++) if(S[i]!==undefined) c++;
   return c;
 }
 function dS(k){
