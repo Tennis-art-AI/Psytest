@@ -1,0 +1,173 @@
+/* === BASE.CSS — палитра, типографика, reset === */
+/* MentalScreenLab · v2.0 */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Фон */
+  --bg: #0e0e14;
+  --bg2: #14141e;
+  --bg3: #1a1a28;
+
+  /* Текст */
+  --ink: #e8e8f0;
+  --ink2: #a8a8be;
+  --ink3: #5c5c70;
+
+  /* Акцент */
+  --accent: #8a8ac0;
+  --accent-dk: #6a6aa0;
+  --accent-glow: rgba(138, 138, 192, .3);
+
+  /* Бордеры */
+  --brd: rgba(140, 140, 200, .1);
+  --brd2: rgba(255, 255, 255, .04);
+
+  /* Стекло */
+  --glass: rgba(255, 255, 255, .03);
+  --glass-border: rgba(140, 140, 200, .12);
+
+  /* Кризис */
+  --crisis: #c8a050;
+  --crisis-bg: rgba(200, 160, 80, .08);
+
+  /* Цвета расстройств */
+  --c-depr: #80a8d0;
+  --c-bar: #c8b870;
+  --c-adhd: #c0a878;
+  --c-ocd: #b0a0d8;
+  --c-cyclo: #90a8c0;
+  --c-anx: #6aaa8a;
+  --c-bpd: #c07a90;
+  --c-narc: #c0a060;
+  --c-mixed: #8aaa80;
+  --c-insomnia: #7080b0;
+  --c-panic: #c06070;
+  --c-avoid: #7a9a7a;
+  --c-social: #8090c0;
+  --c-ptsd: #a07080;
+  --c-phobias: #90a070;
+
+  /* Размеры */
+  --radius: 14px;
+  --radius-sm: 8px;
+  --radius-pill: 60px;
+  --max-w: 1140px;
+  --max-w-narrow: 720px;
+}
+
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Типографика */
+h1, h2, h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  letter-spacing: -.03em;
+  line-height: 1.15;
+}
+h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); }
+h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); }
+
+h1 em, h2 em { font-style: italic; color: var(--accent); }
+
+a { color: var(--accent); text-decoration: none; transition: color .2s; }
+a:hover { color: var(--ink); }
+
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; }
+.container-narrow { max-width: var(--max-w-narrow); margin: 0 auto; padding: 0 32px; }
+
+/* Утилиты */
+.text-center { text-align: center; }
+.text-muted { color: var(--ink2); }
+.text-small { font-size: 14px; }
+.text-xs { font-size: 12px; color: var(--ink3); }
+.text-accent { color: var(--accent); }
+.text-crisis { color: var(--crisis); }
+
+.mt-1 { margin-top: 8px; }
+.mt-2 { margin-top: 16px; }
+.mt-3 { margin-top: 32px; }
+.mt-4 { margin-top: 48px; }
+.mb-2 { margin-bottom: 16px; }
+.mb-3 { margin-bottom: 32px; }
+.mb-4 { margin-bottom: 48px; }
+
+.section { padding: 80px 0; }
+.section-sm { padding: 48px 0; }
+
+/* Секция с заголовком */
+.section-head {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.section-head h2 { margin-bottom: 12px; }
+.section-head p { color: var(--ink2); font-size: 15px; max-width: 600px; margin: 0 auto; }
+
+/* Лейблы */
+.badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+.badge-accent { background: rgba(138,138,192,.15); color: var(--accent); }
+.badge-ready { background: rgba(106,170,138,.15); color: #6aaa8a; }
+.badge-soon { background: rgba(255,255,255,.05); color: var(--ink3); }
+.badge-crisis { background: var(--crisis-bg); color: var(--crisis); }
+
+/* Анимации */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: .3; }
+  50% { opacity: 1; }
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Скрытие для SR */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+  .container, .container-narrow { padding: 0 20px; }
+  .section { padding: 56px 0; }
+  body { font-size: 16px; }
+}
