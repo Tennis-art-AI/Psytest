@@ -133,7 +133,6 @@ function initQuiz() {
       if (total <= l.max) { level = l; break; }
     }
 
-    // Score screenings by relevance
     const recs = [];
     K6_DATA.screenings.forEach(scr => {
       let score = 0;
@@ -143,63 +142,53 @@ function initQuiz() {
     });
     recs.sort((a, b) => b.score - a.score);
 
-    let html = '<div class="quiz-result quiz-slide" style="max-width:520px;width:100%">';
+    let h = '<div class="quiz-result quiz-slide" style="width:100%;max-width:460px">';
 
-    // === SCORE — compact ===
-    html += '<div class="card" style="text-align:center;margin-bottom:24px;padding:32px;border-color:' + level.color + '40">';
-    html += '<div style="font-size:14px;color:var(--ink3);margin-bottom:8px">Ваш результат K-6</div>';
-    html += '<div style="font-size:56px;font-weight:700;color:' + level.color + ';line-height:1">' + total + '<span style="font-size:20px;color:var(--ink3);font-weight:400"> / 24</span></div>';
-    html += '<div style="margin:12px auto;width:80%;height:6px;background:var(--brd);border-radius:3px;overflow:hidden">';
-    html += '<div style="width:' + (total / 24 * 100) + '%;height:100%;background:' + level.color + ';border-radius:3px"></div></div>';
-    html += '<div style="font-size:18px;font-weight:600;color:' + level.color + '">' + level.label + '</div>';
-    html += '</div>';
+    // Score — compact inline
+    h += '<div style="text-align:center;margin-bottom:28px">';
+    h += '<div style="display:inline-flex;align-items:baseline;gap:6px;margin-bottom:8px">';
+    h += '<span style="font-size:42px;font-weight:700;color:'+level.color+'">'+total+'</span>';
+    h += '<span style="font-size:16px;color:var(--ink3)">/24</span></div>';
+    h += '<div style="width:60%;height:4px;background:var(--brd);border-radius:2px;margin:0 auto 10px;overflow:hidden">';
+    h += '<div style="width:'+(total/24*100)+'%;height:100%;background:'+level.color+';border-radius:2px"></div></div>';
+    h += '<div style="font-size:15px;font-weight:600;color:'+level.color+'">'+level.label+'</div>';
+    h += '</div>';
 
-    // === RECOMMENDATIONS — the main event ===
+    // Recommendations
     if (recs.length > 0) {
-      html += '<div style="margin-bottom:24px">';
-      html += '<div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;text-align:center">Рекомендуем пройти</div>';
-      
-      recs.slice(0, 3).forEach((scr, i) => {
-        const isPrimary = i === 0;
-        html += '<div class="card" style="margin-bottom:12px;' + (isPrimary ? 'border-color:var(--accent);' : '') + 'padding:20px 24px">';
-        html += '<div style="font-size:' + (isPrimary ? '18px' : '16px') + ';font-weight:600;margin-bottom:6px">';
-        if (isPrimary) html += '<span style="color:var(--accent)">&#9733; </span>';
-        html += scr.name + '</div>';
-        html += '<div style="font-size:13px;color:var(--ink2);margin-bottom:14px;line-height:1.6">' + scr.why + '</div>';
-        if (scr.ready) {
-          html += '<a href="/screening/' + scr.slug + '/" class="btn ' + (isPrimary ? 'btn-primary' : 'btn-secondary') + ' btn-block btn-sm">Пройти скрининг &rarr;</a>';
-        } else {
-          html += '<div style="text-align:center"><span class="badge badge-soon">В разработке</span></div>';
-        }
-        html += '</div>';
+      h += '<div style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:12px">Рекомендуемые скрининги</div>';
+      recs.slice(0,3).forEach((scr,i) => {
+        const first = i===0;
+        h += '<a href="'+(scr.ready?'/screening/'+scr.slug+'/':'#')+'" style="display:block;padding:14px 16px;border-radius:var(--radius);border:1px solid '+(first?'var(--accent)':'var(--brd)')+';margin-bottom:8px;text-decoration:none;color:var(--ink);transition:border-color .2s'+(scr.ready?'':';pointer-events:none;opacity:.5')+'">';
+        h += '<div style="display:flex;justify-content:space-between;align-items:center">';
+        h += '<div>';
+        h += '<div style="font-size:15px;font-weight:600">'+(first?'<span style=color:var(--accent)>&#9733;</span> ':'')+scr.name+'</div>';
+        h += '<div style="font-size:12px;color:var(--ink3);margin-top:2px">'+scr.why.split('.')[0]+'</div>';
+        h += '</div>';
+        h += '<span style="font-size:12px;color:var(--accent);white-space:nowrap">'+(scr.ready?'&rarr;':'&#9203;')+'</span>';
+        h += '</div></a>';
       });
-      html += '</div>';
     } else if (total >= 3) {
-      html += '<div class="card" style="margin-bottom:24px;padding:24px;text-align:center">';
-      html += '<div style="font-size:15px;margin-bottom:16px;color:var(--ink2)">Уровень дистресса невысокий. Если что-то беспокоит — выберите скрининг:</div>';
-      html += '<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center">';
-      html += '<a href="/screening/depression/" class="btn btn-secondary btn-sm">Депрессия</a>';
-      html += '<a href="/screening/anxiety/" class="btn btn-secondary btn-sm">Тревога</a>';
-      html += '<a href="/screening/bipolar/" class="btn btn-secondary btn-sm">БАР</a>';
-      html += '<a href="/screening/ocd/" class="btn btn-secondary btn-sm">ОКР</a>';
-      html += '</div></div>';
+      h += '<div style="font-size:14px;color:var(--ink2);text-align:center;margin-bottom:16px">Дистресс невысокий. Если что-то беспокоит:</div>';
+      h += '<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center">';
+      h += '<a href="/screening/depression/" class="btn btn-secondary btn-sm">Депрессия</a>';
+      h += '<a href="/screening/anxiety/" class="btn btn-secondary btn-sm">Тревога</a>';
+      h += '<a href="/screening/bipolar/" class="btn btn-secondary btn-sm">БАР</a>';
+      h += '<a href="/screening/ocd/" class="btn btn-secondary btn-sm">ОКР</a>';
+      h += '</div>';
     } else {
-      html += '<div class="card" style="margin-bottom:24px;padding:24px;text-align:center">';
-      html += '<div style="font-size:15px;color:var(--ink2)">Скрининг не выявил выраженного дистресса. Если что-то всё же беспокоит — <a href="/#screenings">выберите скрининг</a> по конкретному направлению.</div>';
-      html += '</div>';
+      h += '<div style="font-size:14px;color:var(--ink2);text-align:center">Выраженного дистресса не обнаружено.</div>';
     }
 
-    // === BOTTOM BUTTONS ===
-    html += '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">';
-    html += '<a href="/" class="btn btn-secondary btn-sm">На главную</a>';
-    html += '<button class="btn btn-secondary btn-sm quiz-close-result">Закрыть</button>';
-    html += '</div>';
+    // Buttons
+    h += '<div style="display:flex;gap:10px;justify-content:center;margin-top:24px">';
+    h += '<a href="/" class="btn btn-secondary btn-sm">На главную</a>';
+    h += '<a href="/#screenings" class="btn btn-primary btn-sm">Все скрининги</a>';
+    h += '</div>';
 
-    // === DISCLAIMER ===
-    html += '<p style="font-size:11px;color:var(--ink3);margin-top:20px;text-align:center;line-height:1.6">K-6 (Kessler et al., 2002) — скрининговый инструмент, не диагностика.</p>';
-
-    html += '</div>';
-    return html;
+    h += '<div style="font-size:10px;color:var(--ink3);text-align:center;margin-top:16px">K-6 (Kessler, 2002) — скрининг, не диагностика</div>';
+    h += '</div>';
+    return h;
   }
 }
 
