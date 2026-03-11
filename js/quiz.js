@@ -1,46 +1,35 @@
-/* === QUIZ.JS — бесплатный тест 7 вопросов === */
+/* === QUIZ.JS — K-6 Kessler Psychological Distress Scale === */
+/* Kessler et al. (2002), Harvard/WHO. Free to use, no license required. */
 
-const QUIZ_DATA = {
+const K6_DATA = {
   questions: [
-    { cluster: 'mood_down', text: 'В последнее время мне трудно чувствовать радость или интерес к тому, что раньше нравилось' },
-    { cluster: 'anxiety', text: 'Я часто беспокоюсь о вещах, которые ещё не произошли, и мне трудно это остановить' },
-    { cluster: 'mood_up', text: 'Бывают периоды необычного подъёма энергии — сплю меньше, идей слишком много, чувствую, что могу всё' },
-    { cluster: 'obsessions', text: 'В голову приходят повторяющиеся мысли или образы, от которых трудно избавиться' },
-    { cluster: 'attention', text: 'Мне трудно довести дело до конца — переключаюсь между задачами, теряю фокус, забываю' },
-    { cluster: 'sleep', text: 'У меня проблемы со сном: трудно заснуть, просыпаюсь среди ночи, или сон не приносит отдыха' },
-    { cluster: 'relations', text: 'Мои отношения с людьми нестабильны: резкие сближения и разрывы, страх отвержения или избегание' }
+    { id: 'nervous', text: 'Как часто за последний месяц вы чувствовали нервозность, от которой ничего не помогало?' },
+    { id: 'hopeless', text: 'Как часто вы чувствовали безнадёжность — что ничего не улучшится?' },
+    { id: 'restless', text: 'Как часто вы были беспокойными или не могли усидеть на месте?' },
+    { id: 'depressed', text: 'Как часто вы чувствовали такую подавленность, что ничто не могло вас приободрить?' },
+    { id: 'effort', text: 'Как часто вам казалось, что всё даётся с огромным трудом — каждое действие требует усилия?' },
+    { id: 'worthless', text: 'Как часто вы чувствовали себя бесполезным, никчёмным?' }
   ],
   answers: [
-    { text: 'Никогда или очень редко', value: 0 },
-    { text: 'Иногда', value: 1 },
-    { text: 'Часто', value: 2 },
-    { text: 'Почти всегда', value: 3 }
+    { text: 'Ни разу', value: 0 },
+    { text: 'Изредка', value: 1 },
+    { text: 'Иногда', value: 2 },
+    { text: 'Часто', value: 3 },
+    { text: 'Постоянно', value: 4 }
   ],
-  clusters: {
-    mood_down:  { name: 'Настроение ↓', screenings: ['depression', 'mixed'] },
-    anxiety:    { name: 'Тревога', screenings: ['anxiety', 'panic'] },
-    mood_up:    { name: 'Настроение ↑', screenings: ['bipolar', 'cyclothymia'] },
-    obsessions: { name: 'Навязчивости', screenings: ['ocd'] },
-    attention:  { name: 'Внимание', screenings: ['adhd'] },
-    sleep:      { name: 'Сон', screenings: ['insomnia'] },
-    relations:  { name: 'Отношения', screenings: ['bpd', 'avoidant', 'narcissistic'] }
-  },
-  screeningNames: {
-    depression: 'Депрессия (БДР)',
-    anxiety: 'Тревога (ГТР)',
-    bipolar: 'Биполярное расстройство',
-    cyclothymia: 'Циклотимия',
-    ocd: 'ОКР',
-    adhd: 'СДВГ',
-    panic: 'Паническое расстройство',
-    bpd: 'ПРЛ',
-    narcissistic: 'Нарциссическое РЛ',
-    insomnia: 'Бессонница',
-    avoidant: 'Избегающее РЛ',
-    mixed: 'Смешанное тревожно-депрессивное',
-    'social-anxiety': 'Социальная тревога'
-  },
-  readyScreenings: ['depression', 'anxiety', 'bipolar', 'cyclothymia', 'ocd']
+  levels: [
+    { max: 4, label: 'Низкий уровень дистресса', color: '#4a8a60', desc: 'Ваши ответы не указывают на выраженный психологический дистресс. Если что-то всё же беспокоит — консультация специалиста не помешает.' },
+    { max: 12, label: 'Умеренный дистресс', color: '#c0a040', desc: 'Есть признаки психологического напряжения. Рекомендуем пройти углублённый скрининг, чтобы понять, что именно вас беспокоит.' },
+    { max: 24, label: 'Выраженный дистресс', color: '#c05050', desc: 'Уровень дистресса высокий. Углублённый скрининг поможет разобраться, а результат — подготовиться к разговору со специалистом.' }
+  ],
+  screeningMap: {
+    nervous: { name: 'Тревога (ГТР)', slug: 'anxiety', ready: true },
+    hopeless: { name: 'Депрессия (БДР)', slug: 'depression', ready: true },
+    restless: { name: 'СДВГ', slug: 'adhd', ready: false },
+    depressed: { name: 'Депрессия (БДР)', slug: 'depression', ready: true },
+    effort: { name: 'Депрессия (БДР)', slug: 'depression', ready: true },
+    worthless: { name: 'Депрессия (БДР)', slug: 'depression', ready: true }
+  }
 };
 
 let quizState = { step: -1, answers: {} };
@@ -49,7 +38,6 @@ function initQuiz() {
   const overlay = document.querySelector('.quiz-overlay');
   if (!overlay) return;
 
-  // Открытие
   document.querySelectorAll('[data-start-quiz]').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -60,7 +48,6 @@ function initQuiz() {
     });
   });
 
-  // Закрытие
   overlay.querySelector('.quiz-close').addEventListener('click', closeQuiz);
 
   function closeQuiz() {
@@ -74,7 +61,6 @@ function initQuiz() {
     const stepEl = overlay.querySelector('.quiz-step');
 
     if (quizState.step === -1) {
-      // Интро
       if (progress) progress.style.width = '0%';
       if (stepEl) stepEl.textContent = '';
       body.innerHTML = renderIntro();
@@ -85,8 +71,7 @@ function initQuiz() {
       return;
     }
 
-    if (quizState.step >= QUIZ_DATA.questions.length) {
-      // Результат
+    if (quizState.step >= K6_DATA.questions.length) {
       if (progress) progress.style.width = '100%';
       if (stepEl) stepEl.textContent = 'Результат';
       body.innerHTML = renderResult();
@@ -94,22 +79,18 @@ function initQuiz() {
       return;
     }
 
-    // Вопрос
-    const q = QUIZ_DATA.questions[quizState.step];
-    const pct = ((quizState.step + 1) / QUIZ_DATA.questions.length * 100).toFixed(0);
+    const q = K6_DATA.questions[quizState.step];
+    const pct = ((quizState.step + 1) / K6_DATA.questions.length * 100).toFixed(0);
     if (progress) progress.style.width = pct + '%';
-    if (stepEl) stepEl.textContent = (quizState.step + 1) + ' / ' + QUIZ_DATA.questions.length;
+    if (stepEl) stepEl.textContent = (quizState.step + 1) + ' / ' + K6_DATA.questions.length;
 
     body.innerHTML = renderQuestion(q, quizState.step);
 
     body.querySelectorAll('.quiz-answer').forEach(a => {
       a.addEventListener('click', () => {
-        quizState.answers[q.cluster] = parseInt(a.dataset.value);
+        quizState.answers[q.id] = parseInt(a.dataset.value);
         a.classList.add('selected');
-        setTimeout(() => {
-          quizState.step++;
-          renderQuiz();
-        }, 300);
+        setTimeout(() => { quizState.step++; renderQuiz(); }, 300);
       });
     });
 
@@ -124,19 +105,20 @@ function initQuiz() {
 
   function renderIntro() {
     return '<div class="quiz-intro quiz-slide">' +
-      '<h2>Экспресс-тест: 7 вопросов</h2>' +
-      '<p>Это не диагностика — это навигатор. Результат покажет, на что обратить внимание и какой скрининг пройти первым.</p>' +
-      '<p class="text-small text-muted" style="margin-bottom:24px">Отвечайте так, как вы чувствуете себя в последнее время.</p>' +
-      '<button class="btn btn-primary quiz-start-btn">Начать →</button>' +
+      '<span class="badge badge-accent" style="margin-bottom:16px">K-6 · Kessler · WHO</span>' +
+      '<h2>Международный тест психологического дистресса</h2>' +
+      '<p>Шкала K-6 (Kessler, 2002) — валидированный инструмент, используемый ВОЗ и в эпидемиологических исследованиях по всему миру. 6 вопросов, менее 2 минут.</p>' +
+      '<p class="text-small text-muted" style="margin-bottom:24px">Результат покажет общий уровень психологического дистресса и подскажет, какой углублённый скрининг пройти.</p>' +
+      '<button class="btn btn-primary quiz-start-btn">Начать тест K-6 &rarr;</button>' +
       '</div>';
   }
 
   function renderQuestion(q, i) {
     let html = '<div class="quiz-slide">';
-    if (i > 0) html += '<button class="quiz-back">← Назад</button>';
+    if (i > 0) html += '<button class="quiz-back">&larr; Назад</button>';
     html += '<p class="quiz-question">' + q.text + '</p>';
     html += '<div class="quiz-answers">';
-    QUIZ_DATA.answers.forEach(a => {
+    K6_DATA.answers.forEach(a => {
       html += '<div class="quiz-answer" data-value="' + a.value + '">' + a.text + '</div>';
     });
     html += '</div></div>';
@@ -145,45 +127,72 @@ function initQuiz() {
 
   function renderResult() {
     const ans = quizState.answers;
-    let maxCluster = null, maxVal = -1;
+    const total = Object.values(ans).reduce((s, v) => s + v, 0);
+
+    // Find level
+    let level = K6_DATA.levels[0];
+    for (const l of K6_DATA.levels) {
+      if (total <= l.max) { level = l; break; }
+    }
+
+    // Find highest single item for screening recommendation
+    let maxItem = null, maxVal = -1;
+    for (const [k, v] of Object.entries(ans)) {
+      if (v > maxVal) { maxVal = v; maxItem = k; }
+    }
 
     let html = '<div class="quiz-result quiz-slide">';
-    html += '<h2>Ваша карта ментального здоровья</h2>';
-    html += '<div class="cluster-grid">';
+    html += '<h2>Результат K-6</h2>';
 
-    Object.keys(QUIZ_DATA.clusters).forEach(key => {
-      const c = QUIZ_DATA.clusters[key];
-      const val = ans[key] || 0;
-      if (val > maxVal) { maxVal = val; maxCluster = key; }
-      html += '<div class="cluster-item">';
-      html += '<div class="cluster-circle level-' + val + '">' + val + '</div>';
-      html += '<div class="cluster-name">' + c.name + '</div>';
-      html += '</div>';
+    // Score display
+    html += '<div style="margin:24px 0">';
+    html += '<div style="font-size:48px;font-weight:700;color:' + level.color + '">' + total + '</div>';
+    html += '<div style="font-size:14px;color:var(--ink3)">из 24 баллов</div>';
+    html += '<div style="margin-top:8px;font-size:18px;font-weight:600;color:' + level.color + '">' + level.label + '</div>';
+    html += '</div>';
+
+    // Bar visualization
+    html += '<div style="width:100%;height:8px;background:var(--brd);border-radius:4px;margin:16px 0 24px;overflow:hidden">';
+    html += '<div style="width:' + (total / 24 * 100) + '%;height:100%;background:' + level.color + ';border-radius:4px;transition:width 1s ease"></div>';
+    html += '</div>';
+
+    // Description
+    html += '<p class="text-muted" style="margin-bottom:24px">' + level.desc + '</p>';
+
+    // Item breakdown
+    html += '<div style="text-align:left;margin-bottom:24px">';
+    K6_DATA.questions.forEach(q => {
+      const v = ans[q.id] || 0;
+      const pct = (v / 4 * 100);
+      const barColor = v <= 1 ? '#4a8a60' : v <= 2 ? '#c0a040' : '#c05050';
+      html += '<div style="margin-bottom:10px">';
+      html += '<div style="font-size:12px;color:var(--ink3);margin-bottom:4px">' + q.text.replace(/Как часто за последний месяц вы /, '').replace(/Как часто вы /, '').replace(/Как часто вам /, '') + '</div>';
+      html += '<div style="display:flex;align-items:center;gap:8px">';
+      html += '<div style="flex:1;height:6px;background:var(--brd);border-radius:3px;overflow:hidden"><div style="width:' + pct + '%;height:100%;background:' + barColor + ';border-radius:3px"></div></div>';
+      html += '<span style="font-size:12px;color:var(--ink3);width:20px;text-align:right">' + v + '</span>';
+      html += '</div></div>';
     });
     html += '</div>';
 
-    // Рекомендация
-    if (maxCluster && maxVal >= 1) {
-      const c = QUIZ_DATA.clusters[maxCluster];
-      const scr = c.screenings[0];
-      const name = QUIZ_DATA.screeningNames[scr] || scr;
-      const isReady = QUIZ_DATA.readyScreenings.includes(scr);
-
+    // Screening recommendation
+    if (total >= 5 && maxItem) {
+      const scr = K6_DATA.screeningMap[maxItem];
       html += '<div class="quiz-rec">';
-      html += '<h3>Наша рекомендация</h3>';
-      html += '<p>Ваши ответы указывают на наиболее выраженные признаки в области «' + c.name + '». ';
-      html += 'Углублённый скрининг поможет разобраться детальнее.</p>';
-      if (isReady) {
-        html += '<a href="/screening/' + scr + '/" class="btn btn-primary btn-sm">Пройти скрининг: ' + name + ' →</a>';
+      html += '<h3>Рекомендация</h3>';
+      html += '<p>На основе ваших ответов рекомендуем пройти углублённый скрининг:</p>';
+      if (scr.ready) {
+        html += '<a href="/screening/' + scr.slug + '/" class="btn btn-primary btn-sm">Скрининг: ' + scr.name + ' &rarr;</a>';
       } else {
-        html += '<span class="badge badge-soon">Скрининг «' + name + '» в разработке</span>';
+        html += '<span class="badge badge-soon">Скрининг &laquo;' + scr.name + '&raquo; в разработке</span>';
+      }
+      // Also suggest anxiety if nervous/restless are high
+      if ((ans.nervous >= 3 || ans.restless >= 3) && scr.slug !== 'anxiety') {
+        html += '<a href="/screening/anxiety/" class="btn btn-secondary btn-sm" style="margin-left:8px">Также: Тревога (ГТР) &rarr;</a>';
       }
       html += '</div>';
-    } else {
-      html += '<div class="quiz-rec"><p>Скрининг не выявил выраженных признаков. Если что-то беспокоит — консультация специалиста не помешает.</p></div>';
     }
 
-    html += '<p class="quiz-disclaimer">Это экспресс-навигатор, не диагностика. Результат помогает выбрать подходящий скрининг.</p>';
+    html += '<p class="quiz-disclaimer">Шкала K-6 (Kessler et al., 2002) — скрининговый инструмент, не диагностика. Результат не заменяет консультацию специалиста.</p>';
     html += '<button class="btn btn-secondary btn-sm mt-3 quiz-close-result">Закрыть</button>';
     html += '</div>';
     return html;
