@@ -205,9 +205,47 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 .disc{margin-top:20px;padding:18px 24px;background:var(--bg);border-radius:12px;font-size:13px;color:var(--ink3);line-height:1.7;}
 
 @media(max-width:700px){.hero h1{font-size:2rem;}.hero{padding:56px 0 44px;}.igrid,.dmap{grid-template-columns:1fr;}.dgr{grid-template-columns:repeat(2,1fr);}.sf{bottom:14px;right:14px;padding:10px 20px;}.res{padding:28px 20px;}.conc{padding:24px 20px;}.bi-row{flex-direction:column;}}
+
+/* CONSENT SCREEN */
+.consent-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(10,10,20,0.92);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px);}
+.consent-overlay.hidden{display:none;}
+.consent-box{background:#fff;border-radius:16px;max-width:540px;width:100%;padding:40px 32px 32px;color:#1a1a2e;font-family:var(--mono,'JetBrains Mono',monospace);max-height:90vh;overflow-y:auto;}
+.consent-box h2{font-family:var(--serif,'Cormorant Garamond',serif);font-size:1.5rem;font-weight:700;margin-bottom:6px;color:#1a1a2e;}
+.consent-box .consent-sub{font-size:13px;color:#6b7280;margin-bottom:24px;}
+.consent-box ul{list-style:none;padding:0;margin:0 0 20px;}
+.consent-box li{padding:12px 16px;border-radius:10px;background:#f8f9fa;margin-bottom:8px;font-size:14px;line-height:1.6;color:#374151;display:flex;gap:12px;align-items:flex-start;}
+.consent-box li .consent-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+.consent-box .consent-age{padding:14px 16px;border-radius:10px;background:#fef3c7;border:1px solid #f59e0b;font-size:13px;line-height:1.6;color:#92400e;margin-bottom:20px;}
+.consent-box .consent-check-row{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:10px;background:#f0f4ff;margin-bottom:16px;cursor:pointer;user-select:none;transition:background .2s;}
+.consent-box .consent-check-row:hover{background:#e0e7ff;}
+.consent-box .consent-check-row input{width:20px;height:20px;accent-color:#4f46e5;cursor:pointer;flex-shrink:0;}
+.consent-box .consent-check-row span{font-size:14px;color:#1e293b;font-weight:500;}
+.consent-btn{display:block;width:100%;padding:14px;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit;}
+.consent-btn:disabled{background:#e2e8f0;color:#94a3b8;cursor:not-allowed;}
+.consent-btn:enabled{background:#4f46e5;color:#fff;box-shadow:0 2px 8px rgba(79,70,229,0.3);}
+.consent-btn:enabled:hover{background:#4338ca;transform:translateY(-1px);}
 </style>
 </head>
 <body>
+
+<div class="consent-overlay" id="consentOverlay">
+  <div class="consent-box">
+    <h2>Прежде чем начать</h2>
+    <div class="consent-sub">Пожалуйста, прочитайте перед прохождением скрининга</div>
+    <ul>
+      <li><span class="consent-icon">1</span> Это скрининг, не диагноз. Результаты носят информационный характер и не являются медицинским заключением.</li>
+      <li><span class="consent-icon">2</span> Скрининг не заменяет консультацию специалиста. Только врач-психиатр может поставить диагноз на основании очного осмотра.</li>
+      <li><span class="consent-icon">3</span> Ваши данные не покидают браузер. Мы не собираем, не сохраняем и не передаём ответы — всё обрабатывается только на вашем устройстве.</li>
+      <li><span class="consent-icon">4</span> Результат — не приговор. Даже при высоком балле это повод обратиться к специалисту, а не основание для самолечения.</li>
+    </ul>
+    <div class="consent-age">Если вам меньше 18 лет — рекомендуем пройти вместе с родителем или другим взрослым, которому доверяете.</div>
+    <label class="consent-check-row" id="consentLabel">
+      <input type="checkbox" id="consentCheck" onchange="document.getElementById('consentBtn').disabled=!this.checked;">
+      <span>Я понимаю, что это скрининг, а не диагноз</span>
+    </label>
+    <button class="consent-btn" id="consentBtn" disabled onclick="document.getElementById('consentOverlay').classList.add('hidden');">Начать скрининг</button>
+  </div>
+</div>
 
 <div class="hero">
   <h1>Диагностика биполярного расстройства</h1>
