@@ -128,52 +128,12 @@ function initQuiz() {
     const ans = quizState.answers;
     const total = Object.values(ans).reduce((s, v) => s + v, 0);
 
-    // Find level
     let level = K6_DATA.levels[0];
     for (const l of K6_DATA.levels) {
       if (total <= l.max) { level = l; break; }
     }
 
-    // Find highest single item for screening recommendation
-    let maxItem = null, maxVal = -1;
-    for (const [k, v] of Object.entries(ans)) {
-      if (v > maxVal) { maxVal = v; maxItem = k; }
-    }
-
-    let html = '<div class="quiz-result quiz-slide">';
-    html += '<h2>Результат K-6</h2>';
-
-    // Score display
-    html += '<div style="margin:24px 0">';
-    html += '<div style="font-size:48px;font-weight:700;color:' + level.color + '">' + total + '</div>';
-    html += '<div style="font-size:14px;color:var(--ink3)">из 24 баллов</div>';
-    html += '<div style="margin-top:8px;font-size:18px;font-weight:600;color:' + level.color + '">' + level.label + '</div>';
-    html += '</div>';
-
-    // Bar visualization
-    html += '<div style="width:100%;height:8px;background:var(--brd);border-radius:4px;margin:16px 0 24px;overflow:hidden">';
-    html += '<div style="width:' + (total / 24 * 100) + '%;height:100%;background:' + level.color + ';border-radius:4px;transition:width 1s ease"></div>';
-    html += '</div>';
-
-    // Description
-    html += '<p class="text-muted" style="margin-bottom:24px">' + level.desc + '</p>';
-
-    // Item breakdown
-    html += '<div style="text-align:left;margin-bottom:24px">';
-    K6_DATA.questions.forEach(q => {
-      const v = ans[q.id] || 0;
-      const pct = (v / 4 * 100);
-      const barColor = v <= 1 ? '#4a8a60' : v <= 2 ? '#c0a040' : '#c05050';
-      html += '<div style="margin-bottom:10px">';
-      html += '<div style="font-size:12px;color:var(--ink3);margin-bottom:4px">' + q.text.replace(/Как часто за последний месяц вы /, '').replace(/Как часто вы /, '').replace(/Как часто вам /, '') + '</div>';
-      html += '<div style="display:flex;align-items:center;gap:8px">';
-      html += '<div style="flex:1;height:6px;background:var(--brd);border-radius:3px;overflow:hidden"><div style="width:' + pct + '%;height:100%;background:' + barColor + ';border-radius:3px"></div></div>';
-      html += '<span style="font-size:12px;color:var(--ink3);width:20px;text-align:right">' + v + '</span>';
-      html += '</div></div>';
-    });
-    html += '</div>';
-
-    // Screening recommendations — score each screening by relevance
+    // Score screenings by relevance
     const recs = [];
     K6_DATA.screenings.forEach(scr => {
       let score = 0;
@@ -183,45 +143,61 @@ function initQuiz() {
     });
     recs.sort((a, b) => b.score - a.score);
 
+    let html = '<div class="quiz-result quiz-slide" style="max-width:520px;width:100%">';
+
+    // === SCORE — compact ===
+    html += '<div class="card" style="text-align:center;margin-bottom:24px;padding:32px;border-color:' + level.color + '40">';
+    html += '<div style="font-size:14px;color:var(--ink3);margin-bottom:8px">Ваш результат K-6</div>';
+    html += '<div style="font-size:56px;font-weight:700;color:' + level.color + ';line-height:1">' + total + '<span style="font-size:20px;color:var(--ink3);font-weight:400"> / 24</span></div>';
+    html += '<div style="margin:12px auto;width:80%;height:6px;background:var(--brd);border-radius:3px;overflow:hidden">';
+    html += '<div style="width:' + (total / 24 * 100) + '%;height:100%;background:' + level.color + ';border-radius:3px"></div></div>';
+    html += '<div style="font-size:18px;font-weight:600;color:' + level.color + '">' + level.label + '</div>';
+    html += '</div>';
+
+    // === RECOMMENDATIONS — the main event ===
     if (recs.length > 0) {
-      html += '<div style="text-align:left;margin-bottom:24px">';
-      html += '<h3 style="margin-bottom:16px">Какие скрининги пройти</h3>';
+      html += '<div style="margin-bottom:24px">';
+      html += '<div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;text-align:center">Рекомендуем пройти</div>';
       
       recs.slice(0, 3).forEach((scr, i) => {
         const isPrimary = i === 0;
-        const borderColor = isPrimary ? 'var(--accent)' : 'var(--brd)';
-        html += '<div class="quiz-rec" style="margin-bottom:12px;border-color:' + borderColor + '">';
-        html += '<div style="display:flex;justify-content:space-between;align-items:start;gap:16px;flex-wrap:wrap">';
-        html += '<div style="flex:1;min-width:200px">';
-        html += '<h3 style="font-size:1rem;margin-bottom:4px">' + (isPrimary ? '&#9733; ' : '') + scr.name + '</h3>';
-        html += '<p style="font-size:13px;color:var(--ink2);margin-bottom:8px">' + scr.why + '</p>';
-        html += '</div>';
+        html += '<div class="card" style="margin-bottom:12px;' + (isPrimary ? 'border-color:var(--accent);' : '') + 'padding:20px 24px">';
+        html += '<div style="font-size:' + (isPrimary ? '18px' : '16px') + ';font-weight:600;margin-bottom:6px">';
+        if (isPrimary) html += '<span style="color:var(--accent)">&#9733; </span>';
+        html += scr.name + '</div>';
+        html += '<div style="font-size:13px;color:var(--ink2);margin-bottom:14px;line-height:1.6">' + scr.why + '</div>';
         if (scr.ready) {
-          html += '<a href="/screening/' + scr.slug + '/" class="btn ' + (isPrimary ? 'btn-primary' : 'btn-secondary') + ' btn-sm" style="white-space:nowrap">Пройти скрининг &rarr;</a>';
+          html += '<a href="/screening/' + scr.slug + '/" class="btn ' + (isPrimary ? 'btn-primary' : 'btn-secondary') + ' btn-block btn-sm">Пройти скрининг &rarr;</a>';
         } else {
-          html += '<span class="badge badge-soon" style="white-space:nowrap">В разработке</span>';
+          html += '<div style="text-align:center"><span class="badge badge-soon">В разработке</span></div>';
         }
-        html += '</div></div>';
+        html += '</div>';
       });
       html += '</div>';
     } else if (total >= 3) {
-      html += '<div class="quiz-rec" style="margin-bottom:24px">';
-      html += '<h3>Что дальше?</h3>';
-      html += '<p style="font-size:14px;color:var(--ink2)">Уровень дистресса невысокий, но если что-то беспокоит — вы можете пройти скрининг по конкретному направлению:</p>';
-      html += '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">';
+      html += '<div class="card" style="margin-bottom:24px;padding:24px;text-align:center">';
+      html += '<div style="font-size:15px;margin-bottom:16px;color:var(--ink2)">Уровень дистресса невысокий. Если что-то беспокоит — выберите скрининг:</div>';
+      html += '<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center">';
       html += '<a href="/screening/depression/" class="btn btn-secondary btn-sm">Депрессия</a>';
       html += '<a href="/screening/anxiety/" class="btn btn-secondary btn-sm">Тревога</a>';
       html += '<a href="/screening/bipolar/" class="btn btn-secondary btn-sm">БАР</a>';
       html += '<a href="/screening/ocd/" class="btn btn-secondary btn-sm">ОКР</a>';
       html += '</div></div>';
     } else {
-      html += '<div class="quiz-rec" style="margin-bottom:24px">';
-      html += '<p style="font-size:14px;color:var(--ink2)">Скрининг не выявил выраженного дистресса. Если что-то всё же беспокоит — <a href="/#screenings">выберите скрининг</a> по конкретному направлению.</p>';
+      html += '<div class="card" style="margin-bottom:24px;padding:24px;text-align:center">';
+      html += '<div style="font-size:15px;color:var(--ink2)">Скрининг не выявил выраженного дистресса. Если что-то всё же беспокоит — <a href="/#screenings">выберите скрининг</a> по конкретному направлению.</div>';
       html += '</div>';
     }
 
-    html += '<p class="quiz-disclaimer">Шкала K-6 (Kessler et al., 2002) — скрининговый инструмент, не диагностика. Результат не заменяет консультацию специалиста.</p>';
-    html += '<button class="btn btn-secondary btn-sm mt-3 quiz-close-result">Закрыть</button>';
+    // === BOTTOM BUTTONS ===
+    html += '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">';
+    html += '<a href="/" class="btn btn-secondary btn-sm">На главную</a>';
+    html += '<button class="btn btn-secondary btn-sm quiz-close-result">Закрыть</button>';
+    html += '</div>';
+
+    // === DISCLAIMER ===
+    html += '<p style="font-size:11px;color:var(--ink3);margin-top:20px;text-align:center;line-height:1.6">K-6 (Kessler et al., 2002) — скрининговый инструмент, не диагностика.</p>';
+
     html += '</div>';
     return html;
   }
