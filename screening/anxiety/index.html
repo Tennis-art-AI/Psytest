@@ -35,22 +35,26 @@
   <p>21 вопрос · 5 доменов · GAD-7 · HAM-A · PSWQ · IUS-12 · DSM-5</p>
 </div>
 
-<!-- Экран согласия -->
-<div id="consent" style="max-width:640px;margin:40px auto;padding:32px 28px;background:var(--card);border-radius:var(--radius);border:1px solid var(--brd);">
-  <h2 style="font-size:1.3rem;color:var(--ink);margin-bottom:20px;">Перед началом</h2>
-  <ul style="list-style:none;padding:0;margin:0 0 24px 0;font-size:15px;color:var(--ink2);line-height:1.7;">
-    <li style="margin-bottom:10px;">&#8226; Это <strong>скрининг</strong>, а не диагноз. Только специалист может поставить диагноз на основании очного осмотра.</li>
-    <li style="margin-bottom:10px;">&#8226; Результаты носят <strong>информационный характер</strong> и не заменяют консультацию психиатра, психотерапевта или клинического психолога.</li>
-    <li style="margin-bottom:10px;">&#8226; Этот инструмент основан на DSM-5 критериях и валидированных шкалах, но сам <strong>не прошёл клиническую валидацию</strong>. Используйте результат как отправную точку для разговора со специалистом.</li>
-    <li style="margin-bottom:10px;">&#8226; Ваши данные <strong>не покидают браузер</strong> — мы ничего не сохраняем и не передаём.</li>
-    <li style="margin-bottom:10px;">&#8226; Если вам <strong>меньше 18 лет</strong> — рекомендуем пройти вместе с родителем или другим взрослым, которому доверяете.</li>
-  </ul>
-  <div style="text-align:center;">
-    <button onclick="document.getElementById('consent').style.display='none';document.getElementById('mainContent').style.display='block';" style="padding:14px 36px;font-size:16px;font-weight:600;color:#fff;background:var(--pri);border:none;border-radius:10px;cursor:pointer;">Понимаю, продолжить</button>
+<!-- Экран согласия (consent-overlay — единый паттерн) -->
+<div class="consent-overlay" id="consentOverlay">
+  <div class="consent-box">
+    <h2>Прежде чем начать</h2>
+    <div class="consent-sub">Пожалуйста, прочитайте перед прохождением скрининга</div>
+    <ul class="consent-points">
+      <li><span class="consent-num">1</span> Это скрининг, не диагноз. Результаты носят информационный характер и не являются медицинским заключением.</li>
+      <li><span class="consent-num">2</span> Скрининг не заменяет консультацию специалиста. Только врач-психиатр может поставить диагноз на основании очного осмотра.</li>
+      <li><span class="consent-num">3</span> Ваши данные не покидают браузер. Мы не собираем, не сохраняем и не передаём ответы — всё обрабатывается только на вашем устройстве.</li>
+      <li><span class="consent-num">4</span> Результат — не приговор. Даже при высоком балле это повод обратиться к специалисту, а не основание для самолечения.</li>
+    </ul>
+    <div class="consent-age">Если вам меньше 18 лет — рекомендуем пройти вместе с родителем или другим взрослым, которому доверяете.</div>
+    <label class="consent-check-row">
+      <input type="checkbox" id="consentCheck" onchange="document.getElementById('consentBtn').disabled=!this.checked;">
+      <span>Я понимаю, что это скрининг, а не диагноз</span>
+    </label>
+    <button class="consent-btn" id="consentBtn" disabled onclick="document.getElementById('consentOverlay').classList.add('hidden');">Начать скрининг</button>
   </div>
 </div>
 
-<div id="mainContent" style="display:none;">
 <div class="pw"><div class="pi"><div class="pt"><div class="pf" id="pf"></div></div><div class="pl" id="pl">0 из 21</div></div></div>
 
 
@@ -424,8 +428,6 @@
   <div class="sf-n" id="sfn">0</div>
   <div><div class="sf-l">из 72</div><div class="sf-v" id="sfv">—</div></div>
 </div>
-
-</div><!-- /mainContent -->
 
 <!-- Кризисный блок — статичный, виден всегда -->
 <div style="position:fixed;bottom:0;left:0;right:0;background:#2a2a3a;color:#e0e0ea;padding:10px 20px;font-size:13px;text-align:center;z-index:9999;line-height:1.5;">
