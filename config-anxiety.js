@@ -25,6 +25,9 @@ function buildC() {
   const lev = gL(t);
   let h = '';
 
+  /* ДИСКЛЕЙМЕР */
+  h += '<div class="ci" style="background:var(--pri-lt);padding:16px;border-radius:10px;margin-bottom:12px;font-size:14px;color:var(--ink2);"><strong style="color:var(--pri);">Важно:</strong> Результат скрининга — не диагноз. Только специалист может поставить диагноз на основании очного осмотра. Этот инструмент основан на критериях DSM-5 и валидированных шкалах, но сам не прошёл независимую клиническую валидацию.</div>';
+
   /* БЛОК 1: Общий уровень + доменные комментарии */
   if (a >= 3) {
     h += `<div class="ci"><strong>Общий уровень: ${lev.l} (${t} из ${MAX})</strong>${DESC[LEV.indexOf(lev)]}.</div>`;
