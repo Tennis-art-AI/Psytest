@@ -64,65 +64,77 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero" style="min-height:60vh;padding-top:140px">
-  <img src="/img/room-depression.png" alt="Комната депрессии" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.15;z-index:0">
-  <div style="position:relative;z-index:1">
-    <span class="badge badge-accent">БДР · DSM-5 · F32–F33</span>
-    <h1 style="margin-top:16px">Скрининг <em>депрессии</em></h1>
-    <p style="font-style:italic;color:var(--ink3);margin-bottom:24px">Комната, из которой не хочется выходить</p>
-    <p>23 вопроса · 5 доменов · дифференциальная диагностика · ~10 минут</p>
-  </div>
-</section>
+<div class="hero">
+  <h1>Скрининг депрессии</h1>
+  <p>23 вопроса · 5 доменов · дифдиагностика · ~10 минут</p>
+</div>
 
-<!-- Норма vs Расстройство -->
-<section class="section">
-  <div class="container">
-    <div class="section-head fade-up"><h2>Где <em>граница?</em></h2></div>
-    <div class="grid-2">
-      <div class="card fade-up" style="border-color:rgba(106,170,138,.2)">
-        <h3 style="color:#6aaa8a;font-size:1.1rem;margin-bottom:12px">Нормальная грусть</h3>
-        <p class="text-small text-muted">Проходит за дни, связана с конкретной причиной. Не мешает работать и общаться. Сон и аппетит в норме. Способность радоваться сохраняется.</p>
-      </div>
-      <div class="card fade-up" style="border-color:rgba(128,168,208,.2)">
-        <h3 style="color:#80a8d0;font-size:1.1rem;margin-bottom:12px">Депрессивное расстройство</h3>
-        <p class="text-small text-muted">Длится ≥2 недель без чёткой причины. Нарушает работу, отношения, сон. Потеря интереса ко всему. Чувство бесполезности или вины. Может включать мысли о смерти.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Что включает -->
-<section class="section-sm">
-  <div class="container">
-    <div class="section-head fade-up"><h2>Что включает <em>скрининг</em></h2></div>
-    <div class="grid-3">
-      <div class="card fade-up"><h3 style="font-size:1rem;margin-bottom:8px">23 вопроса</h3><p class="text-small text-muted">На основе PHQ-9, BDI-II, HAM-D, IDS-30 и критериев DSM-5-TR</p></div>
-      <div class="card fade-up"><h3 style="font-size:1rem;margin-bottom:8px">5 доменов</h3><p class="text-small text-muted">Эмоциональный, когнитивный, соматический, поведенческий, функционирование</p></div>
-      <div class="card fade-up"><h3 style="font-size:1rem;margin-bottom:8px">Дифдиагностика</h3><p class="text-small text-muted">Отличает депрессию от ГТР, БАР-II и дистимии</p></div>
-      <div class="card fade-up"><h3 style="font-size:1rem;margin-bottom:8px">История</h3><p class="text-small text-muted">Эпизоды, подъёмы, травмы, ремиссии, коморбидность, семья</p></div>
-      <div class="card fade-up"><h3 style="font-size:1rem;margin-bottom:8px">9 факторов анамнеза</h3><p class="text-small text-muted">Включая скринер персистирующей депрессии и вопрос о гипомании</p></div>
-      <div class="card fade-up"><h3 style="font-size:1rem;margin-bottom:8px">Для врача</h3><p class="text-small text-muted">Что обсудить со специалистом на основе ваших ответов</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- Инструменты -->
-<section class="section-sm">
-  <div class="container fade-up">
-    <div class="section-head"><h2 style="font-size:1.2rem">Использованные <em>инструменты</em></h2></div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center">
-      <span class="badge badge-accent">PHQ-9</span>
-      <span class="badge badge-accent">BDI-II (Beck)</span>
-      <span class="badge badge-accent">HAM-D17</span>
-      <span class="badge badge-accent">MADRS</span>
-      <span class="badge badge-accent">IDS-30</span>
-      <span class="badge badge-accent">DSM-5-TR</span>
-    </div>
-  </div>
-</section>
+<!-- ПРОГРЕСС -->
 <div class="pw"><div class="pi"><div class="pt"><div class="pf" id="pf"></div></div><div class="pl" id="pl">0 из 23</div></div></div>
 
-<div class="ct" style="margin-top:32px;"><div class="info info-pri"><strong>Как отвечать</strong>Отвечайте так, как вы чувствуете себя в последнее время. Если симптомы волнообразны — выбирайте типичный уровень, не лучший день и не худший.</div></div>
+<!-- ═══ METHODOLOGY ═══ -->
+<div class="sec"><div class="ct">
+  <div class="slbl">Методология</div>
+  <div class="stitle">Почему именно такая диагностика</div>
+  <div class="stext">Депрессия — не «плохое настроение». Это комплексное расстройство: 227 уникальных комбинаций симптомов могут дать один и тот же диагноз (Fried & Nesse, 2015). Два человека с «одинаковой депрессией» могут не иметь ни одного общего симптома.</div>
+  <div class="stext">Стандартный PHQ-9 (9 вопросов) — это быстрый скрининг: он отвечает на вопрос «есть ли депрессия?», но не показывает ГДЕ она бьёт сильнее всего и ЧТО именно разрушает жизнь. Эта диагностика объединяет 6 международных инструментов и показывает полную картину.</div>
+
+  <div class="info info-pri"><strong>Откуда взяты вопросы</strong>
+    PHQ-9 (Kroenke, 2001) — 9 вопросов по DSM, скрининг · BDI-II (Beck, 1996) — 21 вопрос, акцент на мысли · HAM-D17 (Hamilton, 1960) — золотой стандарт клинических исследований · MADRS (Montgomery, 1979) — чувствительность к изменениям · IDS-30 (Rush, 1996) — самый полный инструмент · Модели: когнитивная триада Бека, модель безнадёжности Абрамсон, руминация Nolen-Hoeksema, поведенческая активация Левинсона</div>
+
+  <details style="margin:24px 0;"><summary style="cursor:pointer;font-weight:600;color:var(--pri);font-size:15px;padding:12px 0;">Сравнительная таблица инструментов ▾</summary>
+  <table class="ctbl"><thead><tr><th>Измерение</th><th>PHQ-9</th><th>BDI-II</th><th>HAM-D</th><th>IDS-30</th><th>Наша</th></tr></thead><tbody>
+    <tr><td>Настроение + ангедония</td><td class="ck">✓</td><td class="ck">✓</td><td class="ck">✓</td><td class="ck">✓</td><td class="ck">✓✓</td></tr>
+    <tr><td>Эмоциональная пустота (притупление чувств)</td><td>—</td><td class="ck">✓</td><td>—</td><td class="ck">✓</td><td class="ck">✓✓</td></tr>
+    <tr><td>Безнадёжность</td><td>—</td><td class="ck">✓✓</td><td>—</td><td class="ck">✓</td><td class="ck">✓✓</td></tr>
+    <tr><td>Руминация</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="ck">✓✓</td></tr>
+    <tr><td>Страдание от мыслей</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="ck">✓✓</td></tr>
+    <tr><td>Суточные колебания</td><td>—</td><td>—</td><td class="ck">✓</td><td class="ck">✓</td><td class="ck">✓</td></tr>
+    <tr><td>Соматика (сон, аппетит, боли)</td><td class="ck">✓</td><td class="ck">✓</td><td class="ck">✓✓</td><td class="ck">✓✓</td><td class="ck">✓✓</td></tr>
+    <tr><td>Социальная изоляция</td><td>—</td><td>—</td><td>—</td><td class="ck">✓</td><td class="ck">✓✓</td></tr>
+    <tr><td>Уход за собой</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="ck">✓</td></tr>
+    <tr><td>Раздражительность</td><td>—</td><td class="ck">✓</td><td>—</td><td class="ck">✓</td><td class="ck">✓</td></tr>
+    <tr><td>Влияние на жизнь (3 сферы)</td><td class="ck">✓</td><td>—</td><td class="ck">✓</td><td>—</td><td class="ck">✓✓✓</td></tr>
+    <tr><td>История + повторяющиеся эпизоды</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="ck">✓✓</td></tr>
+    <tr><td>Учёт «плавающих» симптомов</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="ck">✓✓</td></tr>
+  </tbody></table></details>
+
+  <div class="dmap">
+    <div class="dmc dc-a"><div class="dmc-letter">А</div><div class="dmc-name">Эмоциональный</div><div class="dmc-desc">Настроение, удовольствие, эмоциональная пустота, безнадёжность, суточные, плаксивость</div><div class="dmc-w">6 вопросов · 0–5 · 35%</div><div class="dmc-bar"><div class="dmc-bf" id="barA2" style="background:var(--dA);"></div></div></div>
+    <div class="dmc dc-b"><div class="dmc-letter">Б</div><div class="dmc-name">Когнитивный</div><div class="dmc-desc">Руминация, вина, концентрация, мысли о смерти, страдание от мыслей</div><div class="dmc-w">5 вопросов · 0–5 · 29%</div><div class="dmc-bar"><div class="dmc-bf" id="barB2" style="background:var(--dB);"></div></div></div>
+    <div class="dmc dc-c"><div class="dmc-letter">В</div><div class="dmc-name">Соматический</div><div class="dmc-desc">Сон, аппетит, энергия, психомоторика, боли</div><div class="dmc-w">5 вопросов · 0–3 · 17%</div><div class="dmc-bar"><div class="dmc-bf" id="barC2" style="background:var(--dC);"></div></div></div>
+    <div class="dmc dc-d"><div class="dmc-letter">Г</div><div class="dmc-name">Поведенческий</div><div class="dmc-desc">Изоляция, уход за собой, раздражительность, снижение активности</div><div class="dmc-w">4 вопроса · 0–4 · 19%</div><div class="dmc-bar"><div class="dmc-bf" id="barD2" style="background:var(--dD);"></div></div></div>
+    <div class="dmc dc-e"><div class="dmc-letter">Д</div><div class="dmc-name">Функционирование</div><div class="dmc-desc">Работа, отношения, быт — обязательно по DSM-5</div><div class="dmc-w">3 вопроса · вне балла</div><div class="dmc-bar"><div class="dmc-bf" id="barE2" style="background:var(--dE);"></div></div></div>
+  </div>
+
+  <div class="info info-warm"><strong>Почему когнитивный и эмоциональный домены весят больше</strong>
+    DSM-5 выделяет настроение и ангедонию как обязательные. Бек показал: негативные мысли — центральный механизм. Человек, которого мысли разрушают при здоровом теле, получит адекватно высокий балл. HAM-D тоже использует разные шкалы: ключевые пункты 0–4, второстепенные 0–2.</div>
+
+  <div class="info info-sage"><strong>Если ваши симптомы «плавают»</strong>
+    Работаете 2 часа, потом не можете 2 часа? Неделю нормально, потом неделю в тяжёлом состоянии? Мысли сегодня лёгкие, завтра невыносимые? Это типичный паттерн депрессии — она редко бывает «ровной». В каждом вопросе есть варианты для волнообразных симптомов. Оценивайте свой <strong>типичный</strong> уровень за весь период — не лучший день и не худший, а среднее между ними.</div>
+</div></div>
+
+<!-- INTRO -->
+<div class="sec" style="padding:44px 0;"><div class="ct">
+  <div class="slbl">Введение</div>
+  <div class="stitle">Грусть и депрессия — не одно и то же</div>
+  <div class="igrid">
+    <div class="icard"><h4>Нормальная грусть</h4><ul><li>Привязана к событию</li><li>Проходит за дни — недели</li><li>Удовольствие от других вещей сохранено</li><li>«Мне плохо» — ситуативно</li><li>Отвлечение помогает</li></ul></div>
+    <div class="icard"><h4>Депрессия</h4><ul><li>Часто без видимой причины</li><li>Более 2 недель, без улучшения</li><li>Удовольствие исчезает полностью</li><li>«Я ничтожество» — глобально</li><li>Отвлечение не помогает</li></ul></div>
+  </div>
+  <div class="info info-pri"><strong>Когда ставится диагноз «большое депрессивное расстройство»</strong>
+    По DSM-5 нужны все условия одновременно:<br>
+    <strong>1.</strong> Минимум 5 из 9 симптомов — хотя бы одно: подавленное настроение ИЛИ потеря интереса.<br>
+    <strong>2.</strong> Длятся минимум 2 недели, бо́льшую часть каждого дня.<br>
+    <strong>3.</strong> Реально мешает жить — работе, отношениям, повседневным делам.<br>
+    <strong>4.</strong> Причина не в веществах и не в болезни тела.</div>
+  <div style="margin-top:20px;font-size:16px;color:var(--ink2);background:var(--bg);padding:20px 24px;border-radius:14px;"><strong style="color:var(--ink);">Как заполнять:</strong> Отвечайте так, как вы чувствуете себя в последнее время. Выберите описание ближе всего к вашему ТИПИЧНОМУ состоянию. Если симптомы плавают (день хорошо, день плохо) — выбирайте «среднее».</div>
+</div></div>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main"><div class="ct">
+  <div class="sdiv"><div class="sdiv-n">I</div><div><h3>Симптомы</h3><p>20 + 3 вопроса · 5 доменов · макс. 86 баллов</p></div></div>
+
 
 <div class="ct">
 
