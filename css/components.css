@@ -126,6 +126,7 @@
   text-decoration: none;
   transition: all .3s;
   cursor: pointer; border: none;
+  min-height: 44px;
 }
 .btn-primary { background: var(--accent); color: var(--bg); }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-glow); color: var(--bg); }
@@ -145,7 +146,7 @@
 .card:hover { border-color: rgba(140,140,200,.25); transform: translateY(-2px); }
 
 /* ========= СЕТКА ========= */
-.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
 .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 
 /* ========= КАТАЛОГ СКРИНИНГОВ ========= */
@@ -254,7 +255,6 @@
   .nav-burger { display: block; }
   .mega-cols { grid-template-columns: 1fr; gap: 24px; }
   .mega-menu { padding: 24px 20px; }
-  .grid-3 { grid-template-columns: 1fr; }
   .grid-2 { grid-template-columns: 1fr; }
   .hero { padding: 100px 20px 60px; min-height: auto; }
   .compare-table { font-size: 12px; }
