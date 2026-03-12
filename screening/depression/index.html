@@ -3,103 +3,287 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Тест на депрессию онлайн — скрининг на основе PHQ-9 и DSM-5 | MentalScreenLab</title>
-<meta name="description" content="Углублённый скрининг депрессии: 26 вопросов, 5 доменов, дифференциальная диагностика. На основе PHQ-9, BDI-II, HAM-D и DSM-5-TR. Результат для разговора с врачом.">
-<meta name="keywords" content="тест на депрессию, тест на депрессию онлайн, скрининг депрессии, PHQ-9, шкала бека, тест бека на депрессию">
-<link rel="canonical" href="https://mentalscreenlab.com/screening/depression/">
-<link rel="stylesheet" href="/css/base.css">
-<link rel="stylesheet" href="/css/components.css">
+<title>Скрининг депрессии — MentalScreenLab</title>
+<meta name="description" content="Углублённый скрининг депрессии: 23 вопроса, 5 доменов. На основе PHQ-9, BDI-II, HAM-D и DSM-5-TR.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/common.css">
+<style>
+:root{
+  --bg:#faf8f5;--card:#fff;--ink:#1a1a1a;--ink2:#3d3d3d;--ink3:#8a8a8a;
+  --pri:#4a3270;--pri-lt:#f0ecf6;--pri-dk:#2d1a50;--pri-soft:#7c6a9a;
+  --warm:#c4956a;--warm-lt:#fdf6f0;--warm-dk:#8a6040;
+  --red:#b03a3a;--red-lt:#fdf0f0;
+  --sage:#5a7a5a;--sage-lt:#f0f5f0;
+  --brd:#e8e4df;--brd-lt:#f0ece7;
+  --dA:#6a3a7a;--dB:#3a5a7a;--dC:#6a7a3a;--dD:#7a4a3a;--dE:#3a6a6a;
+  --radius:16px;
+}
+.pf{height:100%;background:linear-gradient(90deg,var(--warm),#e8b090);border-radius:2px;transition:width .5s;width:0%;}
+.consent-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;}
+.consent-box{background:var(--card);border-radius:20px;max-width:540px;width:100%;padding:40px 36px;text-align:center;}
+.consent-box h2{font-family:'Cormorant Garamond',serif;font-size:1.8rem;margin-bottom:16px;}
+.consent-box p{font-size:14px;color:var(--ink2);line-height:1.8;margin-bottom:12px;text-align:left;}
+.consent-box .age-warn{background:var(--warm-lt);border-left:4px solid var(--warm);padding:12px 16px;border-radius:8px;font-size:13px;color:var(--warm-dk);text-align:left;margin:16px 0;}
+.consent-btn{background:var(--pri);color:#fff;border:none;padding:14px 40px;border-radius:50px;font-size:16px;font-family:inherit;cursor:pointer;margin-top:16px;}
+.crisis-float{position:fixed;bottom:28px;left:28px;background:var(--red-lt);border:1px solid rgba(176,58,58,.2);border-radius:14px;padding:12px 18px;z-index:200;font-size:12px;color:var(--red);max-width:260px;line-height:1.5;}
+.crisis-float strong{display:block;margin-bottom:2px;}
+.hcb.sel{background:var(--pri);border-color:var(--pri);color:#fff;font-weight:500;}
+.hcn{display:none;padding:8px 22px 12px;font-size:13px;color:var(--warm-dk);background:var(--warm-lt);}
+.hist-ok{display:none;padding:6px 22px 10px;font-size:12px;color:var(--sage);font-weight:500;}
+.hist-ok.show{display:block;}
+.ci{padding:14px 0;font-size:15px;line-height:1.7;color:var(--ink2);}
+.ci strong{display:block;color:var(--ink);margin-bottom:4px;}
+.res{background:var(--card);border:1px solid var(--brd-lt);border-radius:var(--radius);padding:32px;margin-top:48px;}
+.rb{height:8px;background:var(--brd-lt);border-radius:4px;overflow:hidden;margin:16px 0;}
+.rb-f{height:100%;border-radius:4px;transition:width .6s;}
+.stbl{width:100%;border-collapse:collapse;font-size:13px;margin:20px 0;}
+.stbl td{padding:8px 12px;border-bottom:1px solid var(--brd-lt);}
+.stbl tr.act td{background:var(--pri-lt);font-weight:600;}
+.disclaimer-footer{text-align:center;padding:32px 20px;font-size:12px;color:var(--ink3);line-height:1.7;border-top:1px solid var(--brd);margin-top:48px;}
+.ao.sel-w .ach{background:var(--red);border-color:var(--red);}
+</style>
 </head>
 <body>
 
+<div class="consent-overlay" id="consent"><div class="consent-box">
+  <h2>Прежде чем начать</h2>
+  <p>Это <strong>скрининг, не диагноз</strong>. Результаты носят информационный характер и не заменяют консультацию специалиста.</p>
+  <p>Скрининг поможет подготовиться к разговору с психиатром, психотерапевтом или клиническим психологом.</p>
+  <p><strong>Данные не покидают ваш браузер</strong> — ничего не сохраняется.</p>
+  <div class="age-warn">Если вам меньше 18 лет — рекомендуем пройти вместе с родителем или другим взрослым, которому доверяете.</div>
+  <button class="consent-btn" onclick="document.getElementById('consent').style.display='none'">Понятно, начать</button>
+</div></div>
 
-<nav class="nav">
-  <a href="/" class="nav-logo">Mental<span>ScreenLab</span></a>
-  <div class="nav-center">
-    <a href="/" class="nav-link">← Главная</a>
-    <a href="/rooms/" class="nav-link">Галерея</a>
+<div class="crisis-float"><strong>Нужна помощь сейчас?</strong>Телефон доверия: <strong>8-800-2000-122</strong><br>Бесплатно, круглосуточно</div>
+
+<div class="hero"><h1>Скрининг депрессии</h1><p>23 вопроса · 5 доменов · дифдиагностика · ~10 минут</p></div>
+<div class="pw"><div class="pi"><div class="pt"><div class="pf" id="pf"></div></div><div class="pl" id="pl">0 из 23</div></div></div>
+
+<div class="ct" style="margin-top:32px;"><div class="info info-pri"><strong>Как отвечать</strong>Отвечайте так, как вы чувствуете себя в последнее время. Если симптомы волнообразны — выбирайте типичный уровень, не лучший день и не худший.</div></div>
+
+<div class="ct">
+
+  <!-- ═══ DOMAIN A ═══ -->
+  <div class="dh" style="color:var(--dA);"><span>Домен А · Эмоциональный · 0–5 · повышенный вес</span><span class="ln"></span></div>
+
+  <div class="qc"><div class="qh" style="background:var(--dA);"><div class="qn">01</div><div class="qm"><div class="qtg">Ядерный · DSM-5 + PHQ-9 + MADRS</div><div class="qtl">Настроение</div><div class="qd">Подавленное настроение бо́льшую часть дня</div></div></div>
+    <div class="qp">Какое описание ближе к вашему настроению за последние 2 недели?</div>
+    <div class="ans" data-q="1"><label class="ao"><input type="radio" name="q1" value="0"><span class="al">А</span><span class="ach"></span><span class="at">Обычное — грусть приходит и уходит, не задерживается</span><span class="as s0">0</span></label>
+    <label class="ao"><input type="radio" name="q1" value="1"><span class="al">Б</span><span class="ach"></span><span class="at">Грусть ощутима, но отвлечение помогает — друзья, работа, фильм</span><span class="as s1">1</span></label>
+    <label class="ao"><input type="radio" name="q1" value="2"><span class="al">В</span><span class="ach"></span><span class="at">Волнообразно: тоска накатывает, потом отпускает. День нормально, день тяжело</span><span class="as s2">2</span></label>
+    <label class="ao"><input type="radio" name="q1" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">Тяжесть почти постоянная — «серая пелена», через которую мало что пробивается</span><span class="as s3">3</span></label>
+    <label class="ao"><input type="radio" name="q1" value="4"><span class="al">Д</span><span class="ach"></span><span class="at">Не грусть, а пустота — перестал(а) что-либо чувствовать</span><span class="as s4">4</span></label>
+    <label class="ao"><input type="radio" name="q1" value="5"><span class="al">Е</span><span class="ach"></span><span class="at">Невыносимая душевная боль — хуже физической, не прекращается</span><span class="as s5">5</span></label></div></div>
+
+  <div class="qc"><div class="qh" style="background:var(--dA);"><div class="qn">02</div><div class="qm"><div class="qtg">Ядерный · ангедония · DSM-5 + PHQ-9</div><div class="qtl">Способность получать удовольствие</div></div></div>
+    <div class="qp">Что с удовольствием от жизни?</div>
+    <div class="ans" data-q="2"><label class="ao"><input type="radio" name="q2" value="0"><span class="al">А</span><span class="ach"></span><span class="at">Всё как обычно — интересы и удовольствия на месте</span><span class="as s0">0</span></label>
+    <label class="ao"><input type="radio" name="q2" value="1"><span class="al">Б</span><span class="ach"></span><span class="at">Некоторые вещи стали менее интересными — но не всё</span><span class="as s1">1</span></label>
+    <label class="ao"><input type="radio" name="q2" value="2"><span class="al">В</span><span class="ach"></span><span class="at">Заставляю себя — иногда получается, иногда нет. Удовольствие «мерцает»</span><span class="as s2">2</span></label>
+    <label class="ao"><input type="radio" name="q2" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">Перестал(а) пытаться — хобби, друзья, еда, секс безразличны</span><span class="as s3">3</span></label>
+    <label class="ao"><input type="radio" name="q2" value="4"><span class="al">Д</span><span class="ach"></span><span class="at">Не просто безразлично — вызывает раздражение или отвращение</span><span class="as s4">4</span></label>
+    <label class="ao"><input type="radio" name="q2" value="5"><span class="al">Е</span><span class="ach"></span><span class="at">Забыл(а) что такое «хорошо» — не могу представить удовольствие</span><span class="as s5">5</span></label></div></div>
+
+  <div class="qc"><div class="qh" style="background:var(--dA);"><div class="qn">03</div><div class="qm"><div class="qtg">Нет в PHQ-9 · BDI-II + IDS-30</div><div class="qtl">Эмоциональная пустота (притупление чувств)</div><div class="qd">Это НЕ грусть — это когда способность чувствовать как будто «выключена»: ни радости, ни печали, ни любви, ни злости</div></div></div>
+    <div class="qp">Способны ли вы чувствовать эмоции — любые?</div>
+    <div class="ans" data-q="3"><label class="ao"><input type="radio" name="q3" value="0"><span class="al">А</span><span class="ach"></span><span class="at">Эмоции нормальные — чувствую радость, грусть, злость, нежность</span><span class="as s0">0</span></label>
+    <label class="ao"><input type="radio" name="q3" value="1"><span class="al">Б</span><span class="ach"></span><span class="at">Немного приглушены — как будто смотрю на жизнь через стекло</span><span class="as s1">1</span></label>
+    <label class="ao"><input type="radio" name="q3" value="2"><span class="al">В</span><span class="ach"></span><span class="at">Нестабильно: иногда чувствую нормально, иногда приглушено, иногда — полная пустота. Меняется без закономерности</span><span class="as s2">2</span></label>
+    <label class="ao"><input type="radio" name="q3" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">Чувствую себя «роботом» — делаю, говорю, но внутри пусто</span><span class="as s3">3</span></label>
+    <label class="ao"><input type="radio" name="q3" value="4"><span class="al">Д</span><span class="ach"></span><span class="at">Не могу плакать, даже когда хочу — не чувствую даже собственную боль</span><span class="as s4">4</span></label>
+    <label class="ao"><input type="radio" name="q3" value="5"><span class="al">Е</span><span class="ach"></span><span class="at">Полная эмоциональная пустота — не чувствую ничего к близким, к себе, к миру</span><span class="as s5">5</span></label></div></div>
+
+  <div class="qc"><div class="qh" style="background:var(--dA);"><div class="qn">04</div><div class="qm"><div class="qtg">Нет в PHQ-9 · BDI-II + Абрамсон (1989)</div><div class="qtl">Безнадёжность</div><div class="qd">«Будущего нет» — сильнейший предиктор суицида</div></div></div>
+    <div class="qp">Как вы видите будущее?</div>
+    <div class="ans" data-q="4"><label class="ao"><input type="radio" name="q4" value="0"><span class="al">А</span><span class="ach"></span><span class="at">С надеждой — есть планы, верю что будет хорошо</span><span class="as s0">0</span></label>
+    <label class="ao"><input type="radio" name="q4" value="1"><span class="al">Б</span><span class="ach"></span><span class="at">Периодически сомневаюсь, но в целом надежда есть</span><span class="as s1">1</span></label>
+    <label class="ao"><input type="radio" name="q4" value="2"><span class="al">В</span><span class="ach"></span><span class="at">Качели: день верю — день не верю. Нестабильно</span><span class="as s2">2</span></label>
+    <label class="ao"><input type="radio" name="q4" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">Будущее ощущается пустым — нечего ждать</span><span class="as s3">3</span></label>
+    <label class="ao"><input type="radio" name="q4" value="4"><span class="al">Д</span><span class="ach"></span><span class="at">Убеждён(а): ничего не изменится. Это навсегда</span><span class="as s4">4</span></label>
+    <label class="ao"><input type="radio" name="q4" value="5"><span class="al">Е</span><span class="ach"></span><span class="at">Будущее = продолжение страдания. Единственный выход — чтобы прекратилось</span><span class="as s5">5</span></label></div></div>
+
+  <div class="qc"><div class="qh" style="background:var(--dA);"><div class="qn">05</div><div class="qm"><div class="qtg">HAM-D · маркер типа депрессии</div><div class="qtl">Суточные колебания</div><div class="qd">Утром хуже → меланхолия. Вечером хуже → атипичная</div></div></div>
+    <div class="qp">Есть ли паттерн в течение дня?</div>
+    <div class="ans" data-q="5"><label class="ao"><input type="radio" name="q5" value="0"><span class="al">А</span><span class="ach"></span><span class="at">Нет паттерна — стабильно в течение дня</span><span class="as s0">0</span></label>
+    <label class="ao"><input type="radio" name="q5" value="1"><span class="al">Б</span><span class="ach"></span><span class="at">Утром немного тяжелее — к обеду выравнивается</span><span class="as s1">1</span></label>
+    <label class="ao"><input type="radio" name="q5" value="2"><span class="al">В</span><span class="ach"></span><span class="at">Чёткий паттерн: утро = пытка, к вечеру легче</span><span class="as s2">2</span></label>
+    <label class="ao"><input type="radio" name="q5" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">Плохо весь день без колебаний — ровный серый фон</span><span class="as s3">3</span></label>
+    <label class="ao"><input type="radio" name="q5" value="4"><span class="al">Д</span><span class="ach"></span><span class="at">Непредсказуемо: час нормально, потом проваливаюсь — нет стабильности</span><span class="as s4">4</span></label>
+    <label class="ao"><input type="radio" name="q5" value="5"><span class="al">Е</span><span class="ach"></span><span class="at">Пробуждение = возвращение в страдание. Ночь — единственное облегчение</span><span class="as s5">5</span></label></div></div>
+
+  <div class="qc"><div class="qh" style="background:var(--dA);"><div class="qn">06</div><div class="qm"><div class="qtg">BDI-II + MADRS</div><div class="qtl">Плаксивость и эмоциональная хрупкость</div></div></div>
+    <div class="qp">Как с плаксивостью?</div>
+    <div class="ans" data-q="6"><label class="ao"><input type="radio" name="q6" value="0"><span class="al">А</span><span class="ach"></span><span class="at">Обычная эмоциональность</span><span class="as s0">0</span></label>
+    <label class="ao"><input type="radio" name="q6" value="1"><span class="al">Б</span><span class="ach"></span><span class="at">Стал(а) более чувствительным(ой) — слёзы ближе</span><span class="as s1">1</span></label>
+    <label class="ao"><input type="radio" name="q6" value="2"><span class="al">В</span><span class="ach"></span><span class="at">Плачу без причины — от песни, от мысли, от взгляда</span><span class="as s2">2</span></label>
+    <label class="ao"><input type="radio" name="q6" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">Постоянная готовность расплакаться — «комок в горле»</span><span class="as s3">3</span></label>
+    <label class="ao"><input type="radio" name="q6" value="4"><span class="al">Д</span><span class="ach"></span><span class="at">Хочу плакать, но НЕ МОГУ — слёзы «высохли»</span><span class="as s4">4</span></label>
+    <label class="ao"><input type="radio" name="q6" value="5"><span class="al">Е</span><span class="ach"></span><span class="at">Любая мелочь = срыв ИЛИ полная неспособность чувствовать</span><span class="as s5">5</span></label></div></div>
+
+  <!-- ═══ DOMAIN B ═══ -->
+  <div class="dh" style="color:var(--dB);"><span>Домен Б · Когнитивный · 0–5 · повышенный вес</span><span class="ln"></span></div>
+
+  <div class="qc"><div class="qh" style="background:var(--dB);"><div class="qn">07</div><div class="qm"><div class="qtg">Nolen-Hoeksema (1991) · нет ни в одном стандартном инструменте</div><div class="qtl">Руминация</div><div class="qd">Прокручивание негатива — центральный механизм хронификации</div></div></div>
+    <div class="qp">Прокручиваете ли негативные мысли снова и снова?</div>
+    <div class="ans" data-q="7"><label class="ao"><input type="radio" name="q7" value="0"><span class="al">А</span><span class="ach"></span><span class="at">Нет — обдумываю и двигаюсь дальше</span><span class="as s0">0</span></label>
+    <label class="ao"><input type="radio" name="q7" value="1"><span class="al">Б</span><span class="ach"></span><span class="at">Иногда возвращаюсь к неприятному — но переключаюсь</span><span class="as s1">1</span></label>
+    <label class="ao"><input type="radio" name="q7" value="2"><span class="al">В</span><span class="ach"></span><span class="at">Часто прокручиваю одни и те же мысли: «почему так?», «что не так со мной?» — то сильнее, то слабее</span><span class="as s2">2</span></label>
+    <label class="ao"><input type="radio" name="q7" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">Почти непрерывно — мышление зафиксировано на негативе</span><span class="as s3">3</span></label>
+    <label class="ao"><input type="radio" name="q7" value="4"><span class="al">Д</span><span class="ach"></span><span class="at">Не могу остановить — крутится даже во сне</span><span class="as s4">4</span></label>
+    <label class="ao"><input type="radio" name="q7" value="5"><span class="al">Е</span><span class="ach"></span><span class="at">Мозг — ловушка. Каждая мысль ведёт к следующей негативной. Выхода нет</span><span class="as s5">5</span></label></div></div>
+
+  <div class="qc"><div class="qh" style="background:var(--dB);"><div class="qn">08</div><div class="qm"><div class="qtg">DSM-5 + BDI-II + когнитивная триада Бека</div><div class="qtl">Самокритика, вина, никчёмность</div></div></div>
+    <div class="qp">Какие мысли о себе преобладали?</div>
+    <div class="ans" data-q="8"><label class="ao"><input type="radio" name="q8" value="0"><span class="al">А</span><span class="ach"></span><span class="at">Самооценка нормальная — обычные сомнения</span><span class="as s0">0</span></label>
+    <label class="ao"><input type="radio" name="q8" value="1"><span class="al">Б</span><span class="ach"></span><span class="at">Больше самокритики — «мог(ла) бы лучше»</span><span class="as s1">1</span></label>
+    <label class="ao"><input type="radio" name="q8" value="2"><span class="al">В</span><span class="ach"></span><span class="at">Стойкое «я хуже других» — то сильнее, то слабее, но не уходит</span><span class="as s2">2</span></label>
+    <label class="ao"><input type="radio" name="q8" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">Иррациональная вина — «всё плохое из-за меня»</span><span class="as s3">3</span></label>
+    <label class="ao"><input type="radio" name="q8" value="4"><span class="al">Д</span><span class="ach"></span><span class="at">«Я обуза для близких — им лучше без меня»</span><span class="as s4">4</span></label>
+    <label class="ao"><input type="radio" name="q8" value="5"><span class="al">Е</span><span class="ach"></span><span class="at">Глубокое убеждение в ничтожности — как факт, не чувство</span><span class="as s5">5</span></label></div></div>
+
+  <div class="qc"><div class="qh" style="background:var(--dB);"><div class="qn">09</div><div class="qm"><div class="qtg">DSM-5 + PHQ-9 + HAM-D</div><div class="qtl">Концентрация и решения</div></div></div>
+    <div class="qp">Как с концентрацией?</div>
+    <div class="ans" data-q="9"><label class="ao"><input type="radio" name="q9" value="0"><span class="al">А</span><span class="ach"></span><span class="at">Ясное мышление — без проблем</span><span class="as s0">0</span></label>
+    <label class="ao"><input type="radio" name="q9" value="1"><span class="al">Б</span><span class="ach"></span><span class="at">Иногда трудно — но справляюсь</span><span class="as s1">1</span></label>
+    <label class="ao"><input type="radio" name="q9" value="2"><span class="al">В</span><span class="ach"></span><span class="at">«Туман» — не могу читать, следить за разговором. Волнами: час могу, час нет</span><span class="as s2">2</span></label>
+    <label class="ao"><input type="radio" name="q9" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">Не могу принимать решения — даже простые парализуют</span><span class="as s3">3</span></label>
+    <label class="ao"><input type="radio" name="q9" value="4"><span class="al">Д</span><span class="ach"></span><span class="at">Мышление замедлилось — окружающие замечают</span><span class="as s4">4</span></label>
+    <label class="ao"><input type="radio" name="q9" value="5"><span class="al">Е</span><span class="ach"></span><span class="at">Полная блокада — не могу думать, помнить, решать</span><span class="as s5">5</span></label></div></div>
+
+  <div class="qc"><div class="qh" style="background:#7f1d1d;"><div class="qn">10</div><div class="qm"><div class="qtg">DSM-5 + PHQ-9 Q9 + BDI-II</div><div class="qtl">Мысли о смерти и суициде</div></div></div>
+    <div class="qp">Какое описание ближе?</div>
+    <div class="ans" data-q="10"><label class="ao"><input type="radio" name="q10" value="0"><span class="al">А</span><span class="ach"></span><span class="at">Таких мыслей нет</span><span class="as s0">0</span></label>
+    <label class="ao"><input type="radio" name="q10" value="1"><span class="al">Б</span><span class="ach"></span><span class="at">«Устал(а) от всего» — не о смерти конкретно</span><span class="as s1">1</span></label>
+    <label class="ao"><input type="radio" name="q10" value="2"><span class="al">В</span><span class="ach"></span><span class="at">«Лучше бы меня не было» — мысли ПУГАЮТ, я их не хочу</span><span class="as s2">2</span></label>
+    <label class="ao"><input type="radio" name="q10" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">Мысли о способах — но пугают и вызывают отвращение</span><span class="as s3">3</span></label>
+    <label class="ao"><input type="radio" name="q10" value="4"><span class="al">Д</span><span class="ach"></span><span class="at">Мысли о смерти ПРИНОСЯТ ОБЛЕГЧЕНИЕ — как выход</span><span class="as s4">4</span></label>
+    <label class="ao sel-w"><input type="radio" name="q10" value="5"><span class="al">Е</span><span class="ach"></span><span class="at">Составил(а) план или предпринял(а) попытку</span><span class="as s5">5</span></label></div>
+    <div class="qnt qnt-red"><strong>Если выбрали Д или Е — обратитесь за помощью сейчас</strong>Телефон доверия: 8-800-100-49-94 (бесплатно, круглосуточно) | Скорая: 112</div></div>
+
+  <div class="qc"><div class="qh" style="background:var(--dB);"><div class="qn">11</div><div class="qm"><div class="qtg">Метакогнитивный</div><div class="qtl">Страдание от собственных мыслей</div><div class="qd">Не содержание, а сам ПРОЦЕСС — насколько мысли причиняют боль</div></div></div>
+    <div class="qp">Насколько негативные мысли причиняют страдание?</div>
+    <div class="ans" data-q="11"><label class="ao"><input type="radio" name="q11" value="0"><span class="al">А</span><span class="ach"></span><span class="at">Не причиняют особого дискомфорта</span><span class="as s0">0</span></label>
+    <label class="ao"><input type="radio" name="q11" value="1"><span class="al">Б</span><span class="ach"></span><span class="at">Неприятно, но терпимо</span><span class="as s1">1</span></label>
+    <label class="ao"><input type="radio" name="q11" value="2"><span class="al">В</span><span class="ach"></span><span class="at">Причиняют реальное страдание — то сильнее, то слабее. Непредсказуемо</span><span class="as s2">2</span></label>
+    <label class="ao"><input type="radio" name="q11" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">Каждая мысль — удар. Мозг атакует без передышки</span><span class="as s3">3</span></label>
+    <label class="ao"><input type="radio" name="q11" value="4"><span class="al">Д</span><span class="ach"></span><span class="at">Невыносимая психическая боль — хочется «выключить голову»</span><span class="as s4">4</span></label>
+    <label class="ao"><input type="radio" name="q11" value="5"><span class="al">Е</span><span class="ach"></span><span class="at">Боль от мыслей сильнее физической — существование невыносимо</span><span class="as s5">5</span></label></div></div>
+
+  <!-- ═══ DOMAIN C ═══ -->
+  <div class="dh" style="color:var(--dC);"><span>Домен В · Соматический · 0–3</span><span class="ln"></span></div>
+
+  <div class="qc"><div class="qh" style="background:var(--dC);"><div class="qn">12</div><div class="qm"><div class="qtg">DSM-5 + HAM-D + IDS-30 · тип = тип депрессии</div><div class="qtl">Сон</div></div></div><div class="qp">Какой был сон?</div>
+    <div class="ans" data-q="12"><label class="ao"><input type="radio" name="q12" value="0"><span class="al">А</span><span class="ach"></span><span class="at">Нормальный</span><span class="as s0">0</span></label><label class="ao"><input type="radio" name="q12" value="1"><span class="al">Б</span><span class="ach"></span><span class="at">Проблемы с засыпанием ИЛИ ранние пробуждения 3–5 утра</span><span class="as s1">1</span></label><label class="ao"><input type="radio" name="q12" value="2"><span class="al">В</span><span class="ach"></span><span class="at">Гиперсомния (10–14 ч.) ИЛИ фрагментарный сон</span><span class="as s2">2</span></label><label class="ao"><input type="radio" name="q12" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">Сон разрушен — не сплю сутками ИЛИ сплю весь день</span><span class="as s3">3</span></label></div></div>
+
+  <div class="qc"><div class="qh" style="background:var(--dC);"><div class="qn">13</div><div class="qm"><div class="qtg">DSM-5 + IDS-30</div><div class="qtl">Аппетит и вес</div></div></div><div class="qp">Что с аппетитом?</div>
+    <div class="ans" data-q="13"><label class="ao"><input type="radio" name="q13" value="0"><span class="al">А</span><span class="ach"></span><span class="at">Нормальный</span><span class="as s0">0</span></label><label class="ao"><input type="radio" name="q13" value="1"><span class="al">Б</span><span class="ach"></span><span class="at">Снизился ИЛИ тянет на сладкое/углеводы</span><span class="as s1">1</span></label><label class="ao"><input type="radio" name="q13" value="2"><span class="al">В</span><span class="ach"></span><span class="at">Отвращение к еде ИЛИ неконтролируемое переедание</span><span class="as s2">2</span></label><label class="ao"><input type="radio" name="q13" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">Не могу есть / ем непрерывно — значительное изменение веса</span><span class="as s3">3</span></label></div></div>
+
+  <div class="qc"><div class="qh" style="background:var(--dC);"><div class="qn">14</div><div class="qm"><div class="qtg">DSM-5 + PHQ-9</div><div class="qtl">Энергия</div></div></div><div class="qp">Какой тип усталости?</div>
+    <div class="ans" data-q="14"><label class="ao"><input type="radio" name="q14" value="0"><span class="al">А</span><span class="ach"></span><span class="at">Нормальная энергия</span><span class="as s0">0</span></label><label class="ao"><input type="radio" name="q14" value="1"><span class="al">Б</span><span class="ach"></span><span class="at">Устаю быстрее, но основные дела делаю</span><span class="as s1">1</span></label><label class="ao"><input type="radio" name="q14" value="2"><span class="al">В</span><span class="ach"></span><span class="at">Мотивационная пустота (силы есть, но не могу заставить) ИЛИ «свинцовое» тело</span><span class="as s2">2</span></label><label class="ao"><input type="radio" name="q14" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">Не могу встать — душ, еда = непосильные задачи</span><span class="as s3">3</span></label></div></div>
+
+  <div class="qc"><div class="qh" style="background:var(--dC);"><div class="qn">15</div><div class="qm"><div class="qtg">DSM-5 + HAM-D</div><div class="qtl">Психомоторика</div></div></div><div class="qp">Изменения в движениях?</div>
+    <div class="ans" data-q="15"><label class="ao"><input type="radio" name="q15" value="0"><span class="al">А</span><span class="ach"></span><span class="at">Как обычно</span><span class="as s0">0</span></label><label class="ao"><input type="radio" name="q15" value="1"><span class="al">Б</span><span class="ach"></span><span class="at">Медленнее: тише говорю, меньше жестикулирую</span><span class="as s1">1</span></label><label class="ao"><input type="radio" name="q15" value="2"><span class="al">В</span><span class="ach"></span><span class="at">Заметная заторможенность ИЛИ нервное беспокойство</span><span class="as s2">2</span></label><label class="ao"><input type="radio" name="q15" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">Почти обездвиженность ИЛИ тяжёлая ажитация</span><span class="as s3">3</span></label></div></div>
+
+  <div class="qc"><div class="qh" style="background:var(--dC);"><div class="qn">16</div><div class="qm"><div class="qtg">HAM-D + IDS-30 · нет в PHQ-9</div><div class="qtl">Боли</div></div></div><div class="qp">Необъяснимые боли?</div>
+    <div class="ans" data-q="16"><label class="ao"><input type="radio" name="q16" value="0"><span class="al">А</span><span class="ach"></span><span class="at">Нет</span><span class="as s0">0</span></label><label class="ao"><input type="radio" name="q16" value="1"><span class="al">Б</span><span class="ach"></span><span class="at">Иногда головные боли или тяжесть</span><span class="as s1">1</span></label><label class="ao"><input type="radio" name="q16" value="2"><span class="al">В</span><span class="ach"></span><span class="at">Регулярные боли без медицинской причины</span><span class="as s2">2</span></label><label class="ao"><input type="radio" name="q16" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">Хроническая боль, усиливается с настроением</span><span class="as s3">3</span></label></div></div>
+
+  <!-- ═══ DOMAIN D ═══ -->
+  <div class="dh" style="color:var(--dD);"><span>Домен Г · Поведенческий · 0–4</span><span class="ln"></span></div>
+
+  <div class="qc"><div class="qh" style="background:var(--dD);"><div class="qn">17</div><div class="qm"><div class="qtg">IDS-30 + Левинсон</div><div class="qtl">Социальная изоляция</div></div></div><div class="qp">Как с общением?</div>
+    <div class="ans" data-q="17"><label class="ao"><input type="radio" name="q17" value="0"><span class="al">А</span><span class="ach"></span><span class="at">Как обычно</span><span class="as s0">0</span></label><label class="ao"><input type="radio" name="q17" value="1"><span class="al">Б</span><span class="ach"></span><span class="at">Меньше желания — но если зовут, иду</span><span class="as s1">1</span></label><label class="ao"><input type="radio" name="q17" value="2"><span class="al">В</span><span class="ach"></span><span class="at">Активно избегаю — отменяю встречи, не отвечаю</span><span class="as s2">2</span></label><label class="ao"><input type="radio" name="q17" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">Почти ни с кем — потерял(а) друзей</span><span class="as s3">3</span></label><label class="ao"><input type="radio" name="q17" value="4"><span class="al">Д</span><span class="ach"></span><span class="at">Полная изоляция — мир снаружи не существует</span><span class="as s4">4</span></label></div></div>
+
+  <div class="qc"><div class="qh" style="background:var(--dD);"><div class="qn">18</div><div class="qm"><div class="qtg">Индикатор тяжести</div><div class="qtl">Уход за собой</div></div></div><div class="qp">Как с гигиеной, бытом, едой?</div>
+    <div class="ans" data-q="18"><label class="ao"><input type="radio" name="q18" value="0"><span class="al">А</span><span class="ach"></span><span class="at">Всё в порядке</span><span class="as s0">0</span></label><label class="ao"><input type="radio" name="q18" value="1"><span class="al">Б</span><span class="ach"></span><span class="at">Дела копятся — откладываю</span><span class="as s1">1</span></label><label class="ao"><input type="radio" name="q18" value="2"><span class="al">В</span><span class="ach"></span><span class="at">Серьёзно запустил(а) — грязная посуда, бельё</span><span class="as s2">2</span></label><label class="ao"><input type="radio" name="q18" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">Не мо́юсь днями, дом в хаосе</span><span class="as s3">3</span></label><label class="ao"><input type="radio" name="q18" value="4"><span class="al">Д</span><span class="ach"></span><span class="at">Базовые потребности игнорируются</span><span class="as s4">4</span></label></div></div>
+
+  <div class="qc"><div class="qh" style="background:var(--dD);"><div class="qn">19</div><div class="qm"><div class="qtg">BDI-II + IDS-30 · «мужская депрессия»</div><div class="qtl">Раздражительность и агрессия</div></div></div><div class="qp">Как с раздражительностью?</div>
+    <div class="ans" data-q="19"><label class="ao"><input type="radio" name="q19" value="0"><span class="al">А</span><span class="ach"></span><span class="at">В норме</span><span class="as s0">0</span></label><label class="ao"><input type="radio" name="q19" value="1"><span class="al">Б</span><span class="ach"></span><span class="at">Менее терпелив(а)</span><span class="as s1">1</span></label><label class="ao"><input type="radio" name="q19" value="2"><span class="al">В</span><span class="ach"></span><span class="at">Вспыхиваю из-за пустяков — потом жалею</span><span class="as s2">2</span></label><label class="ao"><input type="radio" name="q19" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">Постоянная злость — конфликты</span><span class="as s3">3</span></label><label class="ao"><input type="radio" name="q19" value="4"><span class="al">Д</span><span class="ach"></span><span class="at">Срывы, агрессия — разрушаю отношения</span><span class="as s4">4</span></label></div></div>
+
+  <div class="qc"><div class="qh" style="background:var(--dD);"><div class="qn">20</div><div class="qm"><div class="qtg">Поведенческая активация · Левинсон</div><div class="qtl">Снижение активности</div></div></div><div class="qp">Насколько сузилась активность?</div>
+    <div class="ans" data-q="20"><label class="ao"><input type="radio" name="q20" value="0"><span class="al">А</span><span class="ach"></span><span class="at">Нормальная активность</span><span class="as s0">0</span></label><label class="ao"><input type="radio" name="q20" value="1"><span class="al">Б</span><span class="ach"></span><span class="at">Стал(а) меньше делать</span><span class="as s1">1</span></label><label class="ao"><input type="radio" name="q20" value="2"><span class="al">В</span><span class="ach"></span><span class="at">Работа — дом — кровать. Дни: то нормально, то лежу</span><span class="as s2">2</span></label><label class="ao"><input type="radio" name="q20" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">Почти ничего — лежу, смотрю в потолок</span><span class="as s3">3</span></label><label class="ao"><input type="radio" name="q20" value="4"><span class="al">Д</span><span class="ach"></span><span class="at">Полная остановка — дни сливаются</span><span class="as s4">4</span></label></div></div>
+
+  <!-- ═══ DOMAIN E ═══ -->
+  <div class="dh" style="color:var(--dE);"><span>Домен Д · Функционирование · вне общего балла · DSM-5 обязательно</span><span class="ln"></span></div>
+
+  <div class="info info-sage" style="margin-bottom:20px;font-size:14px;"><strong>Если состояние «плавает»</strong>Работаете 2 часа, потом не можете 2 часа? 5 дней нормально, потом 5 дней нет? Оценивайте СУММАРНОЕ влияние. Если из-за таких «провалов» вы теряете 30–50% продуктивности — это «серьёзные проблемы». Если 50%+ — «не могу работать полноценно».</div>
+
+  <div class="qc"><div class="qh" style="background:var(--dE);"><div class="qn">21</div><div class="qm"><div class="qtg">DSM-5 D + OASIS</div><div class="qtl">Влияние на работу / учёбу</div></div></div><div class="qp">Как депрессия влияет на работу?</div>
+    <div class="ans" data-q="21"><label class="ao"><input type="radio" name="q21" value="0"><span class="al">А</span><span class="ach"></span><span class="at">Без проблем</span><span class="as s0">0</span></label><label class="ao"><input type="radio" name="q21" value="1"><span class="al">Б</span><span class="ach"></span><span class="at">Стало труднее, но справляюсь</span><span class="as s1">1</span></label><label class="ao"><input type="radio" name="q21" value="2"><span class="al">В</span><span class="ach"></span><span class="at">Серьёзные проблемы: работаю урывками, то могу то нет, теряю 30–50%</span><span class="as s2">2</span></label><label class="ao"><input type="radio" name="q21" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">На грани — продуктивность минимальна, больше 50% времени не могу</span><span class="as s3">3</span></label><label class="ao"><input type="radio" name="q21" value="4"><span class="al">Д</span><span class="ach"></span><span class="at">Не работаю из-за депрессии</span><span class="as s4">4</span></label></div></div>
+
+  <div class="qc"><div class="qh" style="background:var(--dE);"><div class="qn">22</div><div class="qm"><div class="qtg">DSM-5 D + OASIS</div><div class="qtl">Влияние на отношения</div></div></div><div class="qp">Как депрессия влияет на отношения?</div>
+    <div class="ans" data-q="22"><label class="ao"><input type="radio" name="q22" value="0"><span class="al">А</span><span class="ach"></span><span class="at">Без проблем</span><span class="as s0">0</span></label><label class="ao"><input type="radio" name="q22" value="1"><span class="al">Б</span><span class="ach"></span><span class="at">Стало труднее</span><span class="as s1">1</span></label><label class="ao"><input type="radio" name="q22" value="2"><span class="al">В</span><span class="ach"></span><span class="at">Конфликты, отдаление</span><span class="as s2">2</span></label><label class="ao"><input type="radio" name="q22" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">Потерял(а) друзей, разрушаются</span><span class="as s3">3</span></label><label class="ao"><input type="radio" name="q22" value="4"><span class="al">Д</span><span class="ach"></span><span class="at">Полная социальная изоляция</span><span class="as s4">4</span></label></div></div>
+
+  <div class="qc"><div class="qh" style="background:var(--dE);"><div class="qn">23</div><div class="qm"><div class="qtg">Индикатор тяжести</div><div class="qtl">Влияние на быт и повседневность</div></div></div><div class="qp">Как депрессия влияет на быт?</div>
+    <div class="ans" data-q="23"><label class="ao"><input type="radio" name="q23" value="0"><span class="al">А</span><span class="ach"></span><span class="at">В порядке</span><span class="as s0">0</span></label><label class="ao"><input type="radio" name="q23" value="1"><span class="al">Б</span><span class="ach"></span><span class="at">Дела копятся</span><span class="as s1">1</span></label><label class="ao"><input type="radio" name="q23" value="2"><span class="al">В</span><span class="ach"></span><span class="at">Серьёзные трудности — хаос в доме</span><span class="as s2">2</span></label><label class="ao"><input type="radio" name="q23" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">Быт развалился</span><span class="as s3">3</span></label><label class="ao"><input type="radio" name="q23" value="4"><span class="al">Д</span><span class="ach"></span><span class="at">Не в состоянии помыться, поесть, выйти</span><span class="as s4">4</span></label></div></div>
+
+  
+
+<div class="hist">
+  <div class="sdiv"><div class="sdiv-n">H</div><div><h3>История</h3><p>Не влияет на балл, но влияет на выводы</p></div></div>
+
+  <div class="hc"><div class="hch"><span class="hcc">X1</span><div><div class="hcl">Количество депрессивных эпизодов</div><div class="hcd">Сколько раз в жизни вы переживали подобное?</div></div></div><div class="hco"><span class="hcb" data-g="x1" data-v="first">Первый</span><span class="hcb" data-g="x1" data-v="2-3">2–3</span><span class="hcb" data-g="x1" data-v="4-5">4–5</span><span class="hcb" data-g="x1" data-v="5+">Более 5</span><span class="hcb" data-g="x1" data-v="continuous">Непрерывно</span></div><div class="hcn" id="note-x1"></div><div class="hist-ok" id="ok-x1">✓ Учтено</div></div>
+
+  <div class="hc"><div class="hch"><span class="hcc">X2</span><div><div class="hcl">Самый длинный эпизод</div></div></div><div class="hco"><span class="hcb" data-g="x2" data-v="<2w">&lt;2 нед.</span><span class="hcb" data-g="x2" data-v="2-4w">2–4 нед.</span><span class="hcb" data-g="x2" data-v="1-6m">1–6 мес.</span><span class="hcb" data-g="x2" data-v="6-24m">6–24 мес.</span><span class="hcb" data-g="x2" data-v="2y+" data-note="Специалист может расценить это как отдельный диагноз">Более 2 лет ⚠</span></div><div class="hcn" id="note-x2"></div><div class="hist-ok" id="ok-x2">✓ Учтено</div></div>
+
+  <div class="hc"><div class="hch"><span class="hcc">X3</span><div><div class="hcl">Возвращались ли к нормальному состоянию?</div></div></div><div class="hco"><span class="hcb" data-g="x3" data-v="full">Да, полностью</span><span class="hcb" data-g="x3" data-v="partial">Частично</span><span class="hcb" data-g="x3" data-v="residual" data-note="Фон сохранялся — важная информация для специалиста">Фон оставался ⚠</span><span class="hcb" data-g="x3" data-v="none">Без перерывов</span></div><div class="hcn" id="note-x3"></div><div class="hist-ok" id="ok-x3">✓ Учтено</div></div>
+
+  <div class="hc"><div class="hch"><span class="hcc">X4</span><div><div class="hcl">Были ли периоды необычного подъёма?</div><div class="hcd">Энергия зашкаливает, сон 3–4 часа и хватает, поток идей</div></div></div><div class="hco"><span class="hcb" data-g="x4" data-v="no">Нет</span><span class="hcb" data-g="x4" data-v="maybe" data-note="Расскажите об этом специалисту">Возможно</span><span class="hcb" data-g="x4" data-v="yes" data-note="Обязательно обсудите с психиатром — критически важно">Да ⚠</span></div><div class="hcn" id="note-x4"></div><div class="hist-ok" id="ok-x4">✓ Учтено</div></div>
+
+  <div class="hc"><div class="hch"><span class="hcc">X5</span><div><div class="hcl">Связаны ли симптомы с травмой?</div><div class="hcd">Насилие, потеря близкого, авария, катастрофа</div></div></div><div class="hco"><span class="hcb" data-g="x5" data-v="no">Нет</span><span class="hcb" data-g="x5" data-v="maybe">Возможно</span><span class="hcb" data-g="x5" data-v="yes">Да</span></div><div class="hcn" id="note-x5"></div><div class="hist-ok" id="ok-x5">✓ Учтено</div></div>
+
+  <div class="hc"><div class="hch"><span class="hcc">Д1</span><div><div class="hcl">Есть ли ещё и тревога?</div><div class="hcd">До 60% людей с депрессией имеют и тревогу</div></div></div><div class="hco"><span class="hcb" data-g="d1" data-v="no">Нет</span><span class="hcb" data-g="d1" data-v="sometimes">Бывает</span><span class="hcb" data-g="d1" data-v="marked">Выраженная</span><span class="hcb" data-g="d1" data-v="diagnosed">Диагностирована</span></div><div class="hcn" id="note-d1"></div><div class="hist-ok" id="ok-d1">✓ Учтено</div></div>
+
+  <div class="hc"><div class="hch"><span class="hcc">Д2</span><div><div class="hcl">Есть ли болезни-имитаторы депрессии?</div><div class="hcd">Щитовидная железа, анемия, диабет, дефицит витаминов</div></div></div><div class="hco"><span class="hcb" data-g="d2" data-v="no">Нет</span><span class="hcb" data-g="d2" data-v="unknown" data-note="Стоит обсудить со специалистом обследование">Не знаю</span><span class="hcb" data-g="d2" data-v="treated">Есть, лечу</span><span class="hcb" data-g="d2" data-v="untreated" data-note="Обсудите со специалистом">Есть, не лечу ⚠</span></div><div class="hcn" id="note-d2"></div><div class="hist-ok" id="ok-d2">✓ Учтено</div></div>
+
+  <div class="hc"><div class="hch"><span class="hcc">Д3</span><div><div class="hcl">Депрессия или БАР у родственников?</div><div class="hcd">Наследуемость депрессии 37–40%</div></div></div><div class="hco"><span class="hcb" data-g="d3" data-v="no">Нет</span><span class="hcb" data-g="d3" data-v="depression">Депрессия</span><span class="hcb" data-g="d3" data-v="bipolar" data-note="Сообщите специалисту — важный фактор">Биполярное ⚠</span><span class="hcb" data-g="d3" data-v="both" data-note="Сообщите специалисту">И то, и другое ⚠</span></div><div class="hcn" id="note-d3"></div><div class="hist-ok" id="ok-d3">✓ Учтено</div></div>
+
+  <div class="hc"><div class="hch"><span class="hcc">PDS</span><div><div class="hcl">Когда последний раз вы 2+ мес. НЕ испытывали этих симптомов?</div><div class="hcd">Скринер персистирующей депрессии</div></div></div><div class="hco"><span class="hcb" data-g="pds" data-v="recent">Менее года назад</span><span class="hcb" data-g="pds" data-v="1-2y">1–2 года</span><span class="hcb" data-g="pds" data-v="2y+" data-note="Специалист может расценить как персистирующее расстройство">Более 2 лет ⚠</span><span class="hcb" data-g="pds" data-v="never" data-note="Специалист может расценить как персистирующее расстройство">Не помню такого ⚠</span></div><div class="hcn" id="note-pds"></div><div class="hist-ok" id="ok-pds">✓ Учтено</div></div>
+</div>
+
+
+<div class="res">
+  <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:8px;">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:700;color:var(--ink);line-height:1;" id="rn">—</div>
+    <div><div style="font-size:18px;font-weight:600;" id="rl"></div><div style="font-size:12px;color:var(--ink3);">из 86</div></div>
   </div>
-  <div class="nav-burger"><span></span><span></span><span></span></div>
-</nav>
+  <div class="rb"><div class="rb-f" id="rb"></div></div>
+  <div style="font-size:15px;color:var(--ink2);line-height:1.7;" id="rd">Ответьте минимум на 5 вопросов</div>
 
-<!-- Hero -->
-<section class="hero" style="min-height:60vh;padding-top:140px">
-  <img src="/img/room-depression.png" alt="Комната депрессии" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.15;z-index:0">
-  <div style="position:relative;z-index:1">
-    <span class="badge badge-accent">БДР · DSM-5 · F32–F33</span>
-    <h1 style="margin-top:16px">Тест на <em>депрессию</em></h1>
-    <p style="font-style:italic;color:var(--ink3);margin-bottom:24px">Комната, из которой не хочется выходить</p>
-    <p>26 вопросов · 5 доменов · дифференциальная диагностика · ~10 минут</p>
-    <span class="badge badge-soon" style="font-size:14px;padding:10px 24px">&#9203; Скрининг в разработке</span>
-  </div>
-</section>
+  <table class="stbl" id="stbl"><tbody>
+    <tr data-r="0,17"><td>0–17</td><td style="color:#166534;font-weight:700;">НЕТ ДЕПРЕССИИ</td><td>В пределах нормы</td></tr>
+    <tr data-r="18,34"><td>18–34</td><td style="color:#6a7a2a;font-weight:700;">ЛЁГКАЯ</td><td>Заслуживает внимания</td></tr>
+    <tr data-r="35,52"><td>35–52</td><td style="color:#b45309;font-weight:700;">УМЕРЕННАЯ</td><td>Обратитесь к специалисту</td></tr>
+    <tr data-r="53,69"><td>53–69</td><td style="color:#c2410c;font-weight:700;">ТЯЖЁЛАЯ</td><td>Необходима помощь</td></tr>
+    <tr data-r="70,86"><td>70–86</td><td style="color:#b03a3a;font-weight:700;">КРАЙНЕ ТЯЖЁЛАЯ</td><td>Срочно к психиатру</td></tr>
+  </tbody></table>
 
-<!-- Норма vs Расстройство -->
-<section class="section">
-  <div class="container">
-    <div class="section-head fade-up"><h2>Где <em>граница?</em></h2></div>
-    <div class="grid-2">
-      <div class="card fade-up" style="border-color:rgba(106,170,138,.2)">
-        <h3 style="color:#6aaa8a;font-size:1.1rem;margin-bottom:12px">Нормальная грусть</h3>
-        <p class="text-small text-muted">Проходит за дни, связана с конкретной причиной. Не мешает работать и общаться. Сон и аппетит в норме. Способность радоваться сохраняется.</p>
-      </div>
-      <div class="card fade-up" style="border-color:rgba(128,168,208,.2)">
-        <h3 style="color:var(--c-depr);font-size:1.1rem;margin-bottom:12px">Депрессивное расстройство</h3>
-        <p class="text-small text-muted">Длится ≥2 недель без чёткой причины. Нарушает работу, отношения, сон. Потеря интереса ко всему. Чувство бесполезности или вины. Может включать мысли о смерти.</p>
-      </div>
+  <div id="domBlock" style="display:none;margin-top:24px;">
+    <div style="font-size:13px;font-weight:600;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">ДОМЕНЫ</div>
+    <div class="dmap">
+      <div class="dmc" style="background:rgba(106,58,122,.06);"><div class="dmc-letter">А</div><div class="dmc-name">Эмоциональный</div><div class="dmc-w"><span id="dA">–</span> / 30</div><div class="dmc-bar"><div class="dmc-bf" id="barA" style="background:var(--dA);"></div></div></div>
+      <div class="dmc" style="background:rgba(58,90,122,.06);"><div class="dmc-letter">Б</div><div class="dmc-name">Когнитивный</div><div class="dmc-w"><span id="dB">–</span> / 25</div><div class="dmc-bar"><div class="dmc-bf" id="barB" style="background:var(--dB);"></div></div></div>
+      <div class="dmc" style="background:rgba(106,122,58,.06);"><div class="dmc-letter">В</div><div class="dmc-name">Соматический</div><div class="dmc-w"><span id="dC">–</span> / 15</div><div class="dmc-bar"><div class="dmc-bf" id="barC" style="background:var(--dC);"></div></div></div>
+      <div class="dmc" style="background:rgba(122,74,58,.06);"><div class="dmc-letter">Г</div><div class="dmc-name">Поведенческий</div><div class="dmc-w"><span id="dD">–</span> / 16</div><div class="dmc-bar"><div class="dmc-bf" id="barD" style="background:var(--dD);"></div></div></div>
+      <div class="dmc" style="background:rgba(58,106,106,.06);"><div class="dmc-letter">Д</div><div class="dmc-name">Функционирование</div><div class="dmc-w"><span id="dE">–</span> / 12</div><div class="dmc-bar"><div class="dmc-bf" id="barE" style="background:var(--dE);"></div></div></div>
     </div>
   </div>
-</section>
+  <div id="conc"></div>
+</div>
+</div>
 
-<!-- Что включает -->
-<section class="section-sm">
-  <div class="container">
-    <div class="section-head fade-up"><h2>Что включает <em>скрининг</em></h2></div>
-    <div class="grid-3">
-      <div class="card fade-up"><h3 style="font-size:1rem;margin-bottom:8px">26 вопросов</h3><p class="text-small text-muted">На основе PHQ-9, BDI-II, HAM-D, IDS-30 и критериев DSM-5-TR</p></div>
-      <div class="card fade-up"><h3 style="font-size:1rem;margin-bottom:8px">5 доменов</h3><p class="text-small text-muted">Аффективный, когнитивный, соматический, психомоторный, функционирование</p></div>
-      <div class="card fade-up"><h3 style="font-size:1rem;margin-bottom:8px">Дифдиагностика</h3><p class="text-small text-muted">Отличает депрессию от ГТР, БАР-II и дистимии</p></div>
-      <div class="card fade-up"><h3 style="font-size:1rem;margin-bottom:8px">История</h3><p class="text-small text-muted">Эпизоды, подъёмы, травмы, ремиссии, коморбидность, семья</p></div>
-      <div class="card fade-up"><h3 style="font-size:1rem;margin-bottom:8px">Подтипы</h3><p class="text-small text-muted">Меланхолический vs атипичный — sub-module</p></div>
-      <div class="card fade-up"><h3 style="font-size:1rem;margin-bottom:8px">Для врача</h3><p class="text-small text-muted">Что обсудить со специалистом на основе ваших ответов</p></div>
-    </div>
-  </div>
-</section>
+<div class="sf" onclick="document.querySelector('.res').scrollIntoView({behavior:'smooth'})">
+  <div><div class="sf-l">БАЛЛ</div><div class="sf-n" id="sfn">0</div></div>
+  <div><div class="sf-l">УРОВЕНЬ</div><div class="sf-v" id="sfv">—</div></div>
+</div>
 
-<!-- CTA -->
-<section class="section-sm">
-  <div class="container text-center fade-up">
-    <div class="pricing-card featured" style="max-width:400px;margin:0 auto">
-      <div class="pc-name">Скрининг депрессии</div>
-      <div class="pc-price">399 <span>₽</span></div>
-      <ul><li>Результат по 5 доменам</li><li>Дифференциальная таблица</li><li>Анализ истории</li><li>Подтип: меланхолический / атипичный</li></ul>
-      <span class="badge badge-soon" style="font-size:14px;padding:10px 24px">&#9203; Скрининг в разработке</span>
-      <p class="text-xs mt-2">Базовый результат (общий уровень) — бесплатно</p>
-    </div>
-  </div>
-</section>
+<div class="disclaimer-footer">
+  MentalScreenLab — информационный скрининговый сервис. Не является медицинской услугой. Не ставит диагнозы. Не назначает лечение.<br>
+  <a href="/" style="color:var(--pri);text-decoration:none;">← Главная</a> &middot;
+  <a href="/privacy.html" style="color:var(--ink3);text-decoration:none;">Конфиденциальность</a><br>
+  © 2026 MentalScreenLab
+</div>
 
-<!-- Инструменты -->
-<section class="section-sm">
-  <div class="container fade-up">
-    <div class="section-head"><h2 style="font-size:1.2rem">Использованные <em>инструменты</em></h2></div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center">
-      <span class="badge badge-accent">PHQ-9</span>
-      <span class="badge badge-accent">BDI-II (Beck)</span>
-      <span class="badge badge-accent">HAM-D17</span>
-      <span class="badge badge-accent">MADRS</span>
-      <span class="badge badge-accent">IDS-30</span>
-      <span class="badge badge-accent">DSM-5-TR</span>
-    </div>
-  </div>
-</section>
-
-<footer class="footer">
-    <div class="footer-disclaimer">MentalScreenLab — информационный скрининговый сервис. Не является медицинской услугой. Не ставит диагнозы. Не заменяет консультации специалиста.</div>
-  <div class="footer-links"><a href="/">Главная</a> <a href="/methodology/">Методология</a> <a href="/privacy.html">Конфиденциальность</a></div>
-  <div>© 2026 MentalScreenLab</div>
-</footer>
-
-<script src="/js/scroll.js"></script>
+<script src="/config-depression.js"></script>
+<script src="/engine.js"></script>
 </body>
 </html>
