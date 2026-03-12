@@ -6,6 +6,8 @@
 <title>Скрининг депрессии — MentalScreenLab</title>
 <meta name="description" content="Углублённый скрининг депрессии: 23 вопроса, 5 доменов. На основе PHQ-9, BDI-II, HAM-D и DSM-5-TR.">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/components.css">
 <link rel="stylesheet" href="/common.css">
 <style>
 :root{
@@ -56,7 +58,68 @@
 
 <div class="crisis-float"><strong>Нужна помощь сейчас?</strong>Телефон доверия: <strong>8-800-2000-122</strong><br>Бесплатно, круглосуточно</div>
 
-<div class="hero"><h1>Скрининг депрессии</h1><p>23 вопроса · 5 доменов · дифдиагностика · ~10 минут</p></div>
+<nav class="nav">
+  <a href="/" class="nav-logo">Mental<span>ScreenLab</span></a>
+  <div class="nav-center"><a href="/" class="nav-link">← Главная</a><a href="/rooms/" class="nav-link">Галерея</a></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="min-height:60vh;padding-top:140px">
+  <img src="/img/room-depression.png" alt="Комната депрессии" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.15;z-index:0">
+  <div style="position:relative;z-index:1">
+    <span class="badge badge-accent">БДР · DSM-5 · F32–F33</span>
+    <h1 style="margin-top:16px">Скрининг <em>депрессии</em></h1>
+    <p style="font-style:italic;color:var(--ink3);margin-bottom:24px">Комната, из которой не хочется выходить</p>
+    <p>23 вопроса · 5 доменов · дифференциальная диагностика · ~10 минут</p>
+  </div>
+</section>
+
+<!-- Норма vs Расстройство -->
+<section class="section">
+  <div class="container">
+    <div class="section-head fade-up"><h2>Где <em>граница?</em></h2></div>
+    <div class="grid-2">
+      <div class="card fade-up" style="border-color:rgba(106,170,138,.2)">
+        <h3 style="color:#6aaa8a;font-size:1.1rem;margin-bottom:12px">Нормальная грусть</h3>
+        <p class="text-small text-muted">Проходит за дни, связана с конкретной причиной. Не мешает работать и общаться. Сон и аппетит в норме. Способность радоваться сохраняется.</p>
+      </div>
+      <div class="card fade-up" style="border-color:rgba(128,168,208,.2)">
+        <h3 style="color:#80a8d0;font-size:1.1rem;margin-bottom:12px">Депрессивное расстройство</h3>
+        <p class="text-small text-muted">Длится ≥2 недель без чёткой причины. Нарушает работу, отношения, сон. Потеря интереса ко всему. Чувство бесполезности или вины. Может включать мысли о смерти.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Что включает -->
+<section class="section-sm">
+  <div class="container">
+    <div class="section-head fade-up"><h2>Что включает <em>скрининг</em></h2></div>
+    <div class="grid-3">
+      <div class="card fade-up"><h3 style="font-size:1rem;margin-bottom:8px">23 вопроса</h3><p class="text-small text-muted">На основе PHQ-9, BDI-II, HAM-D, IDS-30 и критериев DSM-5-TR</p></div>
+      <div class="card fade-up"><h3 style="font-size:1rem;margin-bottom:8px">5 доменов</h3><p class="text-small text-muted">Эмоциональный, когнитивный, соматический, поведенческий, функционирование</p></div>
+      <div class="card fade-up"><h3 style="font-size:1rem;margin-bottom:8px">Дифдиагностика</h3><p class="text-small text-muted">Отличает депрессию от ГТР, БАР-II и дистимии</p></div>
+      <div class="card fade-up"><h3 style="font-size:1rem;margin-bottom:8px">История</h3><p class="text-small text-muted">Эпизоды, подъёмы, травмы, ремиссии, коморбидность, семья</p></div>
+      <div class="card fade-up"><h3 style="font-size:1rem;margin-bottom:8px">9 факторов анамнеза</h3><p class="text-small text-muted">Включая скринер персистирующей депрессии и вопрос о гипомании</p></div>
+      <div class="card fade-up"><h3 style="font-size:1rem;margin-bottom:8px">Для врача</h3><p class="text-small text-muted">Что обсудить со специалистом на основе ваших ответов</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Инструменты -->
+<section class="section-sm">
+  <div class="container fade-up">
+    <div class="section-head"><h2 style="font-size:1.2rem">Использованные <em>инструменты</em></h2></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center">
+      <span class="badge badge-accent">PHQ-9</span>
+      <span class="badge badge-accent">BDI-II (Beck)</span>
+      <span class="badge badge-accent">HAM-D17</span>
+      <span class="badge badge-accent">MADRS</span>
+      <span class="badge badge-accent">IDS-30</span>
+      <span class="badge badge-accent">DSM-5-TR</span>
+    </div>
+  </div>
+</section>
 <div class="pw"><div class="pi"><div class="pt"><div class="pf" id="pf"></div></div><div class="pl" id="pl">0 из 23</div></div></div>
 
 <div class="ct" style="margin-top:32px;"><div class="info info-pri"><strong>Как отвечать</strong>Отвечайте так, как вы чувствуете себя в последнее время. Если симптомы волнообразны — выбирайте типичный уровень, не лучший день и не худший.</div></div>
@@ -285,5 +348,6 @@
 
 <script src="/config-depression.js"></script>
 <script src="/engine.js"></script>
+<script src="/js/scroll.js"></script>
 </body>
 </html>
