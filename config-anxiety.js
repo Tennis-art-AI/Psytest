@@ -11,11 +11,11 @@ const LEV = [
   { min:63, max:72, l:'КРАЙНЕ ТЯЖЁЛАЯ', c:'#b03a3a', b:'#ef4444' }
 ];
 const DESC = [
-  'Тревога в пределах нормы',
-  'Заметная тревожность, жизнь функционирует',
-  'Признаки выражены — рекомендуется консультация специалиста',
-  'Серьёзные нарушения',
-  'Тревога парализует жизнь'
+  'Скрининг не выявил выраженных признаков',
+  'Есть признаки, заслуживающие внимания',
+  'Признаки выражены — рекомендуется обращение к специалисту',
+  'Выраженные признаки. Обратитесь к специалисту — помощь эффективна',
+  'Срочно обратитесь к специалисту. Помощь возможна даже в тяжёлых случаях'
 ];
 
 function buildC() {
@@ -23,6 +23,13 @@ function buildC() {
   if (a < 5 && hk === 0) { document.getElementById('conc').style.display = 'none'; return; }
   document.getElementById('conc').style.display = 'block';
   const lev = gL(t);
+  /* Гейт функционирования (DSM-5 Критерий D) */
+  const _dEg = dS('E');
+  const _levIdx = LEV.indexOf(lev);
+  let effLev = lev, effIdx = _levIdx, funcGated = false;
+  if (_dEg !== null && _dEg / DM.E <= 0.25 && _levIdx > 1) {
+    effLev = LEV[1]; effIdx = 1; funcGated = true;
+  }
   let h = '';
 
   /* ДИСКЛЕЙМЕР */
@@ -30,10 +37,17 @@ function buildC() {
 
   /* БЛОК 1: Общий уровень + доменные комментарии */
   if (a >= 3) {
-    h += `<div class="ci"><strong>Общий уровень: ${lev.l} (${t} из ${MAX})</strong>${DESC[LEV.indexOf(lev)]}.</div>`;
+    h += `<div class="ci"><strong>Общий уровень: ${effLev.l} (${t} из ${MAX})</strong>${DESC[effIdx]}.</div>`;
+    if (funcGated) {
+      h += '<div class="ci" style="background:#fffbeb;padding:16px;border-radius:10px;border-left:4px solid #d97706;"><strong style="color:#d97706;">Функционирование сохранено</strong>Ваш скрининговый балл повышен, но нарушения функционирования не выявлены. Это может указывать на тревожную черту характера, а не на расстройство. Уровень скорректирован. Тем не менее, если симптомы беспокоят — консультация специалиста не помешает.</div>';
+    }
     /* Блок «к специалисту» при уровне ≥ лёгкий */
-    if (LEV.indexOf(lev) >= 1) {
+    if (effIdx >= 1) {
       h += '<div class="ci" style="background:var(--sage-lt);padding:16px;border-radius:10px;border-left:4px solid var(--sage);"><strong style="color:var(--sage);">Рекомендуется консультация специалиста</strong>Результат скрининга указывает на признаки, которые стоит обсудить с психиатром, психотерапевтом или клиническим психологом. Это состояние хорошо изучено, и для него существуют эффективные методы помощи при обращении к специалисту.</div>';
+    }
+    /* Temporal gating: DSM-5 Критерий A (≥6 мес.) */
+    if (HIST.x1 === '<3m') {
+      h += '<div class="ci" style="background:var(--red-lt);padding:18px;border-radius:10px;border-left:4px solid var(--red);"><strong style="color:var(--red);">Длительность менее 6 месяцев</strong>DSM-5 требует тревоги ≥6 месяцев для ГТР. Ваши симптомы могут быть <strong>адаптационной реакцией на стресс</strong>, а не хроническим расстройством. Это важное отличие — адаптационная реакция часто проходит при разрешении стрессовой ситуации. Если состояние сохранится — пройдите скрининг повторно через 3 месяца.</div>';
     }
     [
       { k:'A', n:'Ядерное беспокойство', mx:DM.A, ad:[
@@ -93,7 +107,7 @@ function buildC() {
   const histKeys = Object.keys(HIST);
   if (histKeys.length > 0) {
     h += '<div class="ci" style="border-top:2px solid var(--brd);padding-top:18px;margin-top:8px;"><strong style="color:var(--pri);">Дифференциальная диагностика и тактика:</strong></div>';
-    if (HIST.x1 === '<3m') h += '<div class="ci"><strong>Длительность менее 3 месяцев.</strong> DSM-5 требует ≥6 месяцев для ГТР. Возможна адаптационная реакция на стресс, а не хроническое расстройство. Мониторинг — если сохраняется ≥6 месяцев, переоценка.</div>';
+    if (HIST.x1 === '<3m') h += '<div class="ci"><strong>Длительность менее 3 месяцев</strong> — см. предупреждение выше. Если тревога сохраняется ≥6 месяцев — переоцените.</div>';
     if (HIST.x1 === '2y+') h += '<div class="ci"><strong>Более 2 лет.</strong> Хроническое течение. Обратитесь к специалисту — при длительном течении существуют эффективные методы помощи, подобранные индивидуально.</div>';
     if (HIST.x2 === 'regular' || HIST.x2 === 'frequent') h += '<div class="ci" style="background:var(--warm-lt);padding:16px;border-radius:10px;"><strong>Панические атаки.</strong> Это отдельное состояние от ГТР. При ГТР — хроническое беспокойство. При панике — внезапные приступы ужаса. Часто сочетаются (до 30%). Обсудите с психиатром — подход к помощи может отличаться.</div>';
     if (HIST.x3 === 'boredom') h += '<div class="ci" style="background:var(--warm-lt);padding:16px;border-radius:10px;"><strong>Концентрацию нарушает скука, а не тревога.</strong> Это больше характерно для СДВГ. При ГТР — мешают тревожные МЫСЛИ. При СДВГ — мешает СКУКА, а на интересном — гиперфокус. Пройдите также диагностику СДВГ.</div>';
