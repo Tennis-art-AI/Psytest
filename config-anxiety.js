@@ -1,4 +1,7 @@
-/* config-anxiety.js — конфигурация для диагностики ГТР */
+/* config-anxiety.js — Скрининг ГТР (генерализованное тревожное расстройство)
+   MentalScreenLab · §17 SKILL v8.0
+   Источники: GAD-7, HAM-A, PSWQ, IUS-12, MCQ-30, DSM-5-TR
+   Модели: Borkovec (1994), Dugas (1998), Wells (1999) */
 
 const TQ = 18, FQ = 3, MAX = 72, SCORED = 18;
 const DOM = { A:[1,5], B:[6,10], C:[11,14], D:[15,18], E:[19,21] };
