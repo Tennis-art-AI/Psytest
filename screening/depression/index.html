@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Скрининг депрессии — MentalScreenLab</title>
-<meta name="description" content="Углублённый скрининг депрессии: 23 вопроса, 5 доменов. На основе PHQ-9, BDI-II, HAM-D и DSM-5-TR.">
+<meta name="description" content="Углублённый скрининг депрессии: 26 вопросов, 5 доменов + sub-module. На основе PHQ-9, BDI-II, HAM-D и DSM-5-TR.">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/common.css">
 <link rel="stylesheet" href="/css/consent.css">
@@ -76,11 +76,11 @@
 <!-- HERO -->
 <div class="hero">
   <h1>Скрининг депрессии</h1>
-  <p>23 вопроса · 5 доменов · PHQ-9 · BDI-II · HAM-D · MADRS · IDS-30 · DSM-5</p>
+  <p>26 вопросов · 5 доменов · PHQ-9 · BDI-II · HAM-D · MADRS · IDS-30 · DSM-5</p>
 </div>
 
 <!-- ПРОГРЕСС -->
-<div class="pw"><div class="pi"><div class="pt"><div class="pf" id="pf"></div></div><div class="pl" id="pl">0 из 23</div></div></div>
+<div class="pw"><div class="pi"><div class="pt"><div class="pf" id="pf"></div></div><div class="pl" id="pl">0 из 26</div></div></div>
 
 <!-- ═══ METHODOLOGY ═══ -->
 <div class="sec"><div class="ct">
@@ -115,10 +115,14 @@
     <div class="dmc dc-c"><div class="dmc-letter">В</div><div class="dmc-name">Соматический</div><div class="dmc-desc">Сон, аппетит, энергия, психомоторика, боли</div><div class="dmc-w">5 вопросов · 0–3 · 17%</div><div class="dmc-bar"><div class="dmc-bf" id="barC2" style="background:var(--dC);"></div></div></div>
     <div class="dmc dc-d"><div class="dmc-letter">Г</div><div class="dmc-name">Поведенческий</div><div class="dmc-desc">Изоляция, уход за собой, раздражительность, снижение активности</div><div class="dmc-w">4 вопроса · 0–4 · 19%</div><div class="dmc-bar"><div class="dmc-bf" id="barD2" style="background:var(--dD);"></div></div></div>
     <div class="dmc dc-e"><div class="dmc-letter">Д</div><div class="dmc-name">Функционирование</div><div class="dmc-desc">Работа, отношения, быт — обязательно по DSM-5</div><div class="dmc-w">3 вопроса · вне балла</div><div class="dmc-bar"><div class="dmc-bf" id="barE2" style="background:var(--dE);"></div></div></div>
+    <div class="dmc" style="background:#f5f0eb;"><div class="dmc-letter" style="font-size:1.1rem;opacity:.2;">M/A</div><div class="dmc-name">Подтип</div><div class="dmc-desc">Реактивность, телесный паттерн, чувствительность к отвержению</div><div class="dmc-w">3 вопроса · отдельный индикатор</div><div class="dmc-bar"><div class="dmc-bf" style="background:#8a6a50;width:0%;"></div></div></div>
   </div>
 
   <div class="info info-warm"><strong>Почему когнитивный и эмоциональный домены весят больше</strong>
     DSM-5 выделяет настроение и ангедонию как обязательные. Бек показал: негативные мысли — центральный механизм. Человек, которого мысли разрушают при здоровом теле, получит адекватно высокий балл. HAM-D тоже использует разные шкалы: ключевые пункты 0–4, второстепенные 0–2.</div>
+
+  <div class="info info-warm"><strong>Как работает индикатор подтипа (меланхолический / атипичный)</strong>
+    Вопросы 24–26 оценивают три маркера атипичной депрессии: реактивность настроения, телесный паттерн (сон, аппетит, тяжесть в теле) и чувствительность к отвержению. Они не входят в основной балл — формируют отдельный индикатор подтипа в результатах. Это важно, потому что подтип влияет на выбор специалистом подхода к помощи.</div>
 
   <div class="info info-sage"><strong>Если ваши симптомы «плавают»</strong>
     Работаете 2 часа, потом не можете 2 часа? Неделю нормально, потом неделю в тяжёлом состоянии? Мысли сегодня лёгкие, завтра невыносимые? Это типичный паттерн депрессии — она редко бывает «ровной». В каждом вопросе есть варианты для волнообразных симптомов. Оценивайте свой <strong>типичный</strong> уровень за весь период — не лучший день и не худший, а среднее между ними.</div>
@@ -143,7 +147,7 @@
 
 <!-- ═══ MAIN ═══ -->
 <div class="main"><div class="ct">
-  <div class="sdiv"><div class="sdiv-n">I</div><div><h3>Симптомы</h3><p>20 + 3 вопроса · 5 доменов · макс. 86 баллов</p></div></div>
+  <div class="sdiv"><div class="sdiv-n">I</div><div><h3>Симптомы</h3><p>20 scored + 3 функционирование + 3 подтип · макс. 86 баллов</p></div></div>
 
 
 <div class="ct">
@@ -313,7 +317,22 @@
   <div class="qc"><div class="qh" style="background:var(--dE);"><div class="qn">23</div><div class="qm"><div class="qtg">Индикатор тяжести</div><div class="qtl">Влияние на быт и повседневность</div></div></div><div class="qp">Как депрессия влияет на быт?</div>
     <div class="ans" data-q="23"><label class="ao"><input type="radio" name="q23" value="2"><span class="al">1</span><span class="ach"></span><span class="at">Серьёзные трудности — хаос в доме</span><span class="as s2">2</span></label><label class="ao"><input type="radio" name="q23" value="3"><span class="al">2</span><span class="ach"></span><span class="at">Быт развалился</span><span class="as s3">3</span></label><label class="ao"><input type="radio" name="q23" value="0"><span class="al">3</span><span class="ach"></span><span class="at">В порядке</span><span class="as s0">0</span></label><label class="ao"><input type="radio" name="q23" value="4"><span class="al">4</span><span class="ach"></span><span class="at">Не в состоянии помыться, поесть, выйти</span><span class="as s4">4</span></label><label class="ao"><input type="radio" name="q23" value="1"><span class="al">5</span><span class="ach"></span><span class="at">Дела копятся</span><span class="as s1">1</span></label></div></div>
 
-  
+  <!-- ═══ SUB-MODULE: Подтип депрессии ═══ -->
+  <div class="dh" style="color:#8a6a50;"><span>Sub-module · Подтип депрессии · вне общего балла · отдельный индикатор</span><span class="ln"></span></div>
+
+  <div class="qc"><div class="qh" style="background:#8a6a50;"><div class="qn">24</div><div class="qm"><div class="qtg">DSM-5 atypical specifier · ключевой маркер</div><div class="qtl">Реактивность настроения</div><div class="qd">Может ли что-то хорошее улучшить ваше состояние?</div></div></div>
+    <div class="qp">Когда происходит что-то приятное — меняется ли настроение?</div>
+    <div class="ans" data-q="24"><label class="ao"><input type="radio" name="q24" value="2"><span class="al">1</span><span class="ach"></span><span class="at">Хорошие новости, друзья, хобби — помогают на время, потом возвращается</span><span class="as s2">2</span></label><label class="ao"><input type="radio" name="q24" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Ничто не пробивается — радость невозможна, даже от любимых вещей</span><span class="as s0">0</span></label><label class="ao"><input type="radio" name="q24" value="3"><span class="al">3</span><span class="ach"></span><span class="at">Настроение легко улучшается от приятного, но потом падает обратно</span><span class="as s3">3</span></label><label class="ao"><input type="radio" name="q24" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Редко и ненадолго — проблески, но быстро гаснут</span><span class="as s1">1</span></label></div>
+    <div class="qnt"><strong>Почему этот вопрос?</strong>Реактивность настроения — ключевой маркер подтипа. При меланхолической депрессии ничто не приносит облегчения. При атипичной — настроение может временно улучшиться от хороших событий, но это не значит «не настоящая депрессия» — это другой подтип, требующий другого подхода.</div></div>
+
+  <div class="qc"><div class="qh" style="background:#8a6a50;"><div class="qn">25</div><div class="qm"><div class="qtg">DSM-5 · HAM-D · IDS-30 · соматический паттерн</div><div class="qtl">Телесный паттерн депрессии</div><div class="qd">Сон, аппетит и тело — два полюса депрессии</div></div></div>
+    <div class="qp">Какие телесные ощущения преобладают?</div>
+    <div class="ans" data-q="25"><label class="ao"><input type="radio" name="q25" value="3"><span class="al">1</span><span class="ach"></span><span class="at">Пересыпаю (10+ ч.), тяга к еде, «свинцовая тяжесть» в руках и ногах, набор веса</span><span class="as s3">3</span></label><label class="ao"><input type="radio" name="q25" value="1"><span class="al">2</span><span class="ach"></span><span class="at">Смесь — то бессонница, то пересыпание; аппетит скачет</span><span class="as s1">1</span></label><label class="ao"><input type="radio" name="q25" value="0"><span class="al">3</span><span class="ach"></span><span class="at">Бессонница, ранние пробуждения, потеря аппетита, беспокойство или заторможенность</span><span class="as s0">0</span></label><label class="ao"><input type="radio" name="q25" value="2"><span class="al">4</span><span class="ach"></span><span class="at">Больше пересыпаю и переедаю, но без выраженной тяжести в теле</span><span class="as s2">2</span></label></div></div>
+
+  <div class="qc"><div class="qh" style="background:#8a6a50;"><div class="qn">26</div><div class="qm"><div class="qtg">Columbia · DSM-5 atypical · межличностная чувствительность</div><div class="qtl">Чувствительность к отвержению</div><div class="qd">Не обычная обида — парализующая реакция на критику</div></div></div>
+    <div class="qp">Как вы реагируете на критику или отвержение?</div>
+    <div class="ans" data-q="26"><label class="ao"><input type="radio" name="q26" value="1"><span class="al">1</span><span class="ach"></span><span class="at">Чувствителен(а), но не больше обычного при подавленности</span><span class="as s1">1</span></label><label class="ao"><input type="radio" name="q26" value="3"><span class="al">2</span><span class="ach"></span><span class="at">Парализует — одно слово критики разрушает день или неделю</span><span class="as s3">3</span></label><label class="ao"><input type="radio" name="q26" value="0"><span class="al">3</span><span class="ach"></span><span class="at">Переживаю, но быстро отпускаю</span><span class="as s0">0</span></label><label class="ao"><input type="radio" name="q26" value="2"><span class="al">4</span><span class="ach"></span><span class="at">Очень болезненно — избегаю ситуаций, где могут отвергнуть</span><span class="as s2">2</span></label></div></div>
+
 
 <div class="hist">
   <div class="sdiv"><div class="sdiv-n">H</div><div><h3>История</h3><p>Не влияет на балл, но влияет на выводы</p></div></div>
