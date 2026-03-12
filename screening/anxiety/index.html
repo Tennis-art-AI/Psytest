@@ -2,53 +2,438 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Тест на тревожность онлайн — скрининг ГТР на основе GAD-7 и DSM-5 | MentalScreenLab</title>
-<meta name="description" content="Углублённый скрининг тревожного расстройства: 21 вопрос, 5 доменов, дифдиагностика. На основе GAD-7, PSWQ, MCQ-30.">
-<meta name="keywords" content="тест на тревожность, тест на тревогу, скрининг тревожности, GAD-7, тест на ГТР">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Скрининг тревожности — тест на ГТР на основе GAD-7 и DSM-5 | MentalScreenLab</title>
+<meta name="description" content="Углублённый скрининг тревожного расстройства: 21 вопрос, 5 доменов, дифдиагностика. На основе GAD-7, PSWQ, IUS-12, MCQ-30 и DSM-5-TR.">
 <link rel="canonical" href="https://mentalscreenlab.com/screening/anxiety/">
-<link rel="stylesheet" href="/css/base.css">
-<link rel="stylesheet" href="/css/components.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/common.css">
+<link rel="stylesheet" href="/css/consent.css">
+<style>
+:root{
+  --bg:#f6f6fa;--card:#fff;--ink:#1a1a24;--ink2:#3d3d50;--ink3:#8a8a9a;
+  --pri:#4a4a70;--pri-lt:#eeeef6;--pri-dk:#14141e;--pri-soft:#7a7aa0;
+  --warm:#8a8ac0;--warm-lt:#f2f0fa;--warm-dk:#5a5a80;
+  --red:#b03a4a;--red-lt:#fdf0f2;
+  --sage:#5a7a6a;--sage-lt:#f0f5f2;
+  --brd:#e0e0ea;--brd-lt:#eaeaf0;
+  --dA:#2a6a4a;--dB:#5a4a2a;--dC:#4a2a5a;--dD:#2a4a6a;--dE:#3a6a6a;
+  --radius:16px;
+}
+.dc-a{background:#edf5f0;}.dc-a::before{background:var(--dA);}
+.dc-b{background:#f5f2e8;}.dc-b::before{background:var(--dB);}
+.dc-c{background:#f2edf5;}.dc-c::before{background:var(--dC);}
+.dc-d{background:#edf2f5;}.dc-d::before{background:var(--dD);}
+.dc-e{background:#f0f7f7;}.dc-e::before{background:var(--dE);}
+.pf{height:100%;background:linear-gradient(90deg,#7a7ab0,#a4a4d8);border-radius:2px;transition:width .5s;width:0%;}
+</style>
 </head>
 <body>
-<nav class="nav">
-  <a href="/" class="nav-logo">Mental<span>ScreenLab</span></a>
-  <div class="nav-center"><a href="/" class="nav-link">&#8592; Главная</a><a href="/rooms/" class="nav-link">Галерея</a></div>
-</nav>
-<section class="hero" style="min-height:60vh;padding-top:140px">
-  <picture><source srcset="/img/room-anxiety.webp" type="image/webp"><img src="/img/room-anxiety.png" alt="anxiety" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.15;z-index:0"></picture>
-  <div style="position:relative;z-index:1">
-    <span class="badge badge-accent">ГТР · DSM-5 · F41.1</span>
-    <h1 style="margin-top:16px">Тест на <em>тревожность</em></h1>
-    <p style="font-style:italic;color:var(--ink3);margin-bottom:24px">Сто сценариев катастрофы до завтрака</p>
-    <p>21 вопрос · 5 доменов · дифференциальная диагностика · ~8 минут</p>
-    <span class="badge badge-soon" style="font-size:14px;padding:10px 24px">&#9203; Скрининг в разработке</span>
+
+<div class="hero">
+  <h1>Скрининг тревожного расстройства</h1>
+  <p>21 вопрос · 5 доменов · GAD-7 · HAM-A · PSWQ · IUS-12 · DSM-5</p>
+</div>
+
+<!-- Экран согласия -->
+<div id="consent" style="max-width:640px;margin:40px auto;padding:32px 28px;background:var(--card);border-radius:var(--radius);border:1px solid var(--brd);">
+  <h2 style="font-size:1.3rem;color:var(--ink);margin-bottom:20px;">Перед началом</h2>
+  <ul style="list-style:none;padding:0;margin:0 0 24px 0;font-size:15px;color:var(--ink2);line-height:1.7;">
+    <li style="margin-bottom:10px;">&#8226; Это <strong>скрининг</strong>, а не диагноз. Только специалист может поставить диагноз на основании очного осмотра.</li>
+    <li style="margin-bottom:10px;">&#8226; Результаты носят <strong>информационный характер</strong> и не заменяют консультацию психиатра, психотерапевта или клинического психолога.</li>
+    <li style="margin-bottom:10px;">&#8226; Этот инструмент основан на DSM-5 критериях и валидированных шкалах, но сам <strong>не прошёл клиническую валидацию</strong>. Используйте результат как отправную точку для разговора со специалистом.</li>
+    <li style="margin-bottom:10px;">&#8226; Ваши данные <strong>не покидают браузер</strong> — мы ничего не сохраняем и не передаём.</li>
+    <li style="margin-bottom:10px;">&#8226; Если вам <strong>меньше 18 лет</strong> — рекомендуем пройти вместе с родителем или другим взрослым, которому доверяете.</li>
+  </ul>
+  <div style="text-align:center;">
+    <button onclick="document.getElementById('consent').style.display='none';document.getElementById('mainContent').style.display='block';" style="padding:14px 36px;font-size:16px;font-weight:600;color:#fff;background:var(--pri);border:none;border-radius:10px;cursor:pointer;">Понимаю, продолжить</button>
   </div>
-</section>
-<section class="section"><div class="container">
-  <div class="section-head fade-up"><h2>Где <em>граница?</em></h2></div>
-  <div class="grid-2">
-    <div class="card fade-up" style="border-color:rgba(106,170,138,.2)"><h3 style="color:#6aaa8a;font-size:1.1rem;margin-bottom:12px">Нормальное беспокойство</h3><p class="text-small text-muted">Связано с конкретной ситуацией, проходит после её разрешения. Не мешает спать. Помогает подготовиться. Контролируемо.</p></div>
-    <div class="card fade-up"><h3 style="color:var(--c-anx);font-size:1.1rem;margin-bottom:12px">Тревожное расстройство (ГТР)</h3><p class="text-small text-muted">Беспокойство о множестве вещей ≥6 месяцев, трудно остановить. Мышечное напряжение, бессонница, раздражительность. Мешает работать и жить.</p></div>
+</div>
+
+<div id="mainContent" style="display:none;">
+<div class="pw"><div class="pi"><div class="pt"><div class="pf" id="pf"></div></div><div class="pl" id="pl">0 из 21</div></div></div>
+
+
+<div class="sec"><div class="ct">
+  <div class="slbl">Методология</div>
+  <div class="stitle">Тревожное расстройство — не «нервный характер»</div>
+  <div class="stext">Генерализованное тревожное расстройство (ГТР) — хроническое чрезмерное беспокойство о множестве тем, которое человек не может контролировать. Ключевое: беспокойство непропорционально ситуации, охватывает много сфер жизни одновременно и длится ≥6 месяцев (DSM-5).</div>
+  <div class="stext">GAD-7 (Spitzer, 2006) — скрининг из 7 вопросов. HAM-A (Hamilton, 1959) — клиническая шкала. Наша диагностика объединяет оба и добавляет: непереносимость неопределённости (IUS-12, Dugas), метакогниции о тревоге (MCQ-30, Wells), модель «worry как избегание» (Borkovec).</div>
+
+  <div class="info info-pri"><strong>Откуда взяты вопросы</strong>
+    GAD-7 (Spitzer, 2006) — скрининг · HAM-A (Hamilton, 1959) — клиническая шкала тревоги · PSWQ (Meyer, 1990) — склонность к беспокойству · IUS-12 (Carleton, 2007) — непереносимость неопределённости · MCQ-30 (Wells) — метакогниции · Dugas (1998) — модель непереносимости неопределённости · Borkovec (1983) — worry как когнитивное избегание · DSM-5-TR (APA, 2022)</div>
+
+  <details style="margin:24px 0;"><summary style="cursor:pointer;font-weight:600;color:var(--pri);font-size:15px;padding:12px 0;">Тревога vs Паника vs ОКР vs СДВГ — ключевые отличия ▾</summary>
+  <table class="ctbl"><thead><tr><th>Параметр</th><th>ГТР</th><th>Паника</th><th>ОКР</th><th>СДВГ</th></tr></thead><tbody>
+    <tr><td>Что беспокоит</td><td>Всё подряд — темы «плавают»</td><td>Приступы + страх приступов</td><td>Конкретные навязчивые мысли</td><td>Не беспокойство, а скука и хаос</td></tr>
+    <tr><td>Концентрация</td><td>Мешают тревожные МЫСЛИ</td><td>Между приступами — норма</td><td>Мешают навязчивые мысли</td><td>Мешает СКУКА (при интересном — гиперфокус)</td></tr>
+    <tr><td>Физические симптомы</td><td>Хроническое напряжение</td><td>Острые приступы (сердце, удушье)</td><td>Менее выражены</td><td>Беспокойство тела (ёрзание)</td></tr>
+    <tr><td>Контроль</td><td>Не может остановить БЕСПОКОЙСТВО</td><td>Не может остановить ПРИСТУП</td><td>Не может остановить РИТУАЛ</td><td>Не может НАЧАТЬ скучное</td></tr>
+    <tr><td>С детства?</td><td>Может начаться в любом возрасте</td><td>Обычно 20–30 лет</td><td>Обычно подростковый</td><td>ОБЯЗАТЕЛЬНО до 12 лет</td></tr>
+  </tbody></table></details>
+
+  <div class="dmap">
+    <div class="dmc dc-a"><div class="dmc-letter">А</div><div class="dmc-name">Ядерное беспокойство</div><div class="dmc-desc">Частота, контроль, катастрофизация, непереносимость неопределённости, широта тем</div><div class="dmc-w">5 вопросов · 0–4 · 29%</div><div class="dmc-bar"><div class="dmc-bf" id="barA" style="background:var(--dA);"></div></div></div>
+    <div class="dmc dc-b"><div class="dmc-letter">Б</div><div class="dmc-name">Когнитивный</div><div class="dmc-desc">Метакогниции «тревога полезна», мета-тревога, страдание, раздражительность, концентрация</div><div class="dmc-w">5 вопросов · 0–4 · 29%</div><div class="dmc-bar"><div class="dmc-bf" id="barB" style="background:var(--dB);"></div></div></div>
+    <div class="dmc dc-c"><div class="dmc-letter">В</div><div class="dmc-name">Соматический</div><div class="dmc-desc">Мышечное напряжение, сон, усталость, вегетативные</div><div class="dmc-w">4 вопроса · 0–4 · 22%</div><div class="dmc-bar"><div class="dmc-bf" id="barC" style="background:var(--dC);"></div></div></div>
+    <div class="dmc dc-d"><div class="dmc-letter">Г</div><div class="dmc-name">Поведенческий</div><div class="dmc-desc">Избегание неопределённости, прокрастинация, поиск заверений, гиперконтроль</div><div class="dmc-w">4 вопроса · 0–4 · 21%</div><div class="dmc-bar"><div class="dmc-bf" id="barD" style="background:var(--dD);"></div></div></div>
+    <div class="dmc dc-e"><div class="dmc-letter">Д</div><div class="dmc-name">Функционирование</div><div class="dmc-desc">Работа, отношения, быт — обязательно по DSM-5</div><div class="dmc-w">3 вопроса · вне балла</div><div class="dmc-bar"><div class="dmc-bf" id="barE" style="background:var(--dE);"></div></div></div>
   </div>
-</div></section>
-<section class="section-sm"><div class="container text-center fade-up">
-  <div class="pricing-card featured" style="max-width:400px;margin:0 auto">
-    <div class="pc-name">Скрининг</div>
-    <div class="pc-price">399 <span>&#8381;</span></div>
-    <ul><li>Результат по 5 доменам</li><li>Дифференциальная таблица</li><li>Анализ истории</li></ul>
-    <span class="badge badge-soon" style="font-size:14px;padding:10px 24px">&#9203; Скрининг в разработке</span>
+
+  <div class="info info-warm"><strong>Порядок утверждений в каждом вопросе перемешан</strong>
+    В этом тесте варианты ответов расположены в случайном порядке — не от «нормы» к «тяжёлому». Это сделано специально, чтобы вы выбирали описание, которое точнее всего отражает ваше состояние, а не ориентировались на позицию ответа. Прочитайте все варианты перед выбором.</div>
+</div></div>
+
+<div class="sec" style="padding:44px 0;"><div class="ct">
+  <div class="slbl">Введение</div>
+  <div class="stitle">Нормальная тревога и ГТР — не одно и то же</div>
+  <div class="igrid">
+    <div class="icard"><h4>Нормальная тревога</h4><ul><li>Конкретный повод — ситуация решилась, отпустило</li><li>Можно переключиться, отвлечься</li><li>Помогает подготовиться и действовать</li><li>Не мешает функционировать</li></ul></div>
+    <div class="icard"><h4>ГТР</h4><ul><li>Множество тем — одна уходит, другая немедленно занимает место</li><li>Не удаётся остановить — мысли возвращаются снова и снова</li><li>Парализует и не ведёт к решению — worry «вхолостую»</li><li>Длится ≥6 месяцев, мешает работать, спать, жить</li></ul></div>
   </div>
-</div></section>
-<section class="section-sm"><div class="container fade-up">
-  <div class="section-head"><h2 style="font-size:1.2rem">Инструменты</h2></div>
-  <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center"><span class="badge badge-accent">GAD-7</span> <span class="badge badge-accent">HAM-A</span> <span class="badge badge-accent">PSWQ</span> <span class="badge badge-accent">IUS-12</span> <span class="badge badge-accent">MCQ-30</span> <span class="badge badge-accent">DSM-5-TR</span></div>
-</div></section>
-<footer class="footer">
-    <div class="footer-disclaimer">MentalScreenLab — информационный скрининговый сервис. Не медицинская услуга.</div>
-  <div class="footer-links"><a href="/">Главная</a> <a href="/methodology/">Методология</a></div>
-  <div>&#169; 2026 MentalScreenLab</div>
-</footer>
+  <div style="margin-top:20px;font-size:16px;color:var(--ink2);background:var(--bg);padding:20px 24px;border-radius:14px;"><strong style="color:var(--ink);">Как заполнять:</strong> <span id="iText">Отвечайте так, как вы чувствуете себя <strong>в последнее время</strong>. Если симптомы волнообразны — выбирайте свой типичный уровень, не лучший день и не худший. Варианты перемешаны — прочитайте все и выберите наиболее точное описание.</span></div>
+</div></div>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main"><div class="ct">
+  <div class="sdiv"><div class="sdiv-n">I</div><div><h3 id="s1t">Симптомы</h3><p>18 + 3 вопроса · 5 доменов · макс. 72 баллов</p></div></div>
+
+  <!-- ═══ DOMAIN A — Ядерное беспокойство ═══ -->
+  <div class="dh" style="color:var(--dA);"><span>Домен А · Ядерное беспокойство · 0–4 · повышенный вес</span><span class="ln"></span></div>
+
+  <!-- Q1: Частота беспокойства — порядок: 3,0,5,1,4,2 -->
+  <div class="qc"><div class="qh" style="background:var(--dA);"><div class="qn">01</div><div class="qm"><div class="qtg">GAD-7 · DSM-5 критерий A</div><div class="qtl">Частота беспокойства</div></div></div>
+    <div class="qp" id="qp-1">Как часто вы беспокоитесь?</div>
+    <div class="ans" data-q="1">
+    <label class="ao"><input type="radio" name="q1" value="3"><span class="al">1</span><span class="ach"></span><span class="at">Почти каждый день — тревога фоном, одна тема сменяет другую</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q1" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Редко — только когда есть реальный повод, и быстро отпускает</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q1" value="1"><span class="al">3</span><span class="ach"></span><span class="at">Несколько раз в неделю — переживаю, но могу переключиться</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q1" value="4"><span class="al">4</span><span class="ach"></span><span class="at">Непрерывно — беспокойство занимает весь день, засыпаю и просыпаюсь с тревогой</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q1" value="2"><span class="al">5</span><span class="ach"></span><span class="at">Волнообразно: неделю нормально, потом дни непрерывного беспокойства</span><span class="as">2</span></label>
+    </div></div>
+
+  <!-- Q2: Контроль — порядок: 4,1,2,5,0,3 -->
+  <div class="qc"><div class="qh" style="background:var(--dA);"><div class="qn">02</div><div class="qm"><div class="qtg">GAD-7 · DSM-5 критерий B · контроль</div><div class="qtl">Способность остановить беспокойство</div></div></div>
+    <div class="qp" id="qp-2">Можете ли вы остановить тревожные мысли когда хотите?</div>
+    <div class="ans" data-q="2">
+    <label class="ao"><input type="radio" name="q2" value="4"><span class="al">1</span><span class="ach"></span><span class="at">Контроль утрачен — беспокойство идёт непрерывным потоком, даже если отвлекусь — немедленно возвращается</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q2" value="1"><span class="al">2</span><span class="ach"></span><span class="at">Могу остановить с усилием — нужно время, но получается</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q2" value="2"><span class="al">3</span><span class="ach"></span><span class="at">Иногда получается, иногда нет — зависит от дня и темы</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q2" value="0"><span class="al">4</span><span class="ach"></span><span class="at">Легко переключаюсь — беспокойство управляемо</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q2" value="3"><span class="al">5</span><span class="ach"></span><span class="at">Редко могу остановить — тревожные мысли возвращаются снова и снова</span><span class="as">3</span></label>
+    </div>
+    <div class="qnt"><strong>Почему этот вопрос ключевой</strong>Неконтролируемость беспокойства — обязательный критерий B по DSM-5. Именно это отличает ГТР от нормальной тревоги: при нормальной — можете переключиться; при ГТР — не можете, даже понимая что беспокойство непропорционально.</div></div>
+
+  <!-- Q3: Катастрофизация — порядок: 2,5,0,4,1,3 -->
+  <div class="qc"><div class="qh" style="background:var(--dA);"><div class="qn">03</div><div class="qm"><div class="qtg">PSWQ · Borkovec · катастрофизация</div><div class="qtl">Ожидание худшего</div><div class="qd">Мозг автоматически достраивает катастрофу из любого события</div></div></div>
+    <div class="qp" id="qp-3">Насколько часто вы ожидаете худшего исхода?</div>
+    <div class="ans" data-q="3">
+    <label class="ao"><input type="radio" name="q3" value="2"><span class="al">1</span><span class="ach"></span><span class="at">Регулярно ловлю себя на цепочке «а вдруг…» — то отпускает, то накрывает</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q3" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Оцениваю ситуации реалистично — не жду худшего</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q3" value="4"><span class="al">3</span><span class="ach"></span><span class="at">Катастрофа ощущается неизбежной — тело реагирует так, будто худшее уже происходит</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q3" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Иногда думаю «а что если…» — но быстро осознаю что маловероятно</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q3" value="3"><span class="al">5</span><span class="ach"></span><span class="at">Почти всегда жду худшего — мозг рисует негативный сценарий раньше чем я успеваю подумать</span><span class="as">3</span></label>
+    </div></div>
+
+  <!-- Q4: Непереносимость неопределённости — порядок: 5,1,3,0,4,2 -->
+  <div class="qc"><div class="qh" style="background:var(--dA);"><div class="qn">04</div><div class="qm"><div class="qtg">IUS-12 · Dugas · непереносимость неопределённости</div><div class="qtl">Реакция на неопределённость</div></div></div>
+    <div class="qp" id="qp-4">Как вы переносите ситуации с неизвестным исходом?</div>
+    <div class="ans" data-q="4">
+    <label class="ao"><input type="radio" name="q4" value="1"><span class="al">1</span><span class="ach"></span><span class="at">Немного некомфортно — но справляюсь без долгих переживаний</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q4" value="3"><span class="al">2</span><span class="ach"></span><span class="at">Тяжело — пока не знаю результат, не могу успокоиться и думаю только об этом</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q4" value="0"><span class="al">3</span><span class="ach"></span><span class="at">Спокойно переношу неопределённость — жизнь непредсказуема, и это нормально</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q4" value="4"><span class="al">4</span><span class="ach"></span><span class="at">Даже мелкая неопределённость вызывает мучительную тревогу — лучше плохая новость, чем ожидание</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q4" value="2"><span class="al">5</span><span class="ach"></span><span class="at">Зависит от ситуации: иногда спокойно, иногда неизвестность изматывает на дни</span><span class="as">2</span></label>
+    </div>
+    <div class="qnt"><strong>Непереносимость неопределённости (IUS-12)</strong>Dugas (1998) показал: непереносимость неопределённости — центральный механизм ГТР. Не сами события вызывают тревогу, а невозможность знать исход. Это объясняет почему при ГТР «всё вызывает тревогу» — любая ситуация содержит неопределённость.</div></div>
+
+  <!-- Q5: Restlessness (C1 DSM-5) — порядок: 3,0,4,1,2 -->
+  <div class="qc"><div class="qh" style="background:var(--dA);"><div class="qn">05</div><div class="qm"><div class="qtg">DSM-5 C1 · GAD-7 пп.1,5 · restlessness</div><div class="qtl">Внутреннее беспокойство, «на взводе»</div></div></div>
+    <div class="qp" id="qp-5">Ощущаете ли вы внутреннее беспокойство — состояние «на взводе», невозможность расслабиться?</div>
+    <div class="ans" data-q="5">
+    <label class="ao"><input type="radio" name="q5" value="3"><span class="al">1</span><span class="ach"></span><span class="at">Почти всегда «на взводе» — внутренняя вибрация, не могу расслабиться, ёрзаю</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q5" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Внутренне спокоен(на) — нет ощущения напряжения или взведённости</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q5" value="4"><span class="al">3</span><span class="ach"></span><span class="at">Непрерывное беспокойство тела — не могу усидеть на месте, любой покой невыносим</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q5" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Иногда чувствую лёгкое внутреннее напряжение — но быстро отпускает</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q5" value="2"><span class="al">5</span><span class="ach"></span><span class="at">Регулярно ощущаю «взведённость» — то приходит, то уходит</span><span class="as">2</span></label>
+    </div></div>
+
+  <!-- ═══ DOMAIN B — Когнитивный ═══ -->
+  <div class="dh" style="color:var(--dB);"><span>Домен Б · Когнитивный · 0–4 · Wells / метакогниции</span><span class="ln"></span></div>
+
+  <!-- Q6: Метакогниция «тревога полезна» — порядок: 3,0,4,2,5,1 -->
+  <div class="qc"><div class="qh" style="background:var(--dB);"><div class="qn">06</div><div class="qm"><div class="qtg">MCQ-30 · Wells · позитивные метакогниции</div><div class="qtl">Убеждение «тревога полезна»</div><div class="qd">«Если перестану тревожиться — случится плохое»</div></div></div>
+    <div class="qp" id="qp-6">Считаете ли вы что тревога помогает предотвратить плохое?</div>
+    <div class="ans" data-q="6">
+    <label class="ao"><input type="radio" name="q6" value="3"><span class="al">1</span><span class="ach"></span><span class="at">Да — если перестану тревожиться, случится плохое. Тревога = моя защита</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q6" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Нет — тревога ничего не предотвращает, это просто эмоция</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q6" value="4"><span class="al">3</span><span class="ach"></span><span class="at">Не тревожиться = безответственно. Тревога — единственное что стоит между мной и катастрофой</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q6" value="2"><span class="al">4</span><span class="ach"></span><span class="at">Головой понимаю что бесполезно, но чувствую что «надо» тревожиться</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q6" value="1"><span class="al">5</span><span class="ach"></span><span class="at">Иногда кажется что тревога помогает быть готовым(ой) — но не уверен(а)</span><span class="as">1</span></label>
+    </div>
+    <div class="qnt"><strong>Модель Wells: метакогниции о тревоге</strong>Wells (2009) обнаружил: люди с ГТР не просто тревожатся — они верят что ДОЛЖНЫ тревожиться. «Тревога защищает» — это метакогнитивное убеждение, которое поддерживает расстройство. Метакогнитивная терапия работает именно с этим.</div></div>
+
+  <!-- Q7: Мета-тревога — порядок: 0,4,2,5,1,3 -->
+  <div class="qc"><div class="qh" style="background:var(--dB);"><div class="qn">07</div><div class="qm"><div class="qtg">MCQ-30 · Wells · негативные метакогниции</div><div class="qtl">Тревога о тревоге (мета-тревога)</div></div></div>
+    <div class="qp" id="qp-7">Тревожитесь ли вы о самой тревоге — что она вас разрушает?</div>
+    <div class="ans" data-q="7">
+    <label class="ao"><input type="radio" name="q7" value="0"><span class="al">1</span><span class="ach"></span><span class="at">Нет — я не тревожусь о самой тревоге</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q7" value="4"><span class="al">2</span><span class="ach"></span><span class="at">Убеждён(а) что тревога меня уничтожает — разрушает здоровье, отношения, рассудок</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q7" value="2"><span class="al">3</span><span class="ach"></span><span class="at">Периодически пугает: «а вдруг я схожу с ума от этой тревоги?»</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q7" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Иногда думаю: «почему я так много переживаю?» — но не зацикливаюсь</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q7" value="3"><span class="al">5</span><span class="ach"></span><span class="at">Тревога о тревоге стала отдельной проблемой: «я не справляюсь с собой»</span><span class="as">3</span></label>
+    <div class="qnt"><strong>Тревога о тревоге — что это?</strong>Многие люди с тревожным расстройством начинают тревожиться о самой тревоге: «что если я не справлюсь», «что если тревога разрушит здоровье или рассудок». Это мета-тревога (Wells, 1999) — один из ключевых механизмов, который поддерживает расстройство. Хорошая новость: этот механизм хорошо изучен, и специалисты умеют с ним работать.</div>
+    </div></div>
+
+  <!-- Q8: Влияние тревоги на повседневную жизнь (DSM-5 Критерий D — дистресс) — порядок: 4,1,2,0,3 -->
+  <div class="qc"><div class="qh" style="background:var(--dB);"><div class="qn">08</div><div class="qm"><div class="qtg">DSM-5 критерий D · клинически значимый дистресс</div><div class="qtl">Насколько тревога мешает жить</div></div></div>
+    <div class="qp" id="qp-8">Насколько тревога отравляет вашу повседневную жизнь?</div>
+    <div class="ans" data-q="8">
+    <label class="ao"><input type="radio" name="q8" value="4"><span class="al">1</span><span class="ach"></span><span class="at">Невыносимо — тревога поглощает день, не могу нормально есть, общаться, работать, ищу любые способы отключить голову</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q8" value="1"><span class="al">2</span><span class="ach"></span><span class="at">Ощутимо — замечаю тревогу, но справляюсь с обычными делами</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q8" value="2"><span class="al">3</span><span class="ach"></span><span class="at">Заметно мешает — часть дней теряю из-за тревоги, откладываю дела, избегаю ситуаций</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q8" value="0"><span class="al">4</span><span class="ach"></span><span class="at">Минимально — тревога почти не влияет на повседневную жизнь</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q8" value="3"><span class="al">5</span><span class="ach"></span><span class="at">Сильно мешает — тревога болезненна, ежедневно теряю продуктивность, отношения страдают</span><span class="as">3</span></label>
+    </div></div>
+
+  <!-- Q9: Раздражительность — порядок: 2,5,1,3,0,4 -->
+  <div class="qc"><div class="qh" style="background:var(--dB);"><div class="qn">09</div><div class="qm"><div class="qtg">DSM-5 критерий C4 · HAM-A</div><div class="qtl">Раздражительность и взвинченность</div></div></div>
+    <div class="qp" id="qp-9">Насколько вы раздражительны и взвинчены?</div>
+    <div class="ans" data-q="9">
+    <label class="ao"><input type="radio" name="q9" value="2"><span class="al">1</span><span class="ach"></span><span class="at">То спокойно, то раздражаюсь из-за мелочей — непредсказуемо</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q9" value="1"><span class="al">2</span><span class="ach"></span><span class="at">Иногда на взводе — но быстро успокаиваюсь</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q9" value="3"><span class="al">3</span><span class="ach"></span><span class="at">Часто на нервах — вспыхиваю из-за пустяка, потом жалею</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q9" value="0"><span class="al">4</span><span class="ach"></span><span class="at">Спокоен(на) — нет ощущения напряжения</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q9" value="4"><span class="al">5</span><span class="ach"></span><span class="at">На грани срыва постоянно — малейший раздражитель вызывает вспышку, срываюсь несколько раз в день</span><span class="as">4</span></label>
+    </div></div>
+
+  <!-- Q10: Концентрация — порядок: 5,0,3,1,4,2 -->
+  <div class="qc"><div class="qh" style="background:var(--dB);"><div class="qn">10</div><div class="qm"><div class="qtg">DSM-5 критерий C3 · HAM-A</div><div class="qtl">Влияние тревоги на концентрацию</div></div></div>
+    <div class="qp" id="qp-10">Как тревога влияет на вашу способность сосредоточиться?</div>
+    <div class="ans" data-q="10">
+    <label class="ao"><input type="radio" name="q10" value="0"><span class="al">1</span><span class="ach"></span><span class="at">Концентрация в норме — тревога не мешает</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q10" value="3"><span class="al">2</span><span class="ach"></span><span class="at">Заметно мешает — читаю страницу и не помню содержания</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q10" value="1"><span class="al">3</span><span class="ach"></span><span class="at">Иногда отвлекаюсь на тревожные мысли — но возвращаюсь к задаче</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q10" value="4"><span class="al">4</span><span class="ach"></span><span class="at">Не могу прочитать абзац или довести мысль до конца — тревога полностью захватила внимание</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q10" value="2"><span class="al">5</span><span class="ach"></span><span class="at">Часть дней нормально, часть — не могу сосредоточиться вообще</span><span class="as">2</span></label>
+    </div></div>
+
+  <!-- ═══ DOMAIN C — Соматический ═══ -->
+  <div class="dh" style="color:var(--dC);"><span>Домен В · Соматический · 0–4</span><span class="ln"></span></div>
+
+  <!-- Q11: Мышечное напряжение — порядок: 4,0,2,1,3 -->
+  <div class="qc"><div class="qh" style="background:var(--dC);"><div class="qn">11</div><div class="qm"><div class="qtg">DSM-5 критерий C5 · HAM-A</div><div class="qtl">Мышечное напряжение</div></div></div>
+    <div class="qp" id="qp-11">Насколько напряжены ваши мышцы?</div>
+    <div class="ans" data-q="11">
+    <label class="ao"><input type="radio" name="q11" value="4"><span class="al">1</span><span class="ach"></span><span class="at">Тело сковано непрерывно — хронические боли в шее, спине, челюсти, не могу расслабиться даже в покое</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q11" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Нет — тело расслаблено</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q11" value="2"><span class="al">3</span><span class="ach"></span><span class="at">Регулярное напряжение — стискиваю челюсти, болит спина, шея ноет</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q11" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Иногда замечаю напряжение в плечах — расслабляю и проходит</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q11" value="3"><span class="al">5</span><span class="ach"></span><span class="at">Постоянное — тело как панцирь, частые головные боли от напряжения</span><span class="as">3</span></label>
+    </div></div>
+
+  <!-- Q12: Сон — порядок: 3,0,4,1,2 -->
+  <div class="qc"><div class="qh" style="background:var(--dC);"><div class="qn">12</div><div class="qm"><div class="qtg">DSM-5 критерий C6 · HAM-A</div><div class="qtl">Нарушение сна из-за тревоги</div></div></div>
+    <div class="qp" id="qp-12">Как тревога влияет на сон?</div>
+    <div class="ans" data-q="12">
+    <label class="ao"><input type="radio" name="q12" value="3"><span class="al">1</span><span class="ach"></span><span class="at">Тяжёлая бессонница — лежу часами с тревожными мыслями, сон 3–4 часа</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q12" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Сон нормальный — засыпаю без проблем</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q12" value="4"><span class="al">3</span><span class="ach"></span><span class="at">Сон практически разрушен — могу не спать сутками или сплю 1–2 часа урывками</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q12" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Иногда ворочаюсь 20–30 минут — мысли крутятся, но засыпаю</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q12" value="2"><span class="al">5</span><span class="ach"></span><span class="at">Регулярно лежу час и более — тревожные мысли не дают заснуть, будят среди ночи</span><span class="as">2</span></label>
+    </div></div>
+
+  <!-- Q13: Усталость — порядок: 2,4,0,3,1 -->
+  <div class="qc"><div class="qh" style="background:var(--dC);"><div class="qn">13</div><div class="qm"><div class="qtg">DSM-5 критерий C2 · HAM-A</div><div class="qtl">Утомляемость от тревоги</div></div></div>
+    <div class="qp" id="qp-13">Насколько тревога истощает вашу энергию?</div>
+    <div class="ans" data-q="13">
+    <label class="ao"><input type="radio" name="q13" value="2"><span class="al">1</span><span class="ach"></span><span class="at">Часто чувствую себя вымотанным(ой) — даже без физических нагрузок</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q13" value="4"><span class="al">2</span><span class="ach"></span><span class="at">Полное истощение — нет ресурсов ни на что, минимальные действия требуют огромных усилий</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q13" value="0"><span class="al">3</span><span class="ach"></span><span class="at">Энергия в норме — тревога не утомляет</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q13" value="3"><span class="al">4</span><span class="ach"></span><span class="at">Сильное истощение — тревога высасывает бо́льшую часть сил, даже простые дела требуют усилий</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q13" value="1"><span class="al">5</span><span class="ach"></span><span class="at">К вечеру устаю быстрее обычного — но утром нормально</span><span class="as">1</span></label>
+    </div></div>
+
+  <!-- Q14: Телесные проявления (ЖКТ, кардио, автономные) — порядок: 3,0,4,1,2 -->
+  <div class="qc"><div class="qh" style="background:var(--dC);"><div class="qn">14</div><div class="qm"><div class="qtg">HAM-A пп.9–13 · DSM-5 критерий E (косвенно)</div><div class="qtl">Телесные проявления: ЖКТ, сердцебиение, потливость</div></div></div>
+    <div class="qp" id="qp-14">Есть ли телесные проявления тревоги — проблемы с ЖКТ, сердцебиение, потливость?</div>
+    <div class="ans" data-q="14">
+    <label class="ao"><input type="radio" name="q14" value="3"><span class="al">1</span><span class="ach"></span><span class="at">Выраженные — частая тошнота, расстройство ЖКТ, сильное сердцебиение, обильная потливость</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q14" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Нет телесных проявлений тревоги</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q14" value="4"><span class="al">3</span><span class="ach"></span><span class="at">Тяжёлые — хронические проблемы с ЖКТ, постоянное сердцебиение, ощущение нехватки воздуха, головокружение</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q14" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Лёгкие — иногда потеют ладони, слегка учащается пульс, лёгкий дискомфорт в животе</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q14" value="2"><span class="al">5</span><span class="ach"></span><span class="at">Заметные — регулярно «ком в животе», сердцебиение, дрожь в руках, потливость</span><span class="as">2</span></label>
+    </div></div>
+
+  <!-- ═══ DOMAIN D — Поведенческий ═══ -->
+  <div class="dh" style="color:var(--dD);"><span>Домен Г · Поведенческий · 0–4</span><span class="ln"></span></div>
+
+  <!-- Q15: Избегание — порядок: 3,0,4,1,2 -->
+  <div class="qc"><div class="qh" style="background:var(--dD);"><div class="qn">15</div><div class="qm"><div class="qtg">Dugas · избегание неопределённости</div><div class="qtl">Избегание ситуаций с неизвестным исходом</div></div></div>
+    <div class="qp" id="qp-15">Насколько вы избегаете ситуаций из-за тревоги?</div>
+    <div class="ans" data-q="15">
+    <label class="ao"><input type="radio" name="q15" value="3"><span class="al">1</span><span class="ach"></span><span class="at">Жизнь сузилась — избегаю перемен, новых мест, решений из-за тревоги</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q15" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Нет — принимаю неизвестность как часть жизни</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q15" value="4"><span class="al">3</span><span class="ach"></span><span class="at">Парализован(а) — не могу сделать шаг, если не знаю исход на 100%</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q15" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Иногда откладываю решения — но в итоге принимаю</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q15" value="2"><span class="al">5</span><span class="ach"></span><span class="at">Регулярно отказываюсь от возможностей: «а вдруг не получится»</span><span class="as">2</span></label>
+    </div></div>
+
+  <!-- Q16: Прокрастинация — порядок: 1,4,0,3,2 -->
+  <div class="qc"><div class="qh" style="background:var(--dD);"><div class="qn">16</div><div class="qm"><div class="qtg">Поведенческий · тревожная прокрастинация</div><div class="qtl">Откладывание из-за тревоги</div><div class="qd">Не лень — паралич от страха «сделать неправильно»</div></div></div>
+    <div class="qp" id="qp-16">Откладываете ли вы дела из-за тревоги?</div>
+    <div class="ans" data-q="16">
+    <label class="ao"><input type="radio" name="q16" value="1"><span class="al">1</span><span class="ach"></span><span class="at">Иногда тяну с важными решениями — но делаю</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q16" value="4"><span class="al">2</span><span class="ach"></span><span class="at">Полный паралич — не могу ни начать, ни закончить ничего</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q16" value="0"><span class="al">3</span><span class="ach"></span><span class="at">Нет — делаю дела вовремя</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q16" value="3"><span class="al">4</span><span class="ach"></span><span class="at">Тревога блокирует действия — важные дела копятся неделями</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q16" value="2"><span class="al">5</span><span class="ach"></span><span class="at">Регулярно откладываю — анализирую варианты бесконечно, не могу выбрать</span><span class="as">2</span></label>
+    </div></div>
+
+  <!-- Q17: Поиск заверений — порядок: 4,0,2,1,3 -->
+  <div class="qc"><div class="qh" style="background:var(--dD);"><div class="qn">17</div><div class="qm"><div class="qtg">ГТР-специфичный · поиск заверений</div><div class="qtl">Потребность в заверениях от других</div></div></div>
+    <div class="qp" id="qp-17">Насколько часто вам нужно услышать «всё будет нормально» от других?</div>
+    <div class="ans" data-q="17">
+    <label class="ao"><input type="radio" name="q17" value="4"><span class="al">1</span><span class="ach"></span><span class="at">Постоянно — близкие устали от моих вопросов, но я не могу остановиться</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q17" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Не нуждаюсь в заверениях — справляюсь сам(а)</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q17" value="2"><span class="al">3</span><span class="ach"></span><span class="at">Регулярно — спрашиваю нескольких людей, гуглю, перечитываю ответы</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q17" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Иногда спрашиваю «как думаешь, нормально будет?» — одного раза достаточно</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q17" value="3"><span class="al">5</span><span class="ach"></span><span class="at">Часто — облегчение от заверения на минуты, потом тревога возвращается</span><span class="as">3</span></label>
+    </div></div>
+
+  <!-- Q18: Гиперконтроль — порядок: 2,4,0,3,1 -->
+  <div class="qc"><div class="qh" style="background:var(--dD);"><div class="qn">18</div><div class="qm"><div class="qtg">Dugas · гиперконтроль</div><div class="qtl">Избыточная подготовка и перепроверка</div></div></div>
+    <div class="qp" id="qp-18">Насколько вы склонны к гиперконтролю и перепроверке?</div>
+    <div class="ans" data-q="18">
+    <label class="ao"><input type="radio" name="q18" value="2"><span class="al">1</span><span class="ach"></span><span class="at">Регулярно перепроверяю, составляю длинные списки, готовлюсь к маловероятным сценариям</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q18" value="4"><span class="al">2</span><span class="ach"></span><span class="at">Контроль стал ритуалом — невозможно отпустить ни одну деталь, без проверки паника</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q18" value="0"><span class="al">3</span><span class="ach"></span><span class="at">Нормальный уровень подготовки — не перепроверяю</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q18" value="3"><span class="al">4</span><span class="ach"></span><span class="at">Гиперконтроль отнимает часы — перепроверяю всё многократно, не могу доверить никому</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q18" value="1"><span class="al">5</span><span class="ach"></span><span class="at">Чуть больше подготовки чем нужно — но не мешает жить</span><span class="as">1</span></label>
+    </div></div>
+
+  <!-- ═══ DOMAIN E — Функционирование ═══ -->
+  <div class="dh" style="color:var(--dE);"><span>Домен Д · Функционирование · 0–4 · вне балла</span><span class="ln"></span></div>
+
+  <!-- Q19: Работа — порядок: 3,1,4,0,2 -->
+  <div class="qc"><div class="qh" style="background:var(--dE);"><div class="qn">19</div><div class="qm"><div class="qtg">DSM-5 критерий · работа</div><div class="qtl">Влияние на работу или учёбу</div></div></div>
+    <div class="qp" id="qp-19">Как тревога влияет на работу/учёбу?</div>
+    <div class="ans" data-q="19">
+    <label class="ao"><input type="radio" name="q19" value="3"><span class="al">1</span><span class="ach"></span><span class="at">Серьёзно — работаю на минимуме, допускаю ошибки, пропускаю сроки</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q19" value="1"><span class="al">2</span><span class="ach"></span><span class="at">Немного медленнее — но справляюсь</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q19" value="4"><span class="al">3</span><span class="ach"></span><span class="at">Не могу работать/учиться — тревога полностью блокирует</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q19" value="0"><span class="al">4</span><span class="ach"></span><span class="at">Не влияет — работаю нормально</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q19" value="2"><span class="al">5</span><span class="ach"></span><span class="at">Заметно — теряю 30–50% продуктивности, часто отвлекаюсь</span><span class="as">2</span></label>
+    </div></div>
+
+  <!-- Q20: Отношения — порядок: 2,4,0,1,3 -->
+  <div class="qc"><div class="qh" style="background:var(--dE);"><div class="qn">20</div><div class="qm"><div class="qtg">DSM-5 критерий · отношения</div><div class="qtl">Влияние на отношения</div></div></div>
+    <div class="qp" id="qp-20">Как тревога влияет на отношения?</div>
+    <div class="ans" data-q="20">
+    <label class="ao"><input type="radio" name="q20" value="2"><span class="al">1</span><span class="ach"></span><span class="at">Заметно — близкие жалуются, конфликты из-за моей тревоги</span><span class="as">2</span></label>
+    <label class="ao"><input type="radio" name="q20" value="4"><span class="al">2</span><span class="ach"></span><span class="at">Разрушает — потерял(а) отношения из-за тревоги</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q20" value="0"><span class="al">3</span><span class="ach"></span><span class="at">Не влияет</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q20" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Иногда раздражаюсь или отдаляюсь — но отношения сохранны</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q20" value="3"><span class="al">5</span><span class="ach"></span><span class="at">Серьёзно — отдаляюсь от близких, тревога стала главной темой общения</span><span class="as">3</span></label>
+    </div></div>
+
+  <!-- Q21: Быт — порядок: 4,1,0,3,2 -->
+  <div class="qc"><div class="qh" style="background:var(--dE);"><div class="qn">21</div><div class="qm"><div class="qtg">DSM-5 критерий · быт</div><div class="qtl">Влияние на повседневную жизнь</div></div></div>
+    <div class="qp" id="qp-21">Как тревога влияет на быт и отдых?</div>
+    <div class="ans" data-q="21">
+    <label class="ao"><input type="radio" name="q21" value="4"><span class="al">1</span><span class="ach"></span><span class="at">Не справляюсь ни с чем — жизнь остановилась</span><span class="as">4</span></label>
+    <label class="ao"><input type="radio" name="q21" value="1"><span class="al">2</span><span class="ach"></span><span class="at">Немного труднее расслабиться — но справляюсь</span><span class="as">1</span></label>
+    <label class="ao"><input type="radio" name="q21" value="0"><span class="al">3</span><span class="ach"></span><span class="at">Быт и отдых в норме</span><span class="as">0</span></label>
+    <label class="ao"><input type="radio" name="q21" value="3"><span class="al">4</span><span class="ach"></span><span class="at">Серьёзно — отдых невозможен, быт рушится</span><span class="as">3</span></label>
+    <label class="ao"><input type="radio" name="q21" value="2"><span class="al">5</span><span class="ach"></span><span class="at">Заметно — не могу отдохнуть, бытовые дела копятся</span><span class="as">2</span></label>
+    </div></div>
+
+  <!-- HISTORY -->
+  <div class="hist">
+    <div class="sdiv"><div class="sdiv-n">II</div><div><h3>История и контекст</h3><p>Определяет дифдиагностику и тактику · не влияет на балл</p></div></div>
+
+    <div class="hc"><div class="hch"><span class="hcc">X1</span><div><div class="hcl">Как давно длится чрезмерное беспокойство?</div><div class="hcd">DSM-5 требует ≥6 месяцев для диагноза ГТР</div></div></div><div class="hco"><span class="hcb" data-g="x1" data-v="<3m" data-note="Менее 3 месяцев — возможна адаптационная реакция, а не ГТР">Менее 3 месяцев ⚑</span><span class="hcb" data-g="x1" data-v="3-6m">3–6 месяцев</span><span class="hcb" data-g="x1" data-v="6m-2y">6 месяцев — 2 года</span><span class="hcb" data-g="x1" data-v="2y+">Более 2 лет</span></div><div class="hcn" id="note-x1"></div><div class="hist-ok" id="ok-x1">✓ Учтено в выводах</div></div>
+
+    <div class="hc"><div class="hch"><span class="hcc">X2</span><div><div class="hcl">Бывают ли панические атаки (внезапные приступы ужаса с сердцебиением, удушьем, страхом смерти)?</div><div class="hcd">Если да — рассмотрите также паническое расстройство</div></div></div><div class="hco"><span class="hcb" data-g="x2" data-v="no">Нет</span><span class="hcb" data-g="x2" data-v="rare">Были 1–2 раза</span><span class="hcb" data-g="x2" data-v="regular" data-note="Регулярные панические атаки — рассмотрите паническое расстройство (отдельный диагноз от ГТР)">Регулярно ⚑</span><span class="hcb" data-g="x2" data-v="frequent" data-note="Частые панические атаки — скорее всего паническое расстройство, а не только ГТР">Часто (≥1 в неделю) ⚑⚑</span></div><div class="hcn" id="note-x2"></div><div class="hist-ok" id="ok-x2">✓ Учтено в выводах</div></div>
+
+    <div class="hc"><div class="hch"><span class="hcc">X3</span><div><div class="hcl">Что мешает концентрации: тревожные МЫСЛИ или СКУКА?</div><div class="hcd">Ключевое: при ГТР мешают мысли. При СДВГ — скука</div></div></div><div class="hco"><span class="hcb" data-g="x3" data-v="worry">Тревожные мысли вытесняют всё</span><span class="hcb" data-g="x3" data-v="boredom" data-note="Если мешает именно скука, а на интересном — гиперфокус — рассмотрите СДВГ">Скучное невозможно, на интересном — могу часами ⚑</span><span class="hcb" data-g="x3" data-v="both" data-note="Комбинация — возможна коморбидность ГТР + СДВГ">И то и другое</span></div><div class="hcn" id="note-x3"></div><div class="hist-ok" id="ok-x3">✓ Учтено в выводах</div></div>
+
+    <div class="hc"><div class="hch"><span class="hcc">X4</span><div><div class="hcl">Была ли конкретная ситуация (авария, насилие, катастрофа, потеря), после которой тревога резко усилилась?</div><div class="hcd">Дифдиагностика ГТР и ПТСР</div></div></div><div class="hco"><span class="hcb" data-g="x4" data-v="no">Нет — тревога не связана с конкретным событием</span><span class="hcb" data-g="x4" data-v="long_ago">Да, но давно (более 5 лет назад)</span><span class="hcb" data-g="x4" data-v="recent" data-note="Если тревога связана с конкретной травмой — стоит обсудить со специалистом, в том числе скрининг ПТСР">Да, относительно недавно ⚑</span></div><div class="hcn" id="note-x4"></div><div class="hist-ok" id="ok-x4">✓ Учтено в выводах</div></div>
+
+    <div class="hc"><div class="hch"><span class="hcc">Д1</span><div><div class="hcl">Есть ли периоды ремиссии — недели без тревоги?</div></div></div><div class="hco"><span class="hcb" data-g="d1" data-v="yes">Да, бывают недели/месяцы без тревоги</span><span class="hcb" data-g="d1" data-v="partial">Тревога снижается, но полностью не уходит</span><span class="hcb" data-g="d1" data-v="no" data-note="Хроническое течение без ремиссий — более тяжёлый прогноз, возможна дистимия или «двойная» депрессия">Нет — тревога постоянный фон ⚑</span></div><div class="hcn" id="note-d1"></div><div class="hist-ok" id="ok-d1">✓ Учтено в выводах</div></div>
+
+    <div class="hc"><div class="hch"><span class="hcc">Д2</span><div><div class="hcl">Есть ли сопутствующая депрессия?</div><div class="hcd">ГТР и депрессия сочетаются в 60% случаев</div></div></div><div class="hco"><span class="hcb" data-g="d2" data-v="no">Нет</span><span class="hcb" data-g="d2" data-v="mild">Лёгкая</span><span class="hcb" data-g="d2" data-v="moderate" data-note="Коморбидность ГТР + депрессия требует комплексного лечения">Умеренная или тяжёлая ⚑</span></div><div class="hcn" id="note-d2"></div><div class="hist-ok" id="ok-d2">✓ Учтено в выводах</div></div>
+
+    <div class="hc"><div class="hch"><span class="hcc">Д3</span><div><div class="hcl">Есть ли тревожные расстройства в семье?</div><div class="hcd">Наследуемость ГТР ~30%</div></div></div><div class="hco"><span class="hcb" data-g="d3" data-v="no">Нет</span><span class="hcb" data-g="d3" data-v="unknown">Не знаю</span><span class="hcb" data-g="d3" data-v="yes">Да — тревога, паника или ОКР у родственника</span></div><div class="hcn" id="note-d3"></div><div class="hist-ok" id="ok-d3">✓ Учтено в выводах</div></div>
+
+    <div class="hc"><div class="hch"><span class="hcc">Д4</span><div><div class="hcl">Сколько кофеина вы употребляете в день? (кофе, энергетики, крепкий чай)</div><div class="hcd">DSM-5 Критерий E: кофеин — самый частый провокатор тревожных симптомов</div></div></div><div class="hco"><span class="hcb" data-g="d4" data-v="low">0–1 чашка</span><span class="hcb" data-g="d4" data-v="moderate">2–3 чашки</span><span class="hcb" data-g="d4" data-v="high" data-note="Высокое потребление кофеина (>400 мг/день) может значительно усиливать или полностью имитировать симптомы тревожного расстройства">4+ чашки ⚑</span><span class="hcb" data-g="d4" data-v="unknown">Не знаю / не считаю</span></div><div class="hcn" id="note-d4"></div><div class="hist-ok" id="ok-d4">✓ Учтено в выводах</div></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="res" id="results">
+    <div class="res-t">Результаты</div>
+    <p style="color:var(--ink3);font-size:14px;">Результаты появятся по мере заполнения</p>
+    <div class="rbig"><div class="rnum" id="rn">—</div><div class="rmx">/ 72</div></div>
+    <div class="rlv" id="rl" style="color:var(--ink3);"></div>
+    <div class="rds" id="rd">Ответьте минимум на 5 вопросов для предварительных результатов</div>
+    <div class="rbar"><div class="rbf" id="rb" style="width:0%;background:#ddd;"></div></div>
+    <table class="stbl" id="stbl"><thead><tr><th>Баллы</th><th>Уровень</th><th>Что это значит</th><th>Рекомендация</th></tr></thead><tbody>
+      <tr data-r="0,14"><td>0–14</td><td style="color:#166534;font-weight:700;">НОРМА</td><td>Тревога в пределах нормы</td><td>Скрининг не выявил выраженных признаков.</td></tr>
+      <tr data-r="15,31"><td>15–31</td><td style="color:#6a7a2a;font-weight:700;">ЛЁГКАЯ</td><td>Заметная тревожность, жизнь функционирует</td><td>Есть признаки, заслуживающие внимания. Консультация специалиста поможет разобраться.</td></tr>
+      <tr data-r="32,48"><td>32–48</td><td style="color:#b45309;font-weight:700;">УМЕРЕННАЯ</td><td>Признаки выражены</td><td>Рекомендуется обращение к психиатру или психотерапевту.</td></tr>
+      <tr data-r="49,62"><td>49–62</td><td style="color:#c2410c;font-weight:700;">ТЯЖЁЛАЯ</td><td>Серьёзные нарушения</td><td>Обратитесь к психиатру. Эффективные методы помощи существуют.</td></tr>
+      <tr data-r="63,72"><td>63–72</td><td style="color:#b03a3a;font-weight:700;">КРАЙНЕ ТЯЖЁЛАЯ</td><td>Тревога парализует жизнь</td><td>Срочно обратитесь к психиатру. Помощь возможна даже в тяжёлых случаях.</td></tr>
+    </tbody></table>
+
+    <div id="domBlock" style="display:none;">
+      <div style="font-size:11px;font-weight:600;color:var(--ink3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px;">Профиль по доменам</div>
+      <div class="dgr">
+        <div class="dgc" style="border-left:4px solid var(--dA);"><div class="dl">А · Беспокойство</div><div class="dv" id="dA">–</div><div class="dm">из 20</div></div>
+        <div class="dgc" style="border-left:4px solid var(--dB);"><div class="dl">Б · Когнитивный</div><div class="dv" id="dB">–</div><div class="dm">из 20</div></div>
+        <div class="dgc" style="border-left:4px solid var(--dC);"><div class="dl">В · Соматический</div><div class="dv" id="dC">–</div><div class="dm">из 16</div></div>
+        <div class="dgc" style="border-left:4px solid var(--dD);"><div class="dl">Г · Поведенческий</div><div class="dv" id="dD">–</div><div class="dm">из 16</div></div>
+        <div class="dgc" style="border-left:4px solid var(--dE);"><div class="dl">Д · Функционирование</div><div class="dv" id="dE">–</div><div class="dm">из 12 (вне балла)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="conc" id="conc" style="display:none;"><div class="conc-t">Выводы и интерпретация</div><div id="concC"></div></div>
+
+  <details style="margin:24px 0;"><summary style="cursor:pointer;font-weight:600;color:var(--pri);font-size:15px;padding:12px 0;">Как отличить ГТР от похожих состояний ▾</summary>
+  <table class="ctbl"><thead><tr><th></th><th>ГТР</th><th>Депрессия</th><th>Паника</th><th>ОКР</th></tr></thead><tbody>
+    <tr><td style="font-weight:600;">Суть</td><td>Постоянный worry о будущем, множество тем</td><td>Подавленность, потеря интереса и удовольствия</td><td>Внезапные приступы ужаса с пиком за 10 минут</td><td>Навязчивые мысли (чуждые, пугающие) + ритуалы</td></tr>
+    <tr><td style="font-weight:600;">Ключевое отличие</td><td>Темы мигрируют: «что если?» → «а вдруг?» → следующая</td><td>Rumination о прошлом: «почему?», «в чём мой провал?»</td><td>Пик за 10 минут, между приступами может быть норма</td><td>Мысли эго-дистонные — человек сам считает их абсурдными</td></tr>
+    <tr><td style="font-weight:600;">Заподозрить если</td><td>Тревога обо всём ≥6 мес., не можете остановить</td><td>Нет сил и интереса, подавленность, чувство вины</td><td>Приступы с сердцебиением, удушьем, страхом смерти</td><td>Перепроверки, ритуалы, навязчивые мысли</td></tr>
+  </tbody></table></details>
+
+  <div class="refs">
+    <h4>Источники</h4>
+    <div class="ri">[1] Spitzer RL et al. GAD-7. <em>Arch Intern Med.</em> 2006;166(10):1092–1097. <a href="https://doi.org/10.1001/archinte.166.10.1092" target="_blank">doi ↗</a></div>
+    <div class="ri">[2] Hamilton M. HAM-A. <em>Br J Med Psychol.</em> 1959;32(1):50–55.</div>
+    <div class="ri">[3] Meyer TJ et al. PSWQ. <em>Behav Res Ther.</em> 1990;28(6):487–495.</div>
+    <div class="ri">[4] Dugas MJ et al. Intolerance of Uncertainty. <em>Behav Res Ther.</em> 1998;36(2):215–226. <a href="https://doi.org/10.1016/S0005-7967(97)10028-1" target="_blank">doi ↗</a></div>
+    <div class="ri">[5] Wells A. Metacognitive Therapy for Anxiety and Depression. Guilford; 2009.</div>
+    <div class="ri">[6] Carleton RN et al. IUS-12. <em>J Anxiety Disord.</em> 2007;21(1):105–117. <a href="https://doi.org/10.1016/j.janxdis.2006.03.014" target="_blank">doi ↗</a></div>
+    <div class="ri">[7] APA. <em>DSM-5-TR.</em> 2022. <a href="https://doi.org/10.1176/appi.books.9780890425787" target="_blank">doi ↗</a></div>
+    <div class="disc">MentalScreenLab — информационный скрининговый сервис. Не является медицинской услугой. Результаты скрининга не заменяют консультацию специалиста. Данные не покидают ваш браузер.</div>
+  </div>
+
+</div></div>
+
+<div class="sf" onclick="document.getElementById('results').scrollIntoView({behavior:'smooth'})">
+  <div class="sf-n" id="sfn">0</div>
+  <div><div class="sf-l">из 72</div><div class="sf-v" id="sfv">—</div></div>
+</div>
+
+</div><!-- /mainContent -->
+
+<!-- Кризисный блок — статичный, виден всегда -->
+<div style="position:fixed;bottom:0;left:0;right:0;background:#2a2a3a;color:#e0e0ea;padding:10px 20px;font-size:13px;text-align:center;z-index:9999;line-height:1.5;">
+  Если вам нужна помощь прямо сейчас: <strong style="color:#fff;">8-800-2000-122</strong> (бесплатно, круглосуточно) · Экстренная помощь: <strong style="color:#fff;">112</strong>
+</div>
+
+<script src="/config-anxiety.js"></script>
+<script src="/engine.js"></script>
 <script src="/js/scroll.js"></script>
 </body>
 </html>
