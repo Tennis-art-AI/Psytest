@@ -1,0 +1,165 @@
+/* consent.css — единый экран согласия для всех диагностик */
+
+.consent-overlay {
+  position: fixed; inset: 0;
+  background: rgba(10, 8, 20, 0.85);
+  backdrop-filter: blur(16px);
+  z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.consent-overlay.hidden { display: none; }
+
+.consent-box {
+  background: linear-gradient(145deg, #faf8f5 0%, #f4f0ec 100%);
+  border-radius: 24px;
+  max-width: 520px;
+  width: 100%;
+  padding: 44px 36px 36px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.consent-box h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+
+.consent-sub {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  color: #8a8a9a;
+  margin-bottom: 28px;
+}
+
+.consent-points {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.consent-points li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  font-size: 14px;
+  line-height: 1.65;
+  color: #3d3d4d;
+  font-family: 'Outfit', sans-serif;
+}
+
+.consent-num {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4a3270, #6a4a9a);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+.consent-age {
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #fdf6f0, #fef8e8);
+  border: 1px solid rgba(196, 149, 106, 0.25);
+  font-size: 13px;
+  line-height: 1.65;
+  color: #8a6040;
+  font-family: 'Outfit', sans-serif;
+  margin-bottom: 24px;
+}
+
+.consent-check-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: rgba(74, 50, 112, 0.06);
+  border: 1px solid rgba(74, 50, 112, 0.1);
+  margin-bottom: 16px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s;
+}
+.consent-check-row:hover {
+  background: rgba(74, 50, 112, 0.1);
+  border-color: rgba(74, 50, 112, 0.2);
+}
+
+.consent-check-row input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  accent-color: #4a3270;
+  cursor: pointer;
+  flex-shrink: 0;
+  border-radius: 6px;
+}
+
+.consent-check-row span {
+  font-size: 14px;
+  font-weight: 500;
+  color: #2d1a50;
+  font-family: 'Outfit', sans-serif;
+}
+
+.consent-btn {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+  transition: all 0.25s;
+  letter-spacing: 0.01em;
+}
+
+.consent-btn:disabled {
+  background: #e8e4df;
+  color: #a8a8b0;
+  cursor: not-allowed;
+}
+
+.consent-btn:enabled {
+  background: linear-gradient(135deg, #4a3270, #5a3a8a);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(74, 50, 112, 0.3);
+}
+
+.consent-btn:enabled:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(74, 50, 112, 0.4);
+}
+
+@media (max-width: 600px) {
+  .consent-box {
+    padding: 32px 24px 28px;
+    border-radius: 20px;
+  }
+  .consent-box h2 {
+    font-size: 1.5rem;
+  }
+}

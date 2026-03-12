@@ -7,6 +7,7 @@
 <meta name="description" content="Углублённый скрининг депрессии: 23 вопроса, 5 доменов. На основе PHQ-9, BDI-II, HAM-D и DSM-5-TR.">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/common.css">
+<link rel="stylesheet" href="/css/consent.css">
 <style>
 :root{
   --bg:#faf8f5;--card:#fff;--ink:#1a1a1a;--ink2:#3d3d3d;--ink3:#8a8a8a;
@@ -19,12 +20,7 @@
   --radius:16px;
 }
 .pf{height:100%;background:linear-gradient(90deg,var(--warm),#e8b090);border-radius:2px;transition:width .5s;width:0%;}
-.consent-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;}
-.consent-box{background:var(--card);border-radius:20px;max-width:540px;width:100%;padding:40px 36px;text-align:center;}
-.consent-box h2{font-family:'Cormorant Garamond',serif;font-size:1.8rem;margin-bottom:16px;}
-.consent-box p{font-size:14px;color:var(--ink2);line-height:1.8;margin-bottom:12px;text-align:left;}
-.consent-box .age-warn{background:var(--warm-lt);border-left:4px solid var(--warm);padding:12px 16px;border-radius:8px;font-size:13px;color:var(--warm-dk);text-align:left;margin:16px 0;}
-.consent-btn{background:var(--pri);color:#fff;border:none;padding:14px 40px;border-radius:50px;font-size:16px;font-family:inherit;cursor:pointer;margin-top:16px;}
+
 
 .hcb.sel{background:var(--pri);border-color:var(--pri);color:#fff;font-weight:500;}
 .hcn{display:none;padding:8px 22px 12px;font-size:13px;color:var(--warm-dk);background:var(--warm-lt);}
@@ -50,14 +46,24 @@
 </head>
 <body>
 
-<div class="consent-overlay" id="consent"><div class="consent-box">
-  <h2>Прежде чем начать</h2>
-  <p>Это <strong>скрининг, не диагноз</strong>. Результаты носят информационный характер и не заменяют консультацию специалиста.</p>
-  <p>Скрининг поможет подготовиться к разговору с психиатром, психотерапевтом или клиническим психологом.</p>
-  <p><strong>Данные не покидают ваш браузер</strong> — ничего не сохраняется.</p>
-  <div class="age-warn">Если вам меньше 18 лет — рекомендуем пройти вместе с родителем или другим взрослым, которому доверяете.</div>
-  <button class="consent-btn" onclick="document.getElementById('consent').style.display='none'">Понятно, начать</button>
-</div></div>
+<div class="consent-overlay" id="consentOverlay">
+  <div class="consent-box">
+    <h2>Прежде чем начать</h2>
+    <div class="consent-sub">Пожалуйста, прочитайте перед прохождением скрининга</div>
+    <ul class="consent-points">
+      <li><span class="consent-num">1</span> Это скрининг, не диагноз. Результаты носят информационный характер и не являются медицинским заключением.</li>
+      <li><span class="consent-num">2</span> Скрининг не заменяет консультацию специалиста. Только врач-психиатр может поставить диагноз на основании очного осмотра.</li>
+      <li><span class="consent-num">3</span> Ваши данные не покидают браузер. Мы не собираем, не сохраняем и не передаём ответы — всё обрабатывается только на вашем устройстве.</li>
+      <li><span class="consent-num">4</span> Результат — не приговор. Даже при высоком балле это повод обратиться к специалисту, а не основание для самолечения.</li>
+    </ul>
+    <div class="consent-age">Если вам меньше 18 лет — рекомендуем пройти вместе с родителем или другим взрослым, которому доверяете.</div>
+    <label class="consent-check-row">
+      <input type="checkbox" id="consentCheck" onchange="document.getElementById('consentBtn').disabled=!this.checked;">
+      <span>Я понимаю, что это скрининг, а не диагноз</span>
+    </label>
+    <button class="consent-btn" id="consentBtn" disabled onclick="document.getElementById('consentOverlay').classList.add('hidden');">Начать скрининг</button>
+  </div>
+</div>
 
 <div style="position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(239,68,68,0.95);color:#fff;text-align:center;padding:8px 16px;font-size:13px;backdrop-filter:blur(8px);">
   Если вам нужна помощь прямо сейчас: <strong>8-800-2000-122</strong> (бесплатно, круглосуточно)
