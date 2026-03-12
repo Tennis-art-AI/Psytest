@@ -123,10 +123,12 @@ function buildC() {
   }
 
   /* === БЛОК 3: Domain-ratio дифдиагностика === */
+  var drFlags = [];
   if (a >= 5) {
     var rA = dS('A'), rB = dS('B'), rC = dS('C'), rD = dS('D');
 
     if (rC !== null && rA !== null && rC / DM.C > 0.6 && rA / DM.A < 0.3) {
+      drFlags.push('\u0441\u043e\u043c\u0430\u0442\u0438\u0437\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u0430\u044f');
       h += '<div class="ci" style="border-top:2px solid #7aaa9a;padding-top:18px;margin-top:8px;">'
         + '<strong>Соматический домен значительно выше эмоционального</strong>'
         + 'Телесные проявления (сон, аппетит, энергия, боли) доминируют при относительно сохранном настроении. '
@@ -136,6 +138,7 @@ function buildC() {
     }
 
     if (rB !== null && rA !== null && rB / DM.B > 0.6 && rA / DM.A < 0.3) {
+      drFlags.push('\u043a\u043e\u0433\u043d\u0438\u0442\u0438\u0432\u043d\u0430\u044f \u0434\u043e\u043c\u0438\u043d\u0430\u043d\u0442\u0430');
       h += '<div class="ci" style="border-top:2px solid #8a8ac0;padding-top:18px;margin-top:8px;">'
         + '<strong>Когнитивный домен значительно выше эмоционального</strong>'
         + 'Преобладание руминации, самокритики и трудностей концентрации над подавленностью настроения. '
@@ -145,6 +148,7 @@ function buildC() {
     }
 
     if (rD !== null && rA !== null && rD / DM.D > 0.6 && rA / DM.A < 0.3) {
+      drFlags.push('\u0440\u0430\u0437\u0434\u0440\u0430\u0436\u0438\u0442\u0435\u043b\u044c\u043d\u0430\u044f / \u043f\u043e\u0432\u0435\u0434\u0435\u043d\u0447\u0435\u0441\u043a\u0430\u044f');
       h += '<div class="ci" style="border-top:2px solid #c0a060;padding-top:18px;margin-top:8px;">'
         + '<strong>Поведенческий домен значительно выше эмоционального</strong>'
         + 'Раздражительность, изоляция и снижение активности при относительно неизменённом настроении. '
@@ -152,6 +156,17 @@ function buildC() {
         + 'конфликтность и отказ от активности. Обсудите эти проявления со специалистом.'
         + '</div>';
     }
+  }
+
+  /* Domain-ratio alert рядом с баллом */
+  var drEl = document.getElementById('drAlert');
+  if (drFlags.length > 0) {
+    drEl.innerHTML = '\u26a0 <strong>Обратите внимание:</strong> общий балл может не отражать реальную картину. '
+      + 'Доменный анализ выявил атипичный паттерн (' + drFlags.join(', ') + '). '
+      + 'Подробности \u2014 в выводах ниже.';
+    drEl.style.display = 'block';
+  } else {
+    drEl.style.display = 'none';
   }
 
   /* === БЛОК 3.5: Sub-module (меланхолический vs атипичный) === */
