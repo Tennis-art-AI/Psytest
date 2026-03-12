@@ -25,8 +25,7 @@
 .consent-box p{font-size:14px;color:var(--ink2);line-height:1.8;margin-bottom:12px;text-align:left;}
 .consent-box .age-warn{background:var(--warm-lt);border-left:4px solid var(--warm);padding:12px 16px;border-radius:8px;font-size:13px;color:var(--warm-dk);text-align:left;margin:16px 0;}
 .consent-btn{background:var(--pri);color:#fff;border:none;padding:14px 40px;border-radius:50px;font-size:16px;font-family:inherit;cursor:pointer;margin-top:16px;}
-.crisis-float{position:fixed;bottom:28px;left:28px;background:var(--red-lt);border:1px solid rgba(176,58,58,.2);border-radius:14px;padding:12px 18px;z-index:200;font-size:12px;color:var(--red);max-width:260px;line-height:1.5;}
-.crisis-float strong{display:block;margin-bottom:2px;}
+
 .hcb.sel{background:var(--pri);border-color:var(--pri);color:#fff;font-weight:500;}
 .hcn{display:none;padding:8px 22px 12px;font-size:13px;color:var(--warm-dk);background:var(--warm-lt);}
 .hist-ok{display:none;padding:6px 22px 10px;font-size:12px;color:var(--sage);font-weight:500;}
@@ -65,7 +64,9 @@
   <button class="consent-btn" onclick="document.getElementById('consent').style.display='none'">Понятно, начать</button>
 </div></div>
 
-<div class="crisis-float"><strong>Нужна помощь сейчас?</strong>Телефон доверия: <strong>8-800-2000-122</strong><br>Бесплатно, круглосуточно</div>
+<div style="position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(239,68,68,0.95);color:#fff;text-align:center;padding:8px 16px;font-size:13px;backdrop-filter:blur(8px);">
+  Если вам нужна помощь прямо сейчас: <strong>8-800-2000-122</strong> (бесплатно, круглосуточно)
+</div>
 
 <nav class="nav">
   <a href="/" class="nav-logo">Mental<span>ScreenLab</span></a>
@@ -75,7 +76,7 @@
 <!-- HERO -->
 <div class="hero">
   <h1>Скрининг депрессии</h1>
-  <p>23 вопроса · 5 доменов · дифдиагностика · ~10 минут</p>
+  <p>23 вопроса · 5 доменов · PHQ-9 · BDI-II · HAM-D · MADRS · IDS-30 · DSM-5</p>
 </div>
 
 <!-- ПРОГРЕСС -->
@@ -242,7 +243,7 @@
     <label class="ao"><input type="radio" name="q10" value="3"><span class="al">Г</span><span class="ach"></span><span class="at">Мысли о способах — но пугают и вызывают отвращение</span><span class="as s3">3</span></label>
     <label class="ao"><input type="radio" name="q10" value="4"><span class="al">Д</span><span class="ach"></span><span class="at">Мысли о смерти ПРИНОСЯТ ОБЛЕГЧЕНИЕ — как выход</span><span class="as s4">4</span></label>
     <label class="ao sel-w"><input type="radio" name="q10" value="5"><span class="al">Е</span><span class="ach"></span><span class="at">Составил(а) план или предпринял(а) попытку</span><span class="as s5">5</span></label></div>
-    <div class="qnt qnt-red"><strong>Если выбрали Д или Е — обратитесь за помощью сейчас</strong>Телефон доверия: 8-800-100-49-94 (бесплатно, круглосуточно) | Скорая: 112</div></div>
+    <div class="qnt qnt-red"><strong>Если вы выбрали вариант с мыслями о суициде — обратитесь за помощью</strong>Телефон доверия: <strong>8-800-2000-122</strong> (бесплатно, круглосуточно). Экстренная помощь: <strong>112</strong>. Мысли о суициде — это симптом, а не приговор. Они поддаются лечению при обращении к специалисту.</div></div>
 
   <div class="qc"><div class="qh" style="background:var(--dB);"><div class="qn">11</div><div class="qm"><div class="qtg">Метакогнитивный</div><div class="qtl">Страдание от собственных мыслей</div><div class="qd">Не содержание, а сам ПРОЦЕСС — насколько мысли причиняют боль</div></div></div>
     <div class="qp">Насколько негативные мысли причиняют страдание?</div>
