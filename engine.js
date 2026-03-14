@@ -5,6 +5,10 @@
 const S = {};
 const HIST = {};
 
+/* ═══ Paywall ═══ */
+const PAYWALL_AFTER = typeof PW_AFTER !== 'undefined' ? PW_AFTER : 5;
+let screeningUnlocked = false;
+
 function gL(t) { return LEV.find(l => t >= l.min && t <= l.max) || LEV[0]; }
 function tot() { let s = 0; for (let i = 1; i <= SCORED; i++) if (S[i] !== undefined) s += S[i]; return s; }
 function ans() { let c = 0; for (let i = 1; i <= TQ + FQ; i++) if (S[i] !== undefined) c++; return c; }
@@ -14,6 +18,15 @@ function updB() {
     const s = dS(k), b = document.getElementById('bar' + k);
     if (b) b.style.width = s !== null ? Math.max((s / DM[k]) * 100, 3) + '%' : '0%';
   });
+}
+
+function checkPaywall() {
+  const gate = document.querySelector('.paywall-gate');
+  if (!gate || screeningUnlocked) return;
+  if (ans() >= PAYWALL_AFTER) {
+    gate.style.display = '';
+    gate.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 }
 
 function upd() {
@@ -51,6 +64,15 @@ function upd() {
     document.getElementById('rb').style.width = '0%';
     document.getElementById('rd').textContent = 'Ответьте минимум на 5 вопросов для предварительных результатов';
   }
+  checkPaywall();
+}
+
+function unlockScreening() {
+  screeningUnlocked = true;
+  const gate = document.querySelector('.paywall-gate');
+  if (gate) gate.style.display = 'none';
+  document.querySelectorAll('.q-locked').forEach(el => el.classList.remove('q-locked'));
+  upd();
 }
 
 /* Обработчики вопросов */
@@ -84,6 +106,25 @@ document.querySelectorAll('.hcb').forEach(o => {
     buildC();
   });
 });
+
+/* ═══ Token check on load ═══ */
+(function() {
+  const gate = document.querySelector('.paywall-gate');
+  if (!gate) return;
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get('token');
+  if (token) {
+    fetch('/api/check-payment?token=' + token)
+      .then(r => r.json())
+      .then(d => {
+        if (d.valid) {
+          unlockScreening();
+          history.replaceState(null, '', window.location.pathname);
+        }
+      })
+      .catch(() => {});
+  }
+})();
 
 /* Инициализация */
 let cM = '2w';
