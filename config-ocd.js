@@ -80,7 +80,124 @@ function dualScore(a, b) {
 
 
 /* =====================================================================
-   ПОРОГИ ТЯЖЕСТИ: 4 уровня (Cervin et al., 2022)
+   6.3: ЛОГИКА ЧЕКЛИСТОВ → SUB-MODULE
+   =====================================================================
+
+   Данные чеклистов (из inline JS в HTML):
+   ─────────────────────────────────────────────────────────
+   HIST.k1  = ['contamination','harm','taboo',...]  ← К1 тематика
+   CHK['7'] = ['thoughts','images','urges',...]      ← A7 форма обсессий
+   CHK['11']= ['washing','checking','mental',...]    ← Б2 тип ритуалов
+   S[23]    = 0–4                                     ← В6 NJRE/incompleteness
+   HIST.x3  = 'no'|'past'|'current'                  ← X3 тики
+   ─────────────────────────────────────────────────────────
+
+   Маппинг sub-module (бэклог §12):
+   Подтип определяется комбинацией К1 + Б2 + В6 + X3.
+   У одного пациента может быть несколько подтипов одновременно
+   (DY-BOCS: multiple dimensions typical).                             */
+
+const SUB = {
+  contamination: {
+    label: 'Загрязнение / Очищение',
+    k1: 'contamination', b2: 'washing',
+    desc: 'Ведущая эмоция при этом типе ОКР — отвращение, а не только тревога. Специалист учтёт это при подборе подхода.'
+  },
+  checking_harm: {
+    label: 'Проверки / Ответственность за вред',
+    k1: 'harm', b2: 'checking',
+    desc: 'Ведущие эмоции — тревога и чувство вины: «если что-то случится — это моя вина». Это одна из самых частых форм ОКР.'
+  },
+  taboo: {
+    label: 'Табуированные мысли',
+    k1: 'taboo', b2: 'mental',
+    desc: 'Ведущие эмоции — стыд и страх: «а вдруг я на самом деле этого хочу?». Нет — мысль ≠ желание. Именно потому, что мысль пугает, она застревает.'
+  },
+  symmetry: {
+    label: 'Симметрия / Порядок',
+    k1: 'symmetry', njre: true,
+    desc: 'Ведущая эмоция — дискомфорт «неправильности» (NJRE), а не тревога. МКБ-11 специально включила это ощущение как один из движителей ОКР.'
+  },
+  relationship: {
+    label: 'Отношения (ROCD)',
+    k1: 'relationship', b2: null,
+    desc: 'Навязчивые сомнения в отношениях — это не «проблемы в отношениях», а ОКР, атакующее важную сферу жизни.'
+  },
+  health: {
+    label: 'Здоровье',
+    k1: 'health', b2: null,
+    desc: 'Навязчивые мысли о болезнях + компульсивные проверки. МКБ-11 включила ипохондрию в группу ОКР-расстройств из-за общности механизмов.'
+  },
+  tic_related: {
+    label: 'Тик-ассоциированное ОКР',
+    k1: null, b2: 'ticlike', x3: true,
+    desc: 'Около 30% людей с ОКР имеют тики. Это DSM-5 спецификатор, который специалист учтёт при подборе подхода.'
+  }
+};
+
+/* getSubtypes(): определяет подтипы на основе чеклистов и истории.
+   Возвращает массив объектов {key, label, desc}.
+   Вызывается из buildC() (задача 6.18).
+
+   Логика:
+   1. Для каждого SUB — проверяем наличие k1 в HIST.k1 И b2 в CHK['11']
+   2. symmetry: k1 + S[23] >= 2 (NJRE заметный)
+   3. relationship, health: только k1 (без обязательного b2)
+   4. tic_related: HIST.x3 != 'no' И b2 'ticlike' в CHK['11']
+   5. Если k1 имеет > 2 тематик → добавить «смешанный»
+   6. Если ничего не определено → null                                */
+
+function getSubtypes() {
+  var k1 = HIST.k1 || [];
+  var b2 = (typeof CHK !== 'undefined' && CHK['11']) ? CHK['11'] : [];
+  var njre = S[23] || 0;
+  var x3 = HIST.x3 || 'no';
+  var result = [];
+
+  /* Contamination: k1 + b2 */
+  if (k1.indexOf('contamination') !== -1 && b2.indexOf('washing') !== -1) {
+    result.push(SUB.contamination);
+  }
+  /* Checking / Harm: k1 + b2 */
+  if (k1.indexOf('harm') !== -1 && b2.indexOf('checking') !== -1) {
+    result.push(SUB.checking_harm);
+  }
+  /* Taboo: k1 + b2 */
+  if (k1.indexOf('taboo') !== -1 && b2.indexOf('mental') !== -1) {
+    result.push(SUB.taboo);
+  }
+  /* Symmetry: k1 + NJRE */
+  if (k1.indexOf('symmetry') !== -1 && njre >= 2) {
+    result.push(SUB.symmetry);
+  }
+  /* Relationship: только k1 */
+  if (k1.indexOf('relationship') !== -1) {
+    result.push(SUB.relationship);
+  }
+  /* Health: только k1 */
+  if (k1.indexOf('health') !== -1) {
+    result.push(SUB.health);
+  }
+  /* Tic-related: x3 + b2 */
+  if (x3 !== 'no' && b2.indexOf('ticlike') !== -1) {
+    result.push(SUB.tic_related);
+  }
+
+  return result;
+}
+
+/* getSubtypeSummary(): краткая строка для отображения в доменных баллах.
+   «Contamination + Checking» или «Смешанный» или null */
+function getSubtypeSummary() {
+  var subs = getSubtypes();
+  if (subs.length === 0) return null;
+  if (subs.length > 2) return 'Смешанный (' + subs.length + ' типов)';
+  return subs.map(function(s) { return s.label; }).join(' + ');
+}
+
+
+/* =====================================================================
+   6.4 + 6.5: ПОРОГИ ТЯЖЕСТИ и ОПИСАНИЯ (Cervin et al., 2022)
    =====================================================================
 
    Cervin et al. (2022, World Psychiatry, N=3784, 4 страны + валидация):
