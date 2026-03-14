@@ -312,7 +312,7 @@
   <div class="pw-title">Продолжить скрининг</div>
   <div class="pw-desc">Вы увидели качество вопросов. Оставшиеся вопросы + полный отчёт с доменами, дифдиагностикой и персональными выводами — после оплаты.</div>
   <div class="pw-price">399 <span>₽</span></div>
-  <button class="pw-btn" onclick="alert('Оплата будет доступна после подключения ЮКассы')">Оплатить и продолжить →</button>
+  <button class="pw-btn" onclick="payAndContinue()">Оплатить и продолжить →</button>
   <div class="pw-features">
     <span class="pw-feat">Полный результат по доменам</span>
     <span class="pw-feat">Дифференциальная диагностика</span>
@@ -779,6 +779,7 @@ const PAYWALL_AFTER=5;
 let screeningUnlocked=false;
 function checkPaywall(){const g=document.querySelector('.paywall-gate');if(!g||screeningUnlocked)return;if(ans()>=PAYWALL_AFTER){g.style.display='';g.scrollIntoView({behavior:'smooth',block:'center'});}}
 function unlockScreening(){screeningUnlocked=true;const g=document.querySelector('.paywall-gate');if(g)g.style.display='none';document.querySelectorAll('.q-locked').forEach(el=>el.classList.remove('q-locked'));upd();}
+async function payAndContinue(){const screening=window.location.pathname.split('/')[2];const btn=document.querySelector('.pw-btn');const orig=btn.textContent;btn.textContent='Перенаправление на оплату...';btn.disabled=true;btn.style.opacity='0.7';try{const res=await fetch('/api/create-payment',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({screening})});const data=await res.json();if(data.confirmation_url){window.location.href=data.confirmation_url;}else{alert('Ошибка создания платежа. Попробуйте ещё раз.');btn.textContent=orig;btn.disabled=false;btn.style.opacity='';}}catch(err){alert('Ошибка соединения. Попробуйте ещё раз.');btn.textContent=orig;btn.disabled=false;btn.style.opacity='';}}
 
 function gL(t){return LEV.find(l=>t>=l.min&&t<=l.max)||LEV[0];}
 function gBI(t){return BI_LEV.find(l=>t>=l.min&&t<=l.max)||BI_LEV[0];}

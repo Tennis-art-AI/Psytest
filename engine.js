@@ -75,6 +75,32 @@ function unlockScreening() {
   upd();
 }
 
+async function payAndContinue() {
+  const screening = window.location.pathname.split('/')[2];
+  const btn = document.querySelector('.pw-btn');
+  const origText = btn.textContent;
+  btn.textContent = 'Перенаправление на оплату...';
+  btn.disabled = true;
+  btn.style.opacity = '0.7';
+  try {
+    const res = await fetch('/api/create-payment', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ screening })
+    });
+    const data = await res.json();
+    if (data.confirmation_url) {
+      window.location.href = data.confirmation_url;
+    } else {
+      alert('Ошибка создания платежа. Попробуйте ещё раз.');
+      btn.textContent = origText; btn.disabled = false; btn.style.opacity = '';
+    }
+  } catch (err) {
+    alert('Ошибка соединения. Попробуйте ещё раз.');
+    btn.textContent = origText; btn.disabled = false; btn.style.opacity = '';
+  }
+}
+
 /* Обработчики вопросов */
 document.querySelectorAll('.ans').forEach(g => {
   const q = parseInt(g.dataset.q);
