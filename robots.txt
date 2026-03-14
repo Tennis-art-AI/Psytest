@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /docs/
+Disallow: /rooms/
 Disallow: /index_old_gallery.html
 Disallow: /index_backup.html
 
