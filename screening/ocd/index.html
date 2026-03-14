@@ -708,7 +708,78 @@
 <script src="/config-ocd.js"></script>
 <script src="/engine.js"></script>
 <script>
-/* ==== INLINE JS: обработчики dual + multi + consent — задачи 7.30–7.31 ==== */
+/* ==== 7.30: ОБРАБОТЧИКИ ДВУХЧАСТНЫХ ВОПРОСОВ ==== */
+var DUAL = {};
+
+document.querySelectorAll('.ans-dual').forEach(function(g) {
+  var q = parseInt(g.dataset.q), part = g.dataset.part;
+  g.querySelectorAll('.ao').forEach(function(o) {
+    o.addEventListener('click', function() {
+      o.querySelector('input').checked = true;
+      g.querySelectorAll('.ao').forEach(function(x) { x.classList.remove('sel'); });
+      o.classList.add('sel');
+
+      if (!DUAL[q]) DUAL[q] = {};
+      DUAL[q][part] = parseInt(o.querySelector('input').value);
+
+      var pl = document.getElementById('pl-' + q + part);
+      if (pl) pl.classList.add('done');
+
+      if (DUAL[q].a !== undefined && DUAL[q].b !== undefined) {
+        S[q] = dualScore(DUAL[q].a, DUAL[q].b);
+        var ds = document.getElementById('ds-' + q);
+        var dsv = document.getElementById('dsv-' + q);
+        if (ds && dsv) {
+          dsv.textContent = S[q] + ' из 5';
+          ds.classList.add('show');
+        }
+        upd();
+      }
+    });
+  });
+});
+
+/* ==== 7.31: ОБРАБОТЧИКИ MULTIPLE-SELECT ЧЕКЛИСТОВ ==== */
+var CHK = {};
+
+document.querySelectorAll('.ans-multi').forEach(function(g) {
+  var q = g.dataset.q;
+  var histKey = g.dataset.hist || null;
+
+  g.querySelectorAll('.ao').forEach(function(o) {
+    o.addEventListener('click', function() {
+      var val = o.dataset.val;
+
+      if (val === 'unsure') {
+        var wasSelected = o.classList.contains('sel');
+        g.querySelectorAll('.ao').forEach(function(x) { x.classList.remove('sel'); });
+        if (!wasSelected) o.classList.add('sel');
+      } else {
+        var unsure = g.querySelector('.ao[data-val="unsure"]');
+        if (unsure) unsure.classList.remove('sel');
+        o.classList.toggle('sel');
+      }
+
+      var selected = [];
+      g.querySelectorAll('.ao.sel').forEach(function(el) { selected.push(el.dataset.val); });
+
+      if (histKey) {
+        HIST[histKey] = selected;
+      } else {
+        CHK[q] = selected;
+      }
+
+      var mc = document.getElementById('mc-' + q);
+      var mcv = document.getElementById('mcv-' + q);
+      if (mc && mcv) {
+        mcv.textContent = selected.length;
+        if (selected.length > 0) { mc.classList.add('show'); } else { mc.classList.remove('show'); }
+      }
+
+      upd();
+    });
+  });
+});
 </script>
 </body>
 </html>
