@@ -276,8 +276,24 @@
 
   <!-- ==== 7.15: A6 (двухчастный) + A7 (чеклист) ==== -->
 
+  
+<!-- PAYWALL GATE -->
+<div class="paywall-gate" style="display:none">
+  <div class="pw-lock">🔒</div>
+  <div class="pw-title">Продолжить скрининг</div>
+  <div class="pw-desc">Вы увидели качество вопросов. Оставшиеся вопросы + полный отчёт с доменами, дифдиагностикой и персональными выводами — после оплаты.</div>
+  <div class="pw-price">399 <span>₽</span></div>
+  <button class="pw-btn" onclick="alert('Оплата будет доступна после подключения ЮКассы')">Оплатить и продолжить →</button>
+  <div class="pw-features">
+    <span class="pw-feat">Полный результат по доменам</span>
+    <span class="pw-feat">Дифференциальная диагностика</span>
+    <span class="pw-feat">Персональные выводы</span>
+  </div>
+  <div class="pw-note">Безопасная оплата через ЮKassa · Карты · СБП · SberPay</div>
+</div>
+
   <!-- A6: Obsession-free interval (двухчастный) -->
-  <div class="qc qc-dual" id="qc-6">
+  <div class="qc qc-dual q-locked" id="qc-6">
     <div class="qh" style="background:var(--dA);"><div class="qn">6</div><div class="qm"><div class="qtg">Y-BOCS-II item 2 · Storch 2010</div><div class="qtl">Время без навязчивых мыслей</div><div class="qd">Два подвопроса — как долго перерыв и как часто</div></div></div>
     <div class="qp"><span class="part-label" id="pl-6a">a</span>В обычный день — какой самый длинный перерыв от навязчивых мыслей?</div>
     <div class="ans-dual" data-q="6" data-part="a">
@@ -318,7 +334,7 @@
   <!-- ==== 7.16: A8–A9 + qnt «Мысль ≠ действие» ==== -->
 
   <!-- A8: Множественность и миграция тем -->
-  <div class="qc">
+  <div class="qc q-locked">
     <div class="qh" style="background:var(--dA);"><div class="qn">8</div><div class="qm"><div class="qtg">DY-BOCS · Mataix-Cols 2005</div><div class="qtl">Количество и смена тем</div></div></div>
     <div class="qp">Навязчивые мысли обычно на одну тему — или их несколько? Менялись ли темы со временем?</div>
     <div class="ans" data-q="8">
@@ -331,7 +347,7 @@
   </div>
 
   <!-- A9: Вина/стыд от мыслей -->
-  <div class="qc">
+  <div class="qc q-locked">
     <div class="qh" style="background:var(--dA);"><div class="qn">9</div><div class="qm"><div class="qtg">OBQ-44 · TAF-Moral (Rachman 1997)</div><div class="qtl">Вина и стыд от навязчивых мыслей</div><div class="qd">Как вы относитесь к себе из-за этих мыслей?</div></div></div>
     <div class="qp">Вызывают ли навязчивые мысли чувство вины, стыда или ощущение, что вы плохой человек?</div>
     <div class="ans" data-q="9">
@@ -348,10 +364,10 @@
 
   <!-- ==== 7.17: Б1 (двухчастный) + Б2 (чеклист) + qnt «Ментальные ритуалы» ==== -->
 
-  <div class="sdiv" style="background:var(--dB);"><div class="sdiv-n">Б</div><div><h3>Компульсии — ритуалы и повторяющиеся действия</h3><p>8 вопросов · макс. 30 баллов</p></div></div>
+  <div class="sdiv q-locked" style="background:var(--dB);"><div class="sdiv-n">Б</div><div><h3>Компульсии — ритуалы и повторяющиеся действия</h3><p>8 вопросов · макс. 30 баллов</p></div></div>
 
   <!-- Б1: Время на ритуалы (двухчастный) -->
-  <div class="qc qc-dual" id="qc-10">
+  <div class="qc qc-dual q-locked" id="qc-10">
     <div class="qh" style="background:var(--dB);"><div class="qn">10</div><div class="qm"><div class="qtg">Y-BOCS #6 · DSM-5 B · DSM-5 A2</div><div class="qtl">Время на ритуалы и повторяющиеся действия</div><div class="qd">Включая мысленные: пересчёт, молитву, мысленную «перемотку», нейтрализацию</div></div></div>
     <div class="qp"><span class="part-label" id="pl-10a">a</span>В самые тяжёлые дни — сколько времени уходит на ритуалы (включая мысленные)?</div>
     <div class="ans-dual" data-q="10" data-part="a">
@@ -397,7 +413,7 @@
   <!-- ==== 7.18: Б3–Б6 ==== -->
 
   <!-- Б3: Помехи от ритуалов -->
-  <div class="qc">
+  <div class="qc q-locked">
     <div class="qh" style="background:var(--dB);"><div class="qn">12</div><div class="qm"><div class="qtg">Y-BOCS #7 · Y-BOCS-II</div><div class="qtl">Помехи от ритуалов</div></div></div>
     <div class="qp">Насколько ритуалы мешают вашей повседневной жизни — работе, учёбе, общению, домашним делам?</div>
     <div class="ans" data-q="12">
@@ -410,7 +426,7 @@
   </div>
 
   <!-- Б4: Дистресс от невыполнения -->
-  <div class="qc">
+  <div class="qc q-locked">
     <div class="qh" style="background:var(--dB);"><div class="qn">13</div><div class="qm"><div class="qtg">Y-BOCS #8 · NJRE (Coles 2003)</div><div class="qtl">Что происходит, если не выполнить ритуал</div></div></div>
     <div class="qp">Что вы чувствуете, когда не можете выполнить ритуал или вам мешают его завершить?</div>
     <div class="ans" data-q="13">
@@ -423,7 +439,7 @@
   </div>
 
   <!-- Б5: Контроль над компульсиями -->
-  <div class="qc">
+  <div class="qc q-locked">
     <div class="qh" style="background:var(--dB);"><div class="qn">14</div><div class="qm"><div class="qtg">Y-BOCS #10 · Habit model (Gillan 2011)</div><div class="qtl">Контроль над ритуалами</div></div></div>
     <div class="qp">Можете ли вы остановить ритуал по своей воле — не начинать его или прервать на середине?</div>
     <div class="ans" data-q="14">
@@ -436,7 +452,7 @@
   </div>
 
   <!-- Б6: Resistance -->
-  <div class="qc">
+  <div class="qc q-locked">
     <div class="qh" style="background:var(--dB);"><div class="qn">15</div><div class="qm"><div class="qtg">Y-BOCS #9 · Habit model</div><div class="qtl">Попытки сопротивляться ритуалам</div></div></div>
     <div class="qp">Пытаетесь ли вы сопротивляться ритуалам — не делать их, даже когда хочется? И что из этого выходит?</div>
     <div class="ans" data-q="15">
@@ -451,7 +467,7 @@
   <!-- ==== 7.19: Б7 (двухчастный) + Б8 ==== -->
 
   <!-- Б7: Скорость возврата тревоги (двухчастный) -->
-  <div class="qc qc-dual" id="qc-16">
+  <div class="qc qc-dual q-locked" id="qc-16">
     <div class="qh" style="background:var(--dB);"><div class="qn">16</div><div class="qm"><div class="qtg">Цикл ОКР (Salkovskis 1985) · NJRE</div><div class="qtl">Облегчение после ритуала</div><div class="qd">Как долго длится облегчение и как часто ритуал не помогает</div></div></div>
     <div class="qp"><span class="part-label" id="pl-16a">a</span>Когда ритуал выполнен — как долго длится облегчение?</div>
     <div class="ans-dual" data-q="16" data-part="a">
@@ -475,7 +491,7 @@
   </div>
 
   <!-- Б8: Переделывание / repetition -->
-  <div class="qc">
+  <div class="qc q-locked">
     <div class="qh" style="background:var(--dB);"><div class="qn">17</div><div class="qm"><div class="qtg">OCI-R · DOCS dim 4 · NJRE</div><div class="qtl">Переделывание до «правильности»</div></div></div>
     <div class="qp">Бывает ли, что вы переделываете или повторяете действие, потому что «не получилось правильно» — или потому что нужно определённое количество раз?</div>
     <div class="ans" data-q="17">
@@ -489,10 +505,10 @@
 
   <!-- ==== 7.20: В1–В3 ==== -->
 
-  <div class="sdiv" style="background:var(--dC);"><div class="sdiv-n">В</div><div><h3>Избегание</h3><p>6 вопросов · макс. 24 балла</p></div></div>
+  <div class="sdiv q-locked" style="background:var(--dC);"><div class="sdiv-n">В</div><div><h3>Избегание</h3><p>6 вопросов · макс. 24 балла</p></div></div>
 
   <!-- В1: Избегание триггеров -->
-  <div class="qc">
+  <div class="qc q-locked">
     <div class="qh" style="background:var(--dC);"><div class="qn">18</div><div class="qm"><div class="qtg">Y-BOCS-II avoidance</div><div class="qtl">Избегание ситуаций и предметов</div></div></div>
     <div class="qp">Избегаете ли вы определённых мест, предметов, людей или ситуаций, чтобы навязчивые мысли не появлялись?</div>
     <div class="ans" data-q="18">
@@ -505,7 +521,7 @@
   </div>
 
   <!-- В2: Reassurance-seeking -->
-  <div class="qc">
+  <div class="qc q-locked">
     <div class="qh" style="background:var(--dC);"><div class="qn">19</div><div class="qm"><div class="qtg">DOCS · FAS (Calvocoressi 1999)</div><div class="qtl">Потребность в подтверждении от других</div></div></div>
     <div class="qp">Нуждаетесь ли вы в том, чтобы другие люди подтвердили, что всё в порядке — что вы не сделали ничего плохого, что опасности нет, что вы «нормальный»?</div>
     <div class="ans" data-q="19">
@@ -518,7 +534,7 @@
   </div>
 
   <!-- В3: Сужение жизни -->
-  <div class="qc">
+  <div class="qc q-locked">
     <div class="qh" style="background:var(--dC);"><div class="qn">20</div><div class="qm"><div class="qtg">DOCS · FOCI avoidance · ВОЗ DALY</div><div class="qtl">Отказ от того, что раньше было доступно</div></div></div>
     <div class="qp">Отказались ли вы от чего-то в жизни из-за навязчивых мыслей или ритуалов — работы, хобби, поездок, отношений, повседневных дел?</div>
     <div class="ans" data-q="20">
@@ -533,7 +549,7 @@
   <!-- ==== 7.21: В4–В6 + qnt «NJRE — не каприз» ==== -->
 
   <!-- В4: Online-checking -->
-  <div class="qc">
+  <div class="qc q-locked">
     <div class="qh" style="background:var(--dC);"><div class="qn">21</div><div class="qm"><div class="qtg">Cyberchondria · IUS · OCCWG dom 5</div><div class="qtl">Поиск информации и онлайн-проверки</div></div></div>
     <div class="qp">Проводите ли вы время в интернете, проверяя свои опасения — гуглите симптомы, читаете форумы, проходите онлайн-тесты, ищете подтверждение или опровержение своих мыслей?</div>
     <div class="ans" data-q="21">
@@ -546,7 +562,7 @@
   </div>
 
   <!-- В5: Confession -->
-  <div class="qc">
+  <div class="qc q-locked">
     <div class="qh" style="background:var(--dC);"><div class="qn">22</div><div class="qm"><div class="qtg">Scrupulosity · TAF-Moral · Taboo OCD</div><div class="qtl">Потребность рассказать о своих мыслях</div></div></div>
     <div class="qp">Чувствуете ли вы потребность рассказать кому-то о своих навязчивых мыслях — «признаться», «исповедаться», раскрыть содержание мыслей, чтобы стало легче?</div>
     <div class="ans" data-q="22">
@@ -559,7 +575,7 @@
   </div>
 
   <!-- В6: NJRE / incompleteness -->
-  <div class="qc">
+  <div class="qc q-locked">
     <div class="qh" style="background:var(--dC);"><div class="qn">23</div><div class="qm"><div class="qtg">МКБ-11 «sense of completeness» · Coles 2003 · DOCS dim 4</div><div class="qtl">Ощущение «не так» — незавершённость</div><div class="qd">Не страх, не тревога — а ощущение, что что-то «неправильно»</div></div></div>
     <div class="qp">Бывает ли у вас ощущение, что что-то «не так», «не на месте», «не завершено» — и вы должны исправить это, даже если логически всё в порядке?</div>
     <div class="ans" data-q="23">
@@ -576,7 +592,7 @@
 
   <!-- ==== 7.22: К1 (чеклист sub-module) + К2 (функционирование Q24–Q26) ==== -->
 
-  <div class="sdiv" style="background:var(--pri);"><div class="sdiv-n">К</div><div><h3>Контекст</h3><p>Тематика + функционирование · вне балла</p></div></div>
+  <div class="sdiv q-locked" style="background:var(--pri);"><div class="sdiv-n">К</div><div><h3>Контекст</h3><p>Тематика + функционирование · вне балла</p></div></div>
 
   <!-- К1: Тематика обсессий (чеклист, HIST.k1) -->
   <div class="qc" id="qc-k1">
@@ -595,7 +611,7 @@
   </div>
 
   <!-- К2: Функционирование (Q24–Q26, вне балла) -->
-  <div class="qc">
+  <div class="qc q-locked">
     <div class="qh" style="background:var(--pri);"><div class="qn">&#9733;</div><div class="qm"><div class="qtg">DSM-5 критерий B · ВОЗ DALY</div><div class="qtl">Влияние на жизнь</div><div class="qd">3 сферы · вне балла · используется для калибровки</div></div></div>
     <div class="qp"><strong>Работа / учёба:</strong> Насколько навязчивые мысли и ритуалы влияют на вашу работу или учёбу?</div>
     <div class="ans" data-q="24">
@@ -607,7 +623,7 @@
     </div>
   </div>
 
-  <div class="qc">
+  <div class="qc q-locked">
     <div class="qh" style="background:var(--pri);"><div class="qn">&#9733;</div><div class="qm"><div class="qtg">DSM-5 критерий B</div><div class="qtl">Влияние на отношения</div></div></div>
     <div class="qp"><strong>Отношения:</strong> Насколько навязчивые мысли и ритуалы влияют на ваши отношения с близкими?</div>
     <div class="ans" data-q="25">
@@ -619,7 +635,7 @@
     </div>
   </div>
 
-  <div class="qc">
+  <div class="qc q-locked">
     <div class="qh" style="background:var(--pri);"><div class="qn">&#9733;</div><div class="qm"><div class="qtg">DSM-5 критерий B</div><div class="qtl">Влияние на быт</div></div></div>
     <div class="qp"><strong>Быт:</strong> Насколько навязчивые мысли и ритуалы влияют на повседневные дела (уборка, выход из дома, сон)?</div>
     <div class="ans" data-q="26">
@@ -633,37 +649,37 @@
 
   <!-- ==== 7.23: ИСТОРИЯ X1, X2, X3, INS ==== -->
 
-  <div class="sdiv" style="background:var(--warm);"><div class="sdiv-n">II</div><div><h3>История и контекст</h3><p>Дифдиагностика · спецификаторы · вне балла</p></div></div>
+  <div class="sdiv q-locked" style="background:var(--warm);"><div class="sdiv-n">II</div><div><h3>История и контекст</h3><p>Дифдиагностика · спецификаторы · вне балла</p></div></div>
 
   <div class="hist">
     <!-- X1: Давность -->
-    <div class="hc"><div class="hch"><span class="hcc">X1</span><div><div class="hcl">Как давно длятся навязчивые мысли или ритуалы?</div><div class="hcd">Среднее время до обращения при ОКР — 7–11 лет</div></div></div><div class="hco"><span class="hcb" data-g="x1" data-v="6m-2y">6 месяцев — 2 года</span><span class="hcb" data-g="x1" data-v="<6m" data-note="Менее 6 месяцев — может быть реакция на стресс">Менее 6 месяцев ⚑</span><span class="hcb" data-g="x1" data-v="5y+" data-note="Длительность не означает необратимость — помощь эффективна при обращении к специалисту">Более 5 лет</span><span class="hcb" data-g="x1" data-v="2-5y">2–5 лет</span><span class="hcb" data-g="x1" data-v="childhood" data-note="Раннее начало — важная информация для специалиста">С детства ⚑</span></div><div class="hcn" id="note-x1"></div><div class="hist-ok" id="ok-x1">&#10003; Учтено в выводах</div></div>
+    <div class="hc q-locked"><div class="hch"><span class="hcc">X1</span><div><div class="hcl">Как давно длятся навязчивые мысли или ритуалы?</div><div class="hcd">Среднее время до обращения при ОКР — 7–11 лет</div></div></div><div class="hco"><span class="hcb" data-g="x1" data-v="6m-2y">6 месяцев — 2 года</span><span class="hcb" data-g="x1" data-v="<6m" data-note="Менее 6 месяцев — может быть реакция на стресс">Менее 6 месяцев ⚑</span><span class="hcb" data-g="x1" data-v="5y+" data-note="Длительность не означает необратимость — помощь эффективна при обращении к специалисту">Более 5 лет</span><span class="hcb" data-g="x1" data-v="2-5y">2–5 лет</span><span class="hcb" data-g="x1" data-v="childhood" data-note="Раннее начало — важная информация для специалиста">С детства ⚑</span></div><div class="hcn" id="note-x1"></div><div class="hist-ok" id="ok-x1">&#10003; Учтено в выводах</div></div>
 
     <!-- X2: Характер мыслей (дифдиагностика ГТР) -->
-    <div class="hc"><div class="hch"><span class="hcc">X2</span><div><div class="hcl">Какие у вас навязчивые мысли — по характеру?</div><div class="hcd">Это поможет понять, на что больше похож ваш опыт</div></div></div><div class="hco"><span class="hcb" data-g="x2" data-v="irrational">Иррациональные и чуждые</span><span class="hcb" data-g="x2" data-v="stuck">Рациональные, но «застрявшие»</span><span class="hcb" data-g="x2" data-v="realistic" data-note="Ваш паттерн может быть ближе к ГТР — пройдите также скрининг тревоги">О реальных проблемах ⚑</span><span class="hcb" data-g="x2" data-v="mixed" data-note="Возможна коморбидность ОКР + ГТР">Смесь ⚑</span></div><div class="hcn" id="note-x2"></div><div class="hist-ok" id="ok-x2">&#10003; Учтено в выводах</div></div>
+    <div class="hc q-locked"><div class="hch"><span class="hcc">X2</span><div><div class="hcl">Какие у вас навязчивые мысли — по характеру?</div><div class="hcd">Это поможет понять, на что больше похож ваш опыт</div></div></div><div class="hco"><span class="hcb" data-g="x2" data-v="irrational">Иррациональные и чуждые</span><span class="hcb" data-g="x2" data-v="stuck">Рациональные, но «застрявшие»</span><span class="hcb" data-g="x2" data-v="realistic" data-note="Ваш паттерн может быть ближе к ГТР — пройдите также скрининг тревоги">О реальных проблемах ⚑</span><span class="hcb" data-g="x2" data-v="mixed" data-note="Возможна коморбидность ОКР + ГТР">Смесь ⚑</span></div><div class="hcn" id="note-x2"></div><div class="hist-ok" id="ok-x2">&#10003; Учтено в выводах</div></div>
 
     <!-- X3: Тики -->
-    <div class="hc"><div class="hch"><span class="hcc">X3</span><div><div class="hcl">Бывают ли у вас (или были раньше) тики?</div><div class="hcd">Моргание, подёргивание, покашливание, повторение звуков — непроизвольно</div></div></div><div class="hco"><span class="hcb" data-g="x3" data-v="no">Нет</span><span class="hcb" data-g="x3" data-v="past" data-note="Тики в анамнезе — DSM-5 спецификатор tic-related">Были в детстве ⚑</span><span class="hcb" data-g="x3" data-v="current" data-note="Текущие тики + ОКР — ~30% пациентов">Есть сейчас ⚑</span></div><div class="hcn" id="note-x3"></div><div class="hist-ok" id="ok-x3">&#10003; Учтено в выводах</div></div>
+    <div class="hc q-locked"><div class="hch"><span class="hcc">X3</span><div><div class="hcl">Бывают ли у вас (или были раньше) тики?</div><div class="hcd">Моргание, подёргивание, покашливание, повторение звуков — непроизвольно</div></div></div><div class="hco"><span class="hcb" data-g="x3" data-v="no">Нет</span><span class="hcb" data-g="x3" data-v="past" data-note="Тики в анамнезе — DSM-5 спецификатор tic-related">Были в детстве ⚑</span><span class="hcb" data-g="x3" data-v="current" data-note="Текущие тики + ОКР — ~30% пациентов">Есть сейчас ⚑</span></div><div class="hcn" id="note-x3"></div><div class="hist-ok" id="ok-x3">&#10003; Учтено в выводах</div></div>
 
     <!-- INS: Инсайт -->
-    <div class="hc"><div class="hch"><span class="hcc">INS</span><div><div class="hcl">Насколько вы верите своим навязчивым мыслям?</div><div class="hcd">Инсайт — понимание того, что мысли могут быть необоснованными</div></div></div><div class="hco"><span class="hcb" data-g="ins" data-v="good">Понимаю иррациональность, но не могу остановить</span><span class="hcb" data-g="ins" data-v="fair">Зависит от момента — то понимаю, то кажется правдой</span><span class="hcb" data-g="ins" data-v="poor" data-note="Специалист учтёт при подборе подхода">Мне кажется, опасения обоснованны ⚑</span><span class="hcb" data-g="ins" data-v="absent" data-note="Обязательна консультация психиатра">Уверен, что опасения реальны ⚑⚑</span></div><div class="hcn" id="note-ins"></div><div class="hist-ok" id="ok-ins">&#10003; Учтено в выводах</div></div>
+    <div class="hc q-locked"><div class="hch"><span class="hcc">INS</span><div><div class="hcl">Насколько вы верите своим навязчивым мыслям?</div><div class="hcd">Инсайт — понимание того, что мысли могут быть необоснованными</div></div></div><div class="hco"><span class="hcb" data-g="ins" data-v="good">Понимаю иррациональность, но не могу остановить</span><span class="hcb" data-g="ins" data-v="fair">Зависит от момента — то понимаю, то кажется правдой</span><span class="hcb" data-g="ins" data-v="poor" data-note="Специалист учтёт при подборе подхода">Мне кажется, опасения обоснованны ⚑</span><span class="hcb" data-g="ins" data-v="absent" data-note="Обязательна консультация психиатра">Уверен, что опасения реальны ⚑⚑</span></div><div class="hcn" id="note-ins"></div><div class="hist-ok" id="ok-ins">&#10003; Учтено в выводах</div></div>
 
   <!-- ==== 7.24: ИСТОРИЯ Д2–Д4 ==== -->
 
     <!-- Д2: Коморбидная депрессия -->
-    <div class="hc"><div class="hch"><span class="hcc">Д2</span><div><div class="hcl">Помимо навязчивых мыслей — бывает ли длительно сниженное настроение?</div><div class="hcd">Депрессия — самая частая коморбидность при ОКР (50–67%)</div></div></div><div class="hco"><span class="hcb" data-g="d2" data-v="no">Настроение обычно нормальное</span><span class="hcb" data-g="d2" data-v="sometimes" data-note="Возможна вторичная депрессия — пройдите также скрининг депрессии">Бывают периоды сниженного настроения ⚑</span><span class="hcb" data-g="d2" data-v="persistent" data-note="Коморбидная депрессия вероятна. Специалист определит, с чего начать">Длительно подавленное настроение ⚑⚑</span></div><div class="hcn" id="note-d2"></div><div class="hist-ok" id="ok-d2">&#10003; Учтено в выводах</div></div>
+    <div class="hc q-locked"><div class="hch"><span class="hcc">Д2</span><div><div class="hcl">Помимо навязчивых мыслей — бывает ли длительно сниженное настроение?</div><div class="hcd">Депрессия — самая частая коморбидность при ОКР (50–67%)</div></div></div><div class="hco"><span class="hcb" data-g="d2" data-v="no">Настроение обычно нормальное</span><span class="hcb" data-g="d2" data-v="sometimes" data-note="Возможна вторичная депрессия — пройдите также скрининг депрессии">Бывают периоды сниженного настроения ⚑</span><span class="hcb" data-g="d2" data-v="persistent" data-note="Коморбидная депрессия вероятна. Специалист определит, с чего начать">Длительно подавленное настроение ⚑⚑</span></div><div class="hcn" id="note-d2"></div><div class="hist-ok" id="ok-d2">&#10003; Учтено в выводах</div></div>
 
     <!-- Д3: Семейный анамнез -->
-    <div class="hc"><div class="hch"><span class="hcc">Д3</span><div><div class="hcl">Навязчивости или тики у близких родственников?</div><div class="hcd">Наследуемость ОКР — 40–50%. Даже если диагноз не был поставлен</div></div></div><div class="hco"><span class="hcb" data-g="d3" data-v="no">Нет</span><span class="hcb" data-g="d3" data-v="ocd" data-note="Генетическая предрасположенность подтверждена (OR=7.18)">Навязчивости или ритуалы ⚑</span><span class="hcb" data-g="d3" data-v="tics" data-note="Генетическая связь ОКР—тики. Tic-related подтип">Тики ⚑</span></div><div class="hcn" id="note-d3"></div><div class="hist-ok" id="ok-d3">&#10003; Учтено в выводах</div></div>
+    <div class="hc q-locked"><div class="hch"><span class="hcc">Д3</span><div><div class="hcl">Навязчивости или тики у близких родственников?</div><div class="hcd">Наследуемость ОКР — 40–50%. Даже если диагноз не был поставлен</div></div></div><div class="hco"><span class="hcb" data-g="d3" data-v="no">Нет</span><span class="hcb" data-g="d3" data-v="ocd" data-note="Генетическая предрасположенность подтверждена (OR=7.18)">Навязчивости или ритуалы ⚑</span><span class="hcb" data-g="d3" data-v="tics" data-note="Генетическая связь ОКР—тики. Tic-related подтип">Тики ⚑</span></div><div class="hcn" id="note-d3"></div><div class="hist-ok" id="ok-d3">&#10003; Учтено в выводах</div></div>
 
     <!-- Д4: Family accommodation -->
-    <div class="hc"><div class="hch"><span class="hcc">Д4</span><div><div class="hcl">Участвуют ли близкие в ваших ритуалах или подстраивают жизнь под них?</div><div class="hcd">60–97% семей невольно вовлечены — это нормальная реакция</div></div></div><div class="hco"><span class="hcb" data-g="d4" data-v="no">Нет</span><span class="hcb" data-g="d4" data-v="some">Частично</span><span class="hcb" data-g="d4" data-v="significant" data-note="Вовлечённость семьи — предиктор тяжести. Специалист поможет перестроить">Значительно ⚑</span><span class="hcb" data-g="d4" data-v="total" data-note="Это не вина семьи и не ваша — это механизм расстройства">Вся жизнь семьи организована вокруг ОКР ⚑⚑</span></div><div class="hcn" id="note-d4"></div><div class="hist-ok" id="ok-d4">&#10003; Учтено в выводах</div></div>
+    <div class="hc q-locked"><div class="hch"><span class="hcc">Д4</span><div><div class="hcl">Участвуют ли близкие в ваших ритуалах или подстраивают жизнь под них?</div><div class="hcd">60–97% семей невольно вовлечены — это нормальная реакция</div></div></div><div class="hco"><span class="hcb" data-g="d4" data-v="no">Нет</span><span class="hcb" data-g="d4" data-v="some">Частично</span><span class="hcb" data-g="d4" data-v="significant" data-note="Вовлечённость семьи — предиктор тяжести. Специалист поможет перестроить">Значительно ⚑</span><span class="hcb" data-g="d4" data-v="total" data-note="Это не вина семьи и не ваша — это механизм расстройства">Вся жизнь семьи организована вокруг ОКР ⚑⚑</span></div><div class="hcn" id="note-d4"></div><div class="hist-ok" id="ok-d4">&#10003; Учтено в выводах</div></div>
 
   </div><!-- /.hist -->
 
   <!-- ==== 7.25: СЕКЦИЯ РЕЗУЛЬТАТОВ — балл + шкала + таблица уровней ==== -->
 
-  <div class="res" id="results">
+  <div class="res q-locked" id="results">
     <div class="res-t">Результаты</div>
     <p style="color:var(--ink3);font-size:14px;">Результаты появятся по мере заполнения</p>
     <div class="rbig"><div class="rnum" id="rn">—</div><div class="rmx">/ 88</div></div>
