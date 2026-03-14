@@ -177,7 +177,7 @@ function upd() {
   document.getElementById('pf').style.width = (a / 24 * 100) + '%';
   document.getElementById('pl').textContent = a + ' из 24';
   const sf = document.getElementById('sf');
-  if (a >= TQ) sf.classList.add('vis'); else sf.classList.remove('vis');
+  if (a >= TQ + (typeof FQ !== 'undefined' ? FQ : 0)) sf.classList.add('vis'); else sf.classList.remove('vis');
   document.getElementById('sfn').textContent = t;
   document.getElementById('sfv').textContent = a > 0 ? lev.l : '—';
   document.getElementById('rn').textContent = t;

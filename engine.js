@@ -21,7 +21,7 @@ function upd() {
   document.getElementById('pf').style.width = (a / (TQ + FQ) * 100) + '%';
   document.getElementById('pl').textContent = a + ' из ' + (TQ + FQ);
   const sf = document.querySelector('.sf');
-  if (a >= TQ) {
+  if (a >= TQ + (typeof FQ !== 'undefined' ? FQ : 0)) {
     sf.classList.add('vis');
     document.getElementById('sfn').textContent = t;
     document.getElementById('sfv').textContent = lev.l;

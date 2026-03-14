@@ -994,7 +994,7 @@ function upd(){
   document.getElementById('pl').textContent=a+' из '+ALL_QS.length;
   // Плавающая кнопка — появляется после основных 18 вопросов
   const sf=document.getElementById('sf');
-  if(a>=TQ) sf.classList.add('vis'); else sf.classList.remove('vis');
+  if(a>=ALL_QS.length) sf.classList.add('vis'); else sf.classList.remove('vis');
   document.getElementById('sfn').textContent=t;
   document.getElementById('sfv').textContent=a>=TQ?_uFL.l:'—';
   // Результаты
