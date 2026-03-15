@@ -8,9 +8,10 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);font-
 .hero::after{content:'';position:absolute;bottom:-120px;left:-80px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.02);}
 .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,5vw,3rem);font-weight:600;letter-spacing:-.02em;margin-bottom:14px;position:relative;}
 .hero p{color:rgba(255,255,255,.35);font-size:13px;letter-spacing:.08em;text-transform:uppercase;position:relative;}
-.pw{background:var(--pri-dk);padding:0 0 12px;position:sticky;top:0;z-index:100;}
-.pi{max-width:880px;margin:0 auto;padding:0 32px;}
-.pt{height:6px;background:rgba(255,255,255,.15);border-radius:3px;overflow:hidden;}
+.pw{background:var(--card);border-bottom:1px solid var(--brd);padding:12px 0;position:sticky;top:0;z-index:100;}
+.pi{max-width:880px;margin:0 auto;padding:0 32px;display:flex;align-items:center;gap:16px;}
+.pt{flex:1;height:10px;background:rgba(120,100,160,.12);border-radius:5px;overflow:hidden;}
+.pf{height:100%;background:linear-gradient(90deg,#6a4a9a,#8a6aba);border-radius:5px;transition:width .5s;width:0%;}
 .pl{display:none;}
 .ct{max-width:880px;margin:0 auto;padding:0 32px;}
 .mode{background:var(--card);border-bottom:1px solid var(--brd);}
