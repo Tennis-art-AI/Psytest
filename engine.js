@@ -33,7 +33,9 @@ function upd() {
   const t = tot(), a = ans(), lev = gL(t);
   const histCount = Object.keys(HIST).length;
   const totalQ = TQ + FQ + document.querySelectorAll('.hc').length;
-  document.getElementById('pf').style.width = ((a + histCount) / totalQ * 100) + '%';
+  const pct = Math.round((a + histCount) / totalQ * 100);
+  document.getElementById('pf').style.width = pct + '%';
+  document.getElementById('pl').textContent = pct + '%';
   const sf = document.querySelector('.sf');
   if (a >= TQ + (typeof FQ !== 'undefined' ? FQ : 0)) {
     sf.classList.add('vis');
