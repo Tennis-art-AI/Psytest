@@ -58,39 +58,38 @@
   transition: all .3s;
 }
 
-/* ========= DROPDOWN МЕНЮ ========= */
-.mega-menu {
+/* ========= DROPDOWN НАВИГАЦИИ ========= */
+.nav-dd { position: relative; }
+.nav-dd-menu {
   display: none;
   position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(16,16,24,.96);
-  backdrop-filter: blur(24px);
-  border: 1px solid var(--brd);
-  border-radius: 14px;
-  padding: 12px;
-  min-width: 300px;
-  z-index: 150;
-  box-shadow: 0 12px 40px rgba(0,0,0,.4);
+  top: calc(100% + 12px);
+  left: 0;
+  background: #141418;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 12px;
+  padding: 8px;
+  min-width: 280px;
+  z-index: 200;
+  box-shadow: 0 8px 32px rgba(0,0,0,.5);
 }
-.mega-menu.active { display: block; }
-.mega-item {
-  display: flex; flex-direction: column; gap: 2px;
-  padding: 12px 16px;
-  border-radius: 10px;
+.nav-dd-menu.active { display: block; }
+.dd-item {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 8px;
   text-decoration: none;
-  color: var(--ink);
+  color: #e0e0e0;
   transition: background .15s;
 }
-.mega-item:hover { background: rgba(255,255,255,.06); color: var(--ink); }
-.mega-item .mi-name { font-size: 15px; font-weight: 600; }
-.mega-item .mi-sub { font-size: 12px; color: var(--ink3); }
-.mega-soon {
-  padding: 10px 16px;
-  font-size: 12px;
-  color: var(--ink3);
-  border-top: 1px solid var(--brd);
+.dd-item:hover { background: rgba(255,255,255,.07); color: #fff; }
+.dd-item strong { display: block; font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+.dd-item span { font-size: 12px; color: rgba(255,255,255,.4); }
+.dd-soon {
+  padding: 8px 14px;
+  font-size: 11px;
+  color: rgba(255,255,255,.3);
+  border-top: 1px solid rgba(255,255,255,.06);
   margin-top: 4px;
 }
 
@@ -248,7 +247,7 @@
   .nav-center { display: none; }
   .nav-cta.desktop { display: none; }
   .nav-burger { display: block; }
-  .mega-menu { left: 16px; right: 16px; transform: none; min-width: auto; }
+  .nav-dd-menu { left: auto; right: -80px; min-width: 260px; }
   .grid-2 { grid-template-columns: 1fr; }
   .hero { min-height: auto; }
 }
