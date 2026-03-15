@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/common.css?v=2">
-<link rel="stylesheet" href="/css/consent.css?v=2">
+<link rel="stylesheet" href="/css/consent.css?v=3">
 <style>
 /* ==== 7.2: CSS-ПЕРЕМЕННЫЕ И INLINE STYLES ====
    ОКР-палитра: тёплый фиолетовый (--c-ocd:#b0a0d8)
@@ -104,20 +104,23 @@
 <div class="consent-overlay" id="consentOverlay">
   <div class="consent-box">
     <h2>Прежде чем начать</h2>
-    <div class="consent-sub">6B20 · 300.3 (F42.x) · Обсессивно-компульсивное расстройство</div>
+    <div class="consent-sub">Скрининг ОКР · 6B20 · 300.3 (F42.x)</div>
     <ul class="consent-points">
-      <li><span class="consent-num">1</span> Это скрининг, не диагноз. Результаты носят информационный характер и не являются медицинским заключением.</li>
-      <li><span class="consent-num">2</span> Скрининг не заменяет консультацию специалиста. Только врач-психиатр может поставить диагноз на основании очного осмотра.</li>
-      <li><span class="consent-num">3</span> Ваши данные не покидают браузер. Мы не собираем, не сохраняем и не передаём ответы — всё обрабатывается только на вашем устройстве.</li>
-      <li><span class="consent-num">4</span> 80–90% людей иногда испытывают навязчивые мысли — это нормально. Скрининг оценивает, когда это выходит за рамки нормы.</li>
-      <li><span class="consent-num">5</span> Первые 5 вопросов — бесплатно. Вы познакомитесь с методологией и качеством скрининга. Полный скрининг (23 вопроса) + детальный результат по доменам — 399 ₽.</li>
+      <li><span class="consent-num">1</span> Это скрининг, не диагноз. Только врач может поставить диагноз на основании очного осмотра.</li>
+      <li><span class="consent-num">2</span> Ваши данные остаются у вас. Ответы обрабатываются в браузере и не отправляются на сервер.</li>
+      <li><span class="consent-num">3</span> 80–90% людей иногда испытывают навязчивые мысли — это нормально. Скрининг оценивает, когда это выходит за рамки нормы.</li>
     </ul>
+    <div class="consent-model">
+      <div class="consent-model-price">399 ₽ <span>за скрининг</span></div>
+      <p>Перед оплатой вы бесплатно увидите методологию, источники вопросов и попробуете несколько вопросов — чтобы убедиться, что это не очередной тест из интернета.</p>
+      <p><strong>После оплаты</strong> — все 23 вопроса, разбор по областям (обсессии, компульсии, избегание), определение подтипа и что обсудить со специалистом.</p>
+    </div>
     <div class="consent-age">Если вам меньше 18 лет — рекомендуем пройти вместе с родителем или другим взрослым, которому доверяете.</div>
     <label class="consent-check-row">
       <input type="checkbox" id="consentCheck" onchange="document.getElementById('consentBtn').disabled=!this.checked;">
-      <span>Я понимаю, что это скрининг, а не диагноз</span>
+      <span>Я понимаю условия и что полный результат доступен после оплаты</span>
     </label>
-    <button class="consent-btn" id="consentBtn" disabled onclick="document.getElementById('consentOverlay').classList.add('hidden');">Начать скрининг</button>
+    <button class="consent-btn" id="consentBtn" disabled onclick="document.getElementById('consentOverlay').classList.add('hidden');">Начать знакомство со скринингом</button>
   </div>
 </div>
 

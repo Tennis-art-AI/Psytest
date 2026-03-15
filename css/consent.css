@@ -154,6 +154,40 @@
   box-shadow: 0 8px 28px rgba(74, 50, 112, 0.4);
 }
 
+.consent-model {
+  padding: 20px 22px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f0ecf6 0%, #ebe4f5 100%);
+  border: 1px solid rgba(74, 50, 112, 0.15);
+  margin-bottom: 24px;
+  font-family: 'Outfit', sans-serif;
+}
+.consent-model-price {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2d1a50;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.consent-model-price span {
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  background: #4a3270;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.consent-model p {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: #4a4a5a;
+  margin: 0 0 12px;
+}
+.consent-model p:last-child { margin-bottom: 0; }
+.consent-model strong { color: #2d1a50; }
+
 @media (max-width: 600px) {
   .consent-box {
     padding: 32px 24px 28px;
