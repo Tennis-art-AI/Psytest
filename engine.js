@@ -54,7 +54,8 @@ function upd() {
     });
     document.getElementById('domBlock').style.display = 'block';
     ['A','B','C','D','E'].forEach(k => {
-      document.getElementById('d' + k).textContent = dS(k) ?? '–';
+      const el = document.getElementById('d' + k);
+      if (el) el.textContent = dS(k) ?? '–';
     });
     updB();
     buildC();
