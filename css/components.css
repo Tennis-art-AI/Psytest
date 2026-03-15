@@ -58,46 +58,41 @@
   transition: all .3s;
 }
 
-/* ========= МЕГА-МЕНЮ ========= */
+/* ========= DROPDOWN МЕНЮ ========= */
 .mega-menu {
   display: none;
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(10,10,16,.98);
-  backdrop-filter: blur(40px);
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(16,16,24,.96);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--brd);
+  border-radius: 14px;
+  padding: 12px;
+  min-width: 300px;
   z-index: 150;
-  padding: 80px 40px 40px;
-  overflow-y: auto;
-  animation: fadeIn .25s ease;
+  box-shadow: 0 12px 40px rgba(0,0,0,.4);
 }
 .mega-menu.active { display: block; }
-.mega-close {
-  position: absolute; top: 20px; right: 32px;
-  background: none; border: none; color: var(--ink3);
-  font-size: 28px; cursor: pointer;
-}
-
-.mega-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: var(--max-w); margin: 0 auto; }
-.mega-col h4 {
-  font-size: 12px; font-weight: 700;
-  letter-spacing: .15em; text-transform: uppercase;
-  color: var(--accent); margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--brd);
-}
 .mega-item {
-  display: flex; align-items: center; gap: 12px;
+  display: flex; flex-direction: column; gap: 2px;
   padding: 12px 16px;
-  border-radius: var(--radius);
-  transition: background .2s, border-color .2s;
+  border-radius: 10px;
   text-decoration: none;
   color: var(--ink);
-  border: 1px solid transparent;
-  margin-bottom: 6px;
+  transition: background .15s;
 }
-.mega-item:hover { background: rgba(255,255,255,.05); border-color: var(--brd); color: var(--ink); }
-.mega-item .mi-name { font-size: 16px; font-weight: 500; }
-.mega-item .mi-sub { font-size: 12px; color: var(--ink3); margin-top: 2px; }
+.mega-item:hover { background: rgba(255,255,255,.06); color: var(--ink); }
+.mega-item .mi-name { font-size: 15px; font-weight: 600; }
+.mega-item .mi-sub { font-size: 12px; color: var(--ink3); }
+.mega-soon {
+  padding: 10px 16px;
+  font-size: 12px;
+  color: var(--ink3);
+  border-top: 1px solid var(--brd);
+  margin-top: 4px;
+}
 
 /* ========= HERO ========= */
 .hero {
@@ -253,8 +248,7 @@
   .nav-center { display: none; }
   .nav-cta.desktop { display: none; }
   .nav-burger { display: block; }
-  .mega-cols { grid-template-columns: 1fr; gap: 24px; }
-  .mega-menu { padding: clamp(20px, 3vw, 24px) clamp(16px, 2.5vw, 20px); }
+  .mega-menu { left: 16px; right: 16px; transform: none; min-width: auto; }
   .grid-2 { grid-template-columns: 1fr; }
   .hero { min-height: auto; }
 }
