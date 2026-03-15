@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://mentalscreenlab.com/screening/depression/">
 <meta property="og:type" content="website">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/common.css?v=2">
+<link rel="stylesheet" href="/common.css?v=3">
 <link rel="stylesheet" href="/css/consent.css?v=3">
 <style>
 :root{
@@ -173,13 +173,13 @@
 
 <!-- ═══ MAIN ═══ -->
 <div class="main"><div class="ct">
-  <div class="sdiv"><div class="sdiv-n">I</div><div><h3>Симптомы</h3><p>20 scored + 3 функционирование + 3 подтип · макс. 86 баллов</p></div></div>
+  <div class="sdiv"><div class="sdiv-n">I</div><div><h3>Симптомы</h3><p>20 вопросов + функционирование + подтип</p></div></div>
 
 
 <div class="ct">
 
   <!-- ═══ DOMAIN A ═══ -->
-  <div class="dh" style="color:var(--dA);"><span>Домен А · Эмоциональный · 0–5 · повышенный вес</span><span class="ln"></span></div>
+  <div class="dh" style="color:var(--dA);"><span>Эмоциональное состояние</span><span class="ln"></span></div>
 
   <div class="qc"><div class="qh" style="background:var(--dA);"><div class="qn">01</div><div class="qm"><div class="qtg">Ядерный · DSM-5 + PHQ-9 + MADRS</div><div class="qtl">Настроение</div><div class="qd">Подавленное настроение бо́льшую часть дня</div></div></div>
     <div class="qp">Какое описание ближе к вашему настроению?</div>
@@ -251,7 +251,7 @@
     <label class="ao"><input type="radio" name="q6" value="4"><span class="al">6</span><span class="ach"></span><span class="at">Хочу плакать, но НЕ МОГУ — слёзы «высохли»</span><span class="as s4">4</span></label>
     </div></div>
   <!-- ═══ DOMAIN B ═══ -->
-  <div class="dh q-locked" style="color:var(--dB);"><span>Домен Б · Когнитивный · 0–5 · повышенный вес</span><span class="ln"></span></div>
+  <div class="dh q-locked" style="color:var(--dB);"><span>Мышление и мысли</span><span class="ln"></span></div>
 
   <div class="qc q-locked"><div class="qh" style="background:var(--dB);"><div class="qn">07</div><div class="qm"><div class="qtg">Nolen-Hoeksema (1991) · RRS · нет ни в одном стандартном инструменте</div><div class="qtl">Руминация</div><div class="qd">Прокручивание негатива — центральный механизм хронификации</div></div></div>
     <div class="qp">Прокручиваете ли негативные мысли снова и снова?</div>
@@ -316,7 +316,7 @@
     <div class="qnt qnt-red"><strong>Этот вопрос — не о характере или мнениях.</strong> Речь о непоколебимых убеждениях (например: «я виноват(а) во всём», «мой организм разрушается», «меня преследуют»), в которые вы верите абсолютно, даже если все вокруг и факты говорят обратное. 18% людей с тяжёлой депрессией испытывают подобное. Если вы выбрали 1 или 3 — обязательно расскажите об этом специалисту.</div></div>
 
   <!-- ═══ DOMAIN C ═══ -->
-  <div class="dh q-locked" style="color:var(--dC);"><span>Домен В · Соматический · 0–3</span><span class="ln"></span></div>
+  <div class="dh q-locked" style="color:var(--dC);"><span>Тело и сон</span><span class="ln"></span></div>
 
   <div class="qc q-locked"><div class="qh" style="background:var(--dC);"><div class="qn">12</div><div class="qm"><div class="qtg">DSM-5 + HAM-D + IDS-30 · тип = тип депрессии</div><div class="qtl">Сон</div></div></div><div class="qp">Какой был сон?</div>
     <div class="ans" data-q="12"><label class="ao"><input type="radio" name="q12" value="2"><span class="al">1</span><span class="ach"></span><span class="at">Гиперсомния (10–14 ч.) ИЛИ фрагментарный сон</span><span class="as s2">2</span></label><label class="ao"><input type="radio" name="q12" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Нормальный</span><span class="as s0">0</span></label><label class="ao"><input type="radio" name="q12" value="3"><span class="al">3</span><span class="ach"></span><span class="at">Сон разрушен — не сплю сутками ИЛИ сплю весь день</span><span class="as s3">3</span></label><label class="ao"><input type="radio" name="q12" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Проблемы с засыпанием ИЛИ ранние пробуждения 3–5 утра</span><span class="as s1">1</span></label></div></div>
@@ -334,7 +334,7 @@
     <div class="ans" data-q="16"><label class="ao"><input type="radio" name="q16" value="1"><span class="al">1</span><span class="ach"></span><span class="at">Иногда головные боли или тяжесть</span><span class="as s1">1</span></label><label class="ao"><input type="radio" name="q16" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Нет</span><span class="as s0">0</span></label><label class="ao"><input type="radio" name="q16" value="3"><span class="al">3</span><span class="ach"></span><span class="at">Хроническая боль, усиливается с настроением</span><span class="as s3">3</span></label><label class="ao"><input type="radio" name="q16" value="2"><span class="al">4</span><span class="ach"></span><span class="at">Регулярные боли без медицинской причины</span><span class="as s2">2</span></label></div></div>
 
   <!-- ═══ DOMAIN D ═══ -->
-  <div class="dh q-locked" style="color:var(--dD);"><span>Домен Г · Поведенческий · 0–4</span><span class="ln"></span></div>
+  <div class="dh q-locked" style="color:var(--dD);"><span>Поведение и активность</span><span class="ln"></span></div>
 
   <div class="qc q-locked"><div class="qh" style="background:var(--dD);"><div class="qn">17</div><div class="qm"><div class="qtg">IDS-30 + Левинсон</div><div class="qtl">Социальная изоляция</div></div></div><div class="qp">Как с общением?</div>
     <div class="ans" data-q="17"><label class="ao"><input type="radio" name="q17" value="3"><span class="al">1</span><span class="ach"></span><span class="at">Почти ни с кем — потерял(а) друзей</span><span class="as s3">3</span></label><label class="ao"><input type="radio" name="q17" value="0"><span class="al">2</span><span class="ach"></span><span class="at">Как обычно</span><span class="as s0">0</span></label><label class="ao"><input type="radio" name="q17" value="4"><span class="al">3</span><span class="ach"></span><span class="at">Полная изоляция — мир снаружи не существует</span><span class="as s4">4</span></label><label class="ao"><input type="radio" name="q17" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Меньше желания — но если зовут, иду</span><span class="as s1">1</span></label><label class="ao"><input type="radio" name="q17" value="2"><span class="al">5</span><span class="ach"></span><span class="at">Активно избегаю — отменяю встречи, не отвечаю</span><span class="as s2">2</span></label></div></div>
@@ -349,7 +349,7 @@
     <div class="ans" data-q="20"><label class="ao"><input type="radio" name="q20" value="1"><span class="al">1</span><span class="ach"></span><span class="at">Стал(а) меньше делать</span><span class="as s1">1</span></label><label class="ao"><input type="radio" name="q20" value="3"><span class="al">2</span><span class="ach"></span><span class="at">Почти ничего — лежу, смотрю в потолок</span><span class="as s3">3</span></label><label class="ao"><input type="radio" name="q20" value="4"><span class="al">3</span><span class="ach"></span><span class="at">Полная остановка — дни сливаются</span><span class="as s4">4</span></label><label class="ao"><input type="radio" name="q20" value="0"><span class="al">4</span><span class="ach"></span><span class="at">Нормальная активность</span><span class="as s0">0</span></label><label class="ao"><input type="radio" name="q20" value="2"><span class="al">5</span><span class="ach"></span><span class="at">Работа — дом — кровать. Дни: то нормально, то лежу</span><span class="as s2">2</span></label></div></div>
 
   <!-- ═══ DOMAIN E ═══ -->
-  <div class="dh q-locked" style="color:var(--dE);"><span>Домен Д · Функционирование · вне общего балла · DSM-5 обязательно</span><span class="ln"></span></div>
+  <div class="dh q-locked" style="color:var(--dE);"><span>Повседневная жизнь</span><span class="ln"></span></div>
 
   <div class="info info-sage" style="margin-bottom:20px;font-size:14px;"><strong>Если состояние «плавает»</strong>Работаете 2 часа, потом не можете 2 часа? 5 дней нормально, потом 5 дней нет? Оценивайте СУММАРНОЕ влияние. Если из-за таких «провалов» вы теряете 30–50% продуктивности — это «серьёзные проблемы». Если 50%+ — «не могу работать полноценно».</div>
 
@@ -363,7 +363,7 @@
     <div class="ans" data-q="23"><label class="ao"><input type="radio" name="q23" value="2"><span class="al">1</span><span class="ach"></span><span class="at">Серьёзные трудности — хаос в доме</span><span class="as s2">2</span></label><label class="ao"><input type="radio" name="q23" value="3"><span class="al">2</span><span class="ach"></span><span class="at">Быт развалился</span><span class="as s3">3</span></label><label class="ao"><input type="radio" name="q23" value="0"><span class="al">3</span><span class="ach"></span><span class="at">В порядке</span><span class="as s0">0</span></label><label class="ao"><input type="radio" name="q23" value="4"><span class="al">4</span><span class="ach"></span><span class="at">Не в состоянии помыться, поесть, выйти</span><span class="as s4">4</span></label><label class="ao"><input type="radio" name="q23" value="1"><span class="al">5</span><span class="ach"></span><span class="at">Дела копятся</span><span class="as s1">1</span></label></div></div>
 
   <!-- ═══ SUB-MODULE: Подтип депрессии ═══ -->
-  <div class="dh q-locked" style="color:#8a6a50;"><span>Sub-module · Подтип депрессии · вне общего балла · отдельный индикатор</span><span class="ln"></span></div>
+  <div class="dh q-locked" style="color:#8a6a50;"><span>Уточнение картины</span><span class="ln"></span></div>
 
   <div class="qc q-locked"><div class="qh" style="background:#8a6a50;"><div class="qn">24</div><div class="qm"><div class="qtg">DSM-5 atypical specifier · ключевой маркер</div><div class="qtl">Реактивность настроения</div><div class="qd">Может ли что-то хорошее улучшить ваше состояние?</div></div></div>
     <div class="qp">Когда происходит что-то приятное — меняется ли настроение?</div>
@@ -461,7 +461,7 @@
 </div>
 
 <script src="/config-depression.js?v=2"></script>
-<script src="/engine.js?v=3"></script>
+<script src="/engine.js?v=4"></script>
 <script src="/js/scroll.js?v=2"></script>
 </body>
 </html>

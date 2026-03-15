@@ -31,8 +31,9 @@ function checkPaywall() {
 
 function upd() {
   const t = tot(), a = ans(), lev = gL(t);
-  document.getElementById('pf').style.width = (a / (TQ + FQ) * 100) + '%';
-  document.getElementById('pl').textContent = a + ' из ' + (TQ + FQ);
+  const histCount = Object.keys(HIST).length;
+  const totalQ = TQ + FQ + document.querySelectorAll('.hc').length;
+  document.getElementById('pf').style.width = ((a + histCount) / totalQ * 100) + '%';
   const sf = document.querySelector('.sf');
   if (a >= TQ + (typeof FQ !== 'undefined' ? FQ : 0)) {
     sf.classList.add('vis');

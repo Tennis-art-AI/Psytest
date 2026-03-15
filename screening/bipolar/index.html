@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://mentalscreenlab.com/screening/bipolar/">
 <meta property="og:type" content="website">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/common.css?v=2">
+<link rel="stylesheet" href="/common.css?v=3">
 <style>
 /* === 1. ЦВЕТОВАЯ ПАЛИТРА — slate violet (vs depression warm/purple) === */
 :root{
@@ -194,9 +194,9 @@
 </div></div>
 
 <div class="main"><div class="ct">
-  <div class="sdiv"><div class="sdiv-n">I</div><div><h3>Симптомы</h3><p id="s1s">24 + 3 + 3 вопроса · 6 доменов · макс. 106 баллов</p></div></div>
+  <div class="sdiv"><div class="sdiv-n">I</div><div><h3>Симптомы</h3><p id="s1s">24 вопроса + функционирование + маркеры</p></div></div>
 
-  <div class="dh" style="color:var(--pri);"><span>Домены А и Б · Депрессия ↔ Мания · чередование</span><span class="ln"></span></div>
+  <div class="dh" style="color:var(--pri);"><span>Депрессия ↔ Мания</span><span class="ln"></span></div>
 
   <div class="qc"><div class="qh" style="background:var(--dA);"><div class="qn">01</div><div class="qm"><div class="qtg">Ядерный · PHQ-9 · DSM-5</div><div class="qtl">Подавленное настроение в спаде</div><div class="qd">Как ощущается «низ» — периоды депрессивного настроения</div></div></div>
     <div class="qp" id="qp-1">Как ощущается настроение в периоды спада?</div>
@@ -382,7 +382,7 @@
     </div></div>
 
   
-  <div class="dh q-locked" style="color:var(--dA);"><span>Домен А (продолжение) · Маркеры БАР-II · атипичная депрессия</span><span class="ln"></span></div>
+  <div class="dh q-locked" style="color:var(--dA);"><span>Маркеры БАР-II</span><span class="ln"></span></div>
 
   <!-- Q29: Атипичная депрессия, порядок 3,0,5,1,4,2 -->
   <div class="qc q-locked"><div class="qh" style="background:var(--dA);"><div class="qn">29</div><div class="qm"><div class="qtg">DSM-5 atypical specifier · Benazzi 2006 · маркер БАР-II</div><div class="qtl">Тип депрессии: сон, аппетит, тяжесть в теле</div><div class="qd">НЕ бессонница и потеря аппетита — а наоборот: пересыпание, переедание, «свинцовое тело»</div></div></div>
@@ -406,7 +406,7 @@
     <label class="ao"><input type="radio" name="q30" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Иногда раздражительность или беспокойство на фоне подавленности</span><span class="as">1</span></label></div>
     <div class="qnt qnt-red"><strong>Смешанные черты в депрессии — важный сигнал</strong> Когда депрессия сочетается со скачкой мыслей, раздражительностью и ажитацией — это «смешанные черты» по DSM-5. При БАР это состояние связано с наивысшим суицидальным риском: суицидальные мысли + энергия действовать. Если вы часто это испытываете — обсудите с психиатром.</div></div>
 
-<div class="dh q-locked" style="color:var(--dC);"><span>Домен В · Цикличность и соматика · 0–3</span><span class="ln"></span></div>
+<div class="dh q-locked" style="color:var(--dC);"><span>Цикличность и тело</span><span class="ln"></span></div>
 
   <!-- Q15: порядок 2,0,3,1 -->
   <div class="qc q-locked"><div class="qh" style="background:var(--dC);"><div class="qn">15</div><div class="qm"><div class="qtg">Диагностический · БАР-специфичный</div><div class="qtl">Цикличность настроения</div></div></div>
@@ -445,7 +445,7 @@
     <label class="ao"><input type="radio" name="q18" value="3"><span class="al">3</span><span class="ach"></span><span class="at">Экстремальные: в подъёме не сплю почти, в спаде лежу сутками</span><span class="as">3</span></label>
     <label class="ao"><input type="radio" name="q18" value="1"><span class="al">4</span><span class="ach"></span><span class="at">Небольшие колебания: иногда больше, иногда меньше обычного</span><span class="as">1</span></label></div></div>
 
-  <div class="dh q-locked" style="color:var(--dD);"><span>Домен Г · Поведенческий · 0–4</span><span class="ln"></span></div>
+  <div class="dh q-locked" style="color:var(--dD);"><span>Поведение и активность</span><span class="ln"></span></div>
 
   <!-- Q19: порядок 3,0,4,1,2 -->
   <div class="qc q-locked"><div class="qh" style="background:var(--dD);"><div class="qn">19</div><div class="qm"><div class="qtg">MDQ · HCL-32 · финансовый</div><div class="qtl">Финансовое поведение в подъёме</div></div></div>
@@ -487,7 +487,7 @@
     <label class="ao"><input type="radio" name="q22" value="4"><span class="al">4</span><span class="ach"></span><span class="at">Жизнь хаотична — нет стабильного расписания, каждая фаза разрушает то, что построено в другой</span><span class="as">4</span></label>
     <label class="ao"><input type="radio" name="q22" value="2"><span class="al">5</span><span class="ach"></span><span class="at">Заметные сбои — в подъёме режим хаотичный, в спаде всё останавливается</span><span class="as">2</span></label></div></div>
 
-  <div class="dh q-locked" style="color:var(--dE);"><span>Домен Д · Функционирование · 0–4 · вне балла</span><span class="ln"></span></div>
+  <div class="dh q-locked" style="color:var(--dE);"><span>Повседневная жизнь</span><span class="ln"></span></div>
 
   <!-- Q23: порядок 2,0,3,1,4 -->
   <div class="qc q-locked"><div class="qh" style="background:var(--dE);"><div class="qn">23</div><div class="qm"><div class="qtg">DSM-5 критерий · работа</div><div class="qtl">Влияние на работу или учёбу</div></div></div>
@@ -520,7 +520,7 @@
     <label class="ao"><input type="radio" name="q25" value="2"><span class="al">5</span><span class="ach"></span><span class="at">Заметные проблемы: в подъёме хаос от множества начатых дел, в спаде всё запущено</span><span class="as">2</span></label></div></div>
 
   <!-- DOMAIN BI: BAR-I markers -->
-  <div class="dh q-locked" style="color:var(--dBI);"><span>Маркеры БАР-I · 3 вопроса · не входят в основной балл · формируют отдельный индикатор</span><span class="ln"></span></div>
+  <div class="dh q-locked" style="color:var(--dBI);"><span>Маркеры БАР-I</span><span class="ln"></span></div>
   <div class="info info-warm" style="margin-bottom:24px;font-size:14px;"><strong>Зачем эти три вопроса</strong>БАР-I и БАР-II лечатся по-разному. Маркеры ниже помогают определить, ближе ли ваш паттерн к гипомании (БАР-II) или полной мании (БАР-I). Ни один из этих вопросов не влияет на основной балл — они формируют отдельную шкалу в результатах.</div>
 
   <!-- Q26: инсайт, порядок 0,2,3,1 -->
@@ -555,7 +555,7 @@
 
   <!-- HISTORY -->
   <div class="hist">
-    <div class="sdiv"><div class="sdiv-n">II</div><div><h3>История и контекст</h3><p>Определяет тактику лечения · не влияет на основной балл</p></div></div>
+    <div class="sdiv"><div class="sdiv-n">II</div><div><h3>История и контекст</h3><p>Дополнительные вопросы для точности выводов</p></div></div>
     <div class="info info-warm" style="margin-bottom:24px;"><strong>Зачем этот раздел</strong>Основной балл показывает тяжесть симптомов. Но тактика лечения зависит от большего: как давно БАР? какой тип подъёмов? есть ли быстрая цикличность? Ответы появятся в блоке «Выводы» как отдельные рекомендации — на основной балл не влияют.</div>
 
     <div class="hc q-locked"><div class="hch"><span class="hcc">X1</span><div><div class="hcl">Как давно вы замечаете чередование подъёмов и спадов?</div><div class="hcd">Средний срок до диагноза БАР — 10 лет. Раннее выявление меняет прогноз</div></div></div>
